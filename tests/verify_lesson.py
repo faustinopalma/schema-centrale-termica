@@ -51,6 +51,11 @@ def verify_fit(page: Page, scope_svg: str = "#viewport > svg.scene") -> None:
           .some(e => { const r = e.getBoundingClientRect(); return r.left < 0 || r.right > innerWidth + 1; });
     }""")
     assert not header_overflow, "Header controls overflowed viewport width"
+    assert page.evaluate("""()=>['body','header button','.vector-map'].every(sel=>{
+        const el=document.querySelector(sel);
+        const s=getComputedStyle(el);
+        return (s.userSelect==='none'||s.webkitUserSelect==='none');
+    })"""), "Accidental mobile text selection must be disabled on UI and map"
     problems = page.locator(scope_svg).evaluate("""svg=>{
         const errors=[],box=svg.viewBox.baseVal;
         const texts=[...svg.querySelectorAll('text')].filter(t=>getComputedStyle(t).display!=='none'&&t.checkVisibility());
@@ -70,6 +75,39 @@ def verify_fit(page: Page, scope_svg: str = "#viewport > svg.scene") -> None:
                 const p=svg.querySelector('[data-port="'+e.getAttribute(attr)+'"]'),v=e.getPointAtLength(length);
                 if(!p||Math.hypot(v.x-p.cx.baseVal.value,v.y-p.cy.baseVal.value)>.1)
                     errors.push('Disconnected pipe: '+e.dataset.edge);
+            }
+        }
+        const flowSamples=[...svg.querySelectorAll('[data-flow-path="1"]')].map((path,idx)=>{
+            const len=path.getTotalLength(),pts=[];
+            for(let s=10;s<len-10;s+=5){
+                const pt=path.getPointAtLength(s);
+                pts.push([pt.x,pt.y]);
+            }
+            return {idx,d:path.getAttribute('d').slice(0,32),pts};
+        });
+        for(let i=0;i<flowSamples.length;i++){
+            for(let j=i+1;j<flowSamples.length;j++){
+                let hit=false;
+                for(const [ax,ay] of flowSamples[i].pts){
+                    for(const [bx,by] of flowSamples[j].pts){
+                        if(Math.abs(ax-bx)<3.5&&Math.abs(ay-by)<3.5&&Math.hypot(ax-bx,ay-by)<3.5){
+                            errors.push('Visual pipe crossing/overlap: '+flowSamples[i].d+' vs '+flowSamples[j].d+' near ('+Math.round(ax)+','+Math.round(ay)+')');
+                            hit=true;break;
+                        }
+                    }
+                    if(hit)break;
+                }
+            }
+            const textBoxes=texts.map(t=>({txt:t.textContent,b:t.getBBox()}));
+            for(const sample of flowSamples){
+                for(const [px,py] of sample.pts){
+                    for(const tb of textBoxes){
+                        if(px>tb.b.x+2&&px<tb.b.x+tb.b.width-2&&py>tb.b.y+3&&py<tb.b.y+tb.b.height-3){
+                            errors.push('Pipe crosses text label: '+tb.txt+' at ('+Math.round(px)+','+Math.round(py)+')');
+                            break;
+                        }
+                    }
+                }
             }
         }
         return errors;

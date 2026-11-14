@@ -66,17 +66,17 @@
       "closedLoopNote": "Anello chiuso: l'acqua resta nei pannelli",
       "stairwellLabel": "Vano scala",
       "tapRoomLabel": "Alloggio",
-      "openTapNote": "Prelievo aperto → scarico",
-      "noColdReturnNote": "L'acqua usata esce ai rubinetti",
+      "openTapNote": "Diramazione dritta al rubinetto",
+      "noColdReturnNote": "Ferma a chiuso · scarico a aperto",
       "step3Wells": "2 Pozzi · 3 Pompe",
       "step3Treat": "Filtri e vasi",
       "step3Return": "Resa falda",
       "step3PC2": "Pompe principali",
       "step3S3C": "Volani clima",
-      "step3Common": "Spazi comuni Torre B",
-      "step3BP": "Torri A e B · Bassa Pressione (BP)",
+      "step3Common": "Clima spazi comuni Torre B",
+      "step3BP": "Pannelli pavimento · Bassa Pressione (BP)",
       "step3SC2": "Sep. SC2",
-      "step3AP": "Torri A e B · Alta Pressione (AP)",
+      "step3AP": "Pannelli pavimento · Alta Pressione (AP)",
       "step3S3I": "Volani intermedio",
       "step3PC1": "Alta temp.",
       "step3SC1": "Scambiatori",
@@ -172,11 +172,11 @@
         ]
       },
       "dhw": {
-        "title": "Dall'accumulo ai rubinetti e il vero ruolo del ricircolo caldo",
+        "title": "Ai rubinetti arriva dritta — perché allora nel vano scala gira il ricircolo?",
         "pages": [
-          "All'uscita alta di S2 (60 °C), una valvola miscelatrice termostatica tempera l'acqua a 48 °C (linea ACP) inviandola nella colonna montante del vano scala. Quando un condomino apre il rubinetto, l'acqua entra nell'alloggio, viene usata e va allo scarico: dagli appartamenti non torna alcuna acqua fredda alla centrale.",
-          "Perché allora esiste una tubazione di ritorno con le pompe P02 (MP) e P03 (BP)? Quella linea (ACR) percorre solo le colonne montanti condominiali fino in cima alle scale e riporta in centrale acqua ancora calda (~46–48 °C), reimmessa nel miscelatore e nell'ingresso di S2. Serve a mantenere calde le colonne quando i rubinetti sono chiusi, così l'acqua calda arriva subito appena si apre un rubinetto.",
-          "Quando invece i rubinetti prelevano acqua, pari portata di acqua fredda potabile (~15 °C, linea blu AFP proveniente dall'acquedotto e dagli addolcitori T2) entra dal basso in S2 e alimenta la porta fredda del miscelatore."
+          "Dentro ogni appartamento l'acqua calda (48 °C) percorre una semplice diramazione dritta dal vano scala fino ai rubinetti: quando i rubinetti sono chiusi quel tratto resta fermo in pressione, e quando si aprono l'acqua viene usata e va allo scarico.",
+          "Perché invece nella colonna verticale del vano scala (ACP Ø3\") l'acqua non viene lasciata ferma, ma gira tornando dal tetto nel tubo più piccolo ACR (Ø1\"1/4) spinto da P02/P03? Perché una colonna alta 40 metri contiene ~200 litri d'acqua: se restasse ferma di notte si raffredderebbe, e chi abita ai piani alti dovrebbe aspettare minuti sprecando decine di litri freddi (pagandoli anche sul contatore M-bus d'alloggio!).",
+          "Inoltre l'acqua ferma che intiepidisce tra 25 e 42 °C favorirebbe il batterio Legionella. È vero che far girare l'anello condominiale dissipa un po' di calore lungo i tubi: è un compromesso voluto per avere acqua calda subito, igiene sanitaria ed equità di misura, limitando i consumi grazie all'isolamento termico e a piccole pompe di ricircolo da 0,34 kW (3,6 m³/h)."
         ]
       },
       "water": {
@@ -453,17 +453,17 @@
       "closedLoopNote": "Closed loop: water stays in floor pipes",
       "stairwellLabel": "Stairwell riser",
       "tapRoomLabel": "Apartment",
-      "openTapNote": "Open tap → drain",
-      "noColdReturnNote": "Used tap water exits to drain",
+      "openTapNote": "Direct branch to tap",
+      "noColdReturnNote": "Still when closed · drain when open",
       "step3Wells": "2 Wells · 3 Pumps",
       "step3Treat": "Filters & vessels",
       "step3Return": "Aquifer return",
       "step3PC2": "Main heat pumps",
       "step3S3C": "Climate buffers",
-      "step3Common": "Tower B communal",
-      "step3BP": "Towers A & B · Low Pressure (BP)",
+      "step3Common": "Tower B communal HVAC",
+      "step3BP": "Floor panels · Low Pressure (BP)",
       "step3SC2": "SC2 break",
-      "step3AP": "Towers A & B · High Pressure (AP)",
+      "step3AP": "Floor panels · High Pressure (AP)",
       "step3S3I": "Interm. buffers",
       "step3PC1": "High-temp HP",
       "step3SC1": "Exchangers",
@@ -559,11 +559,11 @@
         ]
       },
       "dhw": {
-        "title": "From storage to taps — and why riser recirculation returns warm",
+        "title": "Direct to taps inside apartments — why does the stairwell riser recirculate?",
         "pages": [
-          "At the 60 °C top outlet of S2, a thermostatic mixing valve tempers water to 48 °C (ACP) and sends it up the stairwell riser. When a resident opens a tap, hot water enters the apartment, is used and goes to drain: no cold water ever returns from apartment taps to the plant.",
-          "Why then is there a return line with pumps P02 (MP) and P03 (BP)? That ACR line loops at the top of the condominium stairwell risers outside the apartments and brings warm water (~46–48 °C) back to the mixer and S2 inlet so the risers stay hot while taps are closed.",
-          "Whenever taps draw hot water, an equal flow of cold potable mains water (~15 °C, blue AFP line from boosters GP1/GP2 and softeners T2) enters the bottom of S2 and feeds the cold port of the mixing valve."
+          "Inside each apartment, 48 °C hot water runs along a simple direct branch from the stairwell meter to the taps: when taps are closed that branch stays still under pressure, and when opened the water is used and discharged to drain.",
+          "Why does the vertical stairwell column (ACP Ø3\") loop back from the top via the smaller ACR pipe (Ø1\"1/4, driven by P02/P03) instead of standing still too? A 40-metre Ø3\" riser holds ~200 litres: if left stagnant overnight it would cool down, forcing upper-floor residents to wait minutes and waste dozens of cold litres (counted on their apartment M-bus hot-water meter).",
+          "Stagnant lukewarm water between 25 and 42 °C also promotes Legionella growth. Recirculating the common riser does dissipate some thermal energy along the shaft: pipe insulation and small 0.34 kW (3.6 m³/h) circulators keep that loss modest in exchange for instant hot water, hygiene and fair metering."
         ]
       },
       "water": {
@@ -840,17 +840,17 @@
       "closedLoopNote": "闭式环路：循环水始终留在地板管内",
       "stairwellLabel": "楼梯间立管",
       "tapRoomLabel": "住户内",
-      "openTapNote": "开式用水 → 排水",
-      "noColdReturnNote": "使用后的水排入下水道",
+      "openTapNote": "直达水龙头支管",
+      "noColdReturnNote": "关闭时静止 · 打开时排走",
       "step3Wells": "2 口井 · 3 台泵",
       "step3Treat": "过滤与稳压罐",
       "step3Return": "双回灌井",
       "step3PC2": "主热泵机组",
       "step3S3C": "空调缓冲箱",
-      "step3Common": "B 塔公共区域",
-      "step3BP": "A/B 塔 · 低压区 (BP)",
+      "step3Common": "B 塔公共区空调",
+      "step3BP": "地板盘管 · 低压区 (BP)",
       "step3SC2": "SC2 隔压",
-      "step3AP": "A/B 塔 · 高压区 (AP)",
+      "step3AP": "地板盘管 · 高压区 (AP)",
       "step3S3I": "中间缓冲箱",
       "step3PC1": "高温热泵",
       "step3SC1": "板式换热器",
@@ -946,11 +946,11 @@
         ]
       },
       "dhw": {
-        "title": "从储水罐到水龙头——为什么回水立管是温热的？",
+        "title": "户内直达龙头——为什么公共楼梯间立管还要循环？",
         "pages": [
-          "S2 顶部流出的 60 °C 热水经恒温混水阀调配至 48 °C（ACP 管线），送入楼梯间热水立管。住户打开龙头时，热水进入户内使用后直接排入下水道——户内绝无冷水流回机房。",
-          "那么带有水泵 P02（MP）和 P03（BP）的回水管是什么？它是仅在公共楼梯间立管顶端折返的热回水环路（ACR，约 46–48 °C），流回混水阀和 S2 进水口，使龙头关闭时立管依然保持温热，即开即热。",
-          "当住户用水消耗热水时，等量的 ~15 °C 冷自来水（来自加压组 GP1/GP2 与软化器 T2 的蓝色 AFP 管线）从底部补入 S2 并供给混水阀冷水口。"
+          "在每户室内，48 °C 热水从楼梯间水表沿单向支管直达龙头：龙头关闭时户内支管静止保压，打开时热水使用后直接排入下水道。",
+          "为什么楼梯间公共主立管（ACP Ø3\"）不在不用水时保持静止，而是从立管顶端经细回水管 ACR（Ø1\"1/4，由 P02/P03 驱动）循环回机房？因为 40 米高的 Ø3\" 立管存水约 200 升：若夜间静止冷却，高层住户早晨需放掉大量冷水并等待数分钟（且冷水仍会计入户用 M-bus 热水表）。",
+          "此外，长期停滞在 25–42 °C 的温水易滋生军团菌。立管持续循环确实会产生一定散热损失，工程上通过管道保温与小功率循环泵（0.34 kW，3.6 m³/h）将损耗降至最低，以换取即开即热、卫生安全与计量公平。"
         ]
       },
       "water": {

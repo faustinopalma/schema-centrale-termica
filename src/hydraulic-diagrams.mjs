@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 
 export const hydraulicStyle = `
-.vector-map{display:block;width:100%;height:100%;overflow:visible;user-select:none}
+.vector-map{display:block;width:100%;height:100%;overflow:visible;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none;-webkit-tap-highlight-color:transparent;touch-action:manipulation}
 .svg-label{fill:var(--cp-text);font-family:"Segoe UI",Aptos,Calibri,-apple-system,BlinkMacSystemFont,sans-serif;pointer-events:none}
 .svg-title{font-weight:700;fill:var(--cp-text)}
 .svg-sub{fill:var(--cp-text-muted);font-weight:500}
@@ -148,7 +148,7 @@ export function createDiagrams(graph) {
         { x: 20, y: 20, w: 222, h: 405, labelKey: 'zoneAquifer' },
         { x: 262, y: 20, w: 545, h: 405, labelKey: 'zoneClimateGen' },
         { x: 885, y: 20, w: 735, h: 405, labelKey: 'zoneBuildingLoops' },
-        { x: 355, y: 452, w: 1265, h: 332, labelKey: 'zoneDhwStage', captionOffset: 62 }
+        { x: 340, y: 454, w: 1280, h: 330, labelKey: 'zoneDhwStage', captionOffset: 280 }
       ],
       nodes: [
         node('well', 'wellCompact', 36, 65, 190, 148, 'step2Well', 'ground',
@@ -161,8 +161,8 @@ export function createDiagrams(graph) {
             go: port(0, 257, 'ground', ['PC2.a/g.out']),
             co: port(250, 70, 'climate', ['PC2.a/c.out']),
             ci: port(250, 245, 'climate', ['PC2.a/c.in']),
-            ii: port(80, 335, 'intermediate', ['PC2.a/i.in']),
-            io: port(175, 335, 'intermediate', ['PC2.a/i.out'])
+            io: port(75, 335, 'intermediate', ['PC2.a/i.out']),
+            ii: port(195, 335, 'intermediate', ['PC2.a/i.in'])
           }, ['PC2.a'], { tagPill: 'PC2', tags: ['PC2'] }),
         node('s3c', 'bufferSingle', 615, 65, 160, 172, 'step2S3C', 's3',
           { in: port(0, 70, 'climate', ['S3.c.a/in']), out: port(160, 70, 'climate', ['S3.c.a/out']) }, ['S3.c.a'], { tagPill: 'S3', tags: ['S3'] }),
@@ -170,40 +170,42 @@ export function createDiagrams(graph) {
           { in: port(0, 73, 'climate', ['C.supply/p']), out: port(0, 248, 'climate', ['C.return/p']) }, ['P07', 'BP'], { tagPill: 'Pannelli', tags: ['P07', 'BP'] }),
         node('riser', 'sanitaryRiserHome', 1290, 62, 310, 326, 'step2Riser', 'dhw',
           {
-            acpIn: port(95, 326, 'potable.mp', ['DHW.mp/in']),
-            acrOut: port(230, 326, 'potable.mp', ['DHW.mp/out'])
+            acrOut: port(50, 326, 'potable.mp', ['DHW.mp/out']),
+            acpIn: port(104, 326, 'potable.mp', ['DHW.mp/in'])
           }, ['DHW.mp', 'TAP.mp', 'P02', 'D.return.mp'], { tagPill: 'ACP · ACR', tags: ['ACP', 'ACR', 'P02'] }),
-        node('s3i', 'bufferSingle', 425, 488, 150, 162, 'step2S3I', 'intermediate',
-          { in: port(0, 67, 'intermediate', ['S3.i.a/in']), out: port(150, 67, 'intermediate', ['S3.i.a/out']) }, ['S3.i.a'], { tagPill: 'S3', tags: ['S3'] }),
-        node('pc1', 'highTempPump', 670, 482, 210, 210, 'step2PC1', 'pc1',
+        node('s3i', 'bufferSingle', 405, 505, 150, 162, 'step2S3I', 'intermediate',
+          { in: port(0, 115, 'intermediate', ['S3.i.a/in']), out: port(150, 115, 'intermediate', ['S3.i.a/out']) }, ['S3.i.a'], { tagPill: 'S3', tags: ['S3'] }),
+        node('pc1', 'highTempPump', 655, 482, 210, 210, 'step2PC1', 'pc1',
           {
-            si: port(0, 73, 'intermediate', ['PC1/s.in']),
-            so: port(0, 168, 'intermediate', ['PC1/s.out']),
-            ho: port(210, 73, 'hot', ['PC1/h.out']),
+            so: port(0, 58, 'intermediate', ['PC1/s.out']),
+            si: port(0, 138, 'intermediate', ['PC1/s.in']),
+            ho: port(210, 68, 'hot', ['PC1/h.out']),
             hi: port(210, 168, 'hot', ['PC1/h.in'])
           }, ['PC1'], { tagPill: 'PC1', tags: ['PC1'] }),
-        node('sc1', 'plateExchanger', 970, 490, 82, 195, 'step2SC1', 'sc1',
+        node('sc1', 'plateExchanger', 960, 490, 82, 195, 'step2SC1', 'sc1',
           {
-            pi: port(0, 65, 'hot', ['SC1.mp/p.in']),
+            pi: port(0, 60, 'hot', ['SC1.mp/p.in']),
             po: port(0, 160, 'hot', ['SC1.mp/p.out']),
-            so: port(82, 65, 'potable.mp', ['SC1.mp/s.out']),
+            so: port(82, 60, 'potable.mp', ['SC1.mp/s.out']),
             si: port(82, 160, 'potable.mp', ['SC1.mp/s.in'])
           }, ['SC1.mp'], { tagPill: 'SC1', tags: ['SC1'] }),
-        node('s2', 'dhwCylinder', 1142, 472, 148, 222, 'step2S2', 's2',
+        node('s2', 'dhwCylinder', 1135, 472, 148, 222, 'step2S2', 's2',
           {
-            chargeIn: port(0, 83, 'potable.mp', ['S2.mp/charge.in']),
+            chargeIn: port(0, 78, 'potable.mp', ['S2.mp/charge.in']),
             chargeOut: port(0, 178, 'potable.mp', ['S2.mp/charge.out']),
-            hotOut: port(148, 53, 'potable.mp', ['S2.mp/hot']),
+            recircIn: port(148, 36, 'potable.mp', ['S2.mp/cold']),
+            hotOut: port(148, 88, 'potable.mp', ['S2.mp/hot']),
             coldIn: port(74, 222, 'potable.mp', ['S2.mp/cold'])
           }, ['S2.mp'], { tagPill: 'S2 · 60 °C', tags: ['S2'] }),
-        node('mixer', 'thermoMixer', 1345, 490, 80, 80, 'step2Mix', 'dhw',
+        node('mixer', 'thermoMixer', 1354, 520, 80, 80, 'step2Mix', 'dhw',
           {
-            hotIn: port(0, 35, 'potable.mp', ['MIX.mp/hot']),
-            coldIn: port(40, 80, 'potable.mp', ['MIX.mp/cold']),
-            mixedOut: port(40, 0, 'potable.mp', ['MIX.mp/out'])
+            hotIn: port(0, 40, 'potable.mp', ['MIX.mp/hot']),
+            recircIn: port(16, 0, 'potable.mp', ['MIX.mp/cold']),
+            mixedOut: port(40, 0, 'potable.mp', ['MIX.mp/out']),
+            coldIn: port(40, 80, 'potable.mp', ['MIX.mp/cold'])
           }, ['MIX.mp'], { tagPill: 'Misc. 48 °C', tags: ['ACP'] }),
-        node('mains', 'mainsIntake', 945, 720, 200, 52, 'step2Mains', 'water',
-          { out: port(200, 26, 'potable.mp', ['COLD.mp/p']) }, ['AQ', 'T1', 'S1.a', 'GP1', 'T2.mp', 'COLD.mp'], { tagPill: 'AFP · Rete', tags: ['AFP', 'T1', 'GP1', 'T2'] })
+        node('mains', 'mainsIntake', 910, 720, 225, 52, 'step2Mains', 'water',
+          { out: port(225, 26, 'potable.mp', ['COLD.mp/p']) }, ['AQ', 'T1', 'S1.a', 'GP1', 'T2.mp', 'COLD.mp'], { tagPill: 'AFP · Rete', tags: ['AFP', 'T1', 'GP1', 'T2'] })
       ],
       edges: [
         { id: 's2-gw-sup', from: 'well.out', to: 'pc2.gi', bends: [] },
@@ -211,33 +213,33 @@ export function createDiagrams(graph) {
         { id: 's2-cl-feed', from: 'pc2.co', to: 's3c.in', bends: [] },
         { id: 's2-cl-sup', from: 's3c.out', to: 'load.in', bends: [], pump: 'P07', pumpTopic: 'tag-P07' },
         { id: 's2-cl-ret', from: 'load.out', to: 'pc2.ci', bends: [] },
-        { id: 's2-in-feed', from: 'pc2.io', to: 's3i.in', bends: [[460, 434], [395, 434], [395, 555]] },
+        { id: 's2-in-feed', from: 'pc2.io', to: 's3i.in', bends: [[360, 620]] },
         { id: 's2-in-sup', from: 's3i.out', to: 'pc1.si', bends: [], pump: 'P05', pumpTopic: 'tag-P05' },
-        { id: 's2-in-ret', from: 'pc1.so', to: 'pc2.ii', bends: [[635, 650], [635, 722], [365, 722]] },
+        { id: 's2-in-ret', from: 'pc1.so', to: 'pc2.ii', bends: [[595, 540], [595, 430], [480, 430]] },
         { id: 's2-ht-sup', from: 'pc1.ho', to: 'sc1.pi', bends: [], pump: 'P04', pumpTopic: 'tag-P04' },
         { id: 's2-ht-ret', from: 'sc1.po', to: 'pc1.hi', bends: [] },
         { id: 's2-ch-sup', from: 'sc1.so', to: 's2.chargeIn', bends: [] },
         { id: 's2-ch-ret', from: 's2.chargeOut', to: 'sc1.si', bends: [], pump: 'P01', pumpTopic: 'tag-P01' },
         { id: 's2-hot-out', from: 's2.hotOut', to: 'mixer.hotIn', bends: [] },
         { id: 's2-acp-sup', from: 'mixer.mixedOut', to: 'riser.acpIn', bends: [] },
-        { id: 's2-acr-mix', from: 'riser.acrOut', to: 'mixer.coldIn', bends: [[1520, 714], [1385, 714]], pump: 'P02', pumpTopic: 'tag-P02', pumpAt: [1520, 535], pumpAngle: 90, role: 'recirc' },
-        { id: 's2-acr-s2', from: 'riser.acrOut', to: 's2.coldIn', bends: [[1520, 714], [1216, 714]], role: 'recirc' },
-        { id: 's2-afp-s2', from: 'mains.out', to: 's2.coldIn', bends: [[1216, 746]], role: 'coldFeed' },
-        { id: 's2-afp-mix', from: 'mains.out', to: 'mixer.coldIn', bends: [[1385, 746]], role: 'coldFeed' }
+        { id: 's2-acr-mix', from: 'riser.acrOut', to: 'mixer.recircIn', bends: [[1340, 490], [1370, 490]], pump: 'P02', pumpTopic: 'tag-P02', pumpAt: [1340, 442], pumpAngle: 90, pumpSide: -1, role: 'recirc', thin: true },
+        { id: 's2-acr-s2', from: 'riser.acrOut', to: 's2.recircIn', bends: [[1340, 490], [1310, 490], [1310, 508]], role: 'recirc', thin: true },
+        { id: 's2-afp-s2', from: 'mains.out', to: 's2.coldIn', bends: [[1209, 746]], role: 'coldFeed' },
+        { id: 's2-afp-mix', from: 'mains.out', to: 'mixer.coldIn', bends: [[1394, 746]], role: 'coldFeed' }
       ]
     };
     diagrams[d.id] = d;
   }
 
-  // STEP 3 — Complete Real Condominium Plant Mes 600 S (multi-unit parallel groups, pressure zones, all tags)
+  // STEP 3 — Complete Real Condominium Plant Mes 600 S (100% planar: 0 crossings, multi-unit groups, pressure zones)
   {
     const d = {
       id: 'step3', step: 3, width: 1780, height: 880,
       zones: [
         { x: 18, y: 20, w: 382, h: 530, labelKey: 'zoneWellsMulti' },
-        { x: 416, y: 20, w: 525, h: 418, labelKey: 'zoneGenMulti' },
-        { x: 960, y: 20, w: 802, h: 418, labelKey: 'zoneClimateZones' },
-        { x: 416, y: 458, w: 1346, h: 404, labelKey: 'zoneDhwMulti' }
+        { x: 416, y: 20, w: 525, h: 422, labelKey: 'zoneGenMulti' },
+        { x: 960, y: 20, w: 802, h: 422, labelKey: 'zoneClimateZones' },
+        { x: 416, y: 462, w: 1346, h: 400, labelKey: 'zoneDhwMulti', captionOffset: 274 }
       ],
       nodes: [
         node('wells', 'multiWells', 32, 66, 202, 248, 'step3Wells', 'wells',
@@ -255,62 +257,64 @@ export function createDiagrams(graph) {
             go: port(0, 284, 'ground', ['PC2.a/g.out', 'PC2.b/g.out']),
             co: port(254, 84, 'climate', ['PC2.a/c.out', 'PC2.b/c.out']),
             ci: port(254, 254, 'climate', ['PC2.a/c.in', 'PC2.b/c.in']),
-            ii: port(78, 346, 'intermediate', ['PC2.a/i.in', 'PC2.b/i.in']),
-            io: port(172, 346, 'intermediate', ['PC2.a/i.out', 'PC2.b/i.out'])
+            io: port(64, 346, 'intermediate', ['PC2.a/i.out', 'PC2.b/i.out']),
+            ii: port(194, 346, 'intermediate', ['PC2.a/i.in', 'PC2.b/i.in'])
           }, ['PC2.a', 'PC2.b'], { tagPill: '2 × PC2', tags: ['PC2'] }),
         node('s3c', 'multiBuffer', 746, 66, 176, 174, 'step3S3C', 's3',
           { in: port(0, 84, 'climate', ['S3.c.a/in', 'S3.c.b/in']), out: port(176, 84, 'climate', ['S3.c.a/out', 'S3.c.b/out']) },
           ['S3.c.a', 'S3.c.b'], { tagPill: '2 × S3', tags: ['S3'] }),
-        node('branchCommon', 'climateBranch', 1086, 54, 656, 84, 'step3Common', 'dist-zones',
-          { in: port(0, 26, 'climate', ['P06/in']), out: port(0, 60, 'climate', ['COMMON/out']) },
-          ['P06', 'COMMON'], { tagPill: 'P06 · Spazi comuni', pumpCode: 'P06', tags: ['P06'] }),
-        node('branchBP', 'climateBranch', 1086, 158, 656, 100, 'step3BP', 'dist-zones',
-          { in: port(0, 30, 'climate', ['M07/hot']), out: port(0, 72, 'climate', ['BP/out']) },
-          ['M07', 'P07', 'BP'], { tagPill: 'P07 · Zona BP', pumpCode: 'P07', hasMixer: true, showTemp: true, tags: ['P07', 'BP'] }),
-        node('sc2', 'plateExchanger', 1086, 280, 128, 134, 'step3SC2', 'sc2',
+        node('branchCommon', 'climateBranch', 1046, 52, 654, 84, 'step3Common', 'dist-zones',
+          { in: port(0, 22, 'climate', ['P06/in']), out: port(654, 58, 'climate', ['COMMON/out']) },
+          ['P06', 'COMMON'], { tagPill: 'P06', pumpCode: 'P06', passThrough: true, tags: ['P06'] }),
+        node('branchBP', 'climateBranch', 1046, 150, 654, 100, 'step3BP', 'dist-zones',
+          { in: port(0, 22, 'climate', ['M07/hot']), out: port(654, 68, 'climate', ['BP/out']) },
+          ['M07', 'P07', 'BP'], { tagPill: 'P07', pumpCode: 'P07', passThrough: true, showTemp: true, tags: ['P07', 'BP'] }),
+        node('sc2', 'plateExchanger', 1046, 266, 128, 132, 'step3SC2', 'sc2',
           {
-            pi: port(0, 35, 'climate', ['P08/in']),
-            po: port(0, 98, 'climate', ['SC2/p.out']),
-            so: port(128, 35, 'high', ['SC2/s.out']),
-            si: port(128, 98, 'high', ['SC2/s.in'])
+            pi: port(0, 44, 'climate', ['P08/in']),
+            po: port(42, 132, 'climate', ['SC2/p.out']),
+            so: port(128, 22, 'high', ['SC2/s.out']),
+            si: port(128, 108, 'high', ['SC2/s.in'])
           }, ['P08', 'SC2'], { tagPill: 'P08 + SC2', isSC2: true, tags: ['P08', 'SC2'] }),
-        node('branchAP', 'climateBranch', 1272, 280, 470, 134, 'step3AP', 'dist-zones',
-          { in: port(0, 35, 'high', ['P09/in']), out: port(0, 98, 'high', ['AP/out']) },
-          ['P09', 'AP'], { tagPill: 'P09 · Zona AP', pumpCode: 'P09', showTemp: true, tags: ['P09', 'AP'] }),
-        node('s3i', 'multiBuffer', 442, 498, 174, 168, 'step3S3I', 'intermediate',
-          { in: port(0, 77, 'intermediate', ['S3.i.a/in', 'S3.i.b/in']), out: port(174, 77, 'intermediate', ['S3.i.a/out', 'S3.i.b/out']) },
+        node('branchAP', 'climateBranch', 1234, 266, 466, 132, 'step3AP', 'dist-zones',
+          { in: port(0, 22, 'high', ['P09/in']), out: port(0, 108, 'high', ['AP/out']) },
+          ['P09', 'AP'], { tagPill: 'P09', pumpCode: 'P09', showTemp: true, tags: ['P09', 'AP'] }),
+        node('s3i', 'multiBuffer', 456, 506, 174, 168, 'step3S3I', 'intermediate',
+          { in: port(0, 114, 'intermediate', ['S3.i.a/in', 'S3.i.b/in']), out: port(174, 114, 'intermediate', ['S3.i.a/out', 'S3.i.b/out']) },
           ['S3.i.a', 'S3.i.b'], { tagPill: '2 × S3', tags: ['S3'] }),
-        node('pc1', 'highTempPump', 700, 495, 196, 200, 'step3PC1', 'pc1',
+        node('pc1', 'highTempPump', 712, 495, 196, 200, 'step3PC1', 'pc1',
           {
-            si: port(0, 80, 'intermediate', ['PC1/s.in']),
-            so: port(0, 165, 'intermediate', ['PC1/s.out']),
+            so: port(0, 50, 'intermediate', ['PC1/s.out']),
+            si: port(0, 125, 'intermediate', ['PC1/s.in']),
             ho: port(196, 80, 'hot', ['PC1/h.out']),
             hi: port(196, 165, 'hot', ['PC1/h.in'])
           }, ['PC1'], { tagPill: 'PC1', tags: ['PC1'] }),
-        node('sc1', 'multiExchanger', 980, 495, 118, 200, 'step3SC1', 'sc1',
+        node('sc1', 'multiExchanger', 988, 495, 118, 200, 'step3SC1', 'sc1',
           {
             pi: port(0, 80, 'hot', ['SC1.mp/p.in', 'SC1.bp/p.in']),
             po: port(0, 165, 'hot', ['SC1.mp/p.out', 'SC1.bp/p.out']),
             so: port(118, 80, 'potable.mp', ['SC1.mp/s.out']),
             si: port(118, 165, 'potable.mp', ['SC1.mp/s.in'])
           }, ['SC1.mp', 'SC1.bp'], { tagPill: '2 × SC1', tags: ['SC1'] }),
-        node('s2', 'multiDhwCylinders', 1188, 485, 184, 215, 'step3S2', 's2',
+        node('s2', 'multiDhwCylinders', 1192, 485, 180, 215, 'step3S2', 's2',
           {
             chargeIn: port(0, 90, 'potable.mp', ['S2.mp/charge.in']),
             chargeOut: port(0, 175, 'potable.mp', ['S2.mp/charge.out']),
-            hotOut: port(184, 50, 'potable.mp', ['S2.mp/hot']),
-            coldIn: port(92, 215, 'potable.mp', ['S2.mp/cold'])
+            recircIn: port(180, 30, 'potable.mp', ['S2.mp/cold']),
+            hotOut: port(180, 95, 'potable.mp', ['S2.mp/hot']),
+            coldIn: port(90, 215, 'potable.mp', ['S2.mp/cold'])
           }, ['P01.mp', 'P01.bp', 'S2.mp', 'S2.bp'], { tagPill: '2 × S2', tags: ['S2', 'P01'] }),
-        node('mixer', 'thermoMixer', 1420, 500, 80, 80, 'step3Mix', 'dhw',
+        node('mixer', 'thermoMixer', 1422, 545, 80, 80, 'step3Mix', 'dhw',
           {
             hotIn: port(0, 35, 'potable.mp', ['MIX.mp/hot']),
-            coldIn: port(40, 80, 'potable.mp', ['MIX.mp/cold']),
-            mixedOut: port(80, 35, 'potable.mp', ['MIX.mp/out'])
+            recircIn: port(40, 0, 'potable.mp', ['MIX.mp/cold']),
+            mixedOut: port(80, 35, 'potable.mp', ['MIX.mp/out']),
+            coldIn: port(40, 80, 'potable.mp', ['MIX.mp/cold'])
           }, ['MIX.mp', 'MIX.bp'], { tagPill: '2×Misc.', tags: ['ACP'] }),
-        node('dhwZones', 'multiDhwRisers', 1545, 480, 198, 258, 'step3DhwZones', 'dhw',
+        node('dhwZones', 'multiDhwRisers', 1550, 482, 194, 256, 'step3DhwZones', 'dhw',
           {
-            acpIn: port(0, 55, 'potable.mp', ['DHW.mp/in']),
-            acrOut: port(98, 258, 'potable.mp', ['DHW.mp/out'])
+            acrOut: port(0, 33, 'potable.mp', ['DHW.mp/out']),
+            acpIn: port(0, 128, 'potable.mp', ['DHW.mp/in'])
           }, ['DHW.mp', 'DHW.bp', 'TAP.mp', 'TAP.bp', 'P02', 'P03', 'D.return.mp', 'D.return.bp'],
           { tagPill: 'MP + BP', tags: ['ACP', 'ACR', 'P02', 'P03', 'MP', 'BP'] }),
         node('potable', 'potableStation', 520, 758, 675, 88, 'step3Potable', 'water',
@@ -321,29 +325,29 @@ export function createDiagrams(graph) {
       edges: [
         { id: 's3-gw-raw', from: 'wells.out', to: 'gwTreat.in', bends: [] },
         { id: 's3-gw-sup', from: 'gwTreat.out', to: 'pc2.gi', bends: [] },
-        { id: 's3-gw-ret', from: 'pc2.go', to: 'returnWells.in', bends: [[398, 350], [398, 444]] },
+        { id: 's3-gw-ret', from: 'pc2.go', to: 'returnWells.in', bends: [[388, 350], [388, 444]] },
         { id: 's3-cl-feed', from: 'pc2.co', to: 's3c.in', bends: [] },
-        { id: 's3-cl-b1', from: 's3c.out', to: 'branchCommon.in', bends: [[992, 150], [992, 80]] },
-        { id: 's3-cl-b2', from: 's3c.out', to: 'branchBP.in', bends: [[992, 150], [992, 188]] },
-        { id: 's3-cl-b3', from: 's3c.out', to: 'sc2.pi', bends: [[992, 150], [992, 315]] },
-        { id: 's3-cl-r1', from: 'branchCommon.out', to: 'pc2.ci', bends: [[1036, 114], [1036, 320]] },
-        { id: 's3-cl-r2', from: 'branchBP.out', to: 'pc2.ci', bends: [[1036, 230], [1036, 320]] },
-        { id: 's3-cl-r3', from: 'sc2.po', to: 'pc2.ci', bends: [[1036, 378], [1036, 320]] },
+        { id: 's3-cl-b1', from: 's3c.out', to: 'branchCommon.in', bends: [[988, 150], [988, 74]] },
+        { id: 's3-cl-b2', from: 's3c.out', to: 'branchBP.in', bends: [[988, 150], [988, 172]] },
+        { id: 's3-cl-b3', from: 's3c.out', to: 'sc2.pi', bends: [[988, 150], [988, 310]] },
+        { id: 's3-cl-r1', from: 'branchCommon.out', to: 'pc2.ci', bends: [[1736, 110], [1736, 424], [720, 424], [720, 320]] },
+        { id: 's3-cl-r2', from: 'branchBP.out', to: 'pc2.ci', bends: [[1736, 218], [1736, 424], [720, 424], [720, 320]] },
+        { id: 's3-cl-r3', from: 'sc2.po', to: 'pc2.ci', bends: [[1088, 424], [720, 424], [720, 320]] },
         { id: 's3-ap-sup', from: 'sc2.so', to: 'branchAP.in', bends: [] },
         { id: 's3-ap-ret', from: 'branchAP.out', to: 'sc2.si', bends: [] },
-        { id: 's3-in-feed', from: 'pc2.io', to: 's3i.in', bends: [[608, 448], [412, 448], [412, 575]] },
+        { id: 's3-in-feed', from: 'pc2.io', to: 's3i.in', bends: [[500, 442], [432, 442], [432, 620]] },
         { id: 's3-in-sup', from: 's3i.out', to: 'pc1.si', bends: [], pump: 'P05', pumpTopic: 'tag-P05' },
-        { id: 's3-in-ret', from: 'pc1.so', to: 'pc2.ii', bends: [[662, 660], [662, 716], [386, 716], [386, 430], [514, 430]] },
+        { id: 's3-in-ret', from: 'pc1.so', to: 'pc2.ii', bends: [[664, 545], [664, 442], [630, 442]] },
         { id: 's3-ht-sup', from: 'pc1.ho', to: 'sc1.pi', bends: [], pump: 'P04', pumpTopic: 'tag-P04' },
         { id: 's3-ht-ret', from: 'sc1.po', to: 'pc1.hi', bends: [] },
         { id: 's3-ch-sup', from: 'sc1.so', to: 's2.chargeIn', bends: [] },
         { id: 's3-ch-ret', from: 's2.chargeOut', to: 'sc1.si', bends: [], pump: '2×P01', pumpTopic: 'tag-P01' },
         { id: 's3-hot-out', from: 's2.hotOut', to: 'mixer.hotIn', bends: [] },
-        { id: 's3-acp-sup', from: 'mixer.mixedOut', to: 'dhwZones.acpIn', bends: [] },
-        { id: 's3-acr-mix', from: 'dhwZones.acrOut', to: 'mixer.coldIn', bends: [[1643, 766], [1460, 766]], pump: 'P02·P03', pumpTopic: 'tag-P02', pumpAt: [1552, 766], pumpAngle: 180, role: 'recirc' },
-        { id: 's3-acr-s2', from: 'dhwZones.acrOut', to: 's2.coldIn', bends: [[1643, 766], [1280, 766]], role: 'recirc' },
-        { id: 's3-afp-s2', from: 'potable.out', to: 's2.coldIn', bends: [[1280, 802]], role: 'coldFeed' },
-        { id: 's3-afp-mix', from: 'potable.out', to: 'mixer.coldIn', bends: [[1460, 802]], role: 'coldFeed' }
+        { id: 's3-acp-sup', from: 'mixer.mixedOut', to: 'dhwZones.acpIn', bends: [[1526, 580], [1526, 610]] },
+        { id: 's3-acr-s2', from: 'dhwZones.acrOut', to: 's2.recircIn', bends: [], pump: 'P02·P03', pumpTopic: 'tag-P02', pumpAt: [1508, 515], pumpAngle: 180, role: 'recirc', thin: true },
+        { id: 's3-acr-mix', from: 'dhwZones.acrOut', to: 'mixer.recircIn', bends: [[1462, 515]], role: 'recirc', thin: true },
+        { id: 's3-afp-s2', from: 'potable.out', to: 's2.coldIn', bends: [[1282, 802]], role: 'coldFeed' },
+        { id: 's3-afp-mix', from: 'potable.out', to: 'mixer.coldIn', bends: [[1462, 802]], role: 'coldFeed' }
       ]
     };
     diagrams[d.id] = d;
@@ -382,16 +386,16 @@ export function createDiagrams(graph) {
     const d = {
       id: 'cycle', width: 1160, height: 540, teaching: true, zones: [],
       nodes: [
-        { ...node('stage0', 'cycleStage', 65, 165, 250, 210, 'stage0', 'evaporator', { in: port(125, 210, 'ref'), out: port(125, 0, 'ref') }), stage: 0 },
-        { ...node('stage1', 'cycleStage', 455, 28, 250, 168, 'stage1', 'compressor', { in: port(0, 84, 'ref'), out: port(250, 84, 'ref') }), stage: 1 },
-        { ...node('stage2', 'cycleStage', 845, 165, 250, 210, 'stage2', 'condenser', { in: port(125, 0, 'ref'), out: port(125, 210, 'ref') }), stage: 2 },
-        { ...node('stage3', 'cycleStage', 455, 344, 250, 168, 'stage3', 'expansion', { in: port(250, 84, 'ref'), out: port(0, 84, 'ref') }), stage: 3 }
+        { ...node('stage0', 'cycleStage', 45, 165, 290, 210, 'stage0', 'evaporator', { in: port(52, 210, 'ref'), out: port(52, 0, 'ref') }), stage: 0 },
+        { ...node('stage1', 'cycleStage', 445, 28, 270, 168, 'stage1', 'compressor', { in: port(0, 84, 'ref'), out: port(270, 84, 'ref') }), stage: 1 },
+        { ...node('stage2', 'cycleStage', 825, 165, 290, 210, 'stage2', 'condenser', { in: port(238, 0, 'ref'), out: port(238, 210, 'ref') }), stage: 2 },
+        { ...node('stage3', 'cycleStage', 445, 344, 270, 168, 'stage3', 'expansion', { in: port(270, 84, 'ref'), out: port(0, 84, 'ref') }), stage: 3 }
       ],
       edges: [
-        { id: 'phase0', from: 'stage0.out', to: 'stage1.in', fluid: 'ref', points: [[190, 165], [190, 112], [455, 112]] },
-        { id: 'phase1', from: 'stage1.out', to: 'stage2.in', fluid: 'ref', points: [[705, 112], [970, 112], [970, 165]] },
-        { id: 'phase2', from: 'stage2.out', to: 'stage3.in', fluid: 'ref', points: [[970, 375], [970, 428], [705, 428]] },
-        { id: 'phase3', from: 'stage3.out', to: 'stage0.in', fluid: 'ref', points: [[455, 428], [190, 428], [190, 375]] }
+        { id: 'phase0', from: 'stage0.out', to: 'stage1.in', fluid: 'ref', points: [[97, 165], [97, 112], [445, 112]] },
+        { id: 'phase1', from: 'stage1.out', to: 'stage2.in', fluid: 'ref', points: [[715, 112], [1063, 112], [1063, 165]] },
+        { id: 'phase2', from: 'stage2.out', to: 'stage3.in', fluid: 'ref', points: [[1063, 375], [1063, 428], [715, 428]] },
+        { id: 'phase3', from: 'stage3.out', to: 'stage0.in', fluid: 'ref', points: [[445, 428], [97, 428], [97, 375]] }
       ]
     };
     diagrams[d.id] = d;
@@ -413,7 +417,10 @@ export function renderHydraulic(d, copy, season = 'winter', prefix = 'hyd') {
     if (n.shape === 'thermoMixer') return name === 'hotIn' ? 'danger' : name === 'coldIn' ? 'link' : 'warning';
     if (n.shape === 'sanitaryRiserHome' || n.shape === 'multiDhwRisers') return 'warning';
     if (n.shape === 'mainsIntake' || n.shape === 'potableStation') return 'link';
-    if (n.shape === 'dhwCylinder' || n.shape === 'multiDhwCylinders') return (name === 'chargeIn' || name === 'hotOut') ? 'danger' : 'link';
+    if (n.shape === 'dhwCylinder' || n.shape === 'multiDhwCylinders') {
+      if (name === 'recircIn') return 'warning';
+      return (name === 'chargeIn' || name === 'hotOut') ? 'danger' : 'link';
+    }
     const fluid = n.ports[name].fluid;
     if (fluid === 'ground') {
       return (name === 'out' || name === 'gi' || (n.shape === 'multiGwTreat')) ? supplyTone : returnTone;
@@ -522,16 +529,47 @@ export function renderHydraulic(d, copy, season = 'winter', prefix = 'hyd') {
       `<text class="tag-pill-text" x="${cx}" y="${cy + fontSize * 0.35}" font-size="${fontSize}" text-anchor="middle">${esc(label)}</text></g>`;
   };
 
-  const pumpBadge = (cx, cy, code, topic, dirAngle = 0) => {
+  const pumpBadge = (cx, cy, code, topic, dirAngle = 0, side = 1) => {
     const isVert = Math.abs(Math.abs(dirAngle) - 90) < 15;
     const pillW = Math.max(44, code.length * 8.6 + 10);
-    const px = isVert ? cx + 18 + pillW / 2 : cx;
+    const px = isVert ? cx + side * (18 + pillW / 2) : cx;
     const py = isVert ? cy : cy - 26;
     return `<g class="inline-pump" data-topic="${topic || 'pumps'}" data-tags="${esc(code.replace(/[^A-Z0-9]/g, ' ').trim())}" role="button" tabindex="0" aria-label="${esc(code)}">` +
+      `<circle cx="${cx}" cy="${cy}" r="22" fill="var(--cp-surface)" opacity="0" pointer-events="all"/>` +
       `<circle class="machine-card" cx="${cx}" cy="${cy}" r="14"/>` +
       `<g transform="translate(${cx} ${cy}) rotate(${dirAngle})"><path d="M-5 -6L7 0L-5 6Z" fill="var(--cp-accent)"/></g>` +
       `<rect class="tag-pill-bg" x="${px - pillW / 2}" y="${py - 9}" width="${pillW}" height="18" rx="9"/>` +
       `<text class="tag-pill-text" x="${px}" y="${py + 4}" font-size="12" text-anchor="middle">${esc(code)}</text></g>`;
+  };
+
+  // Deduplicate shared manifold prefix/suffix trunks so every segment is drawn & animated once
+  const ptOnSeg = (p, a, b) => {
+    if (a[0] === b[0] && p[0] === a[0]) return p[1] >= Math.min(a[1], b[1]) - 0.5 && p[1] <= Math.max(a[1], b[1]) + 0.5;
+    if (a[1] === b[1] && p[1] === a[1]) return p[0] >= Math.min(a[0], b[0]) - 0.5 && p[0] <= Math.max(a[0], b[0]) + 0.5;
+    return false;
+  };
+  const ptOnPoly = (p, pts) => {
+    for (let i = 1; i < pts.length; i++) if (ptOnSeg(p, pts[i - 1], pts[i])) return true;
+    return false;
+  };
+  const splitColinear = (pts, coords) => {
+    const out = [pts[0]];
+    for (let i = 1; i < pts.length; i++) {
+      const a = pts[i - 1], b = pts[i];
+      if (a[0] === b[0]) {
+        const dir = Math.sign(b[1] - a[1]);
+        const mids = coords.filter(([cx, cy]) => cx === a[0] && (cy - a[1]) * dir > 0.5 && (b[1] - cy) * dir > 0.5)
+          .map(([, cy]) => cy).sort((u, v) => (u - v) * dir);
+        for (const my of [...new Set(mids)]) out.push([a[0], my]);
+      } else {
+        const dir = Math.sign(b[0] - a[0]);
+        const mids = coords.filter(([cx, cy]) => cy === a[1] && (cx - a[0]) * dir > 0.5 && (b[0] - cx) * dir > 0.5)
+          .map(([cx]) => cx).sort((u, v) => (u - v) * dir);
+        for (const mx of [...new Set(mids)]) out.push([mx, a[1]]);
+      }
+      out.push(b);
+    }
+    return out;
   };
 
   let zonesSvg = '';
@@ -540,30 +578,41 @@ export function renderHydraulic(d, copy, season = 'winter', prefix = 'hyd') {
       `<text class="zone-caption" x="${z.x + (z.captionOffset || 18)}" y="${z.y + 24}">${esc(textLabel(z.labelKey))}</text></g>`;
   }
 
+  const allEdgeVertices = d.edges.flatMap(e => e.points);
+  const drawnPolys = [];
+  const junctionDots = new Map();
   let pipesSvg = '', inlinePumpsSvg = '';
+
   for (const e of d.edges) {
-    const bridges = [];
-    for (let i = 1; i < e.points.length; i++) {
-      const a = e.points[i - 1], b = e.points[i];
-      if (a[1] !== b[1]) continue;
-      for (const other of d.edges) {
-        if (other === e || other.from === e.from || other.to === e.to) continue;
-        if ((e.role && other.role) && (e.to === other.to)) continue;
-        for (let j = 1; j < other.points.length; j++) {
-          const c = other.points[j - 1], q = other.points[j];
-          if (c[0] === q[0] && c[0] > Math.min(a[0], b[0]) + 10 && c[0] < Math.max(a[0], b[0]) - 10 &&
-            a[1] > Math.min(c[1], q[1]) + 4 && a[1] < Math.max(c[1], q[1]) - 4) {
-            bridges.push(c[0]);
-          }
-        }
-      }
-    }
     const fromT = d.teaching ? portTone(d.nodes.find(n => n.id === e.from.split('.')[0]), e.from.split('.')[1]) : resolveTone(e.from, e);
     const toT = d.teaching ? portTone(d.nodes.find(n => n.id === e.to.split('.')[0]), e.to.split('.')[1]) : resolveTone(e.to, e);
-    pipesSvg += drawPipe(e.points, fromT, toT, {
-      bridges,
-      attrs: `data-edge="${e.id}" data-from="${e.from}" data-to="${e.to}" data-fluid="${e.fluid}"`
-    });
+    const canonPath = buildRoundedPath(e.points);
+    pipesSvg += `<path d="${canonPath}" fill="none" stroke="none" data-edge="${e.id}" data-from="${e.from}" data-to="${e.to}" data-fluid="${e.fluid}" data-temperature-from="${fromT}" data-temperature-to="${toT}"/>`;
+
+    const refined = splitColinear(e.points, allEdgeVertices);
+    const segCovered = (a, b) => {
+      const mid = [(a[0] + b[0]) / 2, (a[1] + b[1]) / 2];
+      return drawnPolys.some(prev => (prev.from === e.from || prev.to === e.to) && prev.tone === fromT && ptOnPoly(mid, prev.points));
+    };
+    let startIdx = 0;
+    while (startIdx < refined.length - 1 && segCovered(refined[startIdx], refined[startIdx + 1])) startIdx++;
+    let endIdx = refined.length - 1;
+    while (endIdx > startIdx && segCovered(refined[endIdx - 1], refined[endIdx])) endIdx--;
+
+    const visPts = refined.slice(startIdx, endIdx + 1);
+    if (visPts.length >= 2) {
+      pipesSvg += drawPipe(visPts, fromT, toT, { thin: !!e.thin, marker: endIdx === refined.length - 1 });
+      if (startIdx > 0) {
+        const jp = visPts[0];
+        junctionDots.set(`${jp[0]},${jp[1]}`, `<circle data-junction="${jp[0]},${jp[1]}" cx="${jp[0]}" cy="${jp[1]}" r="4.8" fill="var(--cp-${fromT})" stroke="var(--cp-surface)" stroke-width="1.5"/>`);
+      }
+      if (endIdx < refined.length - 1) {
+        const jp = visPts.at(-1);
+        junctionDots.set(`${jp[0]},${jp[1]}`, `<circle data-junction="${jp[0]},${jp[1]}" cx="${jp[0]}" cy="${jp[1]}" r="4.8" fill="var(--cp-${toT})" stroke="var(--cp-surface)" stroke-width="1.5"/>`);
+      }
+    }
+    drawnPolys.push({ from: e.from, to: e.to, tone: fromT, points: e.points });
+
     if (e.pump) {
       let px, py, angle = 0;
       if (e.pumpAt) {
@@ -576,27 +625,10 @@ export function renderHydraulic(d, copy, season = 'winter', prefix = 'hyd') {
         py = (sa[1] + sb[1]) / 2;
         angle = Math.atan2(sb[1] - sa[1], sb[0] - sa[0]) * 180 / Math.PI;
       }
-      inlinePumpsSvg += pumpBadge(px, py, e.pump, e.pumpTopic, angle);
+      inlinePumpsSvg += pumpBadge(px, py, e.pump, e.pumpTopic, angle, e.pumpSide ?? 1);
     }
   }
-
-  for (const e of d.edges) {
-    for (const other of d.edges) {
-      if (e === other || e.fluid !== other.fluid) continue;
-      const sharedConnect = e.from === other.from || e.to === other.to;
-      if (!sharedConnect) continue;
-      for (const [x, y] of e.points) {
-        for (let i = 1; i < other.points.length; i++) {
-          const a = other.points[i - 1], b = other.points[i];
-          if ((x === a[0] && x === b[0] && y > Math.min(a[1], b[1]) && y < Math.max(a[1], b[1])) ||
-              (y === a[1] && y === b[1] && x > Math.min(a[0], b[0]) && x < Math.max(a[0], b[0]))) {
-            const tone = resolveTone(e.from, e);
-            pipesSvg += `<circle data-junction="${x},${y}" cx="${x}" cy="${y}" r="5" fill="var(--cp-${tone})" stroke="var(--cp-surface)" stroke-width="1.5"/>`;
-          }
-        }
-      }
-    }
-  }
+  pipesSvg += [...junctionDots.values()].join('');
 
   const portPt = (n, p) => [n.x + p.x, n.y + p.y];
   let nodesSvg = '';
@@ -727,9 +759,10 @@ export function renderHydraulic(d, copy, season = 'winter', prefix = 'hyd') {
         for (const [tx, ty] of [[x + 44, y + 66], [x + w - 78, y + 66]]) {
           body += `<rect class="machine-sub" x="${tx}" y="${ty}" width="34" height="78" rx="14"/>`;
         }
-        body += drawPipe([pin, [x + 24, pin[1]], [x + 24, y + 84], [x + w - 24, y + 84], [x + w - 24, pout[1]], pout], tone, tone, { thin: true, marker: false });
-        body += drawPipe([[x + 24, pin[1]], [x + 24, y + 124], [x + w - 24, y + 124], [x + w - 24, pout[1]]], tone, tone, { thin: true, marker: false });
-        body += `<text class="svg-label svg-sub pc-detail" x="${x + w / 2}" y="${y + h - 10}" font-size="13" text-anchor="middle">2 × 2.000 L</text>`;
+        body += drawPipe([pin, [x + 24, pin[1]], [x + 24, y + 82], [x + w - 24, y + 82], [x + w - 24, pout[1]], pout], tone, tone, { thin: true, marker: false });
+        body += drawPipe([[x + 24, pin[1]], [x + 24, y + 128], [x + w - 24, y + 128], [x + w - 24, pout[1]]], tone, tone, { thin: true, marker: false });
+        body += `<circle cx="${x + 24}" cy="${pin[1]}" r="4" fill="var(--cp-${tone})"/><circle cx="${x + w - 24}" cy="${pout[1]}" r="4" fill="var(--cp-${tone})"/>`;
+        body += `<text class="svg-label svg-sub pc-detail" x="${x + w / 2}" y="${y + h - 8}" font-size="13" text-anchor="middle">2 × 2.000 L</text>`;
       } else {
         body += `<rect class="machine-sub" x="${x + w / 2 - 26}" y="${y + 62}" width="52" height="84" rx="20"/>`;
         body += drawPipe([pin, pout], tone, tone, { thin: true, marker: false });
@@ -752,22 +785,25 @@ export function renderHydraulic(d, copy, season = 'winter', prefix = 'hyd') {
       const acp = portPt(n, p.acpIn), acr = portPt(n, p.acrOut);
       body += `<rect class="machine-card" x="${x}" y="${y}" width="${w}" height="${h}" rx="16"/>`;
       body += `<text class="svg-label svg-title" x="${x + w / 2}" y="${y + 27}" font-size="18" text-anchor="middle">${esc(textLabel(n.label))}</text>`;
-      body += `<rect class="machine-sub" x="${x + 16}" y="${y + 44}" width="108" height="${h - 62}" rx="8"/>`;
-      body += `<rect class="machine-sub" x="${x + 134}" y="${y + 44}" width="${w - 150}" height="${h - 62}" rx="8"/>`;
-      body += `<text class="svg-label svg-sub" x="${x + 70}" y="${y + 64}" font-size="13" text-anchor="middle">${esc(textLabel('stairwellLabel'))}</text>`;
-      body += `<text class="svg-label svg-sub" x="${x + 212}" y="${y + 64}" font-size="13" text-anchor="middle">${esc(textLabel('tapRoomLabel'))}</text>`;
-      const topY = y + 96, tapX = x + 215, tapY = y + 148;
-      body += drawPipe([acp, [acp[0], topY], [tapX, topY], [tapX, tapY]], 'warning', 'warning',
-        { thin: true, marker: false, attrs: 'data-draw-off="true"' });
-      body += drawPipe([[acp[0], topY], [x + 48, topY], [x + 48, y + h - 34], [acr[0], y + h - 34], acr], 'warning', 'warning',
+      body += `<rect class="machine-sub" x="${x + 14}" y="${y + 44}" width="116" height="${h - 60}" rx="8"/>`;
+      body += `<rect class="machine-sub" x="${x + 138}" y="${y + 44}" width="${w - 152}" height="${h - 60}" rx="8"/>`;
+      body += `<text class="svg-label svg-sub" x="${x + 72}" y="${y + 64}" font-size="12.5" text-anchor="middle">${esc(textLabel('stairwellLabel'))}</text>`;
+      body += `<text class="svg-label svg-sub" x="${x + 216}" y="${y + 64}" font-size="12.5" text-anchor="middle">${esc(textLabel('tapRoomLabel'))}</text>`;
+      // ACP rises in stairwell column; at top of stairwell turns into thin ACR return staying ONLY in stairwell!
+      // A straight dead-end horizontal branch enters the apartment tap directly without any loop.
+      const topY = y + 98, branchY = y + 142, tapX = x + 224;
+      body += drawPipe([acp, [acp[0], topY], [acr[0], topY], acr], 'warning', 'warning',
         { thin: true, marker: false, attrs: 'data-channel="riser.recirc"' });
-      body += `<path d="M${tapX - 18} ${tapY}h26v12" fill="none" stroke="var(--cp-border-strong)" stroke-width="4" stroke-linecap="round"/>`;
-      body += `<circle cx="${tapX + 8}" cy="${tapY + 24}" r="3.2" fill="var(--cp-warning)"/>` +
-        `<circle cx="${tapX + 8}" cy="${tapY + 38}" r="3.2" fill="var(--cp-warning)"/>` +
-        `<path d="M${tapX - 24} ${tapY + 52}h56l-8 16h-40Z" class="machine-card"/>`;
-      body += `<text class="svg-label svg-temp" x="${x + 72}" y="${y + 195}" font-size="15" text-anchor="middle">48 °C</text>`;
-      body += `<text class="svg-label svg-sub" x="${x + 214}" y="${y + 246}" font-size="13" text-anchor="middle">${esc(textLabel('openTapNote'))}</text>`;
-      body += `<text class="svg-label svg-sub pc-detail" x="${x + 214}" y="${y + 266}" font-size="12" text-anchor="middle">${esc(textLabel('noColdReturnNote'))}</text>`;
+      body += drawPipe([[acp[0], branchY], [tapX, branchY], [tapX, branchY + 14]], 'warning', 'warning',
+        { thin: true, marker: false, attrs: 'data-draw-off="true"' });
+      body += `<circle cx="${acp[0]}" cy="${branchY}" r="4.2" fill="var(--cp-warning)"/>`;
+      body += `<path d="M${tapX - 16} ${branchY + 14}h24v12" fill="none" stroke="var(--cp-border-strong)" stroke-width="4" stroke-linecap="round"/>`;
+      body += `<circle cx="${tapX + 8}" cy="${branchY + 36}" r="3.2" fill="var(--cp-warning)"/>` +
+        `<circle cx="${tapX + 8}" cy="${branchY + 49}" r="3.2" fill="var(--cp-warning)"/>` +
+        `<path d="M${tapX - 22} ${branchY + 62}h52l-8 15h-36Z" class="machine-card"/>`;
+      body += `<text class="svg-label svg-temp" x="${x + 72}" y="${y + 218}" font-size="14.5" text-anchor="middle">48 °C</text>`;
+      body += `<text class="svg-label svg-sub" x="${x + 216}" y="${y + 248}" font-size="12.5" text-anchor="middle">${esc(textLabel('openTapNote'))}</text>`;
+      body += `<text class="svg-label svg-sub pc-detail" x="${x + 216}" y="${y + 268}" font-size="11.5" text-anchor="middle">${esc(textLabel('noColdReturnNote'))}</text>`;
     } else if (n.shape === 'highTempPump') {
       const si = portPt(n, p.si), so = portPt(n, p.so), ho = portPt(n, p.ho), hi = portPt(n, p.hi);
       body += `<rect class="machine-card" x="${x}" y="${y}" width="${w}" height="${h}" rx="16"/>`;
@@ -796,7 +832,8 @@ export function renderHydraulic(d, copy, season = 'winter', prefix = 'hyd') {
       } else {
         body += `<rect class="plate-pack" x="${x + w / 2 - 10}" y="${y + 46}" width="20" height="${h - 62}" rx="4"/>`;
       }
-      body += drawPipe([pi, [x + 18, pi[1]], [x + 18, po[1]], po], portTone(n, 'pi'), portTone(n, 'po'),
+      const primPts = p.po.y === h ? [pi, [po[0], pi[1]], po] : [pi, [x + 18, pi[1]], [x + 18, po[1]], po];
+      body += drawPipe(primPts, portTone(n, 'pi'), portTone(n, 'po'),
         { thin: true, marker: false, gradEnds: [pi, po] });
       body += drawPipe([si, [x + w - 18, si[1]], [x + w - 18, so[1]], so], portTone(n, 'si'), portTone(n, 'so'),
         { thin: true, marker: false, gradEnds: [si, so] });
@@ -805,37 +842,46 @@ export function renderHydraulic(d, copy, season = 'winter', prefix = 'hyd') {
     } else if (n.shape === 'dhwCylinder' || n.shape === 'multiDhwCylinders') {
       const isMulti = n.shape === 'multiDhwCylinders';
       const cin = portPt(n, p.chargeIn), cout = portPt(n, p.chargeOut), hout = portPt(n, p.hotOut), cold = portPt(n, p.coldIn);
+      const rIn = p.recircIn ? portPt(n, p.recircIn) : null;
       const strat = makeGrad([x, y + 54], [x, y + h - 14], 'danger', 'link');
       defs.push(strat.def);
       body += `<rect class="machine-card" x="${x}" y="${y}" width="${w}" height="${h}" rx="16"/>`;
       body += `<text class="svg-label svg-title" x="${x + w / 2}" y="${y + 24}" font-size="16" text-anchor="middle">${esc(textLabel(n.label))}</text>`;
       if (n.tagPill) body += tagPill(x + w / 2, y + 44, n.tagPill, 12);
       if (isMulti) {
-        for (const tx of [x + 26, x + w - 84]) {
+        for (const tx of [x + 26, x + w - 88]) {
           body += `<rect x="${tx}" y="${y + 60}" width="58" height="${h - 76}" rx="24" style="fill:${strat.stroke};fill-opacity:.22;stroke:var(--cp-border-strong);stroke-width:1.8"/>`;
         }
         body += `<text class="svg-label svg-sub pc-detail" x="${x + 55}" y="${y + 132}" font-size="12" text-anchor="middle">MP</text>`;
-        body += `<text class="svg-label svg-sub pc-detail" x="${x + w - 55}" y="${y + 132}" font-size="12" text-anchor="middle">BP</text>`;
+        body += `<text class="svg-label svg-sub pc-detail" x="${x + w - 59}" y="${y + 132}" font-size="12" text-anchor="middle">BP</text>`;
       } else {
-        body += `<rect x="${x + 26}" y="${y + 58}" width="${w - 52}" height="${h - 74}" rx="34" style="fill:${strat.stroke};fill-opacity:.24;stroke:var(--cp-border-strong);stroke-width:1.8"/>`;
+        body += `<rect x="${x + 26}" y="${y + 58}" width="${w - 56}" height="${h - 74}" rx="34" style="fill:${strat.stroke};fill-opacity:.24;stroke:var(--cp-border-strong);stroke-width:1.8"/>`;
       }
       body += drawPipe([cin, [x + 26, cin[1]]], 'danger', 'danger', { thin: true, marker: false });
       body += drawPipe([[x + 26, cout[1]], cout], 'link', 'link', { thin: true, marker: false });
-      body += drawPipe([[x + w - 26, hout[1]], hout], 'danger', 'danger', { thin: true, marker: false });
+      body += drawPipe([[x + w - 30, hout[1]], hout], 'danger', 'danger', { thin: true, marker: false });
       body += drawPipe([cold, [cold[0], y + h - 18]], 'link', 'link', { thin: true, marker: false });
-      body += `<text class="svg-label svg-temp pc-detail" x="${isMulti ? x + 55 : x + w / 2}" y="${y + 84}" font-size="13.5" text-anchor="middle">60 °C</text>`;
+      if (rIn) {
+        body += drawPipe([rIn, [x + w - 30, rIn[1]]], 'warning', 'warning', { thin: true, marker: false });
+      }
+      body += `<text class="svg-label svg-temp pc-detail" x="${isMulti ? x + 55 : x + w / 2 - 2}" y="${y + 84}" font-size="13.5" text-anchor="middle">60 °C</text>`;
     } else if (n.shape === 'thermoMixer') {
       const hin = portPt(n, p.hotIn), cin = portPt(n, p.coldIn), mout = portPt(n, p.mixedOut);
-      const cx = x + w / 2, cy = y + 35;
+      const rin = p.recircIn ? portPt(n, p.recircIn) : null;
+      const cx = x + p.coldIn.x, cy = hin[1];
       body += `<rect class="machine-card" x="${x}" y="${y}" width="${w}" height="${h}" rx="14"/>`;
       body += drawPipe([hin, [cx, cy]], 'danger', 'warning', { thin: true, marker: false });
       body += drawPipe([cin, [cx, cy]], 'link', 'warning', { thin: true, marker: false });
+      if (rin) {
+        const rPts = rin[0] === cx ? [rin, [cx, cy]] : [rin, [rin[0], cy - 18], [cx, cy - 18]];
+        body += drawPipe(rPts, 'warning', 'warning', { thin: true, marker: false });
+      }
       body += drawPipe([[cx, cy], mout], 'warning', 'warning', { thin: true, marker: false });
       body += `<circle class="machine-card" cx="${cx}" cy="${cy}" r="14"/>` +
         `<text class="svg-label svg-title" x="${cx}" y="${cy + 5}" font-size="13" text-anchor="middle">M</text>`;
-      const tempX = p.mixedOut.y === 0 ? x + w + 28 : cx;
-      const tempY = p.mixedOut.y === 0 ? y + 24 : y - 10;
-      body += `<text class="svg-label svg-temp" x="${tempX}" y="${tempY}" font-size="13.5" text-anchor="middle">48 °C</text>`;
+      const tempX = p.mixedOut.y === 0 ? x + w + 28 : x + w + 26;
+      const tempY = p.mixedOut.y === 0 ? y + 24 : y + 14;
+      body += `<text class="svg-label svg-temp" x="${tempX}" y="${tempY}" font-size="13" text-anchor="middle">48 °C</text>`;
     } else if (n.shape === 'mainsIntake' || n.shape === 'potableStation') {
       const pout = portPt(n, p.out);
       body += `<rect class="machine-card" x="${x}" y="${y}" width="${w}" height="${h}" rx="12"/>`;
@@ -863,8 +909,13 @@ export function renderHydraulic(d, copy, season = 'winter', prefix = 'hyd') {
       body += `<rect class="machine-sub" x="${x + 130}" y="${y + 64}" width="58" height="168" rx="10"/>`;
       body += `<text class="svg-label svg-sub" x="${x + 68}" y="${y + 82}" font-size="13" text-anchor="middle">P1 (2×P11)</text>`;
       body += `<text class="svg-label svg-sub" x="${x + 159}" y="${y + 82}" font-size="13" text-anchor="middle">P2 (P10)</text>`;
+      // Single horizontal manifold + non-overlapping vertical pump risers
+      body += drawPipe([[x + 44, y + 206], [x + 44, pout[1]], pout], tone, tone, { thin: true, marker: false });
+      for (const px of [x + 92, x + 159]) {
+        body += drawPipe([[px, y + 206], [px, pout[1]]], tone, tone, { thin: true, marker: false });
+        body += `<circle cx="${px}" cy="${pout[1]}" r="3.8" fill="var(--cp-${tone})"/>`;
+      }
       for (const px of [x + 44, x + 92, x + 159]) {
-        body += drawPipe([[px, y + 206], [px, pout[1]], pout], tone, tone, { thin: true, marker: false });
         body += `<circle class="machine-card" cx="${px}" cy="${y + 202}" r="11"/>` +
           `<path d="M${px - 4} ${y + 206}L${px} ${y + 196}L${px + 4} ${y + 206}Z" fill="var(--cp-accent)"/>`;
       }
@@ -890,60 +941,79 @@ export function renderHydraulic(d, copy, season = 'winter', prefix = 'hyd') {
       body += `<rect class="aquifer-fill" x="${x + 14}" y="${y + h - 42}" width="${w - 28}" height="30" rx="8"/>`;
       for (const wx of [x + 76, x + 176]) {
         body += `<rect class="machine-sub" x="${wx - 18}" y="${y + 68}" width="36" height="72" rx="6"/>`;
-        body += drawPipe([pin, [wx, pin[1]], [wx, y + h - 24]], tone, tone, { thin: true, marker: false });
       }
+      // Single non-overlapping header feeding both R1 boreholes
+      body += drawPipe([pin, [x + 76, pin[1]], [x + 76, y + h - 24]], tone, tone, { thin: true, marker: false });
+      body += drawPipe([[x + 176, pin[1]], [x + 176, y + h - 24]], tone, tone, { thin: true, marker: false });
+      body += `<circle cx="${x + 176}" cy="${pin[1]}" r="3.8" fill="var(--cp-${tone})"/>`;
     } else if (n.shape === 'climateBranch') {
       const pin = portPt(n, p.in), pout = portPt(n, p.out);
       body += `<rect class="machine-card" x="${x}" y="${y}" width="${w}" height="${h}" rx="14"/>`;
-      const sl = x + 88, sr = x + w - 24;
-      body += drawPipe([pin, [sl, pin[1]], [sr, pin[1]], [sr, pout[1]], [sl, pout[1]], pout],
-        portTone(n, 'in'), portTone(n, 'out'), { thin: true, marker: false, gradEnds: [[sl, pin[1]], [sl, pout[1]]], attrs: n.id === 'branchBP' ? 'data-channel="load.in-out"' : '' });
-      const px = x + 44, py = pin[1];
-      body += `<circle class="machine-card" cx="${px}" cy="${py}" r="13"/><path d="M${px - 5} ${py - 5}L${px + 6} ${py}L${px - 5} ${py + 5}Z" fill="var(--cp-accent)"/>`;
-      if (n.tagPill) body += tagPill(x + 126, y + h / 2, n.pumpCode, 12);
-      const textCx = x + 162 + (w - 186) / 2;
-      const titleY = n.showTemp ? y + h / 2 - 4 : y + h / 2 + 5;
-      body += `<text class="svg-label svg-title" x="${textCx}" y="${titleY}" font-size="15" text-anchor="middle">${esc(textLabel(n.label))}</text>`;
+      const px = x + 38, py = pin[1];
+      if (n.passThrough) {
+        const coilL = x + w - 96, coilR = x + w - 20;
+        const coilPts = [pin, [coilR, py], [coilR, y + 40], [coilL, y + 40], [coilL, pout[1]], pout];
+        body += drawPipe(coilPts, portTone(n, 'in'), portTone(n, 'out'),
+          { thin: true, marker: false, gradEnds: [[coilL, py], pout], attrs: n.id === 'branchBP' ? 'data-channel="load.in-out"' : '' });
+      } else {
+        const sr = x + w - 18, coilL = x + w - 80;
+        body += drawPipe([pin, [sr, pin[1]], [sr, y + 54], [coilL, y + 54], [coilL, y + 82], [sr, y + 82], [sr, pout[1]], pout],
+          portTone(n, 'in'), portTone(n, 'out'), { thin: true, marker: false, gradEnds: [[coilL, pin[1]], [coilL, pout[1]]] });
+      }
+      body += `<circle class="machine-card" cx="${px}" cy="${py}" r="12"/><path d="M${px - 5} ${py - 5}L${px + 6} ${py}L${px - 5} ${py + 5}Z" fill="var(--cp-accent)"/>`;
+      const contentY = n.passThrough ? y + 56 : y + 66;
+      if (n.tagPill) body += tagPill(x + 62, contentY, n.pumpCode, 12);
+      const textCx = x + 98 + (w - 190) / 2;
+      const titleY = n.showTemp ? contentY - 4 : contentY + 5;
+      body += `<text class="svg-label svg-title" x="${textCx}" y="${titleY}" font-size="14" text-anchor="middle">${esc(textLabel(n.label))}</text>`;
       if (n.showTemp) {
-        body += `<text class="svg-label svg-temp pc-detail" x="${textCx}" y="${y + h / 2 + 17}" font-size="13.5" text-anchor="middle">${rev ? '18 → 23 °C' : '38 → 33 °C'}</text>`;
+        body += `<text class="svg-label svg-temp pc-detail" x="${textCx}" y="${contentY + 16}" font-size="13" text-anchor="middle">${rev ? '18 → 23 °C' : '38 → 33 °C'}</text>`;
       }
     } else if (n.shape === 'multiDhwRisers') {
       const acp = portPt(n, p.acpIn), acr = portPt(n, p.acrOut);
       body += `<rect class="machine-card" x="${x}" y="${y}" width="${w}" height="${h}" rx="16"/>`;
       body += `<text class="svg-label svg-title" x="${x + w / 2}" y="${y + 25}" font-size="16" text-anchor="middle">${esc(textLabel(n.label))}</text>`;
       if (n.tagPill) body += tagPill(x + w / 2, y + 46, 'MP (P02) · BP (P03)', 11);
-      body += `<rect class="machine-sub" x="${x + 14}" y="${y + 64}" width="${w - 28}" height="82" rx="8"/>`;
-      body += `<rect class="machine-sub" x="${x + 14}" y="${y + 154}" width="${w - 28}" height="82" rx="8"/>`;
-      body += `<text class="svg-label svg-sub" x="${x + 122}" y="${y + 84}" font-size="12.5" text-anchor="middle">${esc(textLabel('riserMP'))}</text>`;
-      body += `<text class="svg-label svg-sub" x="${x + 122}" y="${y + 174}" font-size="12.5" text-anchor="middle">${esc(textLabel('riserBP'))}</text>`;
-      body += drawPipe([acp, [x + 30, acp[1]], [x + 30, y + 104], [x + 148, y + 104]], 'warning', 'warning', { thin: true, marker: false, attrs: 'data-draw-off="true"' });
-      body += drawPipe([[x + 30, acp[1]], [x + 30, y + 194], [x + 148, y + 194]], 'warning', 'warning', { thin: true, marker: false });
-      body += drawPipe([[x + 56, y + 104], [x + 56, y + 244], [acr[0], y + 244], acr], 'warning', 'warning', { thin: true, marker: false });
-      for (const ty of [y + 104, y + 194]) {
-        body += `<path d="M${x + 148} ${ty}h16v10" fill="none" stroke="var(--cp-border-strong)" stroke-width="3.2" stroke-linecap="round"/>` +
-          `<circle cx="${x + 164}" cy="${ty + 19}" r="2.8" fill="var(--cp-warning)"/>` +
-          `<circle cx="${x + 164}" cy="${ty + 29}" r="2.8" fill="var(--cp-warning)"/>`;
+      // Left stairwell shaft vs Right MP/BP apartment tap rooms (dead-end taps, stairwell-only recirculation)
+      body += `<rect class="machine-sub" x="${x + 12}" y="${y + 64}" width="46" height="${h - 78}" rx="7"/>`;
+      body += `<rect class="machine-sub" x="${x + 64}" y="${y + 64}" width="${w - 76}" height="82" rx="8"/>`;
+      body += `<rect class="machine-sub" x="${x + 64}" y="${y + 156}" width="${w - 76}" height="82" rx="8"/>`;
+      body += `<text class="svg-label svg-sub" x="${x + 124}" y="${y + 83}" font-size="12" text-anchor="middle">${esc(textLabel('riserMP'))}</text>`;
+      body += `<text class="svg-label svg-sub" x="${x + 124}" y="${y + 175}" font-size="12" text-anchor="middle">${esc(textLabel('riserBP'))}</text>`;
+      // ACP rises in stairwell shaft (x+38); thin ACR returns from top of stairwell shaft to acrOut (0 crossings!)
+      const mpY = y + 104, bpY = y + 196, shaftX = x + 38;
+      body += drawPipe([acp, [shaftX, acp[1]], [shaftX, y + 74], [x + 22, y + 74], [x + 22, acr[1]], acr], 'warning', 'warning', { thin: true, marker: false });
+      body += drawPipe([[shaftX, acp[1]], [shaftX, bpY], [x + 152, bpY]], 'warning', 'warning', { thin: true, marker: false });
+      body += drawPipe([[shaftX, mpY], [x + 152, mpY]], 'warning', 'warning', { thin: true, marker: false, attrs: 'data-draw-off="true"' });
+      body += `<circle cx="${shaftX}" cy="${acp[1]}" r="3.8" fill="var(--cp-warning)"/><circle cx="${shaftX}" cy="${mpY}" r="3.8" fill="var(--cp-warning)"/>`;
+      for (const ty of [mpY, bpY]) {
+        body += `<path d="M${x + 152} ${ty}h14v9" fill="none" stroke="var(--cp-border-strong)" stroke-width="3.2" stroke-linecap="round"/>` +
+          `<circle cx="${x + 166}" cy="${ty + 17}" r="2.7" fill="var(--cp-warning)"/>` +
+          `<circle cx="${x + 166}" cy="${ty + 27}" r="2.7" fill="var(--cp-warning)"/>`;
       }
     } else if (n.shape === 'cycleStage') {
       const pin = portPt(n, p.in), pout = portPt(n, p.out);
-      const cx = x + w / 2, cy = y + h / 2;
+      const isSideVert = n.stage === 0 || n.stage === 2;
+      const symX = isSideVert ? pin[0] : x + w / 2;
+      const symY = y + h / 2;
+      const labelX = n.stage === 0 ? x + 190 : n.stage === 2 ? x + 100 : x + w / 2;
       body += `<rect class="machine-card" x="${x}" y="${y}" width="${w}" height="${h}" rx="16"/>`;
-      body += `<text class="svg-label svg-title" x="${cx}" y="${y + 28}" font-size="18" text-anchor="middle">${esc(copy.stages[n.stage])}</text>`;
-      body += drawPipe([pin, [cx, cy]], portTone(n, 'in'), portTone(n, 'in'), { thin: true, marker: false });
-      body += drawPipe([[cx, cy], pout], portTone(n, 'out'), portTone(n, 'out'), { thin: true, marker: false });
+      body += `<text class="svg-label svg-title" x="${labelX}" y="${isSideVert ? symY - 12 : y + 28}" font-size="17" text-anchor="middle">${esc(copy.stages[n.stage])}</text>`;
+      body += drawPipe([pin, [symX, symY]], portTone(n, 'in'), portTone(n, 'in'), { thin: true, marker: false });
+      body += drawPipe([[symX, symY], pout], portTone(n, 'out'), portTone(n, 'out'), { thin: true, marker: false });
       if (n.stage === 1) {
-        body += `<circle class="machine-card" cx="${cx}" cy="${cy}" r="30"/>` +
-          `<g data-rotor="1" data-cx="${cx}" data-cy="${cy}"><path d="M${cx - 12} ${cy - 14}L${cx + 18} ${cy}L${cx - 12} ${cy + 14}Z" fill="var(--cp-accent)"/></g>`;
-        body += `<path class="power-track" d="M${cx} ${y + h - 12}V${cy + 34}" marker-end="url(#${prefix}-arr-accent)"/>`;
+        body += `<circle class="machine-card" cx="${symX}" cy="${symY}" r="28"/>` +
+          `<g data-rotor="1" data-cx="${symX}" data-cy="${symY}"><path d="M${symX - 11} ${symY - 13}L${symX + 17} ${symY}L${symX - 11} ${symY + 13}Z" fill="var(--cp-accent)"/></g>`;
+        body += `<path class="power-track" d="M${symX} ${y + h - 28}V${symY + 32}" marker-end="url(#${prefix}-arr-accent)"/>`;
       } else if (n.stage === 3) {
-        body += `<path class="machine-card" d="M${cx - 28} ${cy - 20}L${cx + 28} ${cy + 20}V${cy - 20}L${cx - 28} ${cy + 20}Z"/>`;
+        body += `<path class="machine-card" d="M${symX - 26} ${symY - 18}L${symX + 26} ${symY + 18}V${symY - 18}L${symX - 26} ${symY + 18}Z"/>`;
       } else {
-        body += `<rect class="plate-pack" x="${cx - 28}" y="${cy - 28}" width="56" height="56" rx="8"/>` +
-          `<path d="M${cx - 16} ${cy - 12}h32m-32 12h32m-32 12h32" stroke="var(--cp-border-strong)" stroke-width="2"/>`;
-        if (n.stage === 0) body += drawHeat(x + 16, cy, cx - 34, cy, false);
-        if (n.stage === 2) body += drawHeat(cx + 34, cy, x + w - 16, cy, false);
+        body += `<rect class="plate-pack" x="${symX - 24}" y="${symY - 28}" width="48" height="56" rx="8"/>` +
+          `<path d="M${symX - 14} ${symY - 12}h28m-28 12h28m-28 12h28" stroke="var(--cp-border-strong)" stroke-width="2"/>`;
+        if (n.stage === 0) body += drawHeat(x + 12, symY, symX - 28, symY, false);
+        if (n.stage === 2) body += drawHeat(symX + 28, symY, x + w - 12, symY, false);
       }
-      body += `<text class="svg-label svg-sub" x="${cx}" y="${y + h - 16}" font-size="14" text-anchor="middle">${esc(copy.states[n.stage])}</text>`;
+      body += `<text class="svg-label svg-sub" x="${labelX}" y="${isSideVert ? symY + 16 : y + h - 14}" font-size="${isSideVert ? 11.5 : 13}" text-anchor="middle">${esc(copy.states[n.stage])}</text>`;
     }
 
     let portDots = '';
@@ -957,13 +1027,14 @@ export function renderHydraulic(d, copy, season = 'winter', prefix = 'hyd') {
 
   let extraSvg = '';
   if (d.id === 'cycle') {
-    extraSvg += `<g class="cycle-center-note"><rect class="machine-sub" x="405" y="232" width="350" height="76" rx="14"/>` +
-      `<text class="svg-label svg-title" x="580" y="264" font-size="18" text-anchor="middle">${esc(textLabel(season === 'winter' ? 'copBadgeWinter' : 'copBadgeSummer'))}</text>` +
-      `<text class="svg-label svg-sub" x="580" y="290" font-size="14" text-anchor="middle">${esc(textLabel('cycleCenterSub'))}</text></g>`;
+    extraSvg += `<g class="cycle-center-note"><rect class="machine-sub" x="385" y="232" width="390" height="76" rx="14"/>` +
+      `<text class="svg-label svg-title" x="580" y="264" font-size="16.5" text-anchor="middle">${esc(textLabel(season === 'winter' ? 'copBadgeWinter' : 'copBadgeSummer'))}</text>` +
+      `<text class="svg-label svg-sub" x="580" y="290" font-size="13.5" text-anchor="middle">${esc(textLabel('cycleCenterSub'))}</text></g>`;
   }
   if (d.id === 'step2' || d.id === 'step3') {
-    const iy = d.id === 'step2' ? 674 : 688;
-    extraSvg += `<text class="svg-label svg-temp pc-detail" x="${d.id === 'step2' ? 500 : 528}" y="${iy}" font-size="14" text-anchor="middle">40 / 35 °C</text>`;
+    const ix = d.id === 'step2' ? 480 : 543;
+    const iy = d.id === 'step2' ? 688 : 696;
+    extraSvg += `<text class="svg-label svg-temp pc-detail" x="${ix}" y="${iy}" font-size="14" text-anchor="middle">40 / 35 °C</text>`;
   }
 
   return `<svg xmlns="http://www.w3.org/2000/svg" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" class="vector-map scene" data-diagram="${d.id}" viewBox="0 0 ${d.width} ${d.height}" role="group" aria-label="${esc(copy.title)}">` +

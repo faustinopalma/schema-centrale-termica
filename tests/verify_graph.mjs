@@ -98,3 +98,38 @@ test('season changes water temperature, preserving pipe routing and intermediate
     }
   }
 });
+
+test('all diagrams are strictly planar with zero pipe crossings and zero unrelated colinear overlaps',()=>{
+  const diagrams=createDiagrams(graph);
+  for(const d of Object.values(diagrams)){
+    for(let i=0;i<d.edges.length;i++){
+      for(let j=i+1;j<d.edges.length;j++){
+        const e1=d.edges[i],e2=d.edges[j];
+        const sharedManifold=(e1.from===e2.from||e1.to===e2.to)&&(e1.role===e2.role);
+        for(let s1=1;s1<e1.points.length;s1++){
+          const a=e1.points[s1-1],b=e1.points[s1];
+          for(let s2=1;s2<e2.points.length;s2++){
+            const c=e2.points[s2-1],q=e2.points[s2];
+            const h1=a[1]===b[1],h2=c[1]===q[1];
+            if(h1!==h2){
+              const [ha,hb]=h1?[a,b]:[c,q],[va,vb]=h1?[c,q]:[a,b];
+              const ix=va[0],iy=ha[1];
+              const inH=ix>Math.min(ha[0],hb[0])+0.5&&ix<Math.max(ha[0],hb[0])-0.5;
+              const inV=iy>Math.min(va[1],vb[1])+0.5&&iy<Math.max(va[1],vb[1])-0.5;
+              assert(!(inH&&inV),`Avoidable pipe crossing in ${d.id}: ${e1.id} x ${e2.id} at (${ix},${iy})`);
+            }else if(!sharedManifold){
+              if(h1&&a[1]===c[1]){
+                const overlap=Math.min(Math.max(a[0],b[0]),Math.max(c[0],q[0]))-Math.max(Math.min(a[0],b[0]),Math.min(c[0],q[0]));
+                assert(overlap<=0.5,`Overlapping horizontal pipes in ${d.id}: ${e1.id} & ${e2.id}`);
+              }
+              if(!h1&&a[0]===c[0]){
+                const overlap=Math.min(Math.max(a[1],b[1]),Math.max(c[1],q[1]))-Math.max(Math.min(a[1],b[1]),Math.min(c[1],q[1]));
+                assert(overlap<=0.5,`Overlapping vertical pipes in ${d.id}: ${e1.id} & ${e2.id}`);
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+});
