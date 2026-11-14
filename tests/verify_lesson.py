@@ -244,11 +244,13 @@ def verify_lesson(screenshots: Path | None) -> None:
                 assert not page.locator("#popup").is_visible()
             page.locator("#language").select_option("it")
 
-            # Verify Cycle & Sigle modals on mobile landscape (844x390 & 667x375) fit side-by-side without clipping
+            # Verify Cycle & Sigle modals on mobile landscape (844x390 & 667x375) fit side-by-side AND clear camera punch-hole / Dynamic Island
             for m_w, m_h in [(844, 390), (667, 375)]:
                 page.set_viewport_size({"width": m_w, "height": m_h})
                 page.locator("#step-tab-0").click()
                 page.locator('#viewport [data-node="pc2"]').click()
+                dlg_b = page.locator("#popup").bounding_box()
+                assert dlg_b and dlg_b["x"] >= 48 and (m_w - (dlg_b["x"] + dlg_b["width"])) >= 48, f"Dialog hit camera punch-hole zone: {dlg_b} on {m_w}x{m_h}"
                 page.locator("#extra-action").click()
                 verify_fit(page, "#popup svg.scene")
                 svg_b = page.locator(".cycle-svg-box").bounding_box()
@@ -259,6 +261,8 @@ def verify_lesson(screenshots: Path | None) -> None:
                 page.keyboard.press("Escape")
 
                 page.locator("#tags-btn").click()
+                dlg_t = page.locator("#popup").bounding_box()
+                assert dlg_t and dlg_t["x"] >= 48 and (m_w - (dlg_t["x"] + dlg_t["width"])) >= 48, f"Sigle dialog hit camera punch-hole zone: {dlg_t} on {m_w}x{m_h}"
                 grid_b = page.locator(".tag-grid").bounding_box()
                 card_b = page.locator(".tag-detail-card").bounding_box()
                 assert grid_b and card_b and card_b["y"] < m_h - 40 and card_b["x"] > grid_b["x"], "Mobile Sigle modal must show grid and detail card side-by-side"
