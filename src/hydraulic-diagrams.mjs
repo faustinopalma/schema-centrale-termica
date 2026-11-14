@@ -386,16 +386,16 @@ export function createDiagrams(graph) {
     const d = {
       id: 'cycle', width: 1160, height: 540, teaching: true, zones: [],
       nodes: [
-        { ...node('stage0', 'cycleStage', 45, 165, 290, 210, 'stage0', 'evaporator', { in: port(52, 210, 'ref'), out: port(52, 0, 'ref') }), stage: 0 },
-        { ...node('stage1', 'cycleStage', 445, 28, 270, 168, 'stage1', 'compressor', { in: port(0, 84, 'ref'), out: port(270, 84, 'ref') }), stage: 1 },
-        { ...node('stage2', 'cycleStage', 825, 165, 290, 210, 'stage2', 'condenser', { in: port(238, 0, 'ref'), out: port(238, 210, 'ref') }), stage: 2 },
-        { ...node('stage3', 'cycleStage', 445, 344, 270, 168, 'stage3', 'expansion', { in: port(270, 84, 'ref'), out: port(0, 84, 'ref') }), stage: 3 }
+        { ...node('stage0', 'cycleStage', 35, 165, 305, 210, 'stage0', 'evaporator', { in: port(62, 210, 'ref'), out: port(62, 0, 'ref') }), stage: 0 },
+        { ...node('stage1', 'cycleStage', 430, 28, 300, 168, 'stage1', 'compressor', { in: port(0, 84, 'ref'), out: port(300, 84, 'ref') }), stage: 1 },
+        { ...node('stage2', 'cycleStage', 820, 165, 305, 210, 'stage2', 'condenser', { in: port(243, 0, 'ref'), out: port(243, 210, 'ref') }), stage: 2 },
+        { ...node('stage3', 'cycleStage', 430, 344, 300, 168, 'stage3', 'expansion', { in: port(300, 84, 'ref'), out: port(0, 84, 'ref') }), stage: 3 }
       ],
       edges: [
-        { id: 'phase0', from: 'stage0.out', to: 'stage1.in', fluid: 'ref', points: [[97, 165], [97, 112], [445, 112]] },
-        { id: 'phase1', from: 'stage1.out', to: 'stage2.in', fluid: 'ref', points: [[715, 112], [1063, 112], [1063, 165]] },
-        { id: 'phase2', from: 'stage2.out', to: 'stage3.in', fluid: 'ref', points: [[1063, 375], [1063, 428], [715, 428]] },
-        { id: 'phase3', from: 'stage3.out', to: 'stage0.in', fluid: 'ref', points: [[445, 428], [97, 428], [97, 375]] }
+        { id: 'phase0', from: 'stage0.out', to: 'stage1.in', fluid: 'ref', points: [[97, 165], [97, 112], [430, 112]] },
+        { id: 'phase1', from: 'stage1.out', to: 'stage2.in', fluid: 'ref', points: [[730, 112], [1063, 112], [1063, 165]] },
+        { id: 'phase2', from: 'stage2.out', to: 'stage3.in', fluid: 'ref', points: [[1063, 375], [1063, 428], [730, 428]] },
+        { id: 'phase3', from: 'stage3.out', to: 'stage0.in', fluid: 'ref', points: [[430, 428], [97, 428], [97, 375]] }
       ]
     };
     diagrams[d.id] = d;
@@ -996,9 +996,9 @@ export function renderHydraulic(d, copy, season = 'winter', prefix = 'hyd') {
       const isSideVert = n.stage === 0 || n.stage === 2;
       const symX = isSideVert ? pin[0] : x + w / 2;
       const symY = y + h / 2;
-      const labelX = n.stage === 0 ? x + 190 : n.stage === 2 ? x + 100 : x + w / 2;
+      const labelX = n.stage === 0 ? x + 212 : n.stage === 2 ? x + 93 : x + w / 2;
       body += `<rect class="machine-card" x="${x}" y="${y}" width="${w}" height="${h}" rx="16"/>`;
-      body += `<text class="svg-label svg-title" x="${labelX}" y="${isSideVert ? symY - 12 : y + 28}" font-size="17" text-anchor="middle">${esc(copy.stages[n.stage])}</text>`;
+      body += `<text class="svg-label svg-title" x="${labelX}" y="${isSideVert ? symY - 16 : y + 28}" font-size="16.5" text-anchor="middle">${esc(copy.stages[n.stage])}</text>`;
       body += drawPipe([pin, [symX, symY]], portTone(n, 'in'), portTone(n, 'in'), { thin: true, marker: false });
       body += drawPipe([[symX, symY], pout], portTone(n, 'out'), portTone(n, 'out'), { thin: true, marker: false });
       if (n.stage === 1) {
@@ -1013,7 +1013,13 @@ export function renderHydraulic(d, copy, season = 'winter', prefix = 'hyd') {
         if (n.stage === 0) body += drawHeat(x + 12, symY, symX - 28, symY, false);
         if (n.stage === 2) body += drawHeat(symX + 28, symY, x + w - 12, symY, false);
       }
-      body += `<text class="svg-label svg-sub" x="${labelX}" y="${isSideVert ? symY + 16 : y + h - 14}" font-size="${isSideVert ? 11.5 : 13}" text-anchor="middle">${esc(copy.states[n.stage])}</text>`;
+      if (isSideVert && copy.states[n.stage].includes('·')) {
+        const [stA, stB] = copy.states[n.stage].split('·').map(s => s.trim());
+        body += `<text class="svg-label svg-sub" x="${labelX}" y="${symY + 12}" font-size="12.5" text-anchor="middle">${esc(stA)}</text>` +
+          `<text class="svg-label svg-sub" x="${labelX}" y="${symY + 30}" font-size="12" text-anchor="middle">${esc(stB)}</text>`;
+      } else {
+        body += `<text class="svg-label svg-sub" x="${labelX}" y="${isSideVert ? symY + 16 : y + h - 14}" font-size="13" text-anchor="middle">${esc(copy.states[n.stage])}</text>`;
+      }
     }
 
     let portDots = '';
@@ -1027,8 +1033,8 @@ export function renderHydraulic(d, copy, season = 'winter', prefix = 'hyd') {
 
   let extraSvg = '';
   if (d.id === 'cycle') {
-    extraSvg += `<g class="cycle-center-note"><rect class="machine-sub" x="385" y="232" width="390" height="76" rx="14"/>` +
-      `<text class="svg-label svg-title" x="580" y="264" font-size="16.5" text-anchor="middle">${esc(textLabel(season === 'winter' ? 'copBadgeWinter' : 'copBadgeSummer'))}</text>` +
+    extraSvg += `<g class="cycle-center-note"><rect class="machine-sub" x="365" y="232" width="430" height="76" rx="14"/>` +
+      `<text class="svg-label svg-title" x="580" y="264" font-size="16" text-anchor="middle">${esc(textLabel(season === 'winter' ? 'copBadgeWinter' : 'copBadgeSummer'))}</text>` +
       `<text class="svg-label svg-sub" x="580" y="290" font-size="13.5" text-anchor="middle">${esc(textLabel('cycleCenterSub'))}</text></g>`;
   }
   if (d.id === 'step2' || d.id === 'step3') {

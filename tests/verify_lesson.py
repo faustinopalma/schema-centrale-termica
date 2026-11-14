@@ -110,6 +110,17 @@ def verify_fit(page: Page, scope_svg: str = "#viewport > svg.scene") -> None:
                 }
             }
         }
+        for(const grp of svg.querySelectorAll('[data-stage], .cycle-center-note')){
+            const r=grp.querySelector('rect');
+            if(!r)continue;
+            const rb=r.getBBox();
+            for(const t of grp.querySelectorAll('text')){
+                if(getComputedStyle(t).display==='none'||!t.checkVisibility())continue;
+                const tb=t.getBBox();
+                if(tb.x<rb.x+2||tb.x+tb.width>rb.x+rb.width-2||tb.y<rb.y+2||tb.y+tb.height>rb.y+rb.height-2)
+                    errors.push('Text overflows card box: '+t.textContent);
+            }
+        }
         return errors;
     }""")
     assert not problems, problems
@@ -199,20 +210,35 @@ def verify_lesson(screenshots: Path | None) -> None:
                             if screenshots and language == "it" and width in [1440, 844]:
                                 page.screenshot(path=str(screenshots / f"step{step + 1}-{width}-{season}.png"))
 
-            # Verify interactive refrigeration cycle zoom modal
+            # Verify interactive refrigeration cycle zoom modal across all 3 languages & Prev/Next buttons
             page.set_viewport_size({"width": 1440, "height": 900})
+            for cyc_lang in ["it", "en", "zh"]:
+                page.locator("#language").select_option(cyc_lang)
+                page.locator("#step-tab-0").click()
+                page.locator('#viewport [data-node="pc2"]').click()
+                assert page.locator("#popup").is_visible()
+                page.locator("#extra-action").click()
+                verify_fit(page, "#popup svg.scene")
+                assert page.locator("#page-count").inner_text() == "1 / 4"
+                assert page.locator("#previous").is_disabled()
+                page.locator("#next").click()
+                assert page.locator("#page-count").inner_text() == "2 / 4"
+                assert copy[cyc_lang]["stages"][1] in page.locator(".cycle-stage-bar").inner_text()
+                if screenshots and cyc_lang == "it":
+                    page.screenshot(path=str(screenshots / "cycle-zoom-1440.png"))
+                page.locator('#popup [data-stage="2"]').click()
+                assert page.locator("#page-count").inner_text() == "3 / 4"
+                assert copy[cyc_lang]["stages"][2] in page.locator(".cycle-stage-bar").inner_text()
+                page.locator("#next").click()
+                assert page.locator("#page-count").inner_text() == "4 / 4"
+                assert page.locator("#next").is_disabled()
+                page.locator("#previous").click()
+                assert page.locator("#page-count").inner_text() == "3 / 4"
+                page.locator("#extra-action").click()
+                assert page.locator("#popup-title").inner_text() == copy[cyc_lang]["richTopics"]["cycle"]["title"]
+                page.keyboard.press("Escape")
+                assert not page.locator("#popup").is_visible()
             page.locator("#language").select_option("it")
-            page.locator("#step-tab-0").click()
-            page.locator('#viewport [data-node="pc2"]').click()
-            assert page.locator("#popup").is_visible()
-            page.locator("#extra-action").click()
-            verify_fit(page, "#popup svg.scene")
-            if screenshots:
-                page.screenshot(path=str(screenshots / "cycle-zoom-1440.png"))
-            page.locator('#popup [data-stage="2"]').click()
-            assert copy["it"]["stages"][2] in page.locator(".cycle-stage-bar").inner_text()
-            page.keyboard.press("Escape")
-            assert not page.locator("#popup").is_visible()
 
             # Verify interactive Sigle explorer & highlight-on-schematic jump
             page.locator("#tags-btn").click()

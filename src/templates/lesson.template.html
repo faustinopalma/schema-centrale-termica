@@ -288,7 +288,15 @@ dialog::backdrop{background:var(--cp-overlay)}
 
     if (state.modalMode === 'cycle') {
       $('popup-title').textContent = L.headings[1];
-      $('popup-foot').hidden = true;
+      $('popup-foot').hidden = false;
+      $('previous').hidden = false;
+      $('next').hidden = false;
+      $('page-count').hidden = false;
+      $('previous').disabled = state.cycleStage === 0;
+      $('next').disabled = state.cycleStage >= 3;
+      $('page-count').textContent = `${state.cycleStage + 1} / 4`;
+      $('extra-action').hidden = false;
+      $('extra-action').textContent = `↩ ${L.heatpump}`;
       const stageTopic = ['evaporator', 'compressor', 'condenser', 'expansion'][state.cycleStage];
       const stageDesc = L.richTopics[stageTopic].pages[0];
       $('popup-body').innerHTML = `<div class="cycle-modal-wrap">` +
@@ -332,9 +340,12 @@ dialog::backdrop{background:var(--cp-overlay)}
     }
 
     // Standard richTopic mode
-    $('popup-foot').hidden = false;
     const topicObj = L.richTopics[state.topic] || L.richTopics.guide;
+    const multiPage = topicObj.pages.length > 1;
     $('popup-title').textContent = topicObj.title;
+    $('previous').hidden = !multiPage;
+    $('next').hidden = !multiPage;
+    $('page-count').hidden = !multiPage;
     $('previous').disabled = state.page === 0;
     $('next').disabled = state.page >= topicObj.pages.length - 1;
     $('page-count').textContent = `${state.page + 1} / ${topicObj.pages.length}`;
@@ -343,6 +354,7 @@ dialog::backdrop{background:var(--cp-overlay)}
       $('extra-action').hidden = false;
       $('extra-action').textContent = U.openCycleBtn;
     }
+    $('popup-foot').hidden = !multiPage && !topicObj.hasCycleZoom;
 
     if (state.docKey) {
       const srcMap = { msw: 'documents/hiref-msw.pdf', ksw: 'documents/hiref-ksw.pdf', project: 'project.html' };
@@ -461,9 +473,14 @@ dialog::backdrop{background:var(--cp-overlay)}
       }
       return;
     }
-    if (!$('popup').open && !['SELECT', 'INPUT', 'TEXTAREA'].includes(document.activeElement?.tagName)) {
-      if (e.key === 'ArrowRight' && state.step < 2) { state.step++; state.highlightTag = null; render(); }
-      if (e.key === 'ArrowLeft' && state.step > 0) { state.step--; state.highlightTag = null; render(); }
+    if (!['SELECT', 'INPUT', 'TEXTAREA'].includes(document.activeElement?.tagName)) {
+      if ($('popup').open) {
+        if (e.key === 'ArrowRight' && !$('next').hidden && !$('next').disabled) $('next').click();
+        if (e.key === 'ArrowLeft' && !$('previous').hidden && !$('previous').disabled) $('previous').click();
+      } else {
+        if (e.key === 'ArrowRight' && state.step < 2) { state.step++; state.highlightTag = null; render(); }
+        if (e.key === 'ArrowLeft' && state.step > 0) { state.step--; state.highlightTag = null; render(); }
+      }
     }
   });
 
@@ -485,12 +502,37 @@ dialog::backdrop{background:var(--cp-overlay)}
   $('language').addEventListener('change', e => { state.lang = e.target.value; render(); });
 
   $('extra-action').addEventListener('click', () => {
-    state.modalMode = 'cycle';
-    state.cycleStage = 0;
-    renderModal();
+    if (state.modalMode === 'cycle') {
+      state.modalMode = 'topic';
+      state.topic = state.topic || 'cycle';
+      renderModal();
+    } else {
+      state.modalMode = 'cycle';
+      state.cycleStage = 0;
+      renderModal();
+    }
   });
-  $('previous').addEventListener('click', () => { if (state.page > 0) { state.page--; state.docKey = null; renderModal(); } });
-  $('next').addEventListener('click', () => { state.page++; state.docKey = null; renderModal(); });
+  $('previous').addEventListener('click', () => {
+    if (state.modalMode === 'cycle') {
+      if (state.cycleStage > 0) { state.cycleStage--; renderModal(); }
+    } else if (state.page > 0) {
+      state.page--;
+      state.docKey = null;
+      renderModal();
+    }
+  });
+  $('next').addEventListener('click', () => {
+    if (state.modalMode === 'cycle') {
+      if (state.cycleStage < 3) { state.cycleStage++; renderModal(); }
+    } else {
+      const topicObj = copy().richTopics[state.topic] || copy().richTopics.guide;
+      if (state.page < topicObj.pages.length - 1) {
+        state.page++;
+        state.docKey = null;
+        renderModal();
+      }
+    }
+  });
   $('close').addEventListener('click', () => $('popup').close());
 
   $('popup').addEventListener('click', e => {
