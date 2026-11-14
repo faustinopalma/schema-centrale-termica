@@ -57,40 +57,75 @@ dialog.wide{width:min(1120px,calc(100vw - 20px))}
 dialog[open]{display:flex;flex-direction:column}
 dialog::backdrop{background:var(--cp-overlay)}
 .dialog-head{display:flex;align-items:center;gap:10px;padding:12px 18px;background:var(--cp-bg-elevated);border-bottom:1px solid var(--cp-border)}
-.dialog-head h2{margin:0;font-size:19px;flex:1;min-width:0}
-#popup-body{padding:16px 18px;flex:1;min-height:0;overflow-y:auto;display:flex;flex-direction:column;gap:12px}
+.dialog-head h2{margin:0;font-size:19px;flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+#popup-body{padding:16px 18px;flex:1;min-height:0;overflow-y:auto;overscroll-behavior:contain;display:flex;flex-direction:column;gap:12px}
 #popup-body p{margin:0;font-size:16px;line-height:1.55}
 .related-tags{display:flex;align-items:center;gap:6px;flex-wrap:wrap;padding-top:4px}
-.dialog-foot{display:flex;align-items:center;gap:8px;padding:10px 18px;background:var(--cp-bg-elevated);border-top:1px solid var(--cp-border)}
+.dialog-foot{display:flex;align-items:center;gap:8px;flex-wrap:wrap;padding:10px 18px;background:var(--cp-bg-elevated);border-top:1px solid var(--cp-border)}
 #page-count{margin-right:auto;font-size:14px;color:var(--cp-text-muted);font-weight:600}
 .action-accent{background:var(--cp-accent-soft);color:var(--cp-accent);border-color:var(--cp-accent);font-weight:600}
-.cycle-modal-wrap{display:flex;flex-direction:column;gap:10px;min-height:0}
-.cycle-svg-box{height:min(46dvh,390px);background:var(--cp-bg-elevated);border:1px solid var(--cp-border);border-radius:12px;padding:4px}
+a.btn-link{display:inline-flex;align-items:center;font:inherit;font-size:13px;font-weight:600;text-decoration:none;color:var(--cp-accent);background:var(--cp-accent-soft);border:1px solid var(--cp-accent);border-radius:.625rem;min-height:36px;padding:4px 11px}
+.cycle-modal-wrap{display:flex;flex-direction:column;gap:10px;min-height:0;flex:1}
+.cycle-svg-box{height:min(46dvh,390px);background:var(--cp-bg-elevated);border:1px solid var(--cp-border);border-radius:12px;padding:4px;display:flex;align-items:center;justify-content:center}
+.cycle-svg-box>svg{width:100%;height:100%;max-width:100%;max-height:100%}
 .cycle-stage-bar{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;padding:10px 14px;background:var(--cp-surface-soft);border-left:4px solid var(--cp-accent);border-radius:10px}
 .cycle-stage-bar p{margin:0;font-size:15px}
-.tags-explorer{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(260px,1fr);gap:14px;min-height:260px}
-.tags-left{display:flex;flex-direction:column;gap:10px;min-width:0}
+.tags-explorer{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(250px,1fr);gap:14px;min-height:0;flex:1}
+.tags-left{display:flex;flex-direction:column;gap:8px;min-width:0;min-height:0}
 .cat-bar{display:flex;gap:6px;flex-wrap:wrap}
 .cat-bar button{min-height:32px;padding:4px 10px;font-size:13px}
-.tag-grid{display:flex;flex-wrap:wrap;gap:6px;align-content:flex-start}
-.tag-detail-card{background:var(--cp-bg-elevated);border:1px solid var(--cp-border);border-radius:12px;padding:14px;display:flex;flex-direction:column;gap:8px}
+.tag-grid{display:flex;flex-wrap:wrap;gap:6px;align-content:flex-start;overflow-y:auto;overscroll-behavior:contain;padding-right:2px}
+.tag-detail-card{background:var(--cp-bg-elevated);border:1px solid var(--cp-border);border-radius:12px;padding:14px;display:flex;flex-direction:column;gap:8px;overflow-y:auto;overscroll-behavior:contain}
 .tag-detail-card .code-badge{align-self:flex-start;padding:3px 10px;border-radius:999px;background:var(--cp-accent);color:var(--cp-accent-fg);font:700 14px Consolas,"Courier New",monospace}
 .tag-detail-card h3{margin:0;font-size:17px}
 .tag-detail-card .units-line{font-size:13px;font-weight:600;color:var(--cp-accent)}
 .tag-detail-card p{font-size:14.5px;line-height:1.5;margin:0}
-.sources-bar{display:flex;gap:8px;flex-wrap:wrap}
+.sources-bar{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
 .doc-viewer{width:100%;height:min(52dvh,440px);border:1px solid var(--cp-border);border-radius:8px;background:var(--cp-surface)}
 @media(max-width:1380px){.brand{display:none}}
+@media(max-width:1120px){
+  .stepper button[data-step]{min-width:48px;padding-inline:15px;font-weight:600}
+  .stepper .step-arrow,#guide,#theme-btn{min-width:38px;padding-inline:9px}
+}
 @media(max-width:1023px),(max-height:579px){
   body{grid-template-rows:auto minmax(0,1fr) auto}
   .pc-context{display:none}
-  header{padding:3px 6px;gap:4px}
-  .stepper{padding:2px;gap:2px}
-  .stepper button,.season-group button,.tools-group button,.tools-group select{min-height:34px;padding:2px 6px;font-size:12px}
-  .season-group,.tools-group{gap:3px}
-  main{padding:4px 6px}
-  footer{padding:3px 10px;font-size:12px}
+  header{padding:3px 8px;gap:5px}
+  .stepper{padding:2px;gap:3px}
+  .stepper button,.season-group button,.tools-group button,.tools-group select{min-height:34px;padding:2px 8px;font-size:12.5px}
+  .stepper button[data-step]{min-width:46px;padding-inline:14px;font-size:13.5px;font-weight:600}
+  .stepper .step-arrow,#guide,#theme-btn{min-width:36px}
+  .season-group,.tools-group{gap:4px}
+  main{padding:3px 6px}
+  footer{padding:2px 10px;font-size:11.5px}
+  .legend-items{gap:11px;flex-wrap:nowrap;overflow-x:auto}
   .hint-text{display:none}
+  dialog{width:calc(100vw - 14px);max-width:calc(100vw - 14px);max-height:calc(100dvh - 12px);border-radius:13px}
+  dialog.wide{width:calc(100vw - 14px)}
+  .dialog-head{padding:7px 12px}
+  .dialog-head h2{font-size:16px}
+  .dialog-head button,.dialog-foot button,a.btn-link{min-height:32px;padding:3px 10px;font-size:12.5px}
+  #popup-body{padding:10px 12px;gap:8px}
+  #popup-body p{font-size:14px;line-height:1.45}
+  .dialog-foot{padding:6px 12px;gap:6px}
+  #page-count{font-size:12.5px}
+  .cat-bar button{min-height:28px;padding:2px 8px;font-size:12px}
+  .tag-detail-card{padding:10px 12px;gap:6px}
+  .tag-detail-card h3{font-size:15px}
+  .tag-detail-card p{font-size:13px;line-height:1.42}
+}
+@media(max-height:540px) and (min-width:600px){
+  .cycle-modal-wrap{display:grid;grid-template-columns:minmax(0,1.42fr) minmax(210px,1fr);gap:10px;align-items:stretch}
+  .cycle-svg-box{height:100%;min-height:175px}
+  .cycle-stage-bar{overflow-y:auto;align-items:flex-start}
+  .cycle-stage-bar p{font-size:13.5px;line-height:1.45}
+}
+@media(max-width:640px){
+  header{padding:3px 5px;gap:3px}
+  .stepper{gap:2px}
+  .stepper button[data-step]{min-width:35px;padding-inline:9px;font-size:12.5px}
+  .stepper .step-arrow,#guide,#theme-btn{min-width:31px;padding-inline:6px}
+  .season-group button,.tools-group button,.tools-group select{padding:2px 6px;font-size:11.5px}
   .tags-explorer{grid-template-columns:1fr}
 }
 @media(orientation:portrait){
@@ -200,6 +235,8 @@ dialog::backdrop{background:var(--cp-overlay)}
     season: 'winter',
     modalMode: null, // 'topic' | 'cycle' | 'tags'
     topic: null,
+    prevTopic: null,
+    nodeTags: '',
     page: 0,
     cycleStage: 0,
     tagCat: 'all',
@@ -311,7 +348,16 @@ dialog::backdrop{background:var(--cp-overlay)}
 
     if (state.modalMode === 'tags') {
       $('popup-title').textContent = U.tagsBtn;
-      $('popup-foot').hidden = true;
+      $('previous').hidden = true;
+      $('next').hidden = true;
+      $('page-count').hidden = true;
+      if (state.prevTopic && L.richTopics[state.prevTopic]) {
+        $('popup-foot').hidden = false;
+        $('extra-action').hidden = false;
+        $('extra-action').textContent = `↩ ${L.richTopics[state.prevTopic].title}`;
+      } else {
+        $('popup-foot').hidden = true;
+      }
       const cats = [
         ['all', U.tagFilterAll],
         ['wells', U.tagFilterWells],
@@ -362,13 +408,14 @@ dialog::backdrop{background:var(--cp-overlay)}
         `<button type="button" data-document="msw" aria-pressed="${state.docKey === 'msw'}">${esc(L.pdfMsw)}</button>` +
         `<button type="button" data-document="ksw" aria-pressed="${state.docKey === 'ksw'}">${esc(L.pdfKsw)}</button>` +
         `<button type="button" data-document="project" aria-pressed="${state.docKey === 'project'}">${esc(L.reference)}</button>` +
+        `<a class="btn-link" href="${srcMap[state.docKey]}" target="_blank" rel="noopener">↗ PDF / Web</a>` +
         `</div><iframe class="doc-viewer" title="${esc(state.docKey)}" src="${srcMap[state.docKey]}"></iframe>`;
       return;
     }
 
     let html = `<p>${esc(topicObj.pages[state.page])}</p>`;
     // Show related clickable tags if triggered from an SVG node
-    const relatedTags = (opener?.getAttribute?.('data-tags') || '').split(/[\s,]+/).filter(t => L.tags[t]);
+    const relatedTags = (state.nodeTags || '').split(/[\s,]+/).filter(t => L.tags[t]);
     if (relatedTags.length) {
       html += `<div class="related-tags"><span class="pc-tags-label">${esc(U.activeTagsLabel)}</span>` +
         relatedTags.map(code => `<button type="button" class="tag-chip" data-open-tag="${code}">${esc(code)}</button>`).join('') +
@@ -389,14 +436,17 @@ dialog::backdrop{background:var(--cp-overlay)}
     state.docKey = null;
     if (topic.startsWith('tag-')) {
       const code = topic.slice(4);
+      state.prevTopic = ($('popup').open && state.modalMode === 'topic') ? state.topic : null;
       state.modalMode = 'tags';
       state.tagCat = 'all';
       state.selectedTag = copy().tags[code] ? code : 'P1';
     } else if (['evaporator', 'compressor', 'condenser', 'expansion'].includes(topic) && state.modalMode === 'cycle') {
       state.cycleStage = ['evaporator', 'compressor', 'condenser', 'expansion'].indexOf(topic);
     } else {
+      state.prevTopic = null;
       state.modalMode = 'topic';
       state.topic = copy().richTopics[topic] ? topic : 'guide';
+      state.nodeTags = trigger?.getAttribute?.('data-tags') || '';
       state.page = 0;
     }
     renderModal();
@@ -502,7 +552,12 @@ dialog::backdrop{background:var(--cp-overlay)}
   $('language').addEventListener('change', e => { state.lang = e.target.value; render(); });
 
   $('extra-action').addEventListener('click', () => {
-    if (state.modalMode === 'cycle') {
+    if (state.modalMode === 'tags' && state.prevTopic) {
+      state.modalMode = 'topic';
+      state.topic = state.prevTopic;
+      state.prevTopic = null;
+      renderModal();
+    } else if (state.modalMode === 'cycle') {
       state.modalMode = 'topic';
       state.topic = state.topic || 'cycle';
       renderModal();
@@ -543,6 +598,7 @@ dialog::backdrop{background:var(--cp-overlay)}
   });
   $('popup').addEventListener('close', () => {
     state.modalMode = null;
+    state.prevTopic = null;
     state.docKey = null;
     $('popup-body').replaceChildren();
     animator.refresh(document);

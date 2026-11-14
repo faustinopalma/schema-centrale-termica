@@ -182,6 +182,10 @@ def verify_lesson(screenshots: Path | None) -> None:
                 page.set_viewport_size({"width": width, "height": height})
                 is_pc = width >= 1024 and height >= 580
                 assert page.locator("#pc-context").is_visible() == is_pc
+                min_step_btn_w = 44 if width >= 660 else 34
+                for s_idx in [0, 1, 2]:
+                    btn_box = page.locator(f"#step-tab-{s_idx}").bounding_box()
+                    assert btn_box and btn_box["width"] >= min_step_btn_w, f"Step button {s_idx+1} too narrow ({btn_box}) at {width}x{height}"
                 for language in ["it", "en", "zh"]:
                     page.locator("#language").select_option(language)
                     for step in [0, 1, 2]:
@@ -239,6 +243,30 @@ def verify_lesson(screenshots: Path | None) -> None:
                 page.keyboard.press("Escape")
                 assert not page.locator("#popup").is_visible()
             page.locator("#language").select_option("it")
+
+            # Verify Cycle & Sigle modals on mobile landscape (844x390 & 667x375) fit side-by-side without clipping
+            for m_w, m_h in [(844, 390), (667, 375)]:
+                page.set_viewport_size({"width": m_w, "height": m_h})
+                page.locator("#step-tab-0").click()
+                page.locator('#viewport [data-node="pc2"]').click()
+                page.locator("#extra-action").click()
+                verify_fit(page, "#popup svg.scene")
+                svg_b = page.locator(".cycle-svg-box").bounding_box()
+                bar_b = page.locator(".cycle-stage-bar").bounding_box()
+                assert svg_b and bar_b and bar_b["y"] < m_h - 40 and bar_b["x"] > svg_b["x"], "Mobile cycle modal must show SVG and stage text side-by-side"
+                if screenshots and m_w == 844:
+                    page.screenshot(path=str(screenshots / "mobile-844-cycle.png"))
+                page.keyboard.press("Escape")
+
+                page.locator("#tags-btn").click()
+                grid_b = page.locator(".tag-grid").bounding_box()
+                card_b = page.locator(".tag-detail-card").bounding_box()
+                assert grid_b and card_b and card_b["y"] < m_h - 40 and card_b["x"] > grid_b["x"], "Mobile Sigle modal must show grid and detail card side-by-side"
+                if screenshots and m_w == 844:
+                    page.screenshot(path=str(screenshots / "mobile-844-tags.png"))
+                page.keyboard.press("Escape")
+
+            page.set_viewport_size({"width": 1440, "height": 900})
 
             # Verify interactive Sigle explorer & highlight-on-schematic jump
             page.locator("#tags-btn").click()
