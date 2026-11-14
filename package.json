@@ -1,0 +1,15 @@
+{
+  "name": "schema-centrale-termica",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Progressive interactive hydraulic & thermal explanation of the Mes 600 S condominium groundwater heat-pump and DHW plant",
+  "scripts": {
+    "build": "node src/build.mjs",
+    "test": "node --test tests/verify_graph.mjs",
+    "verify": "python tests/verify_lesson.py"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  }
+}

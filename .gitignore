@@ -1,0 +1,7 @@
+/private/
+private/
+*Schema centrale*
+/dist/
+__pycache__/
+*.pyc
+node_modules/

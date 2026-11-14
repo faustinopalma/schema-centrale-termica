@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" width="1260" height="790" viewBox="0 0 1260 790" role="img" aria-labelledby="dhw-circuits-title dhw-circuits-desc">
+  <title id="dhw-circuits-title">Domestic hot water: follow one pressure branch</title><desc id="dhw-circuits-desc">Simplified water-flow principle | repeat for MP (P02) and BP (P03); each has its own SC1, P01 and S2. Rose: closed PC1 primary water. Blue: potable water. The two fluids exchange heat across SC1. The recirculation connection is simplified; the source includes a split return/mixing arrangement. S00 p.1, two DHW branches. Temperatures are drawing annotations; hygiene and operating settings need verification.</desc>
+  <defs><marker id="dhw-circuits-accent" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 Z" fill="#b11f4b"/></marker><marker id="dhw-circuits-link" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 Z" fill="#0078d4"/></marker><marker id="dhw-circuits-success" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 Z" fill="#16a34a"/></marker><marker id="dhw-circuits-warning" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 Z" fill="#f59e0b"/></marker></defs>
+  <g font-family="Segoe UI, Arial, sans-serif">
+    <rect width="1260" height="790" fill="#f7f4ef"/>
+    <text x="40" y="57" fill="#242424" font-size="30" font-weight="700">Domestic hot water: follow one pressure branch</text>
+    <text x="40" y="91" fill="#5c5c5c" font-size="16">Simplified water-flow principle | repeat for MP (P02) and BP (P03); each has its own SC1, P01 and S2</text>
+    <g inkscape:groupmode="layer" inkscape:label="Connections" id="dhw-circuits-connections"><g class="diagram-edge" data-edge="hot-supply">
+    <path id="dhw-circuits-hot-supply" d="M250,240 L350,240" fill="none" stroke="#b11f4b" stroke-width="3" stroke-linejoin="round"  marker-end="url(#dhw-circuits-accent)" />
+    <text x="300" y="222" text-anchor="middle" font-size="15" fill="#5c5c5c">70 deg C</text></g><g class="diagram-edge" data-edge="hot-return">
+    <path id="dhw-circuits-hot-return" d="M350,290 L250,290" fill="none" stroke="#b11f4b" stroke-width="3" stroke-linejoin="round" stroke-dasharray="8 6" marker-end="url(#dhw-circuits-accent)" />
+    <text x="300" y="316" text-anchor="middle" font-size="15" fill="#5c5c5c">65 deg C</text></g><g class="diagram-edge" data-edge="charge">
+    <path id="dhw-circuits-charge" d="M560,240 L670,240" fill="none" stroke="#0078d4" stroke-width="3" stroke-linejoin="round"  marker-end="url(#dhw-circuits-link)" />
+    <text x="615" y="222" text-anchor="middle" font-size="15" fill="#5c5c5c">60 deg C</text></g><g class="diagram-edge" data-edge="charge-return">
+    <path id="dhw-circuits-charge-return" d="M670,290 L560,290" fill="none" stroke="#0078d4" stroke-width="3" stroke-linejoin="round" stroke-dasharray="8 6" marker-end="url(#dhw-circuits-link)" />
+    <text x="615" y="337" text-anchor="middle" font-size="15" fill="#5c5c5c">P01 / 55 deg C</text></g><g class="diagram-edge" data-edge="stored-hot">
+    <path id="dhw-circuits-stored-hot" d="M880,240 L980,240" fill="none" stroke="#0078d4" stroke-width="3" stroke-linejoin="round"  marker-end="url(#dhw-circuits-link)" />
+    <text x="930" y="222" text-anchor="middle" font-size="15" fill="#5c5c5c">Hot water</text></g><g class="diagram-edge" data-edge="mixed-water">
+    <path id="dhw-circuits-mixed-water" d="M1090,320 L1090,455" fill="none" stroke="#0078d4" stroke-width="3" stroke-linejoin="round"  marker-end="url(#dhw-circuits-link)" />
+    <text x="1170" y="400" text-anchor="middle" font-size="15" fill="#5c5c5c">Mixed supply</text></g><g class="diagram-edge" data-edge="tank-fill">
+    <path id="dhw-circuits-tank-fill" d="M775,455 L775,320" fill="none" stroke="#0078d4" stroke-width="3" stroke-linejoin="round"  marker-end="url(#dhw-circuits-link)" />
+    <text x="719" y="398" text-anchor="middle" font-size="15" fill="#5c5c5c">Cold feed</text></g><g class="diagram-edge" data-edge="mix-cold">
+    <path id="dhw-circuits-mix-cold" d="M880,500 L930,500 L930,290 L980,290" fill="none" stroke="#0078d4" stroke-width="3" stroke-linejoin="round"  marker-end="url(#dhw-circuits-link)" />
+    <text x="1000" y="365" text-anchor="middle" font-size="15" fill="#5c5c5c">Cold blend</text></g><g class="diagram-edge" data-edge="recirc">
+    <path id="dhw-circuits-recirc" d="M1090,565 L1090,625 L455,625 L455,565" fill="none" stroke="#0078d4" stroke-width="3" stroke-linejoin="round" stroke-dasharray="8 6" marker-end="url(#dhw-circuits-link)" />
+    <text x="770" y="650" text-anchor="middle" font-size="15" fill="#5c5c5c">Return from the same pressure zone</text></g><g class="diagram-edge" data-edge="recirc-join">
+    <path id="dhw-circuits-recirc-join" d="M560,510 L610,510 L610,380 L690,380 L690,320" fill="none" stroke="#0078d4" stroke-width="3" stroke-linejoin="round" stroke-dasharray="8 6" marker-end="url(#dhw-circuits-link)" />
+    </g></g>
+    <g inkscape:groupmode="layer" inkscape:label="Components" id="dhw-circuits-components"><g id="dhw-circuits-dhw-pc1" class="diagram-node" data-node="dhw-pc1">
+    <rect x="40" y="210" width="210" height="110" rx="12" fill="#ffffff" stroke="#dedede" stroke-width="2"/>
+    <rect x="40" y="224" width="5" height="82" rx="2" fill="#b11f4b"/>
+    <text x="56" y="241" font-size="16" font-weight="700" fill="#242424">PC1 + P04</text>
+    <text x="56" y="269" font-size="14" fill="#5c5c5c">Closed hot-water primary</text><text x="56" y="291" font-size="14" fill="#5c5c5c">70 supply / 65 return</text></g><g id="dhw-circuits-dhw-sc1" class="diagram-node" data-node="dhw-sc1">
+    <rect x="350" y="210" width="210" height="110" rx="12" fill="#ffffff" stroke="#dedede" stroke-width="2"/>
+    <rect x="350" y="224" width="5" height="82" rx="2" fill="#b11f4b"/>
+    <text x="366" y="241" font-size="16" font-weight="700" fill="#242424">SC1 | 90 kW</text>
+    <text x="366" y="269" font-size="14" fill="#5c5c5c">Heat-exchanger boundary</text><text x="366" y="291" font-size="14" fill="#5c5c5c">No mixing of the fluids</text></g><g id="dhw-circuits-dhw-s2" class="diagram-node" data-node="dhw-s2">
+    <rect x="670" y="210" width="210" height="110" rx="12" fill="#ffffff" stroke="#dedede" stroke-width="2"/>
+    <rect x="670" y="224" width="5" height="82" rx="2" fill="#0078d4"/>
+    <text x="686" y="241" font-size="16" font-weight="700" fill="#242424">S2 | 3,000 L</text>
+    <text x="686" y="269" font-size="14" fill="#5c5c5c">Potable hot-water storage</text><text x="686" y="291" font-size="14" fill="#5c5c5c">60 deg C design label</text></g><g id="dhw-circuits-dhw-mix" class="diagram-node" data-node="dhw-mix">
+    <rect x="980" y="210" width="220" height="110" rx="12" fill="#ffffff" stroke="#dedede" stroke-width="2"/>
+    <rect x="980" y="224" width="5" height="82" rx="2" fill="#0078d4"/>
+    <text x="996" y="241" font-size="16" font-weight="700" fill="#242424">MIXING VALVE</text>
+    <text x="996" y="269" font-size="14" fill="#5c5c5c">Hot + cold blending</text><text x="996" y="291" font-size="14" fill="#5c5c5c">48 deg C outlet label</text></g><g id="dhw-circuits-dhw-return" class="diagram-node" data-node="dhw-return">
+    <rect x="350" y="455" width="210" height="110" rx="12" fill="#ffffff" stroke="#dedede" stroke-width="2"/>
+    <rect x="350" y="469" width="5" height="82" rx="2" fill="#0078d4"/>
+    <text x="366" y="486" font-size="16" font-weight="700" fill="#242424">P02 or P03</text>
+    <text x="366" y="514" font-size="14" fill="#5c5c5c">Dedicated recirculation pump</text><text x="366" y="536" font-size="14" fill="#5c5c5c">3.6 m3/h design duty</text></g><g id="dhw-circuits-dhw-cold" class="diagram-node" data-node="dhw-cold">
+    <rect x="670" y="455" width="210" height="110" rx="12" fill="#ffffff" stroke="#dedede" stroke-width="2"/>
+    <rect x="670" y="469" width="5" height="82" rx="2" fill="#0078d4"/>
+    <text x="686" y="486" font-size="16" font-weight="700" fill="#242424">TREATED COLD WATER</text>
+    <text x="686" y="514" font-size="14" fill="#5c5c5c">Pressure-zone supply</text><text x="686" y="536" font-size="14" fill="#5c5c5c">T2 + T3 + T4 upstream</text></g><g id="dhw-circuits-dhw-users" class="diagram-node" data-node="dhw-users">
+    <rect x="980" y="455" width="220" height="110" rx="12" fill="#ffffff" stroke="#dedede" stroke-width="2"/>
+    <rect x="980" y="469" width="5" height="82" rx="2" fill="#0078d4"/>
+    <text x="996" y="486" font-size="16" font-weight="700" fill="#242424">DHW DISTRIBUTION</text>
+    <text x="996" y="514" font-size="14" fill="#5c5c5c">Draw-off to taps</text><text x="996" y="536" font-size="14" fill="#5c5c5c">Separate recirculation return</text></g></g>
+    <text x="40" y="713" fill="#5c5c5c" font-size="15">Rose: closed PC1 primary water. Blue: potable water. The two fluids exchange heat across SC1.</text><text x="40" y="738" fill="#5c5c5c" font-size="15">The recirculation connection is simplified; the source includes a split return/mixing arrangement.</text><text x="40" y="763" fill="#5c5c5c" font-size="15">S00 p.1, two DHW branches. Temperatures are drawing annotations; hygiene and operating settings need verification.</text>
+  </g></svg>

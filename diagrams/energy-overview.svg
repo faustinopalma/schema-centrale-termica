@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" width="1260" height="750" viewBox="0 0 1260 750" role="img" aria-labelledby="energy-overview-title energy-overview-desc">
+  <title id="energy-overview-title">One plant, three separate water systems</title><desc id="energy-overview-desc">Energy-flow overview | arrows represent heat transfer, not pipe connections. PC2 and PC1 also consume electricity. Heat crosses exchanger surfaces; the water systems remain separate. S00 p.1 + S01/S02 family principles. Recovery availability and priority depend on the installed configuration. Groundwater and building arrows reverse between heating and cooling. Service devices are omitted.</desc>
+  <defs><marker id="energy-overview-accent" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 Z" fill="#b11f4b"/></marker><marker id="energy-overview-link" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 Z" fill="#0078d4"/></marker><marker id="energy-overview-success" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 Z" fill="#16a34a"/></marker><marker id="energy-overview-warning" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 Z" fill="#f59e0b"/></marker></defs>
+  <g font-family="Segoe UI, Arial, sans-serif">
+    <rect width="1260" height="750" fill="#f7f4ef"/>
+    <text x="40" y="57" fill="#242424" font-size="30" font-weight="700">One plant, three separate water systems</text>
+    <text x="40" y="91" fill="#5c5c5c" font-size="16">Energy-flow overview | arrows represent heat transfer, not pipe connections</text>
+    <g inkscape:groupmode="layer" inkscape:label="Connections" id="energy-overview-connections"><g class="diagram-edge" data-edge="ground">
+    <path id="energy-overview-ground" d="M280,240 L400,240" fill="none" stroke="#0078d4" stroke-width="3" stroke-linejoin="round"  marker-end="url(#energy-overview-link)" marker-start="url(#energy-overview-link)"/>
+    <text x="340" y="216" text-anchor="middle" font-size="15" fill="#5c5c5c">Source / sink</text></g><g class="diagram-edge" data-edge="space">
+    <path id="energy-overview-space" d="M640,240 L930,240" fill="none" stroke="#16a34a" stroke-width="3" stroke-linejoin="round"  marker-end="url(#energy-overview-success)" marker-start="url(#energy-overview-success)"/>
+    <text x="785" y="216" text-anchor="middle" font-size="15" fill="#5c5c5c">Heating / cooling</text></g><g class="diagram-edge" data-edge="recovery">
+    <path id="energy-overview-recovery" d="M520,295 L520,430" fill="none" stroke="#f59e0b" stroke-width="3" stroke-linejoin="round"  marker-end="url(#energy-overview-warning)" />
+    <text x="700" y="368" text-anchor="middle" font-size="15" fill="#5c5c5c">Warm-water production / recovery</text></g><g class="diagram-edge" data-edge="lift">
+    <path id="energy-overview-lift" d="M640,485 L680,485" fill="none" stroke="#f59e0b" stroke-width="3" stroke-linejoin="round"  marker-end="url(#energy-overview-warning)" />
+    </g><g class="diagram-edge" data-edge="hot">
+    <path id="energy-overview-hot" d="M900,485 L940,485" fill="none" stroke="#b11f4b" stroke-width="3" stroke-linejoin="round"  marker-end="url(#energy-overview-accent)" />
+    </g></g>
+    <g inkscape:groupmode="layer" inkscape:label="Components" id="energy-overview-components"><g id="energy-overview-wells" class="diagram-node" data-node="wells">
+    <rect x="40" y="185" width="240" height="110" rx="12" fill="#ffffff" stroke="#dedede" stroke-width="2"/>
+    <rect x="40" y="199" width="5" height="82" rx="2" fill="#0078d4"/>
+    <text x="56" y="216" font-size="16" font-weight="700" fill="#242424">GROUNDWATER</text>
+    <text x="56" y="244" font-size="14" fill="#5c5c5c">Wells P1 / P2 + T6 / T7 / S4</text><text x="56" y="266" font-size="14" fill="#5c5c5c">Source in winter; sink in summer</text></g><g id="energy-overview-pc2" class="diagram-node" data-node="pc2">
+    <rect x="400" y="185" width="240" height="110" rx="12" fill="#ffffff" stroke="#dedede" stroke-width="2"/>
+    <rect x="400" y="199" width="5" height="82" rx="2" fill="#b11f4b"/>
+    <text x="416" y="216" font-size="16" font-weight="700" fill="#242424">2 x PC2 | HiRef MSW</text>
+    <text x="416" y="244" font-size="14" fill="#5c5c5c">Water-to-water heat pumps</text><text x="416" y="266" font-size="14" fill="#5c5c5c">Building + intermediate circuits</text></g><g id="energy-overview-hvac" class="diagram-node" data-node="hvac">
+    <rect x="930" y="185" width="270" height="110" rx="12" fill="#ffffff" stroke="#dedede" stroke-width="2"/>
+    <rect x="930" y="199" width="5" height="82" rx="2" fill="#16a34a"/>
+    <text x="946" y="216" font-size="16" font-weight="700" fill="#242424">BUILDING HEATING / COOLING</text>
+    <text x="946" y="244" font-size="14" fill="#5c5c5c">S3 buffers + distribution branches</text><text x="946" y="266" font-size="14" fill="#5c5c5c">Radiant panels and other loads</text></g><g id="energy-overview-warm" class="diagram-node" data-node="warm">
+    <rect x="400" y="430" width="240" height="110" rx="12" fill="#ffffff" stroke="#dedede" stroke-width="2"/>
+    <rect x="400" y="444" width="5" height="82" rx="2" fill="#f59e0b"/>
+    <text x="416" y="461" font-size="16" font-weight="700" fill="#242424">INTERMEDIATE WATER</text>
+    <text x="416" y="489" font-size="14" fill="#5c5c5c">2 x S3, each 2,000 L</text><text x="416" y="511" font-size="14" fill="#5c5c5c">40 / 35 deg C design labels</text></g><g id="energy-overview-pc1" class="diagram-node" data-node="pc1">
+    <rect x="680" y="430" width="220" height="110" rx="12" fill="#ffffff" stroke="#dedede" stroke-width="2"/>
+    <rect x="680" y="444" width="5" height="82" rx="2" fill="#b11f4b"/>
+    <text x="696" y="461" font-size="16" font-weight="700" fill="#242424">PC1 | HiRef KSW</text>
+    <text x="696" y="489" font-size="14" fill="#5c5c5c">High-temperature heat pump</text><text x="696" y="511" font-size="14" fill="#5c5c5c">70 / 65 deg C primary loop</text></g><g id="energy-overview-dhw" class="diagram-node" data-node="dhw">
+    <rect x="940" y="430" width="260" height="110" rx="12" fill="#ffffff" stroke="#dedede" stroke-width="2"/>
+    <rect x="940" y="444" width="5" height="82" rx="2" fill="#0078d4"/>
+    <text x="956" y="461" font-size="16" font-weight="700" fill="#242424">DOMESTIC HOT WATER</text>
+    <text x="956" y="489" font-size="14" fill="#5c5c5c">2 x SC1 + 2 x S2 (3,000 L each)</text><text x="956" y="511" font-size="14" fill="#5c5c5c">60 deg C storage; mixed outlets</text></g></g>
+    <text x="40" y="673" fill="#5c5c5c" font-size="15">PC2 and PC1 also consume electricity. Heat crosses exchanger surfaces; the water systems remain separate.</text><text x="40" y="698" fill="#5c5c5c" font-size="15">S00 p.1 + S01/S02 family principles. Recovery availability and priority depend on the installed configuration.</text><text x="40" y="723" fill="#5c5c5c" font-size="15">Groundwater and building arrows reverse between heating and cooling. Service devices are omitted.</text>
+  </g></svg>

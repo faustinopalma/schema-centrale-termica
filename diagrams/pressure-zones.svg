@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" width="1260" height="1000" viewBox="0 0 1260 1000" role="img" aria-labelledby="pressure-zones-title pressure-zones-desc">
+  <title id="pressure-zones-title">Heating and cooling: distribution by pressure zone</title><desc id="pressure-zones-desc">Paired arrows summarise supply and return | SC2 transfers heat across a separate pressure circuit. P07/P09 residential outlets: 42/38 deg C winter and 13/18 deg C summer (pipe labels). S00 p.1, right-hand distribution. SC2 schedule and terminal details contain different selection temperatures. Mixing valves, expansion vessels, make-up groups and protection devices are omitted from this functional view.</desc>
+  <defs><marker id="pressure-zones-accent" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 Z" fill="#b11f4b"/></marker><marker id="pressure-zones-link" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 Z" fill="#0078d4"/></marker><marker id="pressure-zones-success" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 Z" fill="#16a34a"/></marker><marker id="pressure-zones-warning" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 Z" fill="#f59e0b"/></marker></defs>
+  <g font-family="Segoe UI, Arial, sans-serif">
+    <rect width="1260" height="1000" fill="#f7f4ef"/>
+    <text x="40" y="57" fill="#242424" font-size="30" font-weight="700">Heating and cooling: distribution by pressure zone</text>
+    <text x="40" y="91" fill="#5c5c5c" font-size="16">Paired arrows summarise supply and return | SC2 transfers heat across a separate pressure circuit</text>
+    <g inkscape:groupmode="layer" inkscape:label="Connections" id="pressure-zones-connections"><g class="diagram-edge" data-edge="branch-common">
+    <path id="pressure-zones-branch-common" d="M260,370 L330,370 L330,205 L430,205" fill="none" stroke="#16a34a" stroke-width="3" stroke-linejoin="round"  marker-end="url(#pressure-zones-success)" marker-start="url(#pressure-zones-success)"/>
+    </g><g class="diagram-edge" data-edge="common-load">
+    <path id="pressure-zones-common-load" d="M650,205 L950,205" fill="none" stroke="#16a34a" stroke-width="3" stroke-linejoin="round"  marker-end="url(#pressure-zones-success)" marker-start="url(#pressure-zones-success)"/>
+    <text x="800" y="183" text-anchor="middle" font-size="15" fill="#5c5c5c">Supply / return</text></g><g class="diagram-edge" data-edge="branch-low">
+    <path id="pressure-zones-branch-low" d="M260,400 L430,400" fill="none" stroke="#16a34a" stroke-width="3" stroke-linejoin="round"  marker-end="url(#pressure-zones-success)" marker-start="url(#pressure-zones-success)"/>
+    </g><g class="diagram-edge" data-edge="low-load">
+    <path id="pressure-zones-low-load" d="M650,400 L950,400" fill="none" stroke="#16a34a" stroke-width="3" stroke-linejoin="round"  marker-end="url(#pressure-zones-success)" marker-start="url(#pressure-zones-success)"/>
+    <text x="800" y="378" text-anchor="middle" font-size="15" fill="#5c5c5c">Supply / return</text></g><g class="diagram-edge" data-edge="branch-primary">
+    <path id="pressure-zones-branch-primary" d="M260,430 L330,430 L330,625 L430,625" fill="none" stroke="#16a34a" stroke-width="3" stroke-linejoin="round"  marker-end="url(#pressure-zones-success)" marker-start="url(#pressure-zones-success)"/>
+    </g><g class="diagram-edge" data-edge="primary-sc2">
+    <path id="pressure-zones-primary-sc2" d="M640,625 L730,625" fill="none" stroke="#16a34a" stroke-width="3" stroke-linejoin="round"  marker-end="url(#pressure-zones-success)" marker-start="url(#pressure-zones-success)"/>
+    <text x="686" y="605" text-anchor="middle" font-size="15" fill="#5c5c5c">Primary</text></g><g class="diagram-edge" data-edge="secondary-sc2">
+    <path id="pressure-zones-secondary-sc2" d="M900,625 L990,625" fill="none" stroke="#16a34a" stroke-width="3" stroke-linejoin="round"  marker-end="url(#pressure-zones-success)" marker-start="url(#pressure-zones-success)"/>
+    <text x="945" y="605" text-anchor="middle" font-size="15" fill="#5c5c5c">Secondary</text></g><g class="diagram-edge" data-edge="high-load">
+    <path id="pressure-zones-high-load" d="M1095,680 L1095,765" fill="none" stroke="#16a34a" stroke-width="3" stroke-linejoin="round"  marker-end="url(#pressure-zones-success)" marker-start="url(#pressure-zones-success)"/>
+    </g></g>
+    <g inkscape:groupmode="layer" inkscape:label="Components" id="pressure-zones-components"><g id="pressure-zones-zone-source" class="diagram-node" data-node="zone-source">
+    <rect x="40" y="345" width="220" height="110" rx="12" fill="#ffffff" stroke="#dedede" stroke-width="2"/>
+    <rect x="40" y="359" width="5" height="82" rx="2" fill="#16a34a"/>
+    <text x="56" y="376" font-size="16" font-weight="700" fill="#242424">PC2 BUILDING LOOP</text>
+    <text x="56" y="404" font-size="14" fill="#5c5c5c">2 x S3 buffers (2,000 L each)</text><text x="56" y="426" font-size="14" fill="#5c5c5c">Common supply / return</text></g><g id="pressure-zones-zone-p06" class="diagram-node" data-node="zone-p06">
+    <rect x="430" y="150" width="220" height="110" rx="12" fill="#ffffff" stroke="#dedede" stroke-width="2"/>
+    <rect x="430" y="164" width="5" height="82" rx="2" fill="#16a34a"/>
+    <text x="446" y="181" font-size="16" font-weight="700" fill="#242424">P06</text>
+    <text x="446" y="209" font-size="14" fill="#5c5c5c">Communal-space branch</text><text x="446" y="231" font-size="14" fill="#5c5c5c">3 m3/h; 200 kPa</text></g><g id="pressure-zones-zone-common" class="diagram-node" data-node="zone-common">
+    <rect x="950" y="150" width="250" height="110" rx="12" fill="#ffffff" stroke="#dedede" stroke-width="2"/>
+    <rect x="950" y="164" width="5" height="82" rx="2" fill="#16a34a"/>
+    <text x="966" y="181" font-size="16" font-weight="700" fill="#242424">TOWER B COMMUNAL</text>
+    <text x="966" y="209" font-size="14" fill="#5c5c5c">Plant branch: 45/40 winter</text><text x="966" y="231" font-size="14" fill="#5c5c5c">8/13 deg C summer labels</text></g><g id="pressure-zones-zone-p07" class="diagram-node" data-node="zone-p07">
+    <rect x="430" y="345" width="220" height="110" rx="12" fill="#ffffff" stroke="#dedede" stroke-width="2"/>
+    <rect x="430" y="359" width="5" height="82" rx="2" fill="#16a34a"/>
+    <text x="446" y="376" font-size="16" font-weight="700" fill="#242424">P07 + MIXING</text>
+    <text x="446" y="404" font-size="14" fill="#5c5c5c">Low-pressure distribution</text><text x="446" y="426" font-size="14" fill="#5c5c5c">66 m3/h; 220 kPa</text></g><g id="pressure-zones-zone-low" class="diagram-node" data-node="zone-low">
+    <rect x="950" y="345" width="250" height="110" rx="12" fill="#ffffff" stroke="#dedede" stroke-width="2"/>
+    <rect x="950" y="359" width="5" height="82" rx="2" fill="#16a34a"/>
+    <text x="966" y="376" font-size="16" font-weight="700" fill="#242424">TOWERS A + B | BP</text>
+    <text x="966" y="404" font-size="14" fill="#5c5c5c">Low-pressure residential outlets</text><text x="966" y="426" font-size="14" fill="#5c5c5c">Apartment modules downstream</text></g><g id="pressure-zones-zone-p08" class="diagram-node" data-node="zone-p08">
+    <rect x="430" y="570" width="210" height="110" rx="12" fill="#ffffff" stroke="#dedede" stroke-width="2"/>
+    <rect x="430" y="584" width="5" height="82" rx="2" fill="#16a34a"/>
+    <text x="446" y="601" font-size="16" font-weight="700" fill="#242424">P08</text>
+    <text x="446" y="629" font-size="14" fill="#5c5c5c">SC2 primary circulation</text><text x="446" y="651" font-size="14" fill="#5c5c5c">41.2 m3/h; 80 kPa</text></g><g id="pressure-zones-zone-sc2" class="diagram-node" data-node="zone-sc2">
+    <rect x="730" y="570" width="170" height="110" rx="12" fill="#ffffff" stroke="#dedede" stroke-width="2"/>
+    <rect x="730" y="584" width="5" height="82" rx="2" fill="#b11f4b"/>
+    <text x="746" y="601" font-size="16" font-weight="700" fill="#242424">SC2</text>
+    <text x="746" y="629" font-size="14" fill="#5c5c5c">Hydraulic boundary</text><text x="746" y="651" font-size="14" fill="#5c5c5c">Heat crosses plates</text></g><g id="pressure-zones-zone-p09" class="diagram-node" data-node="zone-p09">
+    <rect x="990" y="570" width="210" height="110" rx="12" fill="#ffffff" stroke="#dedede" stroke-width="2"/>
+    <rect x="990" y="584" width="5" height="82" rx="2" fill="#16a34a"/>
+    <text x="1006" y="601" font-size="16" font-weight="700" fill="#242424">P09</text>
+    <text x="1006" y="629" font-size="14" fill="#5c5c5c">High-pressure secondary</text><text x="1006" y="651" font-size="14" fill="#5c5c5c">57 m3/h; 210 kPa</text></g><g id="pressure-zones-zone-high" class="diagram-node" data-node="zone-high">
+    <rect x="950" y="765" width="250" height="110" rx="12" fill="#ffffff" stroke="#dedede" stroke-width="2"/>
+    <rect x="950" y="779" width="5" height="82" rx="2" fill="#16a34a"/>
+    <text x="966" y="796" font-size="16" font-weight="700" fill="#242424">TOWERS A + B | AP</text>
+    <text x="966" y="824" font-size="14" fill="#5c5c5c">Separate high-pressure outlets</text><text x="966" y="846" font-size="14" fill="#5c5c5c">Apartment modules downstream</text></g></g>
+    <text x="40" y="923" fill="#5c5c5c" font-size="15">P07/P09 residential outlets: 42/38 deg C winter and 13/18 deg C summer (pipe labels).</text><text x="40" y="948" fill="#5c5c5c" font-size="15">S00 p.1, right-hand distribution. SC2 schedule and terminal details contain different selection temperatures.</text><text x="40" y="973" fill="#5c5c5c" font-size="15">Mixing valves, expansion vessels, make-up groups and protection devices are omitted from this functional view.</text>
+  </g></svg>

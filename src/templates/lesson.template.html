@@ -1,0 +1,520 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Mes 600 S</title>
+<script>
+(() => {
+  const param = new URLSearchParams(window.location.search).get("scoutTheme");
+  const theme = param || (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+  document.documentElement.setAttribute("data-theme", theme);
+})();
+</script>
+<style>
+{{THEME}}
+{{HYDRAULIC_STYLE}}
+*{box-sizing:border-box}
+html,body{width:100%;height:100%;margin:0;overflow:hidden}
+body{height:100dvh;background:var(--cp-bg);color:var(--cp-text);font:15px/1.45 "Segoe UI",Aptos,Calibri,-apple-system,BlinkMacSystemFont,sans-serif;display:grid;grid-template-rows:auto auto minmax(0,1fr) auto;padding:env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left)}
+button,select{font:inherit;color:var(--cp-text);background:var(--cp-surface);border:1px solid var(--cp-border);border-radius:.625rem;min-height:40px;padding:5px 11px;transition:border-color .15s ease,background .15s ease}
+button{cursor:pointer;white-space:nowrap}
+button:hover:not(:disabled),select:hover{border-color:var(--cp-accent)}
+button[aria-pressed="true"]{background:var(--cp-accent);color:var(--cp-accent-fg);border-color:var(--cp-accent);font-weight:600}
+button:disabled{opacity:.42;cursor:default}
+:focus-visible{outline:3px solid var(--cp-accent);outline-offset:2px}
+header{display:flex;align-items:center;gap:8px;padding:6px 14px;background:var(--cp-bg-elevated);border-bottom:1px solid var(--cp-border);min-width:0}
+.brand{font-weight:700;font-size:16px;margin-right:4px;white-space:nowrap}
+.stepper{display:flex;align-items:center;gap:4px;background:var(--cp-surface-soft);padding:3px;border-radius:12px;border:1px solid var(--cp-border)}
+.stepper button{min-height:36px;padding:4px 10px;border-radius:9px;font-size:14px}
+.stepper .step-arrow{font-weight:700;padding-inline:9px}
+.spacer{flex:1}
+.season-group,.tools-group{display:flex;align-items:center;gap:6px}
+.season-group button,.tools-group button,.tools-group select{min-height:38px;font-size:14px;padding:4px 10px}
+.pc-context{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:7px 16px;background:var(--cp-surface);border-bottom:1px solid var(--cp-border);min-width:0}
+.pc-summary{min-width:0;flex:1}
+.pc-summary strong{display:inline;font-size:14px;color:var(--cp-accent);margin-right:8px}
+.pc-summary span{font-size:14px;color:var(--cp-text-muted)}
+.pc-tags{display:flex;align-items:center;gap:5px;flex-wrap:wrap;justify-content:flex-end}
+.pc-tags-label{font-size:12px;font-weight:600;color:var(--cp-text-muted);margin-right:2px}
+.tag-chip{min-height:28px;padding:2px 9px;border-radius:999px;font:700 12px/1.2 Consolas,"Courier New",monospace;background:var(--cp-accent-soft);color:var(--cp-accent);border:1px solid var(--cp-accent)}
+.tag-chip:hover,.tag-chip[aria-pressed="true"]{background:var(--cp-accent);color:var(--cp-accent-fg)}
+main{position:relative;min-height:0;min-width:0;padding:6px 12px;display:flex;align-items:center;justify-content:center}
+#viewport{width:100%;height:100%;background:var(--cp-bg-elevated);border:1px solid var(--cp-border);border-radius:14px;padding:4px;display:flex;align-items:center;justify-content:center;overflow:hidden}
+#viewport>svg{width:100%;height:100%;max-width:100%;max-height:100%}
+footer{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:5px 16px;background:var(--cp-bg-elevated);border-top:1px solid var(--cp-border);font-size:13px;color:var(--cp-text-muted);min-width:0}
+.legend-items{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.legend-items span{display:flex;align-items:center;gap:6px;white-space:nowrap}
+.swatch{width:22px;border-top:4px solid var(--cp-danger);border-radius:2px}
+.swatch.cool{border-color:var(--cp-link)}
+.swatch.mixed{border-color:var(--cp-warning)}
+.swatch.heat{border-color:var(--cp-warning);border-top-style:dashed}
+.hint-text{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#orientation{display:none}
+dialog{padding:0;width:min(820px,calc(100vw - 20px));max-width:calc(100vw - 20px);max-height:calc(100dvh - 20px);border:1px solid var(--cp-border-strong);border-radius:16px;background:var(--cp-surface);color:var(--cp-text);box-shadow:var(--cp-shadow);overflow:hidden}
+dialog.wide{width:min(1120px,calc(100vw - 20px))}
+dialog[open]{display:flex;flex-direction:column}
+dialog::backdrop{background:var(--cp-overlay)}
+.dialog-head{display:flex;align-items:center;gap:10px;padding:12px 18px;background:var(--cp-bg-elevated);border-bottom:1px solid var(--cp-border)}
+.dialog-head h2{margin:0;font-size:19px;flex:1;min-width:0}
+#popup-body{padding:16px 18px;flex:1;min-height:0;overflow-y:auto;display:flex;flex-direction:column;gap:12px}
+#popup-body p{margin:0;font-size:16px;line-height:1.55}
+.related-tags{display:flex;align-items:center;gap:6px;flex-wrap:wrap;padding-top:4px}
+.dialog-foot{display:flex;align-items:center;gap:8px;padding:10px 18px;background:var(--cp-bg-elevated);border-top:1px solid var(--cp-border)}
+#page-count{margin-right:auto;font-size:14px;color:var(--cp-text-muted);font-weight:600}
+.action-accent{background:var(--cp-accent-soft);color:var(--cp-accent);border-color:var(--cp-accent);font-weight:600}
+.cycle-modal-wrap{display:flex;flex-direction:column;gap:10px;min-height:0}
+.cycle-svg-box{height:min(46dvh,390px);background:var(--cp-bg-elevated);border:1px solid var(--cp-border);border-radius:12px;padding:4px}
+.cycle-stage-bar{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;padding:10px 14px;background:var(--cp-surface-soft);border-left:4px solid var(--cp-accent);border-radius:10px}
+.cycle-stage-bar p{margin:0;font-size:15px}
+.tags-explorer{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(260px,1fr);gap:14px;min-height:260px}
+.tags-left{display:flex;flex-direction:column;gap:10px;min-width:0}
+.cat-bar{display:flex;gap:6px;flex-wrap:wrap}
+.cat-bar button{min-height:32px;padding:4px 10px;font-size:13px}
+.tag-grid{display:flex;flex-wrap:wrap;gap:6px;align-content:flex-start}
+.tag-detail-card{background:var(--cp-bg-elevated);border:1px solid var(--cp-border);border-radius:12px;padding:14px;display:flex;flex-direction:column;gap:8px}
+.tag-detail-card .code-badge{align-self:flex-start;padding:3px 10px;border-radius:999px;background:var(--cp-accent);color:var(--cp-accent-fg);font:700 14px Consolas,"Courier New",monospace}
+.tag-detail-card h3{margin:0;font-size:17px}
+.tag-detail-card .units-line{font-size:13px;font-weight:600;color:var(--cp-accent)}
+.tag-detail-card p{font-size:14.5px;line-height:1.5;margin:0}
+.sources-bar{display:flex;gap:8px;flex-wrap:wrap}
+.doc-viewer{width:100%;height:min(52dvh,440px);border:1px solid var(--cp-border);border-radius:8px;background:var(--cp-surface)}
+@media(max-width:1380px){.brand{display:none}}
+@media(max-width:1023px),(max-height:579px){
+  body{grid-template-rows:auto minmax(0,1fr) auto}
+  .pc-context{display:none}
+  header{padding:3px 6px;gap:4px}
+  .stepper{padding:2px;gap:2px}
+  .stepper button,.season-group button,.tools-group button,.tools-group select{min-height:34px;padding:2px 6px;font-size:12px}
+  .season-group,.tools-group{gap:3px}
+  main{padding:4px 6px}
+  footer{padding:3px 10px;font-size:12px}
+  .hint-text{display:none}
+  .tags-explorer{grid-template-columns:1fr}
+}
+@media(orientation:portrait){
+  body{grid-template-rows:auto minmax(0,1fr)}
+  header{flex-wrap:wrap;justify-content:center}
+  .stepper,.season-group,.pc-context,footer,#viewport{display:none!important}
+  #orientation{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:14px;padding:24px;max-width:440px;margin:auto;background:var(--cp-surface);border:1px solid var(--cp-border);border-radius:16px}
+  #orientation svg{width:96px;height:72px;fill:none;stroke:var(--cp-accent);stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round}
+  #orientation h1{font-size:22px;margin:0}
+  #orientation p{margin:0;font-size:15px;color:var(--cp-text-muted);line-height:1.5}
+  #orientation .pc-invite{padding:10px 14px;border-radius:10px;background:var(--cp-accent-soft);color:var(--cp-text);border-left:4px solid var(--cp-accent);font-size:14px;text-align:left}
+}
+</style>
+</head>
+<body>
+<header>
+  <span class="brand" id="brand"></span>
+  <nav class="stepper" id="stepper" aria-label="Steps">
+    <button type="button" class="step-arrow" id="prev-step" aria-label="Previous step">◀</button>
+    <button type="button" data-step="0" id="step-tab-0"></button>
+    <button type="button" data-step="1" id="step-tab-1"></button>
+    <button type="button" data-step="2" id="step-tab-2"></button>
+    <button type="button" class="step-arrow" id="next-step" aria-label="Next step">▶</button>
+  </nav>
+  <div class="spacer"></div>
+  <div class="season-group">
+    <button type="button" id="winter" data-season="winter"></button>
+    <button type="button" id="summer" data-season="summer"></button>
+  </div>
+  <div class="tools-group">
+    <button type="button" id="tags-btn"></button>
+    <button type="button" id="guide"></button>
+    <button type="button" id="theme-btn" aria-label="Switch theme">☀/☾</button>
+    <select id="language" aria-label="Language / Lingua / 语言">
+      <option value="it">Italiano</option>
+      <option value="zh">中文</option>
+      <option value="en">English</option>
+    </select>
+  </div>
+</header>
+
+<section class="pc-context" id="pc-context">
+  <div class="pc-summary">
+    <strong id="step-heading"></strong>
+    <span id="step-summary"></span>
+  </div>
+  <div class="pc-tags" id="pc-tags"></div>
+</section>
+
+<main>
+  <div id="viewport"></div>
+  <section id="orientation" role="status">
+    <svg viewBox="0 0 128 84" aria-hidden="true">
+      <rect x="12" y="14" width="30" height="54" rx="5" transform="rotate(-18 27 41)"/>
+      <path d="M46 28a22 22 0 0 1 22 14m-6-2 6 2 2-6"/>
+      <rect x="68" y="18" width="48" height="34" rx="4"/>
+      <path d="M84 52v10m16-10v10m-24 0h32"/>
+    </svg>
+    <h1 id="rotate-title"></h1>
+    <p id="rotate-body"></p>
+    <p class="pc-invite" id="rotate-pc"></p>
+  </section>
+</main>
+
+<footer>
+  <div class="legend-items" id="legend"></div>
+  <span class="hint-text" id="click-hint"></span>
+</footer>
+
+<dialog id="popup" aria-labelledby="popup-title">
+  <div class="dialog-head">
+    <h2 id="popup-title"></h2>
+    <button type="button" id="close"></button>
+  </div>
+  <div id="popup-body"></div>
+  <div class="dialog-foot" id="popup-foot">
+    <span id="page-count" aria-live="polite"></span>
+    <button type="button" class="action-accent" id="extra-action" hidden></button>
+    <button type="button" id="previous"></button>
+    <button type="button" id="next"></button>
+  </div>
+</dialog>
+
+<noscript>Abilita JavaScript · Enable JavaScript · 请启用 JavaScript</noscript>
+<script>
+(() => {
+  const COPY = {{LESSON}};
+  const DIAGRAMS = {{HYDRAULIC_DIAGRAMS}};
+  const renderHydraulic = {{HYDRAULIC_RENDERER}};
+  const createFlowAnimator = {{FLOW_ANIMATOR}};
+  const animator = createFlowAnimator();
+
+  const $ = id => document.getElementById(id);
+  const esc = v => String(v).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+  const detected = (navigator.languages || [navigator.language]).map(l => String(l || '').toLowerCase().split('-')[0]).find(l => ['it', 'en', 'zh'].includes(l)) || 'en';
+
+  const STEP_KEYS = ['step1', 'step2', 'step3'];
+  const STEP_TAGS = [
+    ['P1', 'R1', 'PC2', 'BP'],
+    ['P1', 'R1', 'PC2', 'S3', 'P05', 'PC1', 'P04', 'SC1', 'P01', 'S2', 'ACP', 'ACR', 'P02', 'AFP'],
+    ['P1', 'P2', 'P11', 'P10', 'T6', 'T7', 'S4', 'R1', 'PC2', 'S3', 'P06', 'P07', 'P08', 'SC2', 'P09', 'P05', 'PC1', 'P04', 'SC1', 'P01', 'S2', 'P02', 'P03', 'T1', 'S1', 'GP1', 'GP2', 'T2', 'ACP', 'ACR', 'AFP', 'BP', 'MP', 'AP']
+  ];
+
+  const state = {
+    lang: detected,
+    step: 0,
+    season: 'winter',
+    modalMode: null, // 'topic' | 'cycle' | 'tags'
+    topic: null,
+    page: 0,
+    cycleStage: 0,
+    tagCat: 'all',
+    selectedTag: 'P1',
+    docKey: null,
+    highlightTag: null
+  };
+  let opener = null;
+
+  const copy = () => COPY[state.lang];
+  const ui = () => copy().ui;
+
+  function highlightSvgByTag(tag) {
+    for (const el of $('viewport').querySelectorAll('.highlighted')) el.classList.remove('highlighted');
+    if (!tag) return;
+    for (const el of $('viewport').querySelectorAll('[data-tags]')) {
+      const list = (el.getAttribute('data-tags') || '').split(/[\s,]+/).filter(Boolean);
+      if (list.includes(tag)) el.classList.add('highlighted');
+    }
+  }
+
+  function render() {
+    const L = copy(), U = ui();
+    const compactHeader = window.matchMedia('(max-width: 1120px)').matches;
+    document.documentElement.lang = state.lang;
+    document.title = L.title;
+    $('language').value = state.lang;
+    $('brand').textContent = U.brand;
+
+    for (let i = 0; i < 3; i++) {
+      const tab = $(`step-tab-${i}`);
+      tab.textContent = compactHeader ? String(i + 1) : U.stepTabs[i];
+      tab.title = U.stepTabs[i];
+      tab.setAttribute('aria-label', U.stepTabs[i]);
+      tab.setAttribute('aria-pressed', String(state.step === i));
+    }
+    $('prev-step').disabled = state.step === 0;
+    $('next-step').disabled = state.step === 2;
+    $('prev-step').title = U.prevStep;
+    $('next-step').title = U.nextStep;
+
+    for (const s of ['winter', 'summer']) {
+      $(s).textContent = compactHeader ? U[s].split('·')[0].trim() : U[s];
+      $(s).title = U[s];
+      $(s).setAttribute('aria-pressed', String(state.season === s));
+    }
+    $('tags-btn').textContent = compactHeader ? U.tagsBtn.split('(')[0].trim() : U.tagsBtn;
+    $('tags-btn').title = U.tagsBtn;
+    $('guide').textContent = compactHeader ? '?' : U.guideBtn;
+    $('guide').setAttribute('aria-label', U.guideBtn);
+
+    const stepInfo = L.steps[state.step];
+    $('step-heading').textContent = stepInfo.title;
+    $('step-summary').textContent = state.season === 'winter' ? stepInfo.winterSummary : stepInfo.summerSummary;
+
+    const activeTags = STEP_TAGS[state.step];
+    $('pc-tags').innerHTML = `<span class="pc-tags-label">${esc(U.activeTagsLabel)}</span>` +
+      activeTags.slice(0, 16).map(code => `<button type="button" class="tag-chip" data-open-tag="${code}">${esc(code)}</button>`).join('') +
+      (activeTags.length > 16 ? `<button type="button" class="tag-chip" data-open-all-tags="1">+${activeTags.length - 16}</button>` : '');
+
+    $('rotate-title').textContent = U.rotateTitle;
+    $('rotate-body').textContent = U.rotateBody;
+    $('rotate-pc').textContent = U.rotatePcHint;
+
+    const isPortrait = window.matchMedia('(orientation: portrait)').matches;
+    $('viewport').inert = isPortrait;
+    $('viewport').innerHTML = renderHydraulic(DIAGRAMS[STEP_KEYS[state.step]], L, state.season, `step${state.step + 1}`);
+
+    $('legend').innerHTML = U.legend.map((lbl, idx) =>
+      `<span><i class="swatch ${['', 'cool', 'mixed', 'heat'][idx]}" aria-hidden="true"></i>${esc(lbl)}</span>`
+    ).join('');
+    $('click-hint').textContent = U.clickHint;
+
+    if (state.highlightTag) highlightSvgByTag(state.highlightTag);
+    if ($('popup').open) renderModal();
+    animator.refresh(document);
+  }
+
+  function renderModal() {
+    const L = copy(), U = ui();
+    $('close').textContent = L.close;
+    $('previous').textContent = U.prevPage;
+    $('next').textContent = U.nextPage;
+    $('extra-action').hidden = true;
+    $('popup').classList.toggle('wide', state.modalMode === 'cycle' || state.modalMode === 'tags' || !!state.docKey);
+
+    if (state.modalMode === 'cycle') {
+      $('popup-title').textContent = L.headings[1];
+      $('popup-foot').hidden = true;
+      const stageTopic = ['evaporator', 'compressor', 'condenser', 'expansion'][state.cycleStage];
+      const stageDesc = L.richTopics[stageTopic].pages[0];
+      $('popup-body').innerHTML = `<div class="cycle-modal-wrap">` +
+        `<div class="cycle-svg-box">${renderHydraulic(DIAGRAMS.cycle, L, state.season, 'modal-cycle')}</div>` +
+        `<div class="cycle-stage-bar"><p><strong>${esc(L.stages[state.cycleStage])}</strong> — ${esc(stageDesc)}</p></div>` +
+        `</div>`;
+      const activeStageNode = $('popup-body').querySelector(`[data-stage="${state.cycleStage}"]`);
+      if (activeStageNode) activeStageNode.classList.add('highlighted');
+      animator.refresh(document);
+      return;
+    }
+
+    if (state.modalMode === 'tags') {
+      $('popup-title').textContent = U.tagsBtn;
+      $('popup-foot').hidden = true;
+      const cats = [
+        ['all', U.tagFilterAll],
+        ['wells', U.tagFilterWells],
+        ['gen', U.tagFilterGen],
+        ['pumps', U.tagFilterPumps],
+        ['water', U.tagFilterWater]
+      ];
+      const entries = Object.entries(L.tags).filter(([, item]) => state.tagCat === 'all' || item.cat === state.tagCat);
+      if (!L.tags[state.selectedTag] || (state.tagCat !== 'all' && L.tags[state.selectedTag].cat !== state.tagCat)) {
+        state.selectedTag = entries[0][0];
+      }
+      const sel = L.tags[state.selectedTag];
+      $('popup-body').innerHTML = `<div class="tags-explorer">` +
+        `<div class="tags-left">` +
+        `<div class="cat-bar">${cats.map(([id, label]) => `<button type="button" data-tag-cat="${id}" aria-pressed="${state.tagCat === id}">${esc(label)}</button>`).join('')}</div>` +
+        `<div class="tag-grid">${entries.map(([code]) => `<button type="button" class="tag-chip" data-select-tag="${code}" aria-pressed="${state.selectedTag === code}">${esc(code)}</button>`).join('')}</div>` +
+        `</div>` +
+        `<div class="tag-detail-card">` +
+        `<span class="code-badge">${esc(state.selectedTag)}</span>` +
+        `<h3>${esc(sel.name)}</h3>` +
+        `<div class="units-line">${esc(sel.units)}</div>` +
+        `<p>${esc(sel.body)}</p>` +
+        `<button type="button" class="action-accent" data-locate-tag="${esc(state.selectedTag)}">${esc(U.locateBtn)}</button>` +
+        `</div></div>`;
+      return;
+    }
+
+    // Standard richTopic mode
+    $('popup-foot').hidden = false;
+    const topicObj = L.richTopics[state.topic] || L.richTopics.guide;
+    $('popup-title').textContent = topicObj.title;
+    $('previous').disabled = state.page === 0;
+    $('next').disabled = state.page >= topicObj.pages.length - 1;
+    $('page-count').textContent = `${state.page + 1} / ${topicObj.pages.length}`;
+
+    if (topicObj.hasCycleZoom) {
+      $('extra-action').hidden = false;
+      $('extra-action').textContent = U.openCycleBtn;
+    }
+
+    if (state.docKey) {
+      const srcMap = { msw: 'documents/hiref-msw.pdf', ksw: 'documents/hiref-ksw.pdf', project: 'project.html' };
+      $('popup-body').innerHTML = `<div class="sources-bar">` +
+        `<button type="button" data-document="msw" aria-pressed="${state.docKey === 'msw'}">${esc(L.pdfMsw)}</button>` +
+        `<button type="button" data-document="ksw" aria-pressed="${state.docKey === 'ksw'}">${esc(L.pdfKsw)}</button>` +
+        `<button type="button" data-document="project" aria-pressed="${state.docKey === 'project'}">${esc(L.reference)}</button>` +
+        `</div><iframe class="doc-viewer" title="${esc(state.docKey)}" src="${srcMap[state.docKey]}"></iframe>`;
+      return;
+    }
+
+    let html = `<p>${esc(topicObj.pages[state.page])}</p>`;
+    // Show related clickable tags if triggered from an SVG node
+    const relatedTags = (opener?.getAttribute?.('data-tags') || '').split(/[\s,]+/).filter(t => L.tags[t]);
+    if (relatedTags.length) {
+      html += `<div class="related-tags"><span class="pc-tags-label">${esc(U.activeTagsLabel)}</span>` +
+        relatedTags.map(code => `<button type="button" class="tag-chip" data-open-tag="${code}">${esc(code)}</button>`).join('') +
+        `</div>`;
+    }
+    if (topicObj.hasSources) {
+      html += `<div class="sources-bar">` +
+        `<button type="button" data-document="msw">${esc(L.pdfMsw)}</button>` +
+        `<button type="button" data-document="ksw">${esc(L.pdfKsw)}</button>` +
+        `<button type="button" data-document="project">${esc(L.reference)}</button>` +
+        `</div>`;
+    }
+    $('popup-body').innerHTML = html;
+  }
+
+  function openTopic(topic, trigger) {
+    if (!$('popup').open) opener = trigger;
+    state.docKey = null;
+    if (topic.startsWith('tag-')) {
+      const code = topic.slice(4);
+      state.modalMode = 'tags';
+      state.tagCat = 'all';
+      state.selectedTag = copy().tags[code] ? code : 'P1';
+    } else if (['evaporator', 'compressor', 'condenser', 'expansion'].includes(topic) && state.modalMode === 'cycle') {
+      state.cycleStage = ['evaporator', 'compressor', 'condenser', 'expansion'].indexOf(topic);
+    } else {
+      state.modalMode = 'topic';
+      state.topic = copy().richTopics[topic] ? topic : 'guide';
+      state.page = 0;
+    }
+    renderModal();
+    if (!$('popup').open) {
+      $('popup').showModal();
+      $('close').focus({ preventScroll: true });
+    }
+  }
+
+  document.addEventListener('click', e => {
+    const stageEl = e.target.closest('#popup [data-stage]');
+    if (stageEl && state.modalMode === 'cycle') {
+      state.cycleStage = Number(stageEl.dataset.stage);
+      renderModal();
+      return;
+    }
+    const topicEl = e.target.closest('[data-topic]');
+    if (topicEl) {
+      openTopic(topicEl.dataset.topic, topicEl);
+      return;
+    }
+    const openTagBtn = e.target.closest('[data-open-tag]');
+    if (openTagBtn) {
+      openTopic(`tag-${openTagBtn.dataset.openTag}`, openTagBtn);
+      return;
+    }
+    if (e.target.closest('[data-open-all-tags]')) {
+      openTopic('tag-P1', e.target.closest('[data-open-all-tags]'));
+      return;
+    }
+    const catBtn = e.target.closest('[data-tag-cat]');
+    if (catBtn) {
+      state.tagCat = catBtn.dataset.tagCat;
+      renderModal();
+      return;
+    }
+    const selTag = e.target.closest('[data-select-tag]');
+    if (selTag) {
+      state.selectedTag = selTag.dataset.selectTag;
+      renderModal();
+      return;
+    }
+    const locBtn = e.target.closest('[data-locate-tag]');
+    if (locBtn) {
+      state.step = 2;
+      state.highlightTag = locBtn.dataset.locateTag;
+      $('popup').close();
+      render();
+      return;
+    }
+    const docBtn = e.target.closest('[data-document]');
+    if (docBtn) {
+      state.docKey = state.docKey === docBtn.dataset.document ? null : docBtn.dataset.document;
+      renderModal();
+    }
+  });
+
+  document.addEventListener('mouseover', e => {
+    const chip = e.target.closest('#pc-tags [data-open-tag]');
+    if (chip) highlightSvgByTag(chip.dataset.openTag);
+  });
+  document.addEventListener('mouseout', e => {
+    if (e.target.closest('#pc-tags [data-open-tag]')) highlightSvgByTag(state.highlightTag);
+  });
+
+  document.addEventListener('keydown', e => {
+    if ((e.key === 'Enter' || e.key === ' ') && e.target.matches('g[data-topic]')) {
+      e.preventDefault();
+      if (e.target.closest('#popup') && state.modalMode === 'cycle' && e.target.dataset.stage !== undefined) {
+        state.cycleStage = Number(e.target.dataset.stage);
+        renderModal();
+      } else {
+        openTopic(e.target.dataset.topic, e.target);
+      }
+      return;
+    }
+    if (!$('popup').open && !['SELECT', 'INPUT', 'TEXTAREA'].includes(document.activeElement?.tagName)) {
+      if (e.key === 'ArrowRight' && state.step < 2) { state.step++; state.highlightTag = null; render(); }
+      if (e.key === 'ArrowLeft' && state.step > 0) { state.step--; state.highlightTag = null; render(); }
+    }
+  });
+
+  for (let i = 0; i < 3; i++) {
+    $(`step-tab-${i}`).addEventListener('click', () => { state.step = i; state.highlightTag = null; render(); });
+  }
+  $('prev-step').addEventListener('click', () => { if (state.step > 0) { state.step--; state.highlightTag = null; render(); } });
+  $('next-step').addEventListener('click', () => { if (state.step < 2) { state.step++; state.highlightTag = null; render(); } });
+
+  for (const s of ['winter', 'summer']) {
+    $(s).addEventListener('click', () => { state.season = s; render(); });
+  }
+  $('tags-btn').addEventListener('click', e => openTopic('tag-P1', e.currentTarget));
+  $('guide').addEventListener('click', e => openTopic('guide', e.currentTarget));
+  $('theme-btn').addEventListener('click', () => {
+    const next = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    document.documentElement.setAttribute('data-theme', next);
+  });
+  $('language').addEventListener('change', e => { state.lang = e.target.value; render(); });
+
+  $('extra-action').addEventListener('click', () => {
+    state.modalMode = 'cycle';
+    state.cycleStage = 0;
+    renderModal();
+  });
+  $('previous').addEventListener('click', () => { if (state.page > 0) { state.page--; state.docKey = null; renderModal(); } });
+  $('next').addEventListener('click', () => { state.page++; state.docKey = null; renderModal(); });
+  $('close').addEventListener('click', () => $('popup').close());
+
+  $('popup').addEventListener('click', e => {
+    const r = $('popup').getBoundingClientRect();
+    if (e.target === $('popup') && (e.clientX < r.left || e.clientX > r.right || e.clientY < r.top || e.clientY > r.bottom)) {
+      $('popup').close();
+    }
+  });
+  $('popup').addEventListener('close', () => {
+    state.modalMode = null;
+    state.docKey = null;
+    $('popup-body').replaceChildren();
+    animator.refresh(document);
+    if (opener?.isConnected) opener.focus({ preventScroll: true });
+  });
+
+  window.matchMedia('(orientation: portrait)').addEventListener('change', () => {
+    if ($('popup').open) $('popup').close();
+    render();
+  });
+  window.matchMedia('(max-width: 1120px)').addEventListener('change', render);
+  window.matchMedia('(prefers-reduced-motion: reduce)').addEventListener('change', () => animator.refresh(document));
+
+  render();
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,1163 @@
+{
+  "it": {
+    "ui": {
+      "brand": "Centrale Termica · Mes 600 S",
+      "prevStep": "◀ Indietro",
+      "nextStep": "Avanti ▶",
+      "stepTabs": ["1 · Principio (1 PdC)", "2 · + Acqua Calda", "3 · Impianto Reale"],
+      "winter": "❄ Inverno · Caldo",
+      "summer": "☀ Estate · Freddo",
+      "tagsBtn": "Sigle (P1, S3…)",
+      "guideBtn": "Guida e fonti",
+      "themeBtn": "Tema",
+      "prevPage": "◀ Precedente",
+      "nextPage": "Successiva ▶",
+      "openCycleBtn": "🔍 Apri zoom ciclo frigorifero",
+      "locateBtn": "Evidenzia sullo schema (Passo 3)",
+      "tagFilterAll": "Tutte",
+      "tagFilterWells": "Falda e Pozzi",
+      "tagFilterGen": "Pompe di calore e Accumuli",
+      "tagFilterPumps": "Circolatori P01–P09",
+      "tagFilterWater": "Acqua potabile e Zone",
+      "activeTagsLabel": "Sigle attive:",
+      "legend": ["Tratto più caldo", "Tratto più freddo", "ACS 48 °C e ricircolo montante", "Flusso termico"],
+      "clickHint": "Tocca un componente o una sigla per la spiegazione",
+      "rotateTitle": "Ruota il telefono in orizzontale",
+      "rotateBody": "Gli schemi idraulici si sviluppano in orizzontale per mantenere continui tutti i collegamenti tra pozzi, pompe di calore e appartamenti.",
+      "rotatePcHint": "Consiglio: apri questo sito anche da PC per visualizzare portate, modelli, temperature complete di progetto e la barra interattiva di tutte le sigle.",
+      "zoneAquifer": "Falda acquifera",
+      "zoneHeatPump1": "1 Pompa di calore teorica",
+      "zoneHome": "Appartamento",
+      "zoneClimateGen": "Generazione climatizzazione",
+      "zoneBuildingLoops": "Edificio: circuito chiuso pannelli + montante sanitario",
+      "zoneDhwStage": "Secondo stadio per Acqua Calda Sanitaria (ACS)",
+      "zoneWellsMulti": "Falda: 3 pompe su 2 pozzi + filtri",
+      "zoneGenMulti": "Generazione: 2 × PC2 + accumuli S3",
+      "zoneClimateZones": "Climatizzazione Torri A e B: 3 rami e separazione pressione SC2",
+      "zoneDhwMulti": "Doppio stadio ACS e Centrale Idrica: rami MP e BP raddoppiati",
+      "step1Well": "Pozzo di prelievo",
+      "step1Return": "Pozzo di resa",
+      "step1HP": "Pompa di calore acqua-acqua",
+      "step1Home": "Pannelli radianti a pavimento",
+      "aquiferSourceSub": "Acqua di falda ~16 °C",
+      "aquiferReturnWinter": "Resa più fredda (~11 °C)",
+      "aquiferReturnSummer": "Resa più calda (~21 °C)",
+      "zoomCyclePill": "🔍 Tocca: ciclo frigorifero",
+      "electricWork": "Lavoro elettrico",
+      "compressorShort": "Compressore",
+      "expansionShort": "Valvola espansione",
+      "copBadgeWinter": "Esempio: 3 falda + 1 elettrica = 4 al pavimento",
+      "copBadgeSummer": "Esempio: 3 casa + 1 elettrica = 4 alla falda",
+      "cycleCenterSub": "Tocca una delle 4 fasi per i dettagli",
+      "floorModeWinter": "Circuito chiuso: cede calore alle stanze",
+      "floorModeSummer": "Circuito chiuso: assorbe calore dalle stanze",
+      "step2Well": "Prelievo falda",
+      "step2Return": "Resa in falda",
+      "step2PC2": "PC2 polivalente",
+      "step2S3C": "Volano clima",
+      "step2Floors": "Pannelli radianti",
+      "step2Riser": "Montante e rubinetti",
+      "step2S3I": "Volano 40/35 °C",
+      "step2PC1": "PC1 alta temp.",
+      "step2SC1": "Scamb. SC1",
+      "step2S2": "Bollitore S2",
+      "step2Mix": "Miscelatore",
+      "step2Mains": "Acquedotto e addolcimento",
+      "closedLoopNote": "Anello chiuso: l'acqua resta nei pannelli",
+      "stairwellLabel": "Vano scala",
+      "tapRoomLabel": "Alloggio",
+      "openTapNote": "Prelievo aperto → scarico",
+      "noColdReturnNote": "L'acqua usata esce ai rubinetti",
+      "step3Wells": "2 Pozzi · 3 Pompe",
+      "step3Treat": "Filtri e vasi",
+      "step3Return": "Resa falda",
+      "step3PC2": "Pompe principali",
+      "step3S3C": "Volani clima",
+      "step3Common": "Spazi comuni Torre B",
+      "step3BP": "Torri A e B · Bassa Pressione (BP)",
+      "step3SC2": "Sep. SC2",
+      "step3AP": "Torri A e B · Alta Pressione (AP)",
+      "step3S3I": "Volani intermedio",
+      "step3PC1": "Alta temp.",
+      "step3SC1": "Scambiatori",
+      "step3S2": "Bollitori ACS",
+      "step3Mix": "Miscelatori",
+      "step3DhwZones": "Montanti e utenze",
+      "step3Potable": "Centrale idrica potabile",
+      "threePumpsSub": "2×54 + 1×108 m³/h (riserva)",
+      "riserMP": "Zona MP · 48 °C",
+      "riserBP": "Zona BP · 48 °C"
+    },
+    "steps": [
+      {
+        "title": "Passo 1 di 3 · Il principio con una sola pompa di calore",
+        "winterSummary": "In inverno la pompa di calore preleva energia termica dall'acqua di falda (16 → 11 °C) e, grazie al compressore, la porta a 38 °C per scaldare i pannelli a pavimento.",
+        "summerSummary": "In estate il flusso termico s'inverte: l'acqua a 18 °C assorbe calore dalle stanze (tornando a 23 °C) e la pompa di calore lo scarica nell'acqua di falda (16 → 21 °C)."
+      },
+      {
+        "title": "Passo 2 di 3 · Il collegamento con l'Acqua Calda Sanitaria",
+        "winterSummary": "Un circuito tecnico a 40/35 °C collega PC2 a PC1, che innalza la temperatura a 70/65 °C per caricare il bollitore S2 (60 °C). Ai rubinetti l'acqua (48 °C) viene consumata, mentre nel vano scala circola un anello caldo di ricircolo (P02).",
+        "summerSummary": "Anche in estate la rete sanitaria resta attiva: mentre PC2 raffresca i pavimenti, il ramo a 40/35 °C alimenta PC1 per mantenere caldi S2 (60 °C) e le colonne montanti a 48 °C."
+      },
+      {
+        "title": "Passo 3 di 3 · L'impianto reale del condominio (unità multiple e zone)",
+        "winterSummary": "Nel progetto reale ogni funzione è suddivisa su più unità: 3 pompe di estrazione su 2 pozzi (P1 con 2×P11 + P2 con P10), 2 PC2, 4 volani S3, 3 rami clima (con SC2 per l'alta pressione AP) e 2 linee sanitarie complete (MP e BP).",
+        "summerSummary": "Tutte le unità in parallelo operano anche in raffrescamento: le 2 PC2 raffreddano i rami BP e AP (separati da SC2), mentre PC1, i 2 SC1 e i 2 S2 servono l'acqua calda sanitaria MP e BP."
+      }
+    ],
+    "richTopics": {
+      "ground": {
+        "title": "Falda acquifera: sorgente invernale e pozzo termico estivo",
+        "pages": [
+          "L'acqua sotterranea mantiene una temperatura stabile intorno a 16 °C tutto l'anno. Una pompa sommersa la solleva dal pozzo di prelievo, la fa passare nello scambiatore a piastre della pompa di calore e la restituisce alla falda nel pozzo di resa.",
+          "In inverno l'acqua cede calore e rientra in falda più fredda (~11 °C); in estate riceve il calore estratto dagli appartamenti e rientra più calda (~21 °C). L'acqua di falda resta sempre confinata nel proprio circuito aperto, separata dal refrigerante e dall'acqua dei pannelli."
+        ]
+      },
+      "cycle": {
+        "title": "Come funziona la pompa di calore (Compressore ed Evaporatore)",
+        "hasCycleZoom": true,
+        "pages": [
+          "Dentro la pompa di calore scorre un fluido refrigerante in un circuito chiuso sigillato. Nell'evaporatore il refrigerante si trova a bassa pressione: bolle a bassa temperatura e assorbe calore dall'acqua (dalla falda in inverno, dai pannelli in estate).",
+          "Il compressore aspira il vapore e usa energia elettrica per aumentarne pressione e temperatura. Nel condensatore il vapore caldo cede calore all'altro circuito d'acqua e torna liquido; la valvola di espansione abbassa poi pressione e temperatura per ricominciare il ciclo."
+        ]
+      },
+      "floor": {
+        "title": "Pannelli radianti a pavimento: un unico circuito chiuso per caldo e freddo",
+        "pages": [
+          "Sotto il pavimento degli alloggi scorre acqua tecnica in un anello chiuso. In inverno entra a circa 38 °C, cede calore alle stanze e ritorna a 33 °C; in estate entra fresca a 18 °C, assorbe calore dagli ambienti e ritorna a 23 °C.",
+          "In raffrescamento estivo la temperatura di mandata è mantenuta sopra il punto di rugiada dell'aria ambiente, insieme alla deumidificazione dedicata nei moduli d'utenza, per evitare condensa sul pavimento."
+        ]
+      },
+      "pc2": {
+        "title": "PC2 · Pompe di calore polivalenti (2 × HiRef MSW182ML)",
+        "hasCycleZoom": true,
+        "pages": [
+          "Nel condominio la generazione principale è affidata a 2 unità PC2 in parallelo (260,4 kW termici / 233,3 kW frigoriferi ciascuna a condizioni di targa). Due macchine permettono di modulare la potenza in base al fabbisogno e mantenere continuità durante la manutenzione.",
+          "Ogni PC2 possiede tre scambiatori d'acqua distinti: lato falda, lato climatizzazione edificio e lato circuito intermedio a 40/35 °C verso PC1. In estate il calore sottratto agli alloggi può contribuire ad alimentare l'anello intermedio secondo le logiche del regolatore."
+        ]
+      },
+      "s3": {
+        "title": "S3 · Volani termici in parallelo sulla mandata (4 × 2.000 L)",
+        "pages": [
+          "Lo schema originale prevede 4 serbatoi inerziali S3 da 2.000 litri ciascuno: una coppia sul circuito di climatizzazione e una seconda coppia sul circuito intermedio a 40/35 °C.",
+          "In entrambi i circuiti i due serbatoi S3 sono collegati in parallelo sulla sola tubazione di mandata, mentre la tubazione di ritorno rientra direttamente alle PC2. Questo volume d'acqua accumula energia termica e riduce gli avviamenti ravvicinati dei compressori."
+        ]
+      },
+      "intermediate": {
+        "title": "Il collegamento PC2 ↔ PC1 (Circuito intermedio 40/35 °C)",
+        "pages": [
+          "Per produrre acqua sanitaria a 60 °C senza costringere le pompe principali PC2 a lavorare sempre ad altissima temperatura, l'impianto usa un doppio salto termico collegato da acqua tecnica chiusa.",
+          "L'acqua entra nelle PC2 a 35 °C, viene scaldata a 40 °C, attraversa i due volani S3 in parallelo ed è spinta dalla pompa P05 nello scambiatore sorgente di PC1, dove cede calore e torna a 35 °C verso le PC2."
+        ]
+      },
+      "pc1": {
+        "title": "PC1 · Pompa di calore ad alta temperatura (HiRef 30KSW202K_F1L)",
+        "pages": [
+          "PC1 riceve acqua tiepida a 40/35 °C dal circuito intermedio: partendo già da 40 °C anziché dai 16 °C della falda, i suoi due compressori scroll raggiungono facilmente 70 °C in mandata (con ritorno a 65 °C) per una potenza di progetto di 180,5 kW.",
+          "La pompa P04 fa circolare quest'acqua primaria a 70/65 °C verso gli scambiatori sanitari SC1. È un circuito tecnico chiuso, idraulicamente separato dall'acqua potabile."
+        ]
+      },
+      "sc1": {
+        "title": "SC1 · Scambiatori a piastre sanitari (2 × 90 kW)",
+        "pages": [
+          "Due scambiatori a piastre SC1 (uno per la zona Media Pressione MP e uno per la Bassa Pressione BP, da 90 kW ciascuno) trasferiscono il calore dal circuito primario di PC1 (70/65 °C) all'acqua potabile in caricamento (60/55 °C).",
+          "Le piastre metalliche trasmettono il calore mantenendo fisicamente separata l'acqua tecnica del circuito primario dall'acqua potabile destinata ai rubinetti."
+        ]
+      },
+      "s2": {
+        "title": "S2 · Bollitori di accumulo sanitario (2 × 3.000 L a 60 °C)",
+        "pages": [
+          "Due serbatoi verticali S2 da 3.000 litri ciascuno (totale 6.000 L, uno per MP e uno per BP) accumulano acqua potabile calda a 60 °C per coprire i picchi contemporanei di prelievo mattutini e serali del condominio.",
+          "Due pompe di carica P01 fanno circolare l'acqua potabile tra la parte inferiore di S2 e lo scambiatore SC1 finché l'intero accumulo raggiunge la temperatura di progetto."
+        ]
+      },
+      "dhw": {
+        "title": "Dall'accumulo ai rubinetti e il vero ruolo del ricircolo caldo",
+        "pages": [
+          "All'uscita alta di S2 (60 °C), una valvola miscelatrice termostatica tempera l'acqua a 48 °C (linea ACP) inviandola nella colonna montante del vano scala. Quando un condomino apre il rubinetto, l'acqua entra nell'alloggio, viene usata e va allo scarico: dagli appartamenti non torna alcuna acqua fredda alla centrale.",
+          "Perché allora esiste una tubazione di ritorno con le pompe P02 (MP) e P03 (BP)? Quella linea (ACR) percorre solo le colonne montanti condominiali fino in cima alle scale e riporta in centrale acqua ancora calda (~46–48 °C), reimmessa nel miscelatore e nell'ingresso di S2. Serve a mantenere calde le colonne quando i rubinetti sono chiusi, così l'acqua calda arriva subito appena si apre un rubinetto.",
+          "Quando invece i rubinetti prelevano acqua, pari portata di acqua fredda potabile (~15 °C, linea blu AFP proveniente dall'acquedotto e dagli addolcitori T2) entra dal basso in S2 e alimenta la porta fredda del miscelatore."
+        ]
+      },
+      "water": {
+        "title": "Centrale idrica potabile: filtro T1, accumuli S1, gruppi GP1/GP2 e addolcitori T2",
+        "pages": [
+          "L'acqua fredda dell'acquedotto attraversa il filtro autopulente T1 e alimenta 2 serbatoi di prima raccolta S1 da 2.000 L ciascuno. Da qui due gruppi di spinta separati — GP1 (2 pompe inverter per Media Pressione MP, piani alti) e GP2 (2 pompe inverter per Bassa Pressione BP, piani bassi) — pressurizzano le due reti.",
+          "Ciascuna zona alimenta sia l'acqua fredda potabile diretta agli alloggi (AFP), sia una linea dedicata al trattamento dell'acqua calda con 2 addolcitori volumetrici T2 (per prevenire il calcare negli scambiatori SC1 e nei bollitori S2) e stazioni di dosaggio T3 e T4."
+        ]
+      },
+      "wells": {
+        "title": "Pozzi P1, P2 e R1: perché ci sono 3 pompe di estrazione",
+        "pages": [
+          "L'estrazione dalla falda è progettata con ridondanza completa: il pozzo principale P1 ospita 2 pompe sommerse P11 in parallelo da 54 m³/h ciascuna (totale 108 m³/h = 30 L/s). Accanto, il pozzo di riserva P2 ospita una terza pompa sommersa P10 capace da sola dell'intera portata di 108 m³/h.",
+          "In questo modo l'impianto dispone complessivamente di 3 pompe di prelievo su 2 pozzi indipendenti. Dopo lo scambio termico nelle PC2, l'acqua rientra nell'acquifero attraverso 2 pozzi di restituzione distinti, entrambi siglati R1."
+        ]
+      },
+      "gw-treatment": {
+        "title": "Protezione lato falda: Idrociclone T6, 2 filtri T7 e 2 vasi S4",
+        "pages": [
+          "Prima di entrare negli scambiatori a piastre delle PC2, l'acqua di pozzo attraversa l'idrociclone T6 (che separa per forza centrifuga l'eventuale sabbia pesante) e poi si divide su 2 filtri fini autopulenti T7 in parallelo da 100 micron.",
+          "A valle dei filtri sono collegati in derivazione laterale 2 serbatoi preautoclave a membrana S4 da 1.000 litri ciascuno: ammortizzano i colpi d'ariete e stabilizzano la pressione della linea di falda."
+        ]
+      },
+      "dist-zones": {
+        "title": "Climatizzazione su 3 rami e 2 zone di pressione (Torri A e B)",
+        "pages": [
+          "Dal collettore dopo i volani S3 partono tre rami distinti: P06 alimenta gli spazi comuni della Torre B; P07 (con valvola miscelatrice) alimenta i moduli degli alloggi di Bassa Pressione (BP, piani bassi e medi delle Torri A e B); P08 alimenta il lato primario dello scambiatore SC2.",
+          "Ogni alloggio dispone di un modulo d'utenza con contabilizzatore, valvola di zona, miscelatrice locale per inviare 38/33 °C (inverno) o 18/23 °C (estate) ai pannelli a pavimento e alimentazione per il deumidificatore."
+        ]
+      },
+      "sc2": {
+        "title": "SC2 · Perché i piani alti hanno uno scambiatore di separazione",
+        "pages": [
+          "Negli edifici multipiano l'altezza della colonna d'acqua dei piani alti (Alta Pressione, AP) genera una pressione statica elevata. Per evitare di sottoporre anche le pompe di calore PC2 e i volani S3 a quella pressione, lo scambiatore a piastre SC2 divide idraulicamente i due circuiti.",
+          "La pompa P08 fa circolare l'acqua della centrale sul lato primario di SC2, mentre la pompa P09 fa circolare l'acqua del circuito chiuso AP verso i piani alti delle Torri A e B: il calore passa attraverso le piastre senza sommare le pressioni."
+        ]
+      },
+      "evaporator": {
+        "title": "Fase 1 · Evaporatore (assorbimento del calore)",
+        "pages": [
+          "Il refrigerante entra nell'evaporatore come miscela fredda di liquido e vapore a bassa pressione. Poiché la pressione è bassa, bolle già a pochi gradi centigradi: essendo più freddo dell'acqua che scorre sull'altro lato delle piastre, assorbe spontaneamente calore trasformandosi in vapore."
+        ]
+      },
+      "compressor": {
+        "title": "Fase 2 · Compressore (il cuore elettrico che alza la temperatura)",
+        "pages": [
+          "Il vapore a bassa pressione è tiepido: da solo non potrebbe scaldare i pavimenti a 38 °C. Il compressore lo aspira e lo comprime consumando energia elettrica: riducendo il volume del gas, pressione e temperatura salgono rapidamente oltre la temperatura dell'acqua da riscaldare."
+        ]
+      },
+      "condenser": {
+        "title": "Fase 3 · Condensatore (cessione del calore amplificato)",
+        "pages": [
+          "Il vapore caldo ad alta pressione attraversa il secondo scambiatore a piastre: essendo più caldo dell'acqua, le cede sia il calore prelevato gratuitamente all'inizio sia l'energia elettrica aggiunta dal compressore (es. 3 + 1 = 4), condensando in liquido."
+        ]
+      },
+      "expansion": {
+        "title": "Fase 4 · Valvola di espansione (caduta di pressione e raffreddamento)",
+        "pages": [
+          "Il refrigerante liquido ad alta pressione passa attraverso un orifizio stretto (valvola di laminazione): la pressione crolla di colpo, una piccola frazione evapora istantaneamente e l'intera miscela si raffredda, pronta a rientrare nell'evaporatore per un nuovo giro."
+        ]
+      },
+      "guide": {
+        "title": "Guida alla lettura e documenti tecnici di riferimento",
+        "hasSources": true,
+        "pages": [
+          "Il sito accompagna passo dopo passo dal principio teorico con 1 pompa di calore (Passo 1), all'integrazione con l'acqua calda sanitaria (Passo 2), fino allo schema completo del condominio con tutte le unità in parallelo e le zone di pressione (Passo 3).",
+          "I colori rosso e blu mostrano il tratto più caldo e più freddo all'interno di ciascun circuito; l'arancione identifica la rete sanitaria miscelata a 48 °C e il relativo ricircolo caldo nelle colonne montanti. Temperature e portate riportano i dati di progetto (S00); il documento originale è escluso dal sito pubblico."
+        ]
+      }
+    },
+    "tags": {
+      "P1": { "cat": "wells", "name": "Pozzo principale di prelievo", "units": "1 pozzo (con 2 pompe P11)", "body": "Pozzo principale di captazione dalla falda acquifera. Ospita due pompe sommerse P11 in parallelo da 54 m³/h ciascuna (portata complessiva 108 m³/h = 30 L/s)." },
+      "P2": { "cat": "wells", "name": "Pozzo di prelievo di riserva", "units": "1 pozzo di riserva (con 1 pompa P10)", "body": "Secondo pozzo di estrazione progettato come riserva integrale del pozzo P1: ospita la pompa sommersa P10 da 108 m³/h." },
+      "P11": { "cat": "wells", "name": "Pompe sommerse pozzo principale P1", "units": "2 unità (tot. 3 pompe di estrazione con P10)", "body": "Due elettropompe sommerse DAB SS6 E11 o equivalenti nel pozzo P1 (54 m³/h, prevalenza 930 kPa, 22 kW ciascuna)." },
+      "P10": { "cat": "wells", "name": "Pompa sommersa pozzo di riserva P2", "units": "1 unità (3ª pompa di estrazione)", "body": "Elettropompa sommersa DAB SS8 A05 o equivalente nel pozzo di riserva P2, dimensionata per l'intera portata di progetto di 108 m³/h (37 kW)." },
+      "T6": { "cat": "wells", "name": "Separatore centrifugo a idrociclone", "units": "1 unità (DN125 · 108 m³/h)", "body": "Separa per forza centrifuga la sabbia e le particelle pesanti dall'acqua di pozzo prima dei filtri fini T7." },
+      "T7": { "cat": "wells", "name": "Filtri fini autopulenti acqua di falda", "units": "2 unità in parallelo (DN100 · 100 µm)", "body": "Due filtri in parallelo (65 m³/h ciascuno a progetto) che proteggono gli scambiatori a piastre delle due pompe di calore PC2." },
+      "S4": { "cat": "wells", "name": "Serbatoi preautoclave linea falda", "units": "2 vasi a membrana da 1.000 L", "body": "Due vasi ELBI DL 1000 V collegati in derivazione laterale dopo T7: stabilizzano la pressione e riducono i colpi d'ariete delle pompe di pozzo." },
+      "R1": { "cat": "wells", "name": "Pozzi di restituzione alla falda", "units": "2 pozzi di resa (entrambi siglati R1)", "body": "Restituiscono integralmente all'acquifero l'acqua prelevata, più fredda in inverno (~11 °C) e più calda in estate (~21 °C), senza consumo idrico netto." },
+      "PC2": { "cat": "gen", "name": "Pompe di calore polivalenti principali", "units": "2 unità in parallelo (HiRef MSW182ML)", "body": "Cuore della centrale per riscaldamento (260,4 kW cad.) e raffrescamento (233,3 kW cad.), dotate di tre canali d'acqua separati: falda, climatizzazione e circuito intermedio 40/35 °C." },
+      "PC1": { "cat": "gen", "name": "Pompa di calore alta temperatura ACS", "units": "1 unità bistadio (HiRef 30KSW202K_F1L)", "body": "Preleva calore dall'anello intermedio a 40/35 °C e innalza la temperatura a 70/65 °C (180,5 kW termici, 2 compressori scroll) per caricare i bollitori sanitari tramite SC1." },
+      "S3": { "cat": "gen", "name": "Volani termici inerziali", "units": "4 serbatoi da 2.000 L (2 clima + 2 intermedio)", "body": "Quattro serbatoi da 2.000 L (totale 8.000 L): due in parallelo sulla mandata climatizzazione e due in parallelo sulla mandata 40/35 °C. I rispettivi ritorni bypassano i serbatoi." },
+      "SC2": { "cat": "gen", "name": "Scambiatore separazione Alta Pressione", "units": "1 scambiatore a piastre (231 / 240 kW)", "body": "Separa idraulicamente la pressione della centrale dalla colonna idrostatica dei piani alti (AP), trasferendo caldo d'inverno e freddo d'estate tra i circuiti di P08 e P09." },
+      "SC1": { "cat": "gen", "name": "Scambiatori a piastre produzione ACS", "units": "2 unità da 90 kW (1 MP + 1 BP)", "body": "Trasferiscono calore dal circuito tecnico chiuso a 70/65 °C di PC1 all'acqua potabile a 60/55 °C dei due bollitori S2, senza mai mescolare i fluidi." },
+      "S2": { "cat": "gen", "name": "Bollitori di accumulo Acqua Calda Sanitaria", "units": "2 serbatoi da 3.000 L (1 MP + 1 BP)", "body": "Accumulano complessivamente 6.000 litri di acqua potabile calda a 60 °C (10 bar nominali) per far fronte ai prelievi contemporanei delle due zone di pressione." },
+      "P01": { "cat": "pumps", "name": "Pompe di carica bollitori sanitari S2", "units": "2 gruppi pompa (1 su ramo MP + 1 su ramo BP)", "body": "Fanno circolare l'acqua potabile (16 m³/h cad.) tra il fondo dei bollitori S2 e il secondario degli scambiatori SC1 per portare l'accumulo a 60 °C." },
+      "P02": { "cat": "pumps", "name": "Pompa ricircolo sanitario Media Pressione", "units": "1 unità (ramo MP · 3,6 m³/h)", "body": "Mantiene in circolazione l'acqua calda (~46–48 °C, linea ACR MP) nelle colonne montanti dei piani alti quando i rubinetti sono chiusi, riportandola al miscelatore e a S2." },
+      "P03": { "cat": "pumps", "name": "Pompa ricircolo sanitario Bassa Pressione", "units": "1 unità (ramo BP · 3,6 m³/h)", "body": "Svolge la stessa funzione di ricircolo caldo (~46–48 °C, linea ACR BP) per le colonne montanti sanitarie dei piani bassi e medi." },
+      "P04": { "cat": "pumps", "name": "Circolatore primario alta temperatura PC1", "units": "1 gruppo pompa (32 m³/h · 70/65 °C)", "body": "Spinge l'acqua tecnica chiusa a 70 °C da PC1 al primario dei due scambiatori sanitari SC1 (MP e BP)." },
+      "P05": { "cat": "pumps", "name": "Circolatore anello intermedio 40/35 °C", "units": "1 gruppo pompa (26 m³/h)", "body": "Alimenta il lato sorgente di PC1 prelevando acqua tecnica a 40 °C dai due volani intermedi S3." },
+      "P06": { "cat": "pumps", "name": "Circolatore climatizzazione spazi comuni", "units": "1 gruppo pompa (3 m³/h)", "body": "Alimenta il ramo dedicato alla climatizzazione degli spazi comuni condominiali della Torre B." },
+      "P07": { "cat": "pumps", "name": "Circolatore climatizzazione Bassa Pressione", "units": "1 gruppo pompa inverter (66 m³/h)", "body": "Alimenta, a valle del proprio gruppo di miscelazione, le colonne di climatizzazione Bassa Pressione (BP) delle Torri A e B." },
+      "P08": { "cat": "pumps", "name": "Circolatore primario scambiatore SC2", "units": "1 gruppo pompa inverter (41,2 m³/h)", "body": "Fa circolare l'acqua delle PC2 attraverso il lato primario dello scambiatore di separazione pressione SC2." },
+      "P09": { "cat": "pumps", "name": "Circolatore climatizzazione Alta Pressione", "units": "1 gruppo pompa inverter (57 m³/h)", "body": "Opera sul lato secondario ad alta pressione di SC2, alimentando i pannelli radianti degli alloggi ai piani alti (AP) delle Torri A e B." },
+      "T1": { "cat": "water", "name": "Filtro ingresso acqua potabile", "units": "1 gruppo filtro (AMBRA DN100 · 50 µm)", "body": "Filtra le impurità in ingresso dall'acquedotto pubblico prima dei serbatoi di accumulo idrico S1." },
+      "S1": { "cat": "water", "name": "Serbatoi accumulo acqua fredda prima spinta", "units": "2 serbatoi da 2.000 L ciascuno", "body": "Disaccoppiano la rete pubblica dall'aspirazione dei gruppi di pressurizzazione condominiali GP1 e GP2." },
+      "GP1": { "cat": "water", "name": "Gruppo pressurizzazione idrica Media Pressione", "units": "1 gruppo con 2 pompe inverter (2 × 7,5 kW)", "body": "Alimenta la rete d'acqua fredda e sanitaria di Media Pressione (MP, 34 m³/h) a servizio dei piani superiori." },
+      "GP2": { "cat": "water", "name": "Gruppo pressurizzazione idrica Bassa Pressione", "units": "1 gruppo con 2 pompe inverter (2 × 5,5 kW)", "body": "Alimenta la rete d'acqua fredda e sanitaria di Bassa Pressione (BP, 37 m³/h) a servizio dei piani inferiori e medi." },
+      "T2": { "cat": "water", "name": "Addolcitori volumetrici alimento ACS", "units": "2 unità (1 linea MP + 1 linea BP)", "body": "Riducono la durezza calcarea dell'acqua destinata ai bollitori S2 e agli scambiatori SC1 per evitare incrostazioni." },
+      "T3": { "cat": "water", "name": "Dosaggio antilegionella", "units": "2 stazioni (MP + BP)", "body": "Apparecchiature di dosaggio previste a progetto sulle due linee di alimento sanitario trattato." },
+      "T4": { "cat": "water", "name": "Dosaggio anticorrosivo", "units": "2 stazioni (MP + BP)", "body": "Affiancano T3 sulle due linee di alimento dei bollitori S2 per proteggere tubazioni e accumuli dalla corrosione." },
+      "AFP": { "cat": "water", "name": "Acqua Fredda Potabile", "units": "2 reti (AFP MP + AFP BP)", "body": "Sigla delle tubazioni di acqua fredda potabile (~15 °C): alimenta direttamente i rubinetti freddi degli alloggi e reintegra i bollitori S2 e i miscelatori." },
+      "ACP": { "cat": "water", "name": "Acqua Calda Potabile (mandata 48 °C)", "units": "2 colonne montanti (ACP MP + ACP BP)", "body": "Acqua calda sanitaria temperata a 48 °C dai miscelatori termostatici: sale nelle colonne dei vani scala ed entra negli alloggi quando si apre un rubinetto." },
+      "ACR": { "cat": "water", "name": "Ricircolo Acqua Calda (montanti ~46–48 °C)", "units": "2 anelli montanti (mossi da P02 e P03)", "body": "Ritorno caldo delle colonne condominiali (indicato anche RCP nei vani scala): mantiene calde le tubazioni condominiali a rubinetti chiusi senza provenire dagli scarichi domestici." },
+      "BP": { "cat": "water", "name": "Zona Bassa Pressione", "units": "Climatizzazione (P07) + Sanitario (GP2/P03)", "body": "Identifica le reti dedicate ai piani bassi e medi, che richiedono una pressione idrostatica inferiore rispetto alla sommità delle torri." },
+      "MP": { "cat": "water", "name": "Zona Media Pressione (idrico-sanitaria)", "units": "Rete potabile e ACS piani alti (GP1/P02)", "body": "Identifica la zona di pressione superiore della rete idrico-sanitaria, dotata di proprio gruppo GP1, addolcitore T2, scambiatore SC1 e bollitore S2." },
+      "AP": { "cat": "water", "name": "Zona Alta Pressione (climatizzazione)", "units": "Circuito secondario SC2 + P09", "body": "Identifica il circuito chiuso di climatizzazione dei piani alti delle Torri A e B, separato idraulicamente dalla centrale tramite lo scambiatore SC2." }
+    },
+    "canvas":{
+      "simple":"Semplificato","complete":"Completo",
+      "winter":"Inverno","summer":"Estate","guide":"Guida","previous":"Indietro","next":"Avanti",
+      "rotateTitle":"Ruota il telefono","rotateBody":"Usa lo schermo in orizzontale per vedere l’intero impianto. Il disegno rimane identico, senza scorrimento. Tocca un componente per leggere la spiegazione.",
+      "legend":["Più caldo","Più freddo","Calore"],"mixedLegend":"Acqua 48 °C",
+      "labels":{"well":"Pozzo","returnWell":"Rientro","panels":"Pannelli","hotWater":"ACS","pump":"Pompa","taps":"Rubinetti","mains":"Rete idrica"},
+      "topics":{
+        "ground":{"title":"Falda: prelievo e restituzione","pages":["Le pompe prelevano acqua dalla falda e la inviano alle PC2 attraverso T6 e T7. L’acqua viene poi restituita alla falda: in inverno torna più fredda, in estate più calda.","Il simbolo del pozzo raggruppa P1/P2, pompe e trattamento. I vasi S4 sono collegati lateralmente. Acqua di falda, refrigerante e acqua dell’edificio restano separati."]},
+        "pc2":{"title":"PC2 · Due pompe di calore","pages":["In inverno le PC2 trasferiscono calore dalla falda all’acqua dell’edificio. In estate assorbono calore dall’edificio e lo cedono alla falda. Le tubazioni restano collegate nello stesso modo; cambia il verso del trasferimento termico.","Il cerchio e la freccia elettrica sintetizzano il lavoro del compressore. Il refrigerante assorbe calore nell’evaporatore; il compressore ne aumenta pressione e temperatura, permettendo al condensatore di cedere calore. I dettagli interni sono raggruppati nel simbolo."]},
+        "buffer":{"title":"S3 · Accumuli di climatizzazione","pages":["Questi due S3 da 2.000 litri sono in parallelo sulla mandata. L’acqua si divide tra i serbatoi, poi si riunisce verso la distribuzione. Il ritorno passa direttamente alle PC2.","Gli accumuli aggiungono capacità termica: l’acqua immagazzina energia e rende meno brusche le variazioni di carico. La seconda coppia S3, nel ramo inferiore, appartiene al circuito intermedio."]},
+        "floor":{"title":"Distribuzione e pannelli","pages":["Inverno: l’acqua cede calore al pavimento e ritorna più fredda. Estate: assorbe calore dagli ambienti e ritorna più calda. La selezione attuale mostra {floor}, valori del dettaglio di progetto.","Il simbolo raggruppa distribuzione e terminali. P06 serve gli spazi comuni, P07 la bassa pressione. P08 alimenta SC2; P09 serve il circuito ad alta pressione, idraulicamente separato dall’altro lato di SC2.","In raffrescamento la superficie del pavimento deve restare sopra il punto di rugiada. Regolazione e deumidificazione evitano la condensa; temperature e impostazioni reali richiedono verifica tecnica."]},
+        "intermediate":{"title":"PC2 → S3 → P05 → PC1","pages":["Segui il ramo inferiore: le PC2 riscaldano l’acqua tecnica da 35 a 40 °C. L’acqua attraversa i due S3 in parallelo e P05 la fa circolare verso PC1.","In PC1 l’acqua cede calore al refrigerante e torna a 35 °C direttamente alle PC2. I circuiti frigoriferi delle due macchine restano separati: li collega questo anello d’acqua. I valori 40/35 °C sono di progetto."]},
+        "pc1":{"title":"PC1 · Secondo salto di temperatura","pages":["PC1 preleva calore dal circuito intermedio a 40/35 °C. Il suo compressore aggiunge lavoro e permette di trasferire calore al distinto circuito primario a 70/65 °C.","P04 fa circolare il primario verso SC1. La linea rossa mostra la mandata più calda; la blu il ritorno dopo aver ceduto calore. I colori esprimono differenze nello stesso circuito."]},
+        "dhw":{"title":"SC1 e S2 · Caricamento degli accumuli","pages":["P04 porta l’acqua primaria di PC1 a SC1. Attraverso lo scambiatore cede calore all’acqua potabile: P01 la fa circolare tra SC1 e S2 per caricare gli accumuli. I due lati di SC1 restano separati.","Il disegno mostra un ramo equivalente delle due zone sanitarie. Ogni S2 ha capacità di 3.000 litri, con accumulo indicato a 60 °C. Il circuito di carica mantiene l’acqua calda disponibile; la tubazione verso i rubinetti è un altro ramo."]},
+        "delivery":{"title":"Dall’accumulo ai rubinetti","pages":["Quando si apre un rubinetto, l’acqua calda esce da S2. La valvola miscelatrice aggiunge acqua fredda di rete per ottenere i 48 °C indicati dal progetto. La linea arancione porta quest’acqua ai rubinetti; le gocce indicano il prelievo.","L’acqua prelevata viene consumata e non torna nell’accumulo. Nuova acqua fredda di rete alimenta S2. La linea blu con P02/P03 rappresenta invece il ricircolo della distribuzione, che mantiene calde le tubazioni quando i rubinetti sono chiusi.","Il pavimento ha un circuito chiuso distinto dall’acqua sanitaria. Sono rappresentati un ramo sanitario equivalente e i collegamenti funzionali; i dettagli MP/BP, trattamento e regolazione rimangono nel grafo e nella documentazione tecnica."]},
+        "guide":{"title":"Come leggere la tavola","pages":["I punti seguono l’acqua; le frecce dorate indicano il trasferimento di calore. Rosso e blu significano più caldo e più freddo all’interno dello stesso circuito. Per confrontare circuiti diversi usa le temperature numeriche.","La tavola sintetizza il grafo ricostruito dallo schema originale. I simboli raggruppano componenti; bypass, valvole e dettagli frigoriferi sono omessi. Non è una misura in tempo reale né uno schema operativo per manovre.","Fonti: schema di progetto conservato privatamente e documentazione HiRef MSW/KSW. Il documento originale è escluso dal sito. Le schede pubbliche si aprono qui; Chiudi riporta alla stessa tavola."]}
+      }
+    },
+    "map": {
+      "nav":["Il principio","Dentro la pompa","Il condominio"],
+      "more":"Come funziona","heat":"Calore","fluid":"Movimento del fluido",
+      "routeWinter":"Il calore va dalla falda alla casa.","routeSummer":"Il calore esce dalla casa e va alla falda.",
+      "principleTitles":["La falda","La pompa di calore","Il pavimento e la stanza"],
+      "principleWinter":["L’acqua sotterranea contiene energia termica anche quando è più fredda della casa. La pompa sommersa la porta allo scambiatore; poi torna alla falda più fredda.","Un fluido chiamato refrigerante assorbe quel calore. Il compressore usa elettricità per alzarne la temperatura, così può riscaldare l’acqua del pavimento.","L’acqua circola nei tubi sotto il pavimento e gli cede calore. Il pavimento riscalda la stanza; l’acqua torna alla pompa di calore più fredda."],
+      "principleSummer":["L’acqua di falda riceve il calore tolto alla casa, insieme all’energia fornita al compressore. Dopo lo scambiatore, torna al pozzo di restituzione più calda.","Il refrigerante assorbe calore dall’acqua del pavimento e lo cede alla falda. Il compressore rende possibile questo trasferimento consumando elettricità.","La stanza cede calore al pavimento e all’acqua nei tubi. L’acqua torna più calda alla pompa di calore, dove viene nuovamente raffreddata."],
+      "waterGround":["Prelievo dal pozzo","Restituzione alla falda"],
+      "waterFloorWinter":["Mandata più calda","Ritorno più freddo"],"waterFloorSummer":["Mandata più fredda","Ritorno più caldo"],
+      "sealed":"Il refrigerante ricircola in un circuito sigillato.",
+      "separation":"Tre fluidi separati: acqua di falda, refrigerante e acqua dei pannelli. Negli scambiatori il calore attraversa una parete che tiene separati i fluidi.",
+      "readMap":"Segui le tubazioni continue tra gli attacchi dei componenti. Le frecce dorate indicano il calore; i punti indicano il fluido. Tocca un simbolo per aprire la spiegazione. Un ponticello indica un incrocio senza collegamento.",
+      "temperatureLegend":["Tratto più caldo","Tratto più freddo","Trasferimento di calore"],
+      "temperatureNote":"Il colore cambia dove il fluido assorbe o cede calore. Rosso e blu indicano temperature relative nello stesso circuito: per confrontare circuiti diversi leggiamo i valori numerici. I punti mostrano il movimento del fluido.",
+      "phaseNote":"Nel refrigerante, evaporazione e condensazione trasferiscono molto calore anche a temperatura quasi costante. Il compressore aumenta la temperatura; la valvola di espansione la riduce.",
+      "intermediateTitle":"Il collegamento PC2 ↔ PC1",
+      "pc2Exchange":"PC2 riscalda l’acqua",
+      "pc1Exchange":"PC1 preleva calore",
+      "intermediateBody":"Seguiamo la stessa acqua tecnica: entra nelle PC2 a 35 °C e riceve calore dal refrigerante attraverso uno scambiatore. Esce a 40 °C, attraversa i due S3 in parallelo e viene fatta circolare da P05 verso PC1. Qui cede calore al refrigerante di PC1 e torna a 35 °C direttamente alle PC2. Il compressore di PC1 permette poi di trasferire quel calore al distinto circuito primario a 70/65 °C.",
+      "intermediateScope":"Ingrandimento del solo circuito intermedio. I due circuiti frigoriferi restano separati; li collega l’acqua tecnica. I 40/35 °C sono valori di progetto. La rappresentazione interna mostra gli scambi termici funzionali; tubazioni frigorifere e regolazione del recupero richiedono la documentazione del costruttore.",
+      "stageShort":["A bassa pressione il refrigerante può bollire a bassa temperatura. Riceve calore dall’acqua e diventa vapore.","Il compressore comprime il vapore usando elettricità. Aumentano pressione e temperatura: il refrigerante diventa più caldo dell’acqua da riscaldare.","Il vapore caldo cede calore all’acqua attraverso una parete. Perdendo calore, condensa e torna liquido.","Il liquido attraversa una restrizione: la pressione diminuisce e una parte evapora. La miscela diventa più fredda, pronta ad assorbire altro calore."],
+      "cycleWaterWinter":["Calore dall’acqua di falda","Calore all’acqua dei pannelli"],"cycleWaterSummer":["Calore dall’acqua dei pannelli","Calore all’acqua di falda"],
+      "cycleRead":"Segui 1 → 2 → 3 → 4 → 1. Le frecce del ciclo seguono il refrigerante; nei due scambiatori le frecce dorate mostrano il calore che entra ed esce.",
+      "cycleReturn":"La miscela torna all’evaporatore: il ciclo ricomincia.",
+      "energyTitle":"Perché una pompa di calore può fornire più calore dell’elettricità che usa?",
+      "energyIntro":"Esempio didattico in unità di energia: il compressore permette di trasferire calore già presente nell’ambiente. La sua energia si aggiunge al calore trasferito.",
+      "energyWinter":["dalla falda","di elettricità","alla casa"],"energySummer":["dalla casa","di elettricità","alla falda"],
+      "energyLimit":"3 + 1 = 4 è un esempio illustrativo. Le prestazioni reali dipendono dalle temperature e dalle macchine. Il bilancio trascura dispersioni e consumi delle pompe dell’acqua.",
+      "projectTitles":["Falda e pozzi","PC2 · pompe di calore","S3 · accumuli","Distribuzione","Appartamenti"],
+      "projectWinter":["P1 / P2 portano l’acqua attraverso T6, T7 e S4 alle PC2. Dopo aver ceduto calore, l’acqua viene restituita alla falda.","Due HiRef MSW182ML trasferiscono il calore della falda al circuito di climatizzazione, aggiungendo il lavoro dei compressori.","Due accumuli da 2.000 litri stabilizzano il circuito di climatizzazione, immagazzinando energia nell’acqua.","P06 e P07 servono i propri rami. P08 → SC2 → P09 collega il ramo ad alta pressione mantenendo separati i circuiti idraulici.","I moduli d’alloggio regolano l’acqua dei pannelli. Nel dettaglio di progetto: mandata 38 °C, ritorno 33 °C. Il pavimento scalda la stanza."],
+      "projectSummer":["Le PC2 trasferiscono all’acqua di falda il calore estratto dall’edificio e il lavoro dei compressori. L’acqua restituita è più calda.","Le due PC2 sottraggono calore al circuito di climatizzazione e lo cedono alla falda. Il ruolo termico dei due lati si scambia.","Gli stessi due accumuli da 2.000 litri stabilizzano il circuito d’acqua refrigerata. L’acqua di ritorno porta il calore raccolto nell’edificio.","La distribuzione alimenta i pannelli con acqua più fredda e raccoglie un ritorno più caldo. SC2 continua a separare i circuiti di pressione.","Nel dettaglio di progetto: mandata 18 °C, ritorno 23 °C. Il pavimento assorbe calore; regolazione e deumidificazione devono prevenire la condensa."],
+      "projectTempWinter":["Mandata 38 °C","Ritorno 33 °C"],"projectTempSummer":["Mandata 18 °C","Ritorno 23 °C"],
+      "projectRead":"Schema vettoriale derivato dal grafo del progetto: mandata e ritorno restano collegati. Le coppie S3 sono in parallelo sulla mandata; il ritorno passa separatamente. Apri la distribuzione per seguire P06, P07 e i due lati separati di SC2.",
+      "dhwBranch":"Un ramo separato: l’acqua calda sanitaria",
+      "dhwSummary":"PC2 → circuito intermedio → PC1 → SC1 → S2. Questo ramo riscalda l’acqua dei rubinetti e resta distinto dai pannelli, anche in estate. Apri per vedere gli scambiatori e i limiti del recupero estivo.",
+      "dhwNodes":["Circuito intermedio · 40/35 °C","PC1 e primario · 70/65 °C","SC1 · scambio attraverso una parete","S2 · due serbatoi da 3.000 L"],
+      "dhwBodies":["Da PC2, attraverso due ulteriori S3 da 2.000 L e P05, arriva il calore alla sorgente di PC1.","PC1 aggiunge il lavoro del compressore e alza la temperatura. P04 muove l’acqua del primario.","Due scambiatori SC1 da 90 kW trasferiscono calore al circuito sanitario mantenendolo separato dal primario.","Le pompe P01 caricano gli accumuli potabili. Il progetto indica accumulo a 60 °C e distribuzione miscelata a 48 °C."],
+      "mobileHint":"Su telefono la mappa prosegue in verticale; le frecce conservano il verso del calore."
+    },
+    "title":"Dalla falda al comfort di casa",
+    "brand":"Il condominio · La pompa di calore",
+    "views":["01 · I circuiti","02 · Dentro la pompa di calore","03 · Il nostro impianto"],
+    "language":"Lingua","winter":"Inverno · riscaldamento","summer":"Estate · raffrescamento","pause":"Pausa","play":"Avvia","step":"Un passo","reset":"Ricomincia","fit":"Vista completa","zoomIn":"Ingrandisci","zoomOut":"Riduci","close":"Chiudi","back":"Torna alla mappa","info":"Guida e fonti","speed":"Velocità",
+    "headings":["Tre fluidi separati, un trasferimento di calore","Il refrigerante compie quattro trasformazioni","Ritroviamo questi circuiti nel condominio"],
+    "leadsWinter":["Per scaldare il pavimento, preleviamo calore dall’acqua di falda. Seguiamo l’acqua fino alla pompa di calore: il refrigerante porta quel calore a una temperatura più alta.","Il compressore usa energia elettrica per aumentare pressione e temperatura del vapore. Così il refrigerante può cedere calore all’acqua del pavimento.","Il principio rimane lo stesso. Nel progetto due PC2 alimentano la climatizzazione; accumuli e circuiti di distribuzione collegano la centrale agli appartamenti."],
+    "leadsSummer":["Per raffrescare la casa, l’acqua nei pannelli assorbe calore dagli ambienti. La pompa di calore lo trasferisce alla falda, insieme all’energia del compressore.","Ora il refrigerante evapora assorbendo calore dall’acqua dell’edificio e condensa cedendolo all’acqua di falda. Il compressore continua ad aspirare vapore a bassa pressione.","Gli stessi pannelli radianti possono raffrescare. La regolazione della temperatura e dell’umidità serve a evitare condensa sul pavimento."],
+    "legend":["Acqua di falda · percorso aperto","Acqua dell’edificio · anello chiuso","Refrigerante · circuito sigillato","Freccia tratteggiata · calore"],
+    "hint":"Tocca un componente per approfondire. I punti mostrano il moto dei fluidi; la loro velocità è illustrativa. La chiusura del popup conserva la vista.",
+    "simplified":"Modello didattico: tubazioni e organi ausiliari sono semplificati; nessun valore rappresenta una misura in tempo reale.",
+    "ground":"Acqua di falda","extraction":"Pozzo di prelievo","reinjection":"Pozzo di restituzione","pump":"Pompa sommersa","heatpump":"Pompa di calore","zoomPump":"Esplora il ciclo interno","home":"Appartamento","floor":"Pannelli radianti a pavimento","supply":"Mandata","return":"Ritorno","circulator":"Circolatore","electricity":"Energia elettrica","sourceExchanger":"Scambiatore lato falda","buildingExchanger":"Scambiatore lato edificio","refrigerant":"Refrigerante",
+    "groundWinter":"Alla falda torna acqua più fredda","groundSummer":"Alla falda torna acqua più calda","floorWinter":"Il pavimento cede calore alla stanza","floorSummer":"Il pavimento assorbe calore dalla stanza",
+    "stages":["1 · Evaporatore","2 · Compressore","3 · Condensatore","4 · Valvola di espansione"],
+    "stageBodies":[
+      "Il refrigerante a bassa pressione riceve calore attraverso la parete dello scambiatore e passa da miscela liquido-vapore a vapore. Una pressione più bassa consente l’evaporazione a una temperatura più bassa: serve che il refrigerante sia più freddo dell’acqua che gli cede calore.",
+      "Il compressore aspira vapore a bassa pressione e compie lavoro su di esso usando elettricità. Pressione e temperatura aumentano; il vapore diventa abbastanza caldo da cedere calore al circuito ricevente. L’acqua è mossa da pompe idrauliche separate.",
+      "Il vapore caldo ad alta pressione cede calore attraverso una seconda parete e condensa in liquido. In inverno questo calore riscalda l’acqua dell’edificio. La potenza ceduta comprende il calore assorbito e il lavoro del compressore.",
+      "Il liquido attraversa una restrizione che ne riduce la pressione. Una parte evapora durante l’espansione e si forma una miscela più fredda di liquido e vapore. La miscela torna all’evaporatore; il ciclo prosegue."
+    ],
+    "states":["Miscela liquido-vapore · bassa pressione","Vapore · bassa pressione","Vapore caldo · alta pressione","Liquido · alta pressione"],
+    "sourceWinter":"Assorbe calore dalla falda","sinkWinter":"Cede calore all’edificio","sourceSummer":"Assorbe calore dall’edificio","sinkSummer":"Cede calore alla falda",
+    "functional":"Vista funzionale: evaporatore e condensatore mantengono la loro posizione nel disegno; cambia il circuito d’acqua associato. Valvole d’inversione e collegamenti reali sono omessi. Il compressore lavora sempre da bassa ad alta pressione.",
+    "balanceWinter":"Calore al pavimento = calore dalla falda + lavoro del compressore",
+    "balanceSummer":"Calore alla falda = calore dalla casa + lavoro del compressore",
+    "balanceNote":"Bilancio semplificato del ciclo, trascurando le dispersioni. Le pompe dell’acqua aggiungono consumi ausiliari.",
+    "groundBody":"La pompa sommersa solleva acqua da un pozzo di prelievo, la fa attraversare lo scambiatore della pompa di calore e la invia a un pozzo di restituzione. Questo è un percorso aperto verso la falda. L’acqua sotterranea rimane separata sia dal refrigerante sia dall’acqua del pavimento.",
+    "floorBody":"Un circolatore mantiene l’acqua in un anello chiuso tra la pompa di calore e i tubi nel pavimento. In inverno l’acqua cede calore al pavimento e torna più fredda; in estate assorbe calore e torna più calda. Il calore passa tra pavimento e ambiente per irraggiamento e convezione. Nella realtà miscelazione, accumuli e distribuzione intermedia completano l’anello.",
+    "condensation":"In estate la superficie del pavimento deve restare sopra la temperatura di rugiada dell’aria, alla quale il vapore acqueo inizia a condensare. Servono controllo dell’umidità, regolazione e deumidificazione secondo progetto; il solo pavimento freddo non garantisce il controllo dell’umidità.",
+    "boundaryBody":"Le pareti degli scambiatori permettono al calore di passare tra fluidi separati. L’acqua di falda attraversa un lato; il refrigerante scorre nell’altro. Un secondo scambiatore separa il refrigerante dall’acqua dell’edificio. Le linee che si avvicinano nel disegno non indicano miscelazione.",
+    "pumpBody":"La pompa sommersa crea il dislivello di pressione necessario a sollevare e muovere l’acqua di falda. Il circolatore compensa le perdite di pressione del circuito dell’edificio. Il compressore, invece, agisce sul vapore refrigerante: sono tre macchine con compiti diversi.",
+    "pc2":"2 × PC2 · climatizzazione","buffer":"S3 · accumuli inerziali","distribution":"P06 / P07 / P08 + SC2 + P09","apartments":"Moduli d’alloggio e pannelli","intermediate":"Circuito intermedio 40/35 °C","pc1":"PC1 · alta temperatura","dhw":"SC1 + S2 · acqua calda sanitaria",
+    "projectNote":"Collegamento concettuale al progetto. I circuiti d’acqua sono raggruppati; pressioni, portate, temperature e logiche effettive richiedono conferma. Il PDF originale rimane privato.",
+    "projectBodies":[
+      "Nel progetto PC2 identifica due pompe di calore HiRef MSW182ML. La falda è la sorgente invernale e il ricevitore di calore estivo. La vista didattica rappresenta un solo ciclo equivalente; numero di circuiti frigoriferi, commutazione e recupero delle unità installate richiedono le selezioni del costruttore.",
+      "Due S3 da 2.000 litri appartengono al circuito di climatizzazione. P06 serve gli spazi comuni della torre B, P07 la bassa pressione, P08 il primario di SC2 e P09 il suo secondario ad alta pressione. SC2 trasferisce calore mantenendo separati i due circuiti idraulici.",
+      "I moduli d’alloggio misurano i consumi e regolano la distribuzione ai pannelli. Il dettaglio di progetto indica 38/33 °C ai pannelli in inverno e 18/23 °C in estate. Sono valori di progetto da verificare, distinti dalle temperature della centrale.",
+      "La produzione sanitaria aggiunge uno stadio: il circuito intermedio da PC2 alimenta PC1, che serve due SC1 e due accumuli S2 da 3.000 litri. È separato dal circuito dei pannelli. Il recupero simultaneo in estate dipende dalla configurazione e dalla regolazione effettive."
+    ],
+    "question":"Verifica la tua lettura","questionText":"In estate, quale acqua torna più calda dopo avere attraversato i pannelli del pavimento?","answers":["L’acqua dell’edificio","L’acqua di falda","Il refrigerante"],"correct":"Esatto. L’acqua dell’edificio assorbe calore dal pavimento e torna più calda alla pompa di calore.","retry":"Segui l’anello dei pannelli: l’acqua dell’edificio passa dal blu al rosso mentre assorbe calore.",
+    "guideBody":"Le tre mappe collegano il trasferimento di calore, il ciclo frigorifero e i componenti del condominio. Il selettore inverno/estate cambia frecce, spiegazioni e temperature pertinenti. Le animazioni sono automatiche e rispettano la preferenza di sistema per il movimento ridotto. Su telefono i componenti si dispongono in verticale, mantenendo testi leggibili.",
+    "sourcesTitle":"Fonti e limiti","sourcesBody":"Principi del ciclo: U.S. Department of Energy, Introduction to Heat Pumps e Geothermal Heat Pumps. Collegamento al progetto: documentazione HiRef MSW/KSW e analisi dello schema conservato privatamente. Le versioni tradotte sono spiegazioni originali; i documenti tecnici mantengono la propria lingua.",
+    "reference":"Apri le mappe tecniche precedenti (inglese)","pdfMsw":"Scheda HiRef MSW","pdfKsw":"Scheda HiRef KSW","hideDocument":"Nascondi documento","privateNote":"Il disegno originale è escluso dal sito. Nessun comando apre o scarica quel documento.",
+    "noJs":"Per esplorare le mappe e le animazioni abilita JavaScript nel browser."
+  },
+  "en": {
+    "ui": {
+      "brand": "Thermal Plant · Mes 600 S",
+      "prevStep": "◀ Back",
+      "nextStep": "Next ▶",
+      "stepTabs": ["1 · Principle (1 HP)", "2 · + Hot Water", "3 · Real Plant"],
+      "winter": "❄ Winter · Heating",
+      "summer": "☀ Summer · Cooling",
+      "tagsBtn": "Tags (P1, S3…)",
+      "guideBtn": "Guide & sources",
+      "themeBtn": "Theme",
+      "prevPage": "◀ Previous",
+      "nextPage": "Next ▶",
+      "openCycleBtn": "🔍 Open refrigerant cycle zoom",
+      "locateBtn": "Highlight on schematic (Step 3)",
+      "tagFilterAll": "All",
+      "tagFilterWells": "Aquifer & Wells",
+      "tagFilterGen": "Heat Pumps & Buffers",
+      "tagFilterPumps": "Circulators P01–P09",
+      "tagFilterWater": "Potable Water & Zones",
+      "activeTagsLabel": "Active tags:",
+      "legend": ["Warmer section", "Cooler section", "48 °C DHW & warm riser recirc.", "Heat transfer"],
+      "clickHint": "Select any component or tag badge for its explanation",
+      "rotateTitle": "Rotate your phone to landscape",
+      "rotateBody": "The hydraulic schematics run horizontally so every pipe connection between wells, heat pumps and apartments stays continuous.",
+      "rotatePcHint": "Recommended: open this site on a PC as well to view flow rates, equipment models, complete design temperatures and the interactive tag bar.",
+      "zoneAquifer": "Groundwater aquifer",
+      "zoneHeatPump1": "1 Theoretical heat pump",
+      "zoneHome": "Apartment",
+      "zoneClimateGen": "Space-conditioning generation",
+      "zoneBuildingLoops": "Building: closed floor loop + sanitary riser",
+      "zoneDhwStage": "Second stage for Domestic Hot Water (DHW)",
+      "zoneWellsMulti": "Aquifer: 3 pumps across 2 wells + filtration",
+      "zoneGenMulti": "Generation: 2 × PC2 + S3 buffers",
+      "zoneClimateZones": "Towers A & B HVAC: 3 branches & SC2 pressure break",
+      "zoneDhwMulti": "Two-stage DHW & Water Station: twin MP and BP branches",
+      "step1Well": "Extraction well",
+      "step1Return": "Reinjection well",
+      "step1HP": "Water-to-water heat pump",
+      "step1Home": "Radiant floor panels",
+      "aquiferSourceSub": "Aquifer water ~16 °C",
+      "aquiferReturnWinter": "Cooler return (~11 °C)",
+      "aquiferReturnSummer": "Warmer return (~21 °C)",
+      "zoomCyclePill": "🔍 Select: refrigerant cycle",
+      "electricWork": "Electrical work",
+      "compressorShort": "Compressor",
+      "expansionShort": "Expansion valve",
+      "copBadgeWinter": "Example: 3 aquifer + 1 electric = 4 to floor",
+      "copBadgeSummer": "Example: 3 home + 1 electric = 4 to aquifer",
+      "cycleCenterSub": "Select any of the 4 stages for details",
+      "floorModeWinter": "Closed loop: releases heat into rooms",
+      "floorModeSummer": "Closed loop: absorbs heat from rooms",
+      "step2Well": "Aquifer intake",
+      "step2Return": "Aquifer return",
+      "step2PC2": "Polyvalent PC2",
+      "step2S3C": "Climate buffer",
+      "step2Floors": "Radiant floors",
+      "step2Riser": "Riser & taps",
+      "step2S3I": "40/35 °C buffer",
+      "step2PC1": "High-temp PC1",
+      "step2SC1": "SC1 exch.",
+      "step2S2": "S2 cylinder",
+      "step2Mix": "Therm. mixer",
+      "step2Mains": "Mains & softening",
+      "closedLoopNote": "Closed loop: water stays in floor pipes",
+      "stairwellLabel": "Stairwell riser",
+      "tapRoomLabel": "Apartment",
+      "openTapNote": "Open tap → drain",
+      "noColdReturnNote": "Used tap water exits to drain",
+      "step3Wells": "2 Wells · 3 Pumps",
+      "step3Treat": "Filters & vessels",
+      "step3Return": "Aquifer return",
+      "step3PC2": "Main heat pumps",
+      "step3S3C": "Climate buffers",
+      "step3Common": "Tower B communal",
+      "step3BP": "Towers A & B · Low Pressure (BP)",
+      "step3SC2": "SC2 break",
+      "step3AP": "Towers A & B · High Pressure (AP)",
+      "step3S3I": "Interm. buffers",
+      "step3PC1": "High-temp HP",
+      "step3SC1": "Exchangers",
+      "step3S2": "DHW cylinders",
+      "step3Mix": "Mixers",
+      "step3DhwZones": "Risers & taps",
+      "step3Potable": "Potable water booster & treatment",
+      "threePumpsSub": "2×54 + 1×108 m³/h (reserve)",
+      "riserMP": "MP zone · 48 °C",
+      "riserBP": "BP zone · 48 °C"
+    },
+    "steps": [
+      {
+        "title": "Step 1 of 3 · Theoretical principle with a single heat pump",
+        "winterSummary": "In winter the heat pump extracts thermal energy from groundwater (16 → 11 °C) and, through compressor work, raises it to 38 °C to warm the radiant floor panels.",
+        "summerSummary": "In summer heat transfer reverses: 18 °C water absorbs heat from the rooms (returning at 23 °C) and the heat pump rejects it into groundwater (16 → 21 °C)."
+      },
+      {
+        "title": "Step 2 of 3 · Coupling with Domestic Hot Water (DHW)",
+        "winterSummary": "A closed 40/35 °C technical loop links PC2 to PC1, which lifts temperature to 70/65 °C to charge storage cylinder S2 (60 °C). Tap water (48 °C) is consumed openly, while a warm stairwell loop (P02) keeps the risers hot.",
+        "summerSummary": "Domestic hot water stays active in summer too: while PC2 cools the floors, its 40/35 °C branch feeds PC1 so S2 (60 °C) and the 48 °C risers remain hot."
+      },
+      {
+        "title": "Step 3 of 3 · The real condominium plant (multiple units & pressure zones)",
+        "winterSummary": "Every stage in the building uses multiple parallel units: 3 extraction pumps across 2 wells (P1 with 2×P11 + P2 with P10), 2 PC2 units, 4 S3 buffers, 3 HVAC branches (with SC2 isolating high pressure AP) and 2 complete DHW lines (MP and BP).",
+        "summerSummary": "All parallel units also serve summer cooling: the 2 PC2 units chill the BP and AP branches (isolated across SC2), while PC1, the 2 SC1 exchangers and 2 S2 cylinders supply MP and BP hot water."
+      }
+    ],
+    "richTopics": {
+      "ground": {
+        "title": "Groundwater aquifer: winter heat source and summer heat sink",
+        "pages": [
+          "Groundwater remains near a steady 16 °C year-round. A submersible pump lifts it from the extraction well, passes it through the heat pump's plate exchanger and returns it to the aquifer via the reinjection well.",
+          "In winter the water gives up heat and returns cooler (~11 °C); in summer it receives heat removed from the apartments and returns warmer (~21 °C). Groundwater always stays in its own circuit, isolated from refrigerant and building water."
+        ]
+      },
+      "cycle": {
+        "title": "Inside the heat pump (Compressor and Evaporator)",
+        "hasCycleZoom": true,
+        "pages": [
+          "A sealed refrigerant loop circulates inside the heat pump. In the evaporator, low pressure lets the refrigerant boil at a low temperature and absorb heat from water (groundwater in winter, floor water in summer).",
+          "The compressor draws in that vapour and uses electricity to raise its pressure and temperature. In the condenser, hot vapour releases heat to the receiving water circuit and condenses; the expansion valve then drops pressure and temperature to repeat the cycle."
+        ]
+      },
+      "floor": {
+        "title": "Radiant floor panels: one closed loop for heating and cooling",
+        "pages": [
+          "Closed-loop technical water circulates beneath the apartment floors. In winter it enters at 38 °C, warms the rooms and returns at 33 °C; in summer it enters at 18 °C, absorbs room heat and returns at 23 °C.",
+          "During summer cooling, supply temperature is kept above room dew point alongside dedicated apartment dehumidification so moisture does not condense on the floor."
+        ]
+      },
+      "pc2": {
+        "title": "PC2 · Main multipurpose heat pumps (2 × HiRef MSW182ML)",
+        "hasCycleZoom": true,
+        "pages": [
+          "Main generation uses 2 parallel PC2 units (260.4 kW heating / 233.3 kW cooling each at rating conditions). Twin units allow capacity staging at part load and continuity during service.",
+          "Each PC2 has three separate water exchangers: groundwater, building conditioning and the 40/35 °C intermediate loop feeding PC1. In summer, heat removed from apartments can help feed the intermediate loop according to controller priority."
+        ]
+      },
+      "s3": {
+        "title": "S3 · Parallel supply thermal buffers (4 × 2,000 L)",
+        "pages": [
+          "The design includes 4 S3 buffer vessels of 2,000 litres each: one pair on the space-conditioning circuit and a second pair on the 40/35 °C intermediate circuit.",
+          "In both circuits the two S3 tanks sit in parallel on the supply header, while return water bypasses the tanks directly back to PC2. Their water volume stores thermal energy and smooths compressor cycling."
+        ]
+      },
+      "intermediate": {
+        "title": "The PC2 ↔ PC1 link (40/35 °C intermediate loop)",
+        "pages": [
+          "To store potable hot water at 60 °C while letting PC2 operate at moderate space-conditioning temperatures, the plant uses a two-stage temperature lift linked by closed technical water.",
+          "Water enters PC2 at 35 °C, warms to 40 °C, passes through the two parallel S3 buffers and is pumped by P05 through PC1's source exchanger, returning at 35 °C to PC2."
+        ]
+      },
+      "pc1": {
+        "title": "PC1 · High-temperature heat pump (HiRef 30KSW202K_F1L)",
+        "pages": [
+          "PC1 receives 40/35 °C water from the intermediate loop. Starting from 40 °C instead of 16 °C groundwater lets its twin scroll compressors reach 70 °C supply (65 °C return) at 180.5 kW design output.",
+          "Pump P04 circulates this closed 70/65 °C primary loop across the SC1 domestic hot-water exchangers, keeping technical water separated from drinking water."
+        ]
+      },
+      "sc1": {
+        "title": "SC1 · Domestic hot-water plate exchangers (2 × 90 kW)",
+        "pages": [
+          "Two 90 kW SC1 plate exchangers (one for Medium Pressure MP and one for Low Pressure BP) transfer heat from PC1's 70/65 °C primary loop into potable charging water (60/55 °C).",
+          "Metal plates conduct heat rapidly while maintaining complete hydraulic separation between closed primary water and potable water."
+        ]
+      },
+      "s2": {
+        "title": "S2 · Domestic hot-water storage cylinders (2 × 3,000 L at 60 °C)",
+        "pages": [
+          "Two vertical 3,000-litre S2 cylinders (6,000 L total, one for MP and one for BP) store potable hot water at 60 °C to meet morning and evening draw-off peaks across the condominium.",
+          "Two P01 charging pumps circulate potable water between the bottom of each S2 tank and its SC1 exchanger until storage reaches target temperature."
+        ]
+      },
+      "dhw": {
+        "title": "From storage to taps — and why riser recirculation returns warm",
+        "pages": [
+          "At the 60 °C top outlet of S2, a thermostatic mixing valve tempers water to 48 °C (ACP) and sends it up the stairwell riser. When a resident opens a tap, hot water enters the apartment, is used and goes to drain: no cold water ever returns from apartment taps to the plant.",
+          "Why then is there a return line with pumps P02 (MP) and P03 (BP)? That ACR line loops at the top of the condominium stairwell risers outside the apartments and brings warm water (~46–48 °C) back to the mixer and S2 inlet so the risers stay hot while taps are closed.",
+          "Whenever taps draw hot water, an equal flow of cold potable mains water (~15 °C, blue AFP line from boosters GP1/GP2 and softeners T2) enters the bottom of S2 and feeds the cold port of the mixing valve."
+        ]
+      },
+      "water": {
+        "title": "Potable water station: T1 filter, S1 tanks, GP1/GP2 boosters and T2 softeners",
+        "pages": [
+          "Incoming mains water passes self-cleaning filter T1 into 2 pre-booster storage tanks S1 (2,000 L each). Two twin-pump inverter booster sets — GP1 (Medium Pressure MP, upper floors) and GP2 (Low Pressure BP, lower floors) — pressurise the two zones.",
+          "Each zone supplies cold drinking water directly to apartments (AFP) and feeds a dedicated DHW make-up train with 2 volumetric softeners T2 (preventing scale in SC1 and S2) plus T3 and T4 dosing units."
+        ]
+      },
+      "wells": {
+        "title": "Wells P1, P2 and R1: why there are 3 extraction pumps",
+        "pages": [
+          "Groundwater extraction is built with full redundancy: main well P1 houses 2 parallel P11 submersible pumps rated at 54 m³/h each (108 m³/h = 30 L/s total). Reserve well P2 houses a third submersible pump P10 rated on its own for the full 108 m³/h.",
+          "Together the plant has 3 extraction pumps across 2 independent wells. After heat exchange in PC2, water returns to the aquifer via 2 separate reinjection wells, both tagged R1."
+        ]
+      },
+      "gw-treatment": {
+        "title": "Groundwater protection: T6 hydrocyclone, 2 × T7 filters and 2 × S4 vessels",
+        "pages": [
+          "Before reaching PC2's plate exchangers, well water passes hydrocyclone T6 (centrifugally separating heavy sand) and splits across 2 parallel 100-micron self-cleaning filters T7.",
+          "Downstream of the filters, 2 side-branch bladder vessels S4 (1,000 litres each) absorb pressure surges and stabilise well-line pressure."
+        ]
+      },
+      "dist-zones": {
+        "title": "Space conditioning across 3 branches and 2 pressure zones (Towers A & B)",
+        "pages": [
+          "Downstream of the S3 buffers, the header feeds three branches: P06 serves Tower B communal spaces; P07 (with mixing valve) serves Low Pressure (BP) apartments in Towers A and B; P08 feeds the primary side of exchanger SC2.",
+          "Each apartment module includes energy metering, a zone valve, local mixing for 38/33 °C (winter) or 18/23 °C (summer) radiant floor water and a dehumidifier connection."
+        ]
+      },
+      "sc2": {
+        "title": "SC2 · Why upper floors use a pressure-separation exchanger",
+        "pages": [
+          "In tall buildings, water reaching the upper floors (High Pressure, AP) exerts high static head. Plate heat exchanger SC2 hydraulically isolates the upper-floor circuit so PC2 and S3 operate at lower central-plant pressure.",
+          "Pump P08 circulates central-plant water on SC2's primary side while P09 circulates the separate AP loop to upper-floor apartments in Towers A and B, transferring heat without combining static pressures."
+        ]
+      },
+      "evaporator": {
+        "title": "Stage 1 · Evaporator (absorbing heat)",
+        "pages": [
+          "Refrigerant enters the evaporator as a cold low-pressure liquid-vapour mixture. Low pressure lets it boil at a low temperature; being colder than the water across the plates, it absorbs heat and turns into vapour."
+        ]
+      },
+      "compressor": {
+        "title": "Stage 2 · Compressor (electrical work raising temperature)",
+        "pages": [
+          "Low-pressure vapour is still lukewarm. Driven by electricity, the compressor squeezes the gas into a smaller volume, sharply raising both pressure and temperature above the target water temperature."
+        ]
+      },
+      "condenser": {
+        "title": "Stage 3 · Condenser (releasing amplified heat)",
+        "pages": [
+          "Hot high-pressure vapour crosses the second plate exchanger, transferring both the absorbed environmental heat and the compressor's electrical work (e.g. 3 + 1 = 4) into the water as it condenses to liquid."
+        ]
+      },
+      "expansion": {
+        "title": "Stage 4 · Expansion valve (pressure drop and cooling)",
+        "pages": [
+          "High-pressure liquid passes through a narrow throttling valve: pressure drops abruptly, part of the liquid flashes to vapour and the mixture cools down, ready to re-enter the evaporator."
+        ]
+      },
+      "guide": {
+        "title": "Reading guide and reference technical documents",
+        "hasSources": true,
+        "pages": [
+          "This guide progresses step by step from a single theoretical heat pump (Step 1), to domestic hot-water integration (Step 2), to the complete condominium plant with parallel units and pressure zones (Step 3).",
+          "Red and blue indicate warmer and cooler sections within each circuit; amber marks the 48 °C tempered domestic hot-water supply and warm stairwell recirculation. Values reflect design annotations (S00); the original drawing is excluded from public files."
+        ]
+      }
+    },
+    "tags": {
+      "P1": { "cat": "wells", "name": "Main extraction well", "units": "1 well (housing 2 × P11 pumps)", "body": "Primary groundwater abstraction well housing two parallel P11 submersible pumps rated at 54 m³/h each (108 m³/h = 30 L/s combined)." },
+      "P2": { "cat": "wells", "name": "Reserve extraction well", "units": "1 reserve well (housing 1 × P10 pump)", "body": "Standby abstraction well providing full reserve capacity via submersible pump P10 (108 m³/h)." },
+      "P11": { "cat": "wells", "name": "Main-well submersible pumps", "units": "2 units in P1 (3 extraction pumps total with P10)", "body": "Two DAB SS6 E11 (or equivalent) submersible borehole pumps in well P1 (54 m³/h, 930 kPa head, 22 kW each)." },
+      "P10": { "cat": "wells", "name": "Reserve-well submersible pump", "units": "1 unit in P2 (3rd extraction pump)", "body": "DAB SS8 A05 (or equivalent) submersible pump in reserve well P2 sized for the entire 108 m³/h plant duty (37 kW)." },
+      "T6": { "cat": "wells", "name": "Centrifugal hydrocyclone separator", "units": "1 unit (DN125 · 108 m³/h)", "body": "Uses centrifugal swirl to remove heavy sand particles from well water upstream of the T7 fine filters." },
+      "T7": { "cat": "wells", "name": "Self-cleaning fine groundwater filters", "units": "2 parallel units (DN100 · 100 µm)", "body": "Two parallel 100-micron filters (65 m³/h each in the schedule) protecting the plate exchangers of both PC2 heat pumps." },
+      "S4": { "cat": "wells", "name": "Groundwater pressure vessels", "units": "2 bladder vessels × 1,000 L", "body": "Two ELBI DL 1000 V vessels connected as side branches downstream of T7 to cushion surges and stabilise pressure." },
+      "R1": { "cat": "wells", "name": "Aquifer reinjection wells", "units": "2 restitution wells (both tagged R1)", "body": "Return all extracted groundwater back to the aquifer — cooler in winter (~11 °C) and warmer in summer (~21 °C) — with zero net water consumption." },
+      "PC2": { "cat": "gen", "name": "Main multipurpose heat pumps", "units": "2 parallel units (HiRef MSW182ML)", "body": "Primary space heating (260.4 kW each) and cooling (233.3 kW each) heat pumps with three isolated water channels: groundwater, building HVAC and 40/35 °C intermediate water." },
+      "PC1": { "cat": "gen", "name": "High-temperature DHW heat pump", "units": "1 dual-scroll unit (HiRef 30KSW202K_F1L)", "body": "Extracts heat from the 40/35 °C intermediate loop and lifts primary water to 70/65 °C (180.5 kW) to heat domestic hot water across SC1." },
+      "S3": { "cat": "gen", "name": "Thermal inertia buffer tanks", "units": "4 tanks × 2,000 L (2 HVAC + 2 intermediate)", "body": "Four 2,000 L buffers (8,000 L total): two in parallel on the HVAC supply and two in parallel on the 40/35 °C supply, while returns bypass the tanks." },
+      "SC2": { "cat": "gen", "name": "High-pressure zone plate exchanger", "units": "1 plate exchanger (231 / 240 kW)", "body": "Hydraulically separates central-plant pressure from the upper-floor High Pressure (AP) circuit circulated by P09." },
+      "SC1": { "cat": "gen", "name": "Domestic hot-water plate exchangers", "units": "2 units × 90 kW (1 MP + 1 BP)", "body": "Transfer heat from PC1's closed 70/65 °C primary loop into potable charging water (60/55 °C) for both S2 cylinders without mixing fluids." },
+      "S2": { "cat": "gen", "name": "Domestic hot-water storage cylinders", "units": "2 cylinders × 3,000 L (1 MP + 1 BP)", "body": "Store 6,000 L total of potable hot water at 60 °C (10 bar nominal) serving Medium and Low Pressure residential zones." },
+      "P01": { "cat": "pumps", "name": "S2 storage charging circulators", "units": "2 pump sets (1 MP + 1 BP)", "body": "Circulate potable water (16 m³/h each) from the lower charging port of S2 through SC1 and back into the top of S2." },
+      "P02": { "cat": "pumps", "name": "Medium-Pressure DHW recirculation pump", "units": "1 unit (MP riser · 3.6 m³/h)", "body": "Circulates warm water (~46–48 °C, ACR MP) from the upper-floor stairwell risers back to the mixer and S2 when taps are closed." },
+      "P03": { "cat": "pumps", "name": "Low-Pressure DHW recirculation pump", "units": "1 unit (BP riser · 3.6 m³/h)", "body": "Maintains warm riser recirculation (~46–48 °C, ACR BP) across the lower-floor stairwell risers." },
+      "P04": { "cat": "pumps", "name": "PC1 high-temperature primary circulator", "units": "1 pump set (32 m³/h · 70/65 °C)", "body": "Circulates closed 70 °C water from PC1 across the primary side of both SC1 exchangers." },
+      "P05": { "cat": "pumps", "name": "40/35 °C intermediate-loop circulator", "units": "1 pump set (26 m³/h)", "body": "Feeds 40 °C water from the intermediate S3 buffers into PC1's source exchanger." },
+      "P06": { "cat": "pumps", "name": "Communal-space HVAC circulator", "units": "1 pump set (3 m³/h)", "body": "Supplies the heating and cooling branch dedicated to Tower B communal areas." },
+      "P07": { "cat": "pumps", "name": "Low-Pressure HVAC circulator", "units": "1 inverter pump set (66 m³/h)", "body": "Supplies Low Pressure (BP) residential radiant-panel risers across Towers A and B downstream of its mixing valve." },
+      "P08": { "cat": "pumps", "name": "SC2 primary-side circulator", "units": "1 inverter pump set (41.2 m³/h)", "body": "Circulates main PC2 loop water through the primary side of pressure-break exchanger SC2." },
+      "P09": { "cat": "pumps", "name": "High-Pressure HVAC circulator", "units": "1 inverter pump set (57 m³/h)", "body": "Circulates the isolated secondary side of SC2 serving High Pressure (AP) upper-floor apartments in Towers A and B." },
+      "T1": { "cat": "water", "name": "Incoming potable-water filter", "units": "1 filter group (AMBRA DN100 · 50 µm)", "body": "Filters suspended solids from incoming municipal mains water upstream of the S1 storage tanks." },
+      "S1": { "cat": "water", "name": "Pre-booster potable water vessels", "units": "2 tanks × 2,000 L", "body": "Provide break/storage volume ahead of twin potable booster sets GP1 and GP2." },
+      "GP1": { "cat": "water", "name": "Medium-Pressure potable booster set", "units": "1 set with 2 inverter pumps (2 × 7.5 kW)", "body": "Pressurises the Medium Pressure (MP, 34 m³/h) cold water and DHW feed network for upper residential floors." },
+      "GP2": { "cat": "water", "name": "Low-Pressure potable booster set", "units": "1 set with 2 inverter pumps (2 × 5.5 kW)", "body": "Pressurises the Low Pressure (BP, 37 m³/h) cold water and DHW feed network for lower and middle floors." },
+      "T2": { "cat": "water", "name": "Volumetric DHW water softeners", "units": "2 units (1 MP + 1 BP)", "body": "Remove hardness ions from potable water feeding SC1 and S2 to prevent limescale buildup." },
+      "T3": { "cat": "water", "name": "Anti-Legionella dosing stations", "units": "2 dosing units (MP + BP)", "body": "Design dosing points located on the treated cold feed lines supplying the two DHW branches." },
+      "T4": { "cat": "water", "name": "Anticorrosion dosing stations", "units": "2 dosing units (MP + BP)", "body": "Paired with T3 on the treated DHW feed lines to protect hot-water tanks and distribution piping." },
+      "AFP": { "cat": "water", "name": "Cold Potable Water (Acqua Fredda Potabile)", "units": "2 pressure networks (AFP MP + AFP BP)", "body": "Cold drinking water (~15 °C) feeding apartment cold taps directly while replenishing S2 cylinders and thermostatic mixers." },
+      "ACP": { "cat": "water", "name": "Hot Potable Water supply (48 °C)", "units": "2 stairwell risers (ACP MP + ACP BP)", "body": "Tempered 48 °C domestic hot water rising in stairwell columns and entering apartments whenever a hot tap is opened." },
+      "ACR": { "cat": "water", "name": "Hot-Water Riser Recirculation (~46–48 °C)", "units": "2 stairwell loops (driven by P02 & P03)", "body": "Warm return loop from stairwell risers (also labelled RCP): keeps common risers hot when taps are closed and never comes from used tap drains." },
+      "BP": { "cat": "water", "name": "Low-Pressure Zone (Bassa Pressione)", "units": "HVAC (P07) + Potable/DHW (GP2/P03)", "body": "Serves lower and middle building floors requiring lower static head." },
+      "MP": { "cat": "water", "name": "Medium-Pressure Zone (Potable / DHW)", "units": "Upper-floor potable & DHW (GP1/P02)", "body": "Upper pressure zone of the potable and domestic hot-water system with its own GP1, T2, SC1 and S2." },
+      "AP": { "cat": "water", "name": "High-Pressure Zone (HVAC)", "units": "SC2 secondary + P09", "body": "Upper-floor closed space-conditioning zone in Towers A and B, hydraulically isolated across SC2." }
+    },
+    "canvas":{
+      "simple":"Simplified","complete":"Complete",
+      "winter":"Winter","summer":"Summer","guide":"Guide","previous":"Previous","next":"Next",
+      "rotateTitle":"Rotate your phone","rotateBody":"Use landscape orientation to see the whole plant. The drawing stays the same, without scrolling. Select a component for its explanation.",
+      "legend":["Warmer","Cooler","Heat"],"mixedLegend":"Water 48 °C",
+      "labels":{"well":"Well","returnWell":"Return","panels":"Panels","hotWater":"Hot water","pump":"Heat pump","taps":"Taps","mains":"Mains water"},
+      "topics":{
+        "ground":{"title":"Groundwater: extraction and return","pages":["Pumps draw groundwater and send it through T6 and T7 to PC2. Water then returns to the aquifer: cooler in winter, warmer in summer.","The well symbol groups P1/P2, pumps and treatment. S4 vessels connect as side branches. Groundwater, refrigerant and building water remain separate."]},
+        "pc2":{"title":"PC2 · Two heat pumps","pages":["In winter PC2 transfers heat from groundwater to building water. In summer it absorbs heat from the building and rejects it to groundwater. Water connections remain unchanged; heat transfer reverses.","The circle and electrical arrow summarise compressor work. Refrigerant absorbs heat in the evaporator; compression raises its pressure and temperature so the condenser can release heat. Internal details are grouped in the symbol."]},
+        "buffer":{"title":"S3 · Climate buffers","pages":["These two 2,000-litre S3 tanks are parallel supply branches. Water divides between the tanks, then rejoins toward distribution. Return water goes directly back to PC2.","The tanks add thermal capacity: stored water holds energy and moderates changes in load. The second S3 pair in the lower branch belongs to the intermediate circuit."]},
+        "floor":{"title":"Distribution and floor panels","pages":["Winter: water releases heat to the floor and returns cooler. Summer: it absorbs room heat and returns warmer. The current selection shows {floor}, from the design detail.","The symbol groups distribution and terminals. P06 serves communal spaces and P07 the low-pressure branch. P08 feeds SC2; P09 serves the hydraulically separate high-pressure circuit on its other side.","During cooling, the floor surface must remain above dew point. Regulation and dehumidification prevent condensation; actual temperatures and settings require technical verification."]},
+        "intermediate":{"title":"PC2 → S3 → P05 → PC1","pages":["Follow the lower branch: PC2 heats technical water from 35 to 40 °C. Water passes through the two parallel S3 tanks and P05 circulates it to PC1.","Inside PC1, water releases heat to refrigerant and returns directly to PC2 at 35 °C. The machines have separate refrigerant circuits linked by this water loop. The 40/35 °C values are design annotations."]},
+        "pc1":{"title":"PC1 · Second temperature lift","pages":["PC1 extracts heat from the 40/35 °C intermediate circuit. Its compressor adds work, enabling heat transfer to the separate 70/65 °C primary circuit.","P04 circulates primary water toward SC1. Red shows the warmer supply; blue shows the return after releasing heat. Colours express relative temperatures within each circuit."]},
+        "dhw":{"title":"SC1 and S2 · Charging the tanks","pages":["P04 sends PC1 primary water to SC1. Across the exchanger it transfers heat to potable water, circulated by P01 between SC1 and S2 to charge the tanks. The two sides of SC1 remain separate.","The drawing shows an equivalent branch for the two domestic pressure zones. Each S2 stores 3,000 litres at a design annotation of 60 °C. The charging circuit keeps hot water available; the pipe toward taps is a separate branch."]},
+        "delivery":{"title":"From storage to taps","pages":["Opening a tap draws hot water from S2. The mixing valve adds cold mains water to provide the design's 48 °C supply. The orange pipe takes this water to the taps; droplets indicate draw-off.","Water drawn at taps is consumed and does not return to storage. Fresh cold water feeds S2. The blue line with P02/P03 is the separate distribution recirculation, which keeps the pipes warm when taps are closed.","Floor heating has a closed circuit separate from domestic water. An equivalent domestic branch and functional connections are shown; MP/BP details, treatment and controls remain in the graph and technical documentation."]},
+        "guide":{"title":"Reading the schematic","pages":["Moving dots follow water; gold arrows show heat transfer. Red and blue mean warmer and cooler within the same circuit. Use numerical temperatures to compare different circuits.","The schematic summarises the graph reconstructed from the original design. Symbols group equipment; bypasses, valves and refrigerant details are omitted. This is a teaching model with design values, rather than live operating data.","Sources: the privately held design and HiRef MSW/KSW documentation. The original document is excluded from the site. Public datasheets open here; Close returns to the same drawing."]}
+      }
+    },
+    "map": {
+      "nav":["The principle","Inside the pump","Our building"],
+      "more":"How it works","heat":"Heat","fluid":"Fluid movement",
+      "routeWinter":"Heat travels from groundwater to the home.","routeSummer":"Heat leaves the home and travels to groundwater.",
+      "principleTitles":["Groundwater","The heat pump","The floor and the room"],
+      "principleWinter":["Groundwater contains thermal energy even when it is cooler than the home. A submersible pump brings it to the exchanger; it then returns to the aquifer cooler.","A fluid called refrigerant absorbs that heat. The compressor uses electricity to raise its temperature, allowing it to warm the floor-loop water.","Water circulates through pipes under the floor and releases heat. The floor warms the room; water returns to the heat pump cooler."],
+      "principleSummer":["Groundwater receives the heat removed from the home, together with the compressor’s energy input. After the exchanger it returns to the reinjection well warmer.","Refrigerant absorbs heat from the floor-loop water and releases it to groundwater. The compressor makes this transfer possible by consuming electricity.","The room releases heat to the floor and the water in its pipes. Water returns warmer to the heat pump, where it is cooled again."],
+      "waterGround":["Extraction from the well","Return to the aquifer"],
+      "waterFloorWinter":["Warmer supply","Cooler return"],"waterFloorSummer":["Cooler supply","Warmer return"],
+      "sealed":"Refrigerant recirculates in a sealed loop.",
+      "separation":"Three separate fluids: groundwater, refrigerant and floor-loop water. Inside each exchanger, heat crosses a wall that keeps the fluids separate.",
+      "readMap":"Follow continuous pipes between component ports. Gold arrows show heat; dots show fluid movement. Select a symbol for its explanation. A line bridge marks a crossing without a connection.",
+      "temperatureLegend":["Warmer section","Cooler section","Heat transfer"],
+      "temperatureNote":"Colour changes where fluid absorbs or releases heat. Red and blue represent relative temperatures within the same circuit; compare different circuits using their numerical temperatures. Moving dots show fluid motion.",
+      "phaseNote":"Refrigerant evaporation and condensation transfer substantial heat at nearly constant temperature. Compression raises its temperature; expansion lowers it.",
+      "intermediateTitle":"The PC2 ↔ PC1 connection",
+      "pc2Exchange":"PC2 heats the water",
+      "pc1Exchange":"PC1 extracts heat",
+      "intermediateBody":"Follow the same technical water: it enters PC2 at 35 °C and receives heat from refrigerant across an exchanger. It leaves at 40 °C, passes through the two parallel S3 tanks and is circulated by P05 to PC1. There it releases heat to PC1’s refrigerant and returns directly to PC2 at 35 °C. PC1’s compressor then enables heat transfer to the separate 70/65 °C primary circuit.",
+      "intermediateScope":"Close-up of the intermediate circuit only. The two refrigerant circuits remain separate and are linked by technical water. The 40/35 °C values are design annotations. Internal symbols show functional heat exchanges; refrigerant piping and recovery controls require manufacturer documentation.",
+      "stageShort":["At low pressure, refrigerant can boil at a low temperature. It receives heat from water and becomes vapour.","The compressor uses electricity to compress vapour. Pressure and temperature rise, making the refrigerant hotter than the water it will heat.","Hot vapour releases heat to water through a wall. As it loses heat, it condenses back into liquid.","Liquid passes through a restriction: pressure drops and some liquid evaporates. The mixture becomes colder, ready to absorb more heat."],
+      "cycleWaterWinter":["Heat from groundwater","Heat to floor-loop water"],"cycleWaterSummer":["Heat from floor-loop water","Heat to groundwater"],
+      "cycleRead":"Follow 1 → 2 → 3 → 4 → 1. Cycle arrows follow the refrigerant; gold arrows at the two exchangers show heat entering and leaving.",
+      "cycleReturn":"The mixture returns to the evaporator and the cycle repeats.",
+      "energyTitle":"How can a heat pump deliver more heat than the electricity it uses?",
+      "energyIntro":"Teaching example in units of energy: the compressor enables the transfer of heat already present in the surroundings. Its energy adds to the transferred heat.",
+      "energyWinter":["from groundwater","of electricity","to the home"],"energySummer":["from the home","of electricity","to groundwater"],
+      "energyLimit":"3 + 1 = 4 is illustrative. Actual performance depends on temperatures and equipment. The balance neglects losses and water-pump consumption.",
+      "projectTitles":["Aquifer and wells","PC2 · heat pumps","S3 · buffers","Distribution","Apartments"],
+      "projectWinter":["P1 / P2 send water through T6, T7 and S4 to PC2. After releasing heat, the water is returned to the aquifer.","Two HiRef MSW182ML units transfer groundwater heat to the building circuit, adding compressor work.","Two 2,000-litre buffers stabilise the building circuit by storing energy in water.","P06 and P07 serve their respective branches. P08 → SC2 → P09 links the high-pressure branch while keeping water circuits separate.","Apartment modules regulate floor-loop water. The design detail gives 38 °C supply and 33 °C return. The floor warms the room."],
+      "projectSummer":["PC2 transfers the heat extracted from the building and compressor work to groundwater. Reinjected water is warmer.","The two PC2 units remove heat from the building circuit and release it to groundwater. The thermal roles of the two sides swap.","The same two 2,000-litre buffers stabilise the chilled-water circuit. Returning water carries heat collected in the building.","Distribution supplies cooler water to the floors and collects a warmer return. SC2 continues to separate the pressure circuits.","The design detail gives 18 °C supply and 23 °C return. The floor absorbs heat; controls and dehumidification must prevent condensation."],
+      "projectTempWinter":["Supply 38 °C","Return 33 °C"],"projectTempSummer":["Supply 18 °C","Return 23 °C"],
+      "projectRead":"Vector schematic derived from the design graph, with connected supply and return. Each S3 pair is parallel in the supply; return water takes a separate path. Open distribution to follow P06, P07 and the hydraulically separate sides of SC2.",
+      "dhwBranch":"A separate branch: domestic hot water",
+      "dhwSummary":"PC2 → intermediate loop → PC1 → SC1 → S2. This branch heats tap water and stays separate from the floors, including in summer. Open it to see the exchangers and summer-recovery limitations.",
+      "dhwNodes":["Intermediate loop · 40/35 °C","PC1 and primary · 70/65 °C","SC1 · heat crosses a wall","S2 · two 3,000-litre tanks"],
+      "dhwBodies":["From PC2, through two additional 2,000-litre S3 buffers and P05, heat reaches PC1’s source side.","PC1 adds compressor work and raises the temperature. P04 moves the primary water.","Two 90 kW SC1 exchangers transfer heat to the domestic-water circuit while keeping it separate from the primary.","P01 pumps charge the potable tanks. The design indicates storage at 60 °C and mixed distribution at 48 °C."],
+      "mobileHint":"On phones the map runs vertically; the arrows keep the same heat-transfer meaning."
+    },
+    "title":"From groundwater to comfort at home",
+    "brand":"Our building · The heat pump",
+    "views":["01 · The fluid circuits","02 · Inside the heat pump","03 · Our plant"],
+    "language":"Language","winter":"Winter · heating","summer":"Summer · cooling","pause":"Pause","play":"Play","step":"One step","reset":"Restart","fit":"Fit map","zoomIn":"Zoom in","zoomOut":"Zoom out","close":"Close","back":"Back to the map","info":"Guide & sources","speed":"Speed",
+    "headings":["Three separate fluids, one heat transfer","The refrigerant undergoes four changes","Find these circuits in our building"],
+    "leadsWinter":["To warm the floor, we take heat from groundwater. Follow the water to the heat pump: its refrigerant carries that heat to a higher temperature.","The compressor uses electricity to raise the vapour’s pressure and temperature. The refrigerant can then release heat to the floor-loop water.","The principle stays the same. In the design, two PC2 units supply heating and cooling; buffers and distribution circuits connect the plant to the apartments."],
+    "leadsSummer":["To cool the home, water in the floor pipes absorbs heat from the rooms. The heat pump transfers it to groundwater, together with the compressor’s energy input.","The refrigerant now evaporates by absorbing heat from building water and condenses by releasing it to groundwater. The compressor still draws in low-pressure vapour.","The same radiant floors can provide cooling. Temperature and humidity controls help prevent condensation on the floor."],
+    "legend":["Groundwater · open path","Building water · closed loop","Refrigerant · sealed circuit","Dashed arrow · heat"],
+    "hint":"Select a component to learn more. Dots show fluid movement; speed is illustrative. Closing a popup preserves your view.",
+    "simplified":"Teaching model: pipes and auxiliary devices are simplified; no value is a live measurement.",
+    "ground":"Groundwater","extraction":"Extraction well","reinjection":"Reinjection well","pump":"Submersible pump","heatpump":"Heat pump","zoomPump":"Explore the internal cycle","home":"Apartment","floor":"Radiant floor pipes","supply":"Supply","return":"Return","circulator":"Circulator","electricity":"Electrical energy","sourceExchanger":"Groundwater heat exchanger","buildingExchanger":"Building heat exchanger","refrigerant":"Refrigerant",
+    "groundWinter":"Water returns to the aquifer cooler","groundSummer":"Water returns to the aquifer warmer","floorWinter":"The floor releases heat into the room","floorSummer":"The floor absorbs heat from the room",
+    "stages":["1 · Evaporator","2 · Compressor","3 · Condenser","4 · Expansion valve"],
+    "stageBodies":[
+      "Low-pressure refrigerant receives heat through the exchanger wall and changes from a liquid-vapour mixture into vapour. Lower pressure allows evaporation at a lower temperature: the refrigerant must be colder than the water supplying heat.",
+      "The compressor draws in low-pressure vapour and does work on it using electricity. Pressure and temperature rise; the vapour becomes hot enough to release heat to the receiving circuit. Separate hydraulic pumps move the water.",
+      "Hot, high-pressure vapour releases heat through a second wall and condenses into liquid. In winter this heat warms the building water. The heat output includes both the absorbed heat and the compressor’s work.",
+      "Liquid passes through a restriction that lowers its pressure. Some of it flashes into vapour during expansion, forming a colder liquid-vapour mixture. This mixture returns to the evaporator and the cycle continues."
+    ],
+    "states":["Liquid-vapour mixture · low pressure","Vapour · low pressure","Hot vapour · high pressure","Liquid · high pressure"],
+    "sourceWinter":"Absorbs heat from groundwater","sinkWinter":"Releases heat to the building","sourceSummer":"Absorbs heat from the building","sinkSummer":"Releases heat to groundwater",
+    "functional":"Functional view: evaporator and condenser keep their positions in this drawing; their associated water circuits change. Reversing valves and actual connections are omitted. The compressor always works from low to high pressure.",
+    "balanceWinter":"Heat to the floor = heat from groundwater + compressor work",
+    "balanceSummer":"Heat to groundwater = heat from the home + compressor work",
+    "balanceNote":"Simplified cycle balance, neglecting losses. Water pumps add auxiliary electricity consumption.",
+    "groundBody":"A submersible pump lifts water from an extraction well, sends it through the heat pump’s water-side exchanger and on to a reinjection well. This is an open path through the aquifer. Groundwater remains separate from both the refrigerant and the floor-loop water.",
+    "floorBody":"A circulator keeps water moving in a closed loop between the heat pump and the floor pipes. In winter water releases heat to the floor and returns cooler; in summer it absorbs heat and returns warmer. Heat passes between the floor and the room through radiation and convection. Real systems add mixing, buffers and intermediate distribution.",
+    "condensation":"In summer the floor surface must stay above the air’s dew-point temperature, where water vapour begins to condense. Humidity control, regulation and dehumidification must follow the design; a cool floor alone does not control humidity.",
+    "boundaryBody":"Heat-exchanger walls allow heat to pass between separate fluids. Groundwater flows on one side and refrigerant on the other. A second exchanger separates refrigerant from building water. Nearby lines in the drawing do not indicate fluid mixing.",
+    "pumpBody":"The submersible pump creates the pressure difference needed to lift and move groundwater. The circulator offsets pressure losses in the building loop. The compressor acts on refrigerant vapour: these three machines perform different tasks.",
+    "pc2":"2 × PC2 · heating / cooling","buffer":"S3 · thermal buffers","distribution":"P06 / P07 / P08 + SC2 + P09","apartments":"Apartment modules and floors","intermediate":"Intermediate loop 40/35 °C","pc1":"PC1 · high temperature","dhw":"SC1 + S2 · domestic hot water",
+    "projectNote":"Conceptual link to the design. Water circuits are grouped; actual pressures, flows, temperatures and controls need confirmation. The original PDF remains private.",
+    "projectBodies":[
+      "PC2 identifies two HiRef MSW182ML heat pumps in the design. Groundwater supplies heat in winter and receives heat in summer. The teaching view shows one equivalent cycle; installed refrigerant circuits, changeover and recovery arrangements require manufacturer selections.",
+      "Two 2,000-litre S3 buffers belong to the building circuit. P06 serves Tower B communal areas, P07 the low-pressure zone, P08 the SC2 primary and P09 its high-pressure secondary. SC2 transfers heat while keeping the two water circuits separate.",
+      "Apartment modules meter consumption and regulate water to the floor pipes. The detail specifies 38/33 °C for the floors in winter and 18/23 °C in summer. These are design values to verify and differ from plant temperatures.",
+      "Domestic hot water adds another stage: PC2’s intermediate loop feeds PC1, which supplies two SC1 exchangers and two 3,000-litre S2 tanks. This is separate from the radiant-floor circuit. Simultaneous summer heat recovery depends on actual configuration and controls."
+    ],
+    "question":"Check your reading","questionText":"In summer, which water returns warmer after flowing through the floor pipes?","answers":["Building water","Groundwater","Refrigerant"],"correct":"Exactly. Building water absorbs heat from the floor and returns warmer to the heat pump.","retry":"Follow the floor loop: building water changes from blue to red as it absorbs heat.",
+    "guideBody":"The three maps connect heat transfer, the refrigeration cycle and the building’s components. Winter/summer selection changes arrows, explanations and relevant temperatures. Animations run automatically and respect the system’s reduced-motion preference. On phones, components stack vertically with readable text.",
+    "sourcesTitle":"Sources & boundaries","sourcesBody":"Cycle principles: U.S. Department of Energy, Introduction to Heat Pumps and Geothermal Heat Pumps. Design mapping: HiRef MSW/KSW documentation and analysis of the privately held drawing. Translations are original explanations; technical references retain their own language.",
+    "reference":"Open earlier technical maps (English)","pdfMsw":"HiRef MSW datasheet","pdfKsw":"HiRef KSW datasheet","hideDocument":"Hide document","privateNote":"The original drawing is excluded from this site. No control opens or downloads it.",
+    "noJs":"Enable JavaScript in your browser to explore the maps and animations."
+  },
+  "zh": {
+    "ui": {
+      "brand": "公寓冷热源机房 · Mes 600 S",
+      "prevStep": "◀ 上一步",
+      "nextStep": "下一步 ▶",
+      "stepTabs": ["1 · 原理（单台热泵）", "2 · + 生活热水", "3 · 公寓完整系统"],
+      "winter": "❄ 冬季 · 供暖",
+      "summer": "☀ 夏季 · 制冷",
+      "tagsBtn": "设备代号 (P1, S3…)",
+      "guideBtn": "指南与资料",
+      "themeBtn": "主题",
+      "prevPage": "◀ 上一页",
+      "nextPage": "下一页 ▶",
+      "openCycleBtn": "🔍 查看制冷循环放大图",
+      "locateBtn": "在系统图中高亮显示（第 3 步）",
+      "tagFilterAll": "全部",
+      "tagFilterWells": "地下水与水井",
+      "tagFilterGen": "热泵与缓冲水箱",
+      "tagFilterPumps": "循环泵 P01–P09",
+      "tagFilterWater": "饮用水与压力分区",
+      "activeTagsLabel": "当前代号：",
+      "legend": ["温度较高段", "温度较低段", "48 °C 热水及立管热回水", "热量传递"],
+      "clickHint": "点击任意部件或设备代号查看说明",
+      "rotateTitle": "请将手机横屏放置",
+      "rotateBody": "水力流程图采用横向布局，以完整、连续地展示水井、热泵与住户之间的全部管路连接。",
+      "rotatePcHint": "建议：同时可在电脑大屏上打开本页，以查看完整设计流量、设备型号、各点温度及交互式代号索引栏。",
+      "zoneAquifer": "地下含水层",
+      "zoneHeatPump1": "单台理论热泵",
+      "zoneHome": "住户室内",
+      "zoneClimateGen": "供暖与制冷机组",
+      "zoneBuildingLoops": "楼宇：闭式地板回路 + 热水立管",
+      "zoneDhwStage": "生活热水（ACS）二级升温回路",
+      "zoneWellsMulti": "地下水：2 口井共 3 台抽水泵 + 过滤",
+      "zoneGenMulti": "冷热源：2 × PC2 + S3 缓冲水箱",
+      "zoneClimateZones": "A/B 塔空调：3 条支路与 SC2 高压隔断",
+      "zoneDhwMulti": "双级热水与给水站：MP / BP 双支路配置",
+      "step1Well": "取水井",
+      "step1Return": "回灌井",
+      "step1HP": "水源热泵",
+      "step1Home": "辐射地板管路",
+      "aquiferSourceSub": "地下水 ~16 °C",
+      "aquiferReturnWinter": "低温回灌 (~11 °C)",
+      "aquiferReturnSummer": "升温回灌 (~21 °C)",
+      "zoomCyclePill": "🔍 点击：制冷循环",
+      "electricWork": "电能输入",
+      "compressorShort": "压缩机",
+      "expansionShort": "膨胀阀",
+      "copBadgeWinter": "示例：3 份地热 + 1 份电能 = 4 份供暖热量",
+      "copBadgeSummer": "示例：3 份室内热 + 1 份电能 = 4 份排入地下",
+      "cycleCenterSub": "点击四个阶段查看详细原理",
+      "floorModeWinter": "闭式循环：向房间释放热量",
+      "floorModeSummer": "闭式循环：吸收房间热量",
+      "step2Well": "井水取水",
+      "step2Return": "井水回灌",
+      "step2PC2": "PC2 多功能热泵",
+      "step2S3C": "空调缓冲箱",
+      "step2Floors": "辐射地板",
+      "step2Riser": "立管与龙头",
+      "step2S3I": "40/35 °C 缓冲",
+      "step2PC1": "PC1 高温热泵",
+      "step2SC1": "SC1 换热器",
+      "step2S2": "S2 储水箱",
+      "step2Mix": "恒温混水阀",
+      "step2Mains": "自来水与软化",
+      "closedLoopNote": "闭式环路：循环水始终留在地板管内",
+      "stairwellLabel": "楼梯间立管",
+      "tapRoomLabel": "住户内",
+      "openTapNote": "开式用水 → 排水",
+      "noColdReturnNote": "使用后的水排入下水道",
+      "step3Wells": "2 口井 · 3 台泵",
+      "step3Treat": "过滤与稳压罐",
+      "step3Return": "双回灌井",
+      "step3PC2": "主热泵机组",
+      "step3S3C": "空调缓冲箱",
+      "step3Common": "B 塔公共区域",
+      "step3BP": "A/B 塔 · 低压区 (BP)",
+      "step3SC2": "SC2 隔压",
+      "step3AP": "A/B 塔 · 高压区 (AP)",
+      "step3S3I": "中间缓冲箱",
+      "step3PC1": "高温热泵",
+      "step3SC1": "板式换热器",
+      "step3S2": "热水储水罐",
+      "step3Mix": "双混水阀",
+      "step3DhwZones": "立管与水龙头",
+      "step3Potable": "生活给水加压与水处理站",
+      "threePumpsSub": "2×54 + 1×108 m³/h (备用)",
+      "riserMP": "中压区 MP · 48 °C",
+      "riserBP": "低压区 BP · 48 °C"
+    },
+    "steps": [
+      {
+        "title": "第 1 步（共 3 步）· 单台热泵的基本原理",
+        "winterSummary": "冬季，热泵从地下水（16 → 11 °C）提取热能，经压缩机升温至 38 °C，送入辐射地板为室内供暖。",
+        "summerSummary": "夏季传热方向反转：18 °C 冷水在地板内吸收室内热量（回水 23 °C），热泵将热量排入地下水（16 → 21 °C）。"
+      },
+      {
+        "title": "第 2 步（共 3 步）· 与生活热水系统的耦合",
+        "winterSummary": "闭式 40/35 °C 中间水环路连接 PC2 与 PC1，由 PC1 升温至 70/65 °C 为储水罐 S2（60 °C）充热。住户龙头用水（48 °C）使用后直接排出，楼梯间则设有保温热回水环路（P02）。",
+        "summerSummary": "夏季生活热水同样持续运行：PC2 为地板供冷的同时，40/35 °C 支路向 PC1 供热，保持 S2（60 °C）和 48 °C 热水立管恒温。"
+      },
+      {
+        "title": "第 3 步（共 3 步）· 公寓实际系统（多台并联与压力分区）",
+        "winterSummary": "实际工程中每类设备均设有多台单元：2 口井共 3 台潜水泵（P1 设 2×P11，备用井 P2 设 P10）、2 台 PC2、4 台 S3 缓冲箱、3 条空调支路（SC2 隔离高层高压 AP）以及 MP/BP 两套独立热水系统。",
+        "summerSummary": "夏季制冷时各并联单元协同运行：2 台 PC2 冷却 BP 与 AP 分区（经 SC2 隔压），PC1 与 2 台 SC1、2 台 S2 供应 MP 和 BP 生活热水。"
+      }
+    ],
+    "richTopics": {
+      "ground": {
+        "title": "地下含水层：冬季热源与夏季排热汇",
+        "pages": [
+          "地下水全年保持约 16 °C 的稳定温度。潜水泵从取水井抽水，流经热泵板式换热器后再由回灌井返回含水层。",
+          "冬季地下水释放热量后降温回灌（~11 °C）；夏季吸收建筑排出的热量后升温回灌（~21 °C）。地下水始终在独立开式管路中流动，与制冷剂和室内循环水完全隔离。"
+        ]
+      },
+      "cycle": {
+        "title": "热泵内部原理（压缩机与蒸发器）",
+        "hasCycleZoom": true,
+        "pages": [
+          "热泵内部有密封循环的制冷剂。在蒸发器内，低压使制冷剂在低温下沸腾，从而吸收水侧热量（冬季吸取地下水热量，夏季吸取地板水热量）。",
+          "压缩机吸入低压蒸气并消耗电能将其压缩升温。高温蒸气在冷凝器中向另一侧水回路放热并液化，随后经膨胀阀降压降温，重新开始循环。"
+        ]
+      },
+      "floor": {
+        "title": "地板辐射盘管：同一闭式水环路兼顾冬暖夏凉",
+        "pages": [
+          "住户地板下敷设闭式技术水盘管。冬季 38 °C 供水向房间放热后以 33 °C 返回；夏季 18 °C 供水吸收室内热量后以 23 °C 返回。",
+          "夏季供冷时，供水温度须高于室内空气露点，并配合住户模块连接的除湿设备，防止地面结露。"
+        ]
+      },
+      "pc2": {
+        "title": "PC2 · 主多功能水源热泵（2 × HiRef MSW182ML）",
+        "hasCycleZoom": true,
+        "pages": [
+          "公寓主冷热源采用 2 台并联 PC2 机组（单台额定供暖 260.4 kW / 制冷 233.3 kW）。双机并联便于按负荷分级调节并在检修时保障供能。",
+          "每台 PC2 均配备三个独立水侧换热器：地下水侧、建筑空调侧以及通往 PC1 的 40/35 °C 中间水侧。夏季排出的室内热量可根据控制策略用于中间回路。"
+        ]
+      },
+      "s3": {
+        "title": "S3 · 供水并联缓冲水箱（4 × 2,000 L）",
+        "pages": [
+          "原设计共设 4 台各 2,000 升的 S3 惯性缓冲水箱：2 台用于空调回路，另 2 台用于 40/35 °C 中间水回路。",
+          "两套回路中的 S3 水箱均并联在供水干管上，而回水干管直接绕过水箱返回 PC2。水箱储热可平抑负荷波动并减少压缩机频繁启停。"
+        ]
+      },
+      "intermediate": {
+        "title": "PC2 ↔ PC1 连接环路（40/35 °C 中间水回路）",
+        "pages": [
+          "为在不迫使主热泵 PC2 长期高温运行的条件下制备 60 °C 储水，系统采用由闭式技术水连接的双级升温架构。",
+          "循环水以 35 °C 进入 PC2 升温至 40 °C，流经两台并联 S3 水箱后由水泵 P05 送入 PC1 热源侧放热，再以 35 °C 直接返回 PC2。"
+        ]
+      },
+      "pc1": {
+        "title": "PC1 · 高温生活热水热泵（HiRef 30KSW202K_F1L）",
+        "pages": [
+          "PC1 从 40/35 °C 中间回路取热。由于进水温度已达 40 °C（高于 16 °C 井水），其双涡旋压缩机可高效输出 70/65 °C 高温一次水（设计制热量 180.5 kW）。",
+          "循环泵 P04 驱动 70/65 °C 闭式一次水流经生活热水板式换热器 SC1，与饮用水保持水力隔离。"
+        ]
+      },
+      "sc1": {
+        "title": "SC1 · 生活热水板式换热器（2 × 90 kW）",
+        "pages": [
+          "两台 90 kW 的 SC1 板式换热器（中压区 MP 与低压区 BP 各一台）将 PC1 一次水（70/65 °C）的热量传递给饮用水充热环路（60/55 °C）。",
+          "金属换热板在高效导热的同时，将闭式技术水与自来水彻底隔开。"
+        ]
+      },
+      "s2": {
+        "title": "S2 · 生活热水储水罐（2 × 3,000 L · 60 °C）",
+        "pages": [
+          "两台各 3,000 升的立式储水罐 S2（共 6,000 L，MP 与 BP 各一台）在 60 °C 下储存生活热水，满足全楼早晚集中用水高峰。",
+          "两台充热泵 P01 在 S2 底部与 SC1 二次侧之间循环饮用水，直至整罐达到设定储热温度。"
+        ]
+      },
+      "dhw": {
+        "title": "从储水罐到水龙头——为什么回水立管是温热的？",
+        "pages": [
+          "S2 顶部流出的 60 °C 热水经恒温混水阀调配至 48 °C（ACP 管线），送入楼梯间热水立管。住户打开龙头时，热水进入户内使用后直接排入下水道——户内绝无冷水流回机房。",
+          "那么带有水泵 P02（MP）和 P03（BP）的回水管是什么？它是仅在公共楼梯间立管顶端折返的热回水环路（ACR，约 46–48 °C），流回混水阀和 S2 进水口，使龙头关闭时立管依然保持温热，即开即热。",
+          "当住户用水消耗热水时，等量的 ~15 °C 冷自来水（来自加压组 GP1/GP2 与软化器 T2 的蓝色 AFP 管线）从底部补入 S2 并供给混水阀冷水口。"
+        ]
+      },
+      "water": {
+        "title": "生活给水站：T1 过滤器、S1 水箱、GP1/GP2 加压组与 T2 软化器",
+        "pages": [
+          "市政自来水经自清洗过滤器 T1 进入 2 台各 2,000 升的储水箱 S1，随后由两套双泵变频加压组——GP1（高层中压 MP）和 GP2（中低层低压 BP）——分区供水。",
+          "各分区一路直接向住户供应冷饮用水（AFP），另一路经 2 台容积式软水器 T2（防止 SC1 与 S2 结垢）及 T3、T4 加药装置补入热水系统。"
+        ]
+      },
+      "wells": {
+        "title": "P1、P2 与 R1 水井：为何配置 3 台抽水潜水泵",
+        "pages": [
+          "井水取水采用全冗余设计：主取水井 P1 内设 2 台并联潜水泵 P11，单台 54 m³/h（合计 108 m³/h = 30 L/s）；备用井 P2 内设第 3 台潜水泵 P10，单台即可提供全部 108 m³/h 流量。",
+          "因此两口独立取水井共配备 3 台抽水泵。井水在 PC2 换热后，经 2 口均标为 R1 的回灌井全部回灌至含水层。"
+        ]
+      },
+      "gw-treatment": {
+        "title": "井水侧保护：T6 旋流除砂器、2 × T7 过滤器与 2 × S4 稳压罐",
+        "pages": [
+          "井水进入 PC2 板式换热器前，先经旋流除砂器 T6 分离重质泥沙，再分流通过 2 台并联的 100 微米自清洗精滤器 T7。",
+          "过滤后干管旁接 2 台各 1,000 升的气囊式稳压罐 S4，用于吸收水锤并稳定井水管网压力。"
+        ]
+      },
+      "dist-zones": {
+        "title": "A/B 塔空调配水：3 条支路与高低压分区",
+        "pages": [
+          "S3 缓冲水箱下游分出三条支路：P06 供应 B 塔公共区域；P07（配混水阀）供应 A/B 塔中低层低压区（BP）住户；P08 供应隔压换热器 SC2 的一次侧。",
+          "每户均设户用计量调节模块，内含能量表、二通阀、地板混水循环单元（冬季 38/33 °C、夏季 18/23 °C）及除湿机接口。"
+        ]
+      },
+      "sc2": {
+        "title": "SC2 · 高层空调为何采用板式隔压换热器",
+        "pages": [
+          "高层住户（高压区 AP）静水压较高。通过板式换热器 SC2 将高层环路与机房主环路水力隔离，可避免 PC2 热泵与 S3 水箱承受过高静压。",
+          "水泵 P08 驱动机房水通过 SC2 一次侧，P09 驱动独立的 AP 二次侧闭式水循环至 A/B 塔高层住户，只传热而不叠加水压。"
+        ]
+      },
+      "evaporator": {
+        "title": "阶段 1 · 蒸发器（低温吸热沸腾）",
+        "pages": [
+          "低压气液混合制冷剂进入蒸发器。由于压力低，制冷剂在低温下即可沸腾，温度低于板片另一侧的水，从而自发吸热并完全气化。"
+        ]
+      },
+      "compressor": {
+        "title": "阶段 2 · 压缩机（输入电能提升温度）",
+        "pages": [
+          "低压蒸气温度尚低，压缩机消耗电能将其压缩，使气体压力与温度大幅跃升并高于受热水侧温度。"
+        ]
+      },
+      "condenser": {
+        "title": "阶段 3 · 冷凝器（释放放大后的热量）",
+        "pages": [
+          "高温高压蒸气在冷凝器内向水侧释放吸收的环境热与压缩机功之和（如 3 + 1 = 4），自身冷却凝结为高压液体。"
+        ]
+      },
+      "expansion": {
+        "title": "阶段 4 · 膨胀阀（节流降压降温）",
+        "pages": [
+          "高压液体流经节流孔口后压力骤降，部分液体闪蒸吸热，整股流体降温为低温低压气液混合物，再次进入蒸发器循环。"
+        ]
+      },
+      "guide": {
+        "title": "阅读指南与公开技术参考资料",
+        "hasSources": true,
+        "pages": [
+          "本网站按三个递进步骤展开：先以单台理论热泵说明冷暖原理（第 1 步），再加入生活热水双级升温与立管回水（第 2 步），最后展示本公寓多机组并联与分区全貌（第 3 步）。",
+          "红、蓝色代表同一回路中较热与较冷管段；橙色代表 48 °C 混合生活热水及立管保温回水。标注参数均引自设计图（S00），原始图纸未包含在公开文件中。"
+        ]
+      }
+    },
+    "tags": {
+      "P1": { "cat": "wells", "name": "主取水井", "units": "1 口井（内设 2 台 P11 泵）", "body": "主地下水取水井，内设两台并联潜水泵 P11，单台 54 m³/h（合计 108 m³/h = 30 L/s）。" },
+      "P2": { "cat": "wells", "name": "备用取水井", "units": "1 口备用井（内设 1 台 P10 泵）", "body": "全容量备用取水井，内设潜水泵 P10（108 m³/h）。" },
+      "P11": { "cat": "wells", "name": "主井 P1 潜水泵", "units": "2 台（连同 P10 共 3 台抽水泵）", "body": "主井 P1 内的两台 DAB SS6 E11（或同级）井用潜水泵（单台 54 m³/h，扬程 930 kPa，22 kW）。" },
+      "P10": { "cat": "wells", "name": "备用井 P2 潜水泵", "units": "1 台（第 3 台抽水泵）", "body": "备用井 P2 内的 DAB SS8 A05（或同级）潜水泵，单台即可承担全部 108 m³/h 设计流量（37 kW）。" },
+      "T6": { "cat": "wells", "name": "旋流除砂器（水力旋流器）", "units": "1 台（DN125 · 108 m³/h）", "body": "利用离心旋流在进入精滤器 T7 前分离井水中的重质砂粒。" },
+      "T7": { "cat": "wells", "name": "井水自清洗精滤器", "units": "2 台并联（DN100 · 100 µm）", "body": "两台并联 100 微米过滤器（设计单台 65 m³/h），保护两台 PC2 热泵的板式换热器。" },
+      "S4": { "cat": "wells", "name": "井水侧稳压膨胀罐", "units": "2 台气囊罐 × 1,000 L", "body": "T7 下游旁接的两台 ELBI DL 1000 V 压力罐，用于平抑水锤并稳定井水压力。" },
+      "R1": { "cat": "wells", "name": "地下水回灌井", "units": "2 口回灌井（均标为 R1）", "body": "将换热后的地下水全部回灌含水层（冬季约 11 °C，夏季约 21 °C），不消耗地下水资源。" },
+      "PC2": { "cat": "gen", "name": "主多功能水源热泵", "units": "2 台并联（HiRef MSW182ML）", "body": "承担建筑供暖（单台 260.4 kW）与制冷（单台 233.3 kW），具有地下水、建筑空调与 40/35 °C 中间水三个独立水通道。" },
+      "PC1": { "cat": "gen", "name": "生活热水高温水源热泵", "units": "1 台双压缩机机组（HiRef 30KSW202K_F1L）", "body": "从 40/35 °C 中间回路吸热并升温至 70/65 °C（180.5 kW），经 SC1 加热生活热水。" },
+      "S3": { "cat": "gen", "name": "惯性缓冲水箱", "units": "4 台 × 2,000 L（空调 2 台 + 中间 2 台）", "body": "共 4 台 2,000 L 缓冲罐：2 台并联于空调供水管，2 台并联于 40/35 °C 供水管，回水均直接绕过水箱。" },
+      "SC2": { "cat": "gen", "name": "高压区隔压板式换热器", "units": "1 台板换（231 / 240 kW）", "body": "将机房侧水压与高层高压区（AP，由 P09 循环）静水压隔离开来，实现隔压传热。" },
+      "SC1": { "cat": "gen", "name": "生活热水板式换热器", "units": "2 台 × 90 kW（MP 与 BP 各 1 台）", "body": "将 PC1 闭式一次水（70/65 °C）的热量传给 S2 饮用水充热回路（60/55 °C），两侧流体互不混合。" },
+      "S2": { "cat": "gen", "name": "生活热水储水罐", "units": "2 台 × 3,000 L（MP 与 BP 各 1 台）", "body": "在 60 °C 下共储存 6,000 升生活热水（承压 10 bar），保障高低区用水高峰。" },
+      "P01": { "cat": "pumps", "name": "S2 储水罐充热循环泵", "units": "2 组水泵（MP 与 BP 各 1 组）", "body": "在 S2 底部与 SC1 二次侧之间循环饮用水（单台 16 m³/h），为储水罐充热。" },
+      "P02": { "cat": "pumps", "name": "中压区（MP）热水回水循环泵", "units": "1 台（MP 立管 · 3.6 m³/h）", "body": "龙头关闭时使高层楼梯间立管内的温水（~46–48 °C，ACR MP）循环回混水阀与 S2。" },
+      "P03": { "cat": "pumps", "name": "低压区（BP）热水回水循环泵", "units": "1 台（BP 立管 · 3.6 m³/h）", "body": "维持中低层楼梯间热水立管的保温循环（~46–48 °C，ACR BP）。" },
+      "P04": { "cat": "pumps", "name": "PC1 高温一次侧循环泵", "units": "1 组水泵（32 m³/h · 70/65 °C）", "body": "驱动 PC1 的 70 °C 闭式一次水流经两台 SC1 换热器。" },
+      "P05": { "cat": "pumps", "name": "40/35 °C 中间回路循环泵", "units": "1 组水泵（26 m³/h）", "body": "将中间缓冲箱 S3 的 40 °C 水送入 PC1 热源侧换热器。" },
+      "P06": { "cat": "pumps", "name": "公共区域空调循环泵", "units": "1 组水泵（3 m³/h）", "body": "供应 B 塔公共活动空间的空调支路。" },
+      "P07": { "cat": "pumps", "name": "低压区（BP）空调循环泵", "units": "1 组变频泵（66 m³/h）", "body": "经混水调节后供应 A/B 塔中低层住户（BP）的辐射地板干管。" },
+      "P08": { "cat": "pumps", "name": "SC2 一次侧循环泵", "units": "1 组变频泵（41.2 m³/h）", "body": "驱动机房空调水流经隔压换热器 SC2 的一次侧。" },
+      "P09": { "cat": "pumps", "name": "高压区（AP）空调循环泵", "units": "1 组变频泵（57 m³/h）", "body": "在 SC2 二次侧运行，向 A/B 塔高层住户（AP）输送供暖或制冷循环水。" },
+      "T1": { "cat": "water", "name": "进户自来水过滤器", "units": "1 组过滤器（AMBRA DN100 · 50 µm）", "body": "过滤市政进水中的悬浮杂质，保护后续储水箱 S1 与水泵。" },
+      "S1": { "cat": "water", "name": "加压前储水罐", "units": "2 台 × 2,000 L", "body": "设置在变频加压组 GP1、GP2 吸水侧的缓冲储水罐。" },
+      "GP1": { "cat": "water", "name": "中压区（MP）生活给水加压组", "units": "1 套双变频泵组（2 × 7.5 kW）", "body": "为高层住户提供中压（MP，34 m³/h）冷自来水及热水系统补水。" },
+      "GP2": { "cat": "water", "name": "低压区（BP）生活给水加压组", "units": "1 套双变频泵组（2 × 5.5 kW）", "body": "为中低层住户提供低压（BP，37 m³/h）冷自来水及热水系统补水。" },
+      "T2": { "cat": "water", "name": "生活热水补水软化器", "units": "2 台（MP 与 BP 各 1 台）", "body": "去除进入 S2 与 SC1 的自来水钙镁硬度，防止换热面结垢。" },
+      "T3": { "cat": "water", "name": "防军团菌加药装置", "units": "2 套（MP + BP）", "body": "设计设置在两路软化后生活热水补水管上的卫生加药点。" },
+      "T4": { "cat": "water", "name": "防腐加药装置", "units": "2 套（MP + BP）", "body": "与 T3 并列设置，用于保护热水储罐及管网免受腐蚀。" },
+      "AFP": { "cat": "water", "name": "冷饮用水管网（Acqua Fredda Potabile）", "units": "2 套分区管网（AFP MP + AFP BP）", "body": "约 15 °C 的冷自来水管线，直供住户冷水龙头，并向 S2 底部与混水阀补水。" },
+      "ACP": { "cat": "water", "name": "48 °C 生活热水供水管（Acqua Calda Potabile）", "units": "2 套楼梯间立管（ACP MP + ACP BP）", "body": "经混水阀调配至 48 °C 的生活热水，沿楼梯间立管上升并在开龙头时进入住户。" },
+      "ACR": { "cat": "water", "name": "生活热水立管热回水（~46–48 °C）", "units": "2 套立管环路（由 P02、P03 驱动）", "body": "楼梯间公共立管的保温回水（亦标为 RCP）：龙头关闭时保持立管温热，绝非来自住户排水。" },
+      "BP": { "cat": "water", "name": "低压分区（Bassa Pressione）", "units": "空调 (P07) + 给水/热水 (GP2/P03)", "body": "服务建筑中低楼层，所需静水压力较低。" },
+      "MP": { "cat": "water", "name": "中压分区（给水与生活热水）", "units": "高层给水与热水 (GP1/P02)", "body": "服务高层住户的给水与热水独立分区，配有专用 GP1、T2、SC1 和 S2。" },
+      "AP": { "cat": "water", "name": "高压分区（高层空调）", "units": "SC2 二次侧 + P09", "body": "服务 A/B 塔高层的闭式空调分区，通过 SC2 与机房水力隔断。" }
+    },
+    "canvas":{
+      "simple":"简化图","complete":"完整图",
+      "winter":"冬季","summer":"夏季","guide":"指南","previous":"上一页","next":"下一页",
+      "rotateTitle":"请横向放置手机","rotateBody":"横屏可查看完整系统。各设备的位置保持不变，无需滚动。选择部件可查看说明。",
+      "legend":["较热","较冷","热量"],"mixedLegend":"48 °C 热水",
+      "labels":{"well":"取水井","returnWell":"回灌井","panels":"地板管路","hotWater":"生活热水","pump":"热泵","taps":"水龙头","mains":"自来水"},
+      "topics":{
+        "ground":{"title":"地下水：取水与回灌","pages":["水泵抽取地下水，经 T6、T7 送至 PC2，再回灌至含水层。冬季回灌水较冷，夏季较热。","井的符号合并表示 P1/P2、水泵及水处理。S4 压力罐接在旁支。地下水、制冷剂和建筑循环水始终分离。"]},
+        "pc2":{"title":"PC2 · 两台热泵","pages":["冬季 PC2 将地下水的热量传给建筑循环水；夏季从建筑吸热，向地下水放热。水管连接保持不变，热量传递方向改变。","圆圈及电能箭头概括压缩机的作用。制冷剂在蒸发器中吸热，压缩机提高其压力和温度，使其能够在冷凝器中放热。设备内部细节合并于符号中。"]},
+        "buffer":{"title":"S3 · 空调缓冲水箱","pages":["这两个 2,000 升的 S3 水箱在供水管路上并联。水分流进入水箱后汇合，流向配水系统。回水直接返回 PC2。","水箱增加储热能力，减缓负荷变化。下方支路的另一组 S3 属于中间回路。"]},
+        "floor":{"title":"配水与地板管路","pages":["冬季水向地板放热，回水变冷；夏季水吸收室内热量，回水变暖。当前显示 {floor}，数值来自设计详图。","该符号合并表示配水和末端。P06 服务公共区域，P07 服务低压支路。P08 向 SC2 一次侧供水，P09 服务其另一侧水力独立的高压回路。","制冷时，地板表面温度须高于露点。调节和除湿可避免结露；实际温度和设置需由技术人员核实。"]},
+        "intermediate":{"title":"PC2 → S3 → P05 → PC1","pages":["沿下方支路观察：PC2 将技术循环水从 35 °C 加热至 40 °C。水经过两个并联的 S3 水箱，再由 P05 循环送入 PC1。","水在 PC1 内向制冷剂放热，以 35 °C 直接返回 PC2。两台机器的制冷剂回路独立，由这个水环路连接。40/35 °C 是设计标注值。"]},
+        "pc1":{"title":"PC1 · 第二级升温","pages":["PC1 从 40/35 °C 中间回路吸热。其压缩机增加做功，使热量能够传给独立的 70/65 °C 一次回路。","P04 将一次循环水送向 SC1。红色表示较热的供水，蓝色表示放热后的回水。颜色仅表示同一回路内的相对温度。"]},
+        "dhw":{"title":"SC1 与 S2 · 储水箱充热","pages":["P04 将 PC1 一次水送至 SC1，通过换热器向饮用水传热。P01 使饮用水在 SC1 与 S2 之间循环，为水箱充热。SC1 两侧的水保持分离。","图中合并表示两个生活热水压力区的等效支路。每个 S2 为 3,000 升，设计储水温度为 60 °C。充热回路保持热水供应，通往水龙头的是另一条支路。"]},
+        "delivery":{"title":"从水箱到水龙头","pages":["打开水龙头时，热水从 S2 流出。混水阀加入冷自来水，达到设计标注的 48 °C。橙色管线将混合水送至水龙头，水滴表示实际取水。","水龙头流出的水被使用，不返回储水箱；新的冷水补入 S2。带 P02/P03 的蓝色管线是独立的配水回水循环，使水龙头关闭时管道仍保持温热。","地板循环水与生活热水分离。图中为等效生活热水支路及功能连接；MP/BP 分区、水处理和控制细节保留在拓扑图及技术文档中。"]},
+        "guide":{"title":"如何阅读示意图","pages":["移动圆点表示水流，金色箭头表示传热。红、蓝代表同一回路中较热、较冷的部分。比较不同回路时，应查看温度数值。","示意图依据原设计重建的拓扑图。符号合并表示设备，省略旁通、阀门和制冷剂管路细节。图中为教学模型和设计值，不代表实时运行数据。","资料来源：私下保存的设计图及 HiRef MSW/KSW 文档。原图不包含在网站中。公开技术资料在此打开，关闭后返回同一张图。"]}
+      }
+    },
+    "map": {
+      "nav":["基本原理","热泵内部","本楼系统"],
+      "more":"工作原理","heat":"热量","fluid":"流体流动",
+      "routeWinter":"热量从地下水传到住宅。","routeSummer":"热量离开住宅，传到地下水。",
+      "principleTitles":["地下水","热泵","地板与房间"],
+      "principleWinter":["即使地下水比室内温度低，它仍含有热能。潜水泵把水送到换热器；水释放热量后，以较低温度返回含水层。","一种称为制冷剂的流体吸收这些热量。压缩机利用电能提高其温度，使它能够加热地板回路中的水。","水在地板下的管道中循环并释放热量。地板使房间变暖；水以较低温度返回热泵。"],
+      "principleSummer":["地下水接收从住宅中移走的热量，以及压缩机输入的能量。经过换热器后，水以较高温度流向回灌井。","制冷剂从地板回路的水中吸热，再向地下水放热。压缩机消耗电能，使这一传热过程得以进行。","房间向地板及其管道中的水释放热量。温度升高的水返回热泵，再次被冷却。"],
+      "waterGround":["从取水井抽水","返回含水层"],
+      "waterFloorWinter":["较热的供水","较冷的回水"],"waterFloorSummer":["较冷的供水","较热的回水"],
+      "sealed":"制冷剂在密封回路中循环。",
+      "separation":"三种独立流体：地下水、制冷剂和地板循环水。换热器中的隔壁让热量通过，同时保持流体分离。",
+      "readMap":"沿连续管线查看各部件的接口。金色箭头表示热量，圆点表示流体。选择符号可查看说明。跨线弧表示两条线交叉但不连接。",
+      "temperatureLegend":["温度较高段","温度较低段","热量传递"],
+      "temperatureNote":"流体吸收或释放热量时，颜色随之变化。红色和蓝色表示同一回路内的相对温度；比较不同回路时，应查看标注的温度数值。移动圆点表示流体运动。",
+      "phaseNote":"制冷剂蒸发和冷凝时，可在温度近似不变的情况下传递大量热量。压缩使其升温，节流膨胀使其降温。",
+      "intermediateTitle":"PC2 ↔ PC1 的连接",
+      "pc2Exchange":"PC2 加热循环水",
+      "pc1Exchange":"PC1 从水中吸热",
+      "intermediateBody":"沿同一股技术循环水观察：水以 35 °C 进入 PC2，通过换热器吸收制冷剂的热量。水以 40 °C 流出，经过两个并联的 S3 水箱，再由 P05 泵送至 PC1。在 PC1 内，水将热量传给其制冷剂，然后以 35 °C 直接返回 PC2。PC1 的压缩机使热量能够进一步传给独立的 70/65 °C 一次回路。",
+      "intermediateScope":"此放大图仅显示中间回路。两个制冷剂回路保持独立，由技术循环水连接。40/35 °C 为设计标注值。内部符号表示功能性换热；实际制冷剂管路和热回收控制需依据制造商资料确认。",
+      "stageShort":["在低压下，制冷剂能在低温时沸腾。它从水中吸热并变成蒸气。","压缩机利用电能压缩蒸气。压力和温度升高，使制冷剂比需要加热的水更热。","高温蒸气通过隔壁向水放热。随着热量释放，蒸气冷凝为液体。","液体通过节流部件后压力降低，其中一部分蒸发。混合物温度下降，准备再次吸热。"],
+      "cycleWaterWinter":["从地下水吸热","向地板循环水放热"],"cycleWaterSummer":["从地板循环水吸热","向地下水放热"],
+      "cycleRead":"按 1 → 2 → 3 → 4 → 1 阅读。回路箭头跟随制冷剂；两个换热器处的金色箭头表示热量进入和离开。",
+      "cycleReturn":"混合物返回蒸发器，循环重新开始。",
+      "energyTitle":"热泵为何能提供比所用电能更多的热量？",
+      "energyIntro":"以能量单位为例：压缩机使环境中已有的热量得以转移。压缩机输入的能量会加到转移的热量中。",
+      "energyWinter":["来自地下水","电能输入","送到住宅"],"energySummer":["来自住宅","电能输入","送到地下水"],
+      "energyLimit":"3 + 1 = 4 为教学示例。实际性能取决于温度和设备。此平衡忽略散热损失和水泵耗电。",
+      "projectTitles":["含水层与水井","PC2 · 热泵","S3 · 缓冲水箱","配水系统","各住户"],
+      "projectWinter":["P1 / P2 将水经 T6、T7 和 S4 送到 PC2。水释放热量后返回含水层。","两台 HiRef MSW182ML 将地下水的热量传给建筑回路，同时加入压缩机做功。","两个 2,000 升缓冲水箱利用水储存能量，使建筑回路运行更稳定。","P06、P07 分别服务各自支路。P08 → SC2 → P09 连接高压支路，同时保持水回路分离。","住户模块调节地板循环水。设计详图标注供水 38 °C、回水 33 °C。地板为房间供暖。"],
+      "projectSummer":["PC2 将从建筑中移走的热量及压缩机做功传给地下水。回灌水的温度升高。","两台 PC2 从建筑回路吸热并向地下水放热。两侧的热力作用发生交换。","同样两个 2,000 升缓冲水箱稳定冷水回路。回水携带从建筑中收集的热量。","配水系统向地板供应较冷的水，并收集较热的回水。SC2 继续分隔不同压力的水回路。","设计详图标注供水 18 °C、回水 23 °C。地板吸收热量；控制系统和除湿必须防止结露。"],
+      "projectTempWinter":["供水 38 °C","回水 33 °C"],"projectTempSummer":["供水 18 °C","回水 23 °C"],
+      "projectRead":"矢量图依据原设计的拓扑图生成，供回水保持连通。每组 S3 在供水管路上并联，回水走独立路径。打开配水图可查看 P06、P07 以及 SC2 两侧独立的水回路。",
+      "dhwBranch":"独立支路：生活热水",
+      "dhwSummary":"PC2 → 中间回路 → PC1 → SC1 → S2。该支路加热自来水，夏季也与地板回路保持分离。打开可查看换热器及夏季热回收的适用条件。",
+      "dhwNodes":["中间回路 · 40/35 °C","PC1 与一次回路 · 70/65 °C","SC1 · 热量穿过隔壁","S2 · 两个 3,000 升水箱"],
+      "dhwBodies":["热量从 PC2 经另外两个 2,000 升 S3 缓冲水箱及 P05，送到 PC1 的热源侧。","PC1 加入压缩机做功并提高温度。P04 推动一次回路中的水。","两个 90 kW SC1 换热器向生活热水回路传热，同时保持其与一次回路分离。","P01 泵为饮用水水箱充热。设计标注储水 60 °C、混合后配水 48 °C。"],
+      "mobileHint":"手机上示意图纵向排列，箭头仍表示相同的传热方向。"
+    },
+    "title":"从地下水到舒适的家",
+    "brand":"我们的住宅楼 · 热泵",
+    "views":["01 · 流体回路","02 · 热泵内部","03 · 本楼系统"],
+    "language":"语言","winter":"冬季 · 供暖","summer":"夏季 · 制冷","pause":"暂停","play":"播放","step":"前进一步","reset":"重新开始","fit":"显示全图","zoomIn":"放大","zoomOut":"缩小","close":"关闭","back":"返回示意图","info":"指南与资料","speed":"速度",
+    "headings":["三种独立流体，共同完成热量传递","制冷剂经历四个变化过程","在住宅楼系统中找到这些回路"],
+    "leadsWinter":["要让地板变暖，我们先从地下水中获取热量。沿着水流到达热泵：制冷剂把这些热量提升到更高的温度水平。","压缩机利用电能提高蒸气的压力和温度，随后制冷剂就能向地板回路中的水释放热量。","原理保持不变。设计中，两台 PC2 提供供暖和制冷；缓冲水箱与配水回路把机房连接到各住户。"],
+    "leadsSummer":["要让室内凉爽，地板管道中的水会吸收房间的热量。热泵把这些热量连同压缩机输入的能量一起传给地下水。","此时，制冷剂从建筑水回路吸热并蒸发，再向地下水放热并冷凝。压缩机仍然吸入低压蒸气。","同一套辐射地板也可以供冷。温度和湿度控制有助于防止地面结露。"],
+    "legend":["地下水 · 开式路径","建筑循环水 · 闭式回路","制冷剂 · 密封回路","虚线箭头 · 热量"],
+    "hint":"选择部件可查看说明。移动圆点表示流体流动，速度仅为示意。关闭弹窗后保留原视图。",
+    "simplified":"教学模型：管路和辅助装置已简化，图中没有实时测量值。",
+    "ground":"地下水","extraction":"取水井","reinjection":"回灌井","pump":"潜水泵","heatpump":"热泵","zoomPump":"查看内部循环","home":"住宅","floor":"地板辐射管道","supply":"供水","return":"回水","circulator":"循环泵","electricity":"电能","sourceExchanger":"地下水侧换热器","buildingExchanger":"建筑侧换热器","refrigerant":"制冷剂",
+    "groundWinter":"回灌地下的水温更低","groundSummer":"回灌地下的水温更高","floorWinter":"地板向房间释放热量","floorSummer":"地板从房间吸收热量",
+    "stages":["1 · 蒸发器","2 · 压缩机","3 · 冷凝器","4 · 膨胀阀"],
+    "stageBodies":[
+      "低压制冷剂通过换热器壁面吸收热量，由气液混合物变成蒸气。压力越低，蒸发温度越低；为了吸热，制冷剂的温度必须低于向它供热的水温。",
+      "压缩机吸入低压蒸气，并利用电能对它做功。压力和温度随之升高，使蒸气足够热，可以向受热回路放热。水则由独立的水泵输送。",
+      "高温高压蒸气通过另一处换热壁面放热，并冷凝成液体。冬季，这些热量用于加热建筑循环水。放出的热量包含吸收的热量和压缩机输入的功。",
+      "液体经过节流部件后压力降低，其中一部分闪蒸，形成温度更低的气液混合物。混合物返回蒸发器，循环继续。"
+    ],
+    "states":["气液混合物 · 低压","蒸气 · 低压","高温蒸气 · 高压","液体 · 高压"],
+    "sourceWinter":"从地下水吸热","sinkWinter":"向建筑放热","sourceSummer":"从建筑吸热","sinkSummer":"向地下水放热",
+    "functional":"功能示意图：蒸发器和冷凝器在图中的位置固定，季节变化时与它们关联的水回路发生变化。换向阀和实际管路已省略。压缩机始终把低压蒸气压缩至高压。",
+    "balanceWinter":"供给地板的热量 = 从地下水吸收的热量 + 压缩机做功",
+    "balanceSummer":"传给地下水的热量 = 从室内吸收的热量 + 压缩机做功",
+    "balanceNote":"这是忽略热损失的简化循环能量平衡。水泵还会产生额外的辅助用电。",
+    "groundBody":"潜水泵从取水井提取地下水，使其流过热泵的水侧换热器，然后送入回灌井。这是一条通向含水层的开式路径。地下水与制冷剂、地板循环水始终相互分离。",
+    "floorBody":"循环泵使水在热泵与地板管道之间的闭式回路中流动。冬季，水向地板放热，回水温度降低；夏季，水从地板吸热，回水温度升高。地板通过辐射和对流与室内交换热量。实际系统还设有混水、缓冲水箱和中间配水环节。",
+    "condensation":"夏季地板表面温度必须高于室内空气的露点，即水蒸气开始凝结的温度。因此需要按设计进行湿度控制、温度调节和除湿；仅靠冷地板无法控制湿度。",
+    "boundaryBody":"换热器壁面允许热量在相互分离的流体之间传递。地下水在一侧流动，制冷剂在另一侧流动。第二个换热器把制冷剂与建筑循环水隔开。图中相邻的线条不表示流体混合。",
+    "pumpBody":"潜水泵提供提升和输送地下水所需的压差。循环泵克服建筑水回路的压力损失。压缩机则作用于制冷剂蒸气：这三种设备承担不同的任务。",
+    "pc2":"2 × PC2 · 供暖与制冷","buffer":"S3 · 缓冲水箱","distribution":"P06 / P07 / P08 + SC2 + P09","apartments":"住户模块与地板管道","intermediate":"中间水回路 40/35 °C","pc1":"PC1 · 高温热泵","dhw":"SC1 + S2 · 生活热水",
+    "projectNote":"与设计的概念对应。水回路在此合并表示，实际压力、流量、温度与控制逻辑仍需核实。原始 PDF 保持私有。",
+    "projectBodies":[
+      "设计中的 PC2 代表两台 HiRef MSW182ML 热泵。地下水在冬季提供热量，在夏季接收热量。教学图用一个等效循环表示；实际机组的制冷剂回路、换向和热回收方式需要厂家选型资料确认。",
+      "建筑循环水回路设有两个各 2,000 升的 S3 缓冲水箱。P06 服务 B 塔公共区域，P07 服务低压区，P08 服务 SC2 一次侧，P09 服务其高压二次侧。SC2 在保持两侧水回路分离的同时传递热量。",
+      "住户模块计量用量并调节流向地板管道的水。设计详图给出的地板供回水温度为冬季 38/33 °C、夏季 18/23 °C。这些待核实的设计值与机房水温不同。",
+      "生活热水系统增加了一个温升阶段：PC2 的中间水回路连接 PC1，再由 PC1 向两个 SC1 换热器和两个各 3,000 升的 S2 水箱供热。它与地板回路分开。夏季能否同时回收热量取决于实际配置和控制。"
+    ],
+    "question":"检查你的理解","questionText":"夏季，哪一种水流过地板管道后，回水温度会升高？","answers":["建筑循环水","地下水","制冷剂"],"correct":"正确。建筑循环水从地板吸收热量，以更高的温度返回热泵。","retry":"沿地板回路观察：建筑循环水吸热时，颜色由蓝变红。",
+    "guideBody":"三幅示意图连接热量传递、制冷循环和本楼设备。冬夏切换会改变箭头、说明及相关温度。动画自动播放，并遵循系统的“减少动态效果”设置。手机上部件纵向排列，文字保持清晰可读。",
+    "sourcesTitle":"资料与适用范围","sourcesBody":"循环原理参考美国能源部的 Introduction to Heat Pumps 和 Geothermal Heat Pumps。设计对应关系依据 HiRef MSW/KSW 资料及私有原始图纸的分析。各语言说明为原创译文，技术文档保留原有语言。",
+    "reference":"查看先前的技术示意图（英语）","pdfMsw":"HiRef MSW 技术资料","pdfKsw":"HiRef KSW 技术资料","hideDocument":"隐藏文档","privateNote":"原始图纸已从网站中移除，没有任何按钮可打开或下载该文档。",
+    "noJs":"请在浏览器中启用 JavaScript，以浏览示意图和动画。"
+  }
+}

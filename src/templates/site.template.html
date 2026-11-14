@@ -1,0 +1,322 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mes 600 S | Plant explained</title>
+<script>
+  (() => {
+    const param = new URLSearchParams(window.location.search).get("scoutTheme");
+    const theme =
+      param || (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+    document.documentElement.setAttribute("data-theme", theme);
+  })();
+</script>
+<style>
+:root {
+  color-scheme: light;
+  --cp-bg: #f7f4ef;
+  --cp-bg-elevated: #fcfbf8;
+  --cp-surface: #ffffff;
+  --cp-surface-soft: #f5f5f5;
+  --cp-border: #dedede;
+  --cp-border-strong: #919191;
+  --cp-text: #242424;
+  --cp-text-muted: #5c5c5c;
+  --cp-text-soft: #6f6f6f;
+  --cp-accent: #b11f4b;
+  --cp-accent-hover: #9a1a41;
+  --cp-accent-soft: rgba(177, 31, 75, 0.08);
+  --cp-accent-fg: #ffffff;
+  --cp-success: #16a34a;
+  --cp-danger: #dc2626;
+  --cp-warning: #f59e0b;
+  --cp-link: #0078d4;
+  --cp-shadow: 0 18px 48px rgba(0, 0, 0, 0.12);
+  --cp-overlay: rgba(255, 255, 255, 0.8);
+  --cp-panel: rgba(255, 255, 255, 0.86);
+  --cp-panel-strong: rgba(255, 255, 255, 0.96);
+  --cp-sheen: rgba(255, 255, 255, 0.55);
+  --cp-highlight: rgba(177, 31, 75, 0.12);
+}
+html[data-theme="dark"] {
+  color-scheme: dark;
+  --cp-bg: #3d3b3a;
+  --cp-bg-elevated: #343231;
+  --cp-surface: #292929;
+  --cp-surface-soft: #2e2e2e;
+  --cp-border: #474747;
+  --cp-border-strong: #5f5f5f;
+  --cp-text: #dedede;
+  --cp-text-muted: #919191;
+  --cp-text-soft: #b0b0b0;
+  --cp-accent: #fd8ea1;
+  --cp-accent-hover: #fb7b91;
+  --cp-accent-soft: rgba(253, 142, 161, 0.14);
+  --cp-accent-fg: #1a1a1a;
+  --cp-success: #4ade80;
+  --cp-danger: #f87171;
+  --cp-warning: #fbbf24;
+  --cp-link: #4da6ff;
+  --cp-shadow: 0 18px 48px rgba(0, 0, 0, 0.32);
+  --cp-overlay: rgba(41, 41, 41, 0.88);
+  --cp-panel: rgba(41, 41, 41, 0.72);
+  --cp-panel-strong: rgba(41, 41, 41, 0.96);
+  --cp-sheen: rgba(255, 255, 255, 0.04);
+  --cp-highlight: rgba(253, 142, 161, 0.12);
+}
+* { box-sizing: border-box; }
+body { margin: 0; height: 100dvh; overflow: hidden; display: flex; flex-direction: column; background: var(--cp-bg); color: var(--cp-text); font: 15px/1.5 "Segoe UI", Aptos, Calibri, -apple-system, BlinkMacSystemFont, sans-serif; }
+button { font: inherit; cursor: pointer; border: 1px solid var(--cp-border); border-radius: .625rem; padding: 8px 12px; background: var(--cp-surface); color: var(--cp-text); }
+button:hover { border-color: var(--cp-accent); }
+button[aria-pressed="true"] { background: var(--cp-accent); color: var(--cp-accent-fg); }
+:focus-visible { outline: 3px solid var(--cp-accent); outline-offset: 2px; }
+[hidden] { display: none !important; }
+header { display: flex; align-items: center; flex-wrap: wrap; gap: 12px; padding: 12px 20px; background: var(--cp-bg-elevated); border-bottom: 1px solid var(--cp-border); }
+h1 { font-size: 17px; margin: 0 auto 0 0; }
+nav,.tools,.modes { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+main { flex: 1; min-height: 0; display: flex; flex-direction: column; padding: 12px 20px; gap: 10px; }
+.toolbar { display: flex; gap: 12px; flex-wrap: wrap; justify-content: space-between; align-items: center; }
+.modes button { font-size: 13px; }
+.map-panel { flex: 1; min-height: 0; overflow: auto; border: 1px solid var(--cp-border); border-radius: 16px; position: relative; overscroll-behavior: contain; }
+.map-panel svg { display: block; width: 100%; height: 100%; }
+.diagram-node,.diagram-edge { cursor: pointer; }
+.diagram-node.dim,.diagram-edge.dim { opacity: .4; }
+.diagram-node:hover rect:first-child,.diagram-node:focus-visible rect:first-child { stroke: var(--cp-accent); stroke-width: 3; }
+.diagram-edge:hover path:not(.hit-area),.diagram-edge:focus-visible path:not(.hit-area) { stroke-width: 5; }
+.diagram-edge .hit-area { stroke: var(--cp-bg); stroke-width: 20; stroke-opacity: 0; pointer-events: stroke; }
+.hint { margin: 0; color: var(--cp-text-muted); font-size: 12px; }
+dialog { width: min(620px, calc(100vw - 32px)); max-height: calc(100dvh - 48px); padding: 0; border: 1px solid var(--cp-border-strong); border-radius: 16px; background: var(--cp-surface); color: var(--cp-text); box-shadow: var(--cp-shadow); }
+dialog::backdrop { background: var(--cp-text); opacity: .18; }
+.dialog-header { display: flex; align-items: center; gap: 12px; padding: 16px 20px; position: sticky; top: 0; background: var(--cp-surface); border-bottom: 1px solid var(--cp-border); z-index: 1; }
+h2 { margin: 0; font-size: 20px; flex: 1; }
+.dialog-content { padding: 20px; }
+h3 { font-size: 17px; margin: 12px 0; }
+p { margin: 0 0 14px; }
+dt { font-weight: 650; }
+dd { margin: 0 0 12px; color: var(--cp-text-muted); }
+li { margin-bottom: 12px; }
+details { border-top: 1px solid var(--cp-border); padding: 12px 0; }
+summary { cursor: pointer; color: var(--cp-accent); font-weight: 650; }
+details[open]>summary { margin-bottom: 12px; }
+.tag { font-family: Consolas, "Courier New", Courier, monospace; color: var(--cp-accent); }
+.muted { color: var(--cp-text-muted); font-size: 13px; overflow-wrap: anywhere; }
+.callout { padding: 12px; background: var(--cp-bg); border-left: 3px solid var(--cp-warning); font-size: 13px; }
+.source { margin-top: 12px; }
+.pdf-frame { width: 100%; height: 50dvh; border: 1px solid var(--cp-border); margin-top: 12px; }
+@media(max-width:680px) {
+  header { padding: 8px 12px; gap: 8px; }
+  nav { order: 3; width: 100%; } nav button { flex: 1; padding: 6px; font-size: 12px; }
+  main { padding: 8px; gap: 8px; }
+  h1 { font-size: 15px; } button { padding: 6px 9px; font-size: 13px; }
+  .toolbar { gap: 8px; } .modes { gap: 4px; } .modes button { font-size: 11px; padding: 6px; }
+  .dialog-content { padding: 16px; } .hint { font-size: 11px; }
+}
+@media print {
+  body { height: auto; overflow: visible; } header,.toolbar,.hint,dialog { display: none; }
+  main { display: block; } .map-panel { display: block !important; height: 90vh; overflow: visible; break-after: page; }
+  .map-panel svg { width: 100% !important; height: 100% !important; }
+  .diagram-node.dim,.diagram-edge.dim { opacity: 1; }
+}
+</style>
+</head>
+<body>
+<header>
+  <h1>MES 600 S / Flow maps</h1>
+  <nav aria-label="Choose a flow map">
+    <button type="button" data-map="overview" aria-pressed="true">Energy flows</button>
+    <button type="button" data-map="dhw-map" aria-pressed="false">Domestic hot water</button>
+    <button type="button" data-map="zones-map" aria-pressed="false">Pressure zones</button>
+  </nav>
+  <button type="button" id="guide-info">Guide &amp; evidence</button>
+  <button type="button" id="theme-toggle">Theme</button>
+</header>
+<main>
+  <div class="toolbar">
+    <div id="mode-tools" class="modes" aria-label="Operating modes">{{MODES}}<button type="button" id="mode-info" aria-label="Explain selected mode">Explain mode</button></div>
+    <div class="tools" aria-label="Map zoom">
+      <button type="button" id="zoom-out" aria-label="Zoom out">−</button>
+      <output id="zoom-level" aria-live="polite">100%</output>
+      <button type="button" id="zoom-in" aria-label="Zoom in">+</button>
+      <button type="button" id="fit-map">Fit map</button>
+    </div>
+  </div>
+  <section class="map-panel" id="overview" aria-label="Energy flow map">{{OVERVIEW}}</section>
+  <section class="map-panel" id="dhw-map" aria-label="Domestic hot-water flow map" hidden>{{DHW}}</section>
+  <section class="map-panel" id="zones-map" aria-label="Pressure-zone flow map" hidden>{{ZONES}}</section>
+  <p class="hint">Select a component or a flow for a popup. Close or Esc returns to the same view. Zoom to inspect; scroll to move. Design interpretation &middot; operating settings require verification.</p>
+</main>
+<dialog id="info-popup" aria-labelledby="popup-title">
+  <div class="dialog-header"><h2 id="popup-title"></h2><button type="button" id="close-popup" autofocus>Close</button></div>
+  <div id="popup-content" class="dialog-content"></div>
+</dialog>
+<noscript><p>Enable JavaScript to switch maps and open information popups. The energy map remains visible.</p></noscript>
+<script>
+(() => {
+  const DATA = {{DATA}};
+  const DIAGRAMS = {{DIAGRAM_DATA}};
+  const byId = id => document.getElementById(id);
+  const esc = text => String(text).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  const popup = byId('info-popup');
+  let activeMap = 'overview', activeMode = 'winter', opener;
+  const views = Object.fromEntries(['overview','dhw-map','zones-map'].map(id => [id,{zoom:1,x:0,y:0}]));
+  const targets = {
+    wells:['WELLS','P10','P11','T6','T7','S4'], pc2:['PC2'], hvac:['S3','P06','P07','P08','SC2','P09','TERMINALS'],
+    warm:['S3','P05'], pc1:['PC1','P04','CTRL'], dhw:['SC1','S2','P01','P02','P03'],
+    'dhw-pc1':['PC1','P04'], 'dhw-sc1':['SC1','P01'], 'dhw-s2':['S2'],
+    'dhw-mix':['VALVES'], 'dhw-return':['P02','P03'], 'dhw-cold':['T1','S1','GP1','GP2','T2','T3','T4','T5'],
+    'dhw-users':['TERMINALS'], 'zone-source':['PC2','S3'], 'zone-p06':['P06'], 'zone-common':['TERMINALS'],
+    'zone-p07':['P07','VALVES'], 'zone-low':['TERMINALS'], 'zone-p08':['P08'], 'zone-sc2':['SC2'],
+    'zone-p09':['P09'], 'zone-high':['TERMINALS']
+  };
+  function openPopup(title, html, trigger) {
+    opener = trigger;
+    byId('popup-title').textContent = title;
+    byId('popup-content').innerHTML = html;
+    popup.showModal();
+    popup.scrollTop = 0;
+    byId('close-popup').focus({preventScroll:true});
+  }
+  byId('close-popup').addEventListener('click', () => popup.close());
+  popup.addEventListener('keydown', e => {
+    if (e.key !== 'Tab') return;
+    const stops = [...popup.querySelectorAll('button, summary, iframe, [tabindex="0"]')]
+      .filter(element => !element.disabled && element.checkVisibility());
+    const first = stops[0], last = stops.at(-1);
+    if ((!e.shiftKey && document.activeElement === last) || (e.shiftKey && document.activeElement === first)) {
+      e.preventDefault();
+      (e.shiftKey ? last : first).focus({preventScroll:true});
+    }
+  });
+  popup.addEventListener('close', () => {
+    byId('popup-content').replaceChildren();
+    opener?.focus({preventScroll:true});
+  });
+  popup.addEventListener('click', e => {
+    const r = popup.getBoundingClientRect();
+    if (e.target === popup && (e.clientX < r.left || e.clientX > r.right || e.clientY < r.top || e.clientY > r.bottom)) popup.close();
+  });
+  function sourceHTML(id) {
+    const s = DATA.sources.find(source => source.id === id);
+    return `<details class="source"><summary>${esc(id)} / ${esc(s.title)}</summary>
+      <p>${esc(s.coverage)}</p><p class="muted">${esc(s.publisher)} · PDF pages ${esc(s.pages)}</p>
+      ${s.url ? `<p class="muted">Original source: ${esc(s.url)}</p>` : ''}
+      ${s.file ? `<button type="button" data-pdf="${esc(id)}">View PDF in this popup</button><div class="pdf-host"></div>` : ''}</details>`;
+  }
+  byId('popup-content').addEventListener('click', e => {
+    const button = e.target.closest('[data-pdf]');
+    if (!button) return;
+    const host = button.nextElementSibling;
+    if (host.childElementCount) { host.replaceChildren(); button.textContent='View PDF in this popup'; return; }
+    const source = DATA.sources.find(s=>s.id === button.dataset.pdf);
+    const frame = document.createElement('iframe');
+    frame.className='pdf-frame'; frame.title=source.title; frame.src=encodeURI(source.file);
+    host.append(frame); button.textContent='Hide PDF';
+  });
+  function componentHTML(id, open = false) {
+    const c = DATA.components.find(component => component.id === id);
+    return `<details class="component" data-component="${esc(id)}" ${open ? 'open' : ''}>
+      <summary><span class="tag">${esc(id)}</span> / ${esc(c.name)}</summary><p>${esc(c.role)}</p>
+      <p class="muted">${esc(c.model)}</p><dl><dt>Drawn quantity</dt><dd>${esc(c.quantity)}</dd><dt>Design data</dt><dd>${esc(c.design)}</dd></dl>
+      <p class="callout">${esc(c.note)}</p><p class="muted">${esc(c.location)}</p>${c.sources.map(sourceHTML).join('')}</details>`;
+  }
+  function makeInteractive(element, label, show) {
+    element.setAttribute('role','button'); element.setAttribute('tabindex','0');
+    element.setAttribute('aria-label',label); element.setAttribute('aria-haspopup','dialog');
+    element.addEventListener('click',()=>show(element));
+    element.addEventListener('keydown', e => {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); show(element); }
+    });
+  }
+  document.querySelectorAll('.map-panel').forEach((panel,index) => {
+    const diagram = DIAGRAMS[index];
+    // The SVG contains interactive descendants, so expose them instead of a single image.
+    panel.querySelector('svg').setAttribute('role','group');
+    panel.querySelectorAll('.diagram-node').forEach(n => {
+      const item = diagram.nodes.find(item=>item.id===n.dataset.node);
+      makeInteractive(n,`Details: ${item.title}`, trigger =>
+        openPopup(item.title,targets[n.dataset.node].map((id,i)=>componentHTML(id,i===0)).join(''),trigger));
+    });
+    panel.querySelectorAll('.diagram-edge').forEach(e => {
+      const edge = diagram.edges.find(edge=>edge.id===e.dataset.edge);
+      const from = diagram.nodes.find(n=>n.id===edge.from).title;
+      const to = diagram.nodes.find(n=>n.id===edge.to).title;
+      const hit = e.querySelector('path').cloneNode();
+      hit.removeAttribute('id'); hit.removeAttribute('marker-start'); hit.removeAttribute('marker-end');
+      hit.setAttribute('class','hit-area'); hit.setAttribute('aria-hidden','true'); e.prepend(hit);
+      makeInteractive(e,`Flow: ${from} / ${to}`, trigger => {
+        const mode = DATA.modes.find(m=>m.id===activeMode);
+        openPopup('Flow details',`<h3>${esc(from)} / ${esc(to)}</h3>
+          <p>${esc(edge.label || (edge.both ? 'Paired supply and return connection.' : 'Flow follows the arrow.'))}</p>
+          <p>${esc(diagram.subtitle)}</p>${index===0 ? `<p><strong>${esc(mode.title)}:</strong> ${esc(mode.lead)}</p><p>${mode.edges.includes(edge.id) ? 'Highlighted for this mode.' : 'Muted for this mode; the physical circuit remains present.'}</p><p class="callout">${esc(mode.caution)}</p>` : ''}
+          ${diagram.foot.map(line=>`<p class="muted">${esc(line)}</p>`).join('')}${sourceHTML('S00')}`,trigger);
+      });
+    });
+  });
+  byId('guide-info').addEventListener('click', e => openPopup('Guide & evidence',
+    `<p>${esc(DATA.scope)}</p><p class="callout">This guide supports understanding. Operating changes require approved documentation and the responsible qualified technician. Highlighting is explanatory and does not indicate real pump states.</p>
+    <details><summary>All components (34)</summary>${DATA.components.map(c=>componentHTML(c.id)).join('')}</details>
+    <details><summary>Items to verify</summary>${DATA.issues.map(i=>`<h3>${esc(i.title)}</h3><p>${esc(i.detail)}</p><p class="muted">${esc(i.where)}</p><p><strong>Needed:</strong> ${esc(i.needed)}</p>`).join('')}</details>
+    <details><summary>Drawing vocabulary</summary><dl>${DATA.glossary.map(([term,meaning])=>`<dt>${esc(term)}</dt><dd>${esc(meaning)}</dd>`).join('')}</dl></details>
+    <details><summary>Technical sources</summary>${DATA.sources.map(s=>sourceHTML(s.id)).join('')}</details>`,e.currentTarget));
+  byId('mode-info').addEventListener('click', e => {
+    const m = DATA.modes.find(m=>m.id===activeMode);
+    openPopup(m.title,`<p>${esc(m.lead)}</p><ol>${m.steps.map(s=>`<li>${esc(s)}</li>`).join('')}</ol><p class="callout">${esc(m.caution)}</p>`,e.currentTarget);
+  });
+  function selectMode(id) {
+    activeMode=id;
+    const mode=DATA.modes.find(m=>m.id===id);
+    document.querySelectorAll('[data-mode]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.mode===id)));
+    document.querySelectorAll('#overview .diagram-node').forEach(n=>n.classList.toggle('dim',!mode.active.includes(n.dataset.node)));
+    document.querySelectorAll('#overview .diagram-edge').forEach(e=>{
+      e.classList.toggle('dim',!mode.edges.includes(e.dataset.edge));
+      if (['ground','space'].includes(e.dataset.edge)) {
+        const p=e.querySelector('path:not(.hit-area)');
+        const marker=p.getAttribute('marker-end') || p.getAttribute('marker-start');
+        p.removeAttribute('marker-start'); p.removeAttribute('marker-end');
+        if (id==='combined') { p.setAttribute('marker-start',marker); p.setAttribute('marker-end',marker); }
+        else p.setAttribute(id==='summer' ? 'marker-start' : 'marker-end',marker);
+      }
+    });
+  }
+  document.querySelectorAll('[data-mode]').forEach(b=>b.addEventListener('click',()=>selectMode(b.dataset.mode)));
+  function sizeMap() {
+    const panel=byId(activeMap), state=views[activeMap], svg=panel.querySelector('svg');
+    svg.style.width=`${panel.clientWidth*state.zoom}px`; svg.style.height=`${panel.clientHeight*state.zoom}px`;
+    byId('zoom-level').textContent=`${Math.round(state.zoom*100)}%`;
+    byId('zoom-out').disabled=state.zoom===1; byId('zoom-in').disabled=state.zoom===4;
+  }
+  document.querySelectorAll('[data-map]').forEach(b=>b.addEventListener('click',()=>{
+    const previous=byId(activeMap);
+    views[activeMap].x=previous.scrollLeft; views[activeMap].y=previous.scrollTop;
+    activeMap=b.dataset.map;
+    document.querySelectorAll('.map-panel').forEach(p=>p.hidden=p.id!==activeMap);
+    document.querySelectorAll('[data-map]').forEach(button=>button.setAttribute('aria-pressed',String(button===b)));
+    byId('mode-tools').hidden=activeMap!=='overview';
+    sizeMap(); byId(activeMap).scrollTo(views[activeMap].x,views[activeMap].y);
+  }));
+  function zoom(delta) {
+    const panel=byId(activeMap), state=views[activeMap], old=state.zoom;
+    const x=(panel.scrollLeft+panel.clientWidth/2)/old, y=(panel.scrollTop+panel.clientHeight/2)/old;
+    state.zoom=Math.max(1,Math.min(4,old+delta)); sizeMap();
+    panel.scrollTo(x*state.zoom-panel.clientWidth/2,y*state.zoom-panel.clientHeight/2);
+  }
+  byId('zoom-in').addEventListener('click',()=>zoom(.5));
+  byId('zoom-out').addEventListener('click',()=>zoom(-.5));
+  byId('fit-map').addEventListener('click',()=>{views[activeMap]={zoom:1,x:0,y:0};sizeMap();byId(activeMap).scrollTo(0,0);});
+  new ResizeObserver(sizeMap).observe(document.querySelector('main'));
+  const queryTheme=new URLSearchParams(location.search).get('scoutTheme');
+  if (['light','dark'].includes(queryTheme)) document.documentElement.dataset.theme=queryTheme;
+  function themeLabel() {
+    const next=document.documentElement.dataset.theme==='dark' ? 'light' : 'dark';
+    byId('theme-toggle').textContent=`${next==='dark' ? 'Dark' : 'Light'} theme`;
+    byId('theme-toggle').setAttribute('aria-label',`Switch to ${next} theme`);
+  }
+  byId('theme-toggle').addEventListener('click',()=>{
+    document.documentElement.dataset.theme=document.documentElement.dataset.theme==='dark' ? 'light' : 'dark';themeLabel();
+  });
+  selectMode('winter');sizeMap();themeLabel();
+})();
+</script>
+</body>
+</html>
