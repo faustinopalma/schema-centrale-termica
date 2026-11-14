@@ -16,23 +16,24 @@
 {{HYDRAULIC_STYLE}}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 [hidden]{display:none!important}
-html,body{width:100%;height:100%;margin:0;overflow:hidden;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
-body{height:100dvh;background:var(--cp-bg);color:var(--cp-text);font:15px/1.45 "Segoe UI",Aptos,Calibri,-apple-system,BlinkMacSystemFont,sans-serif;display:grid;grid-template-rows:auto auto minmax(0,1fr) auto;padding:env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);touch-action:manipulation}
+html,body{width:100%;height:100%;margin:0;overflow:hidden;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none;--safe-top:env(safe-area-inset-top,0px);--safe-right:env(safe-area-inset-right,0px);--safe-bottom:env(safe-area-inset-bottom,0px);--safe-left:env(safe-area-inset-left,0px);--safe-x-sum:calc(var(--safe-left) + var(--safe-right));--safe-y-sum:calc(var(--safe-top) + var(--safe-bottom))}
+body{height:100dvh;background:var(--cp-bg);color:var(--cp-text);font:15px/1.45 "Segoe UI",Aptos,Calibri,-apple-system,BlinkMacSystemFont,sans-serif;display:grid;grid-template-rows:auto auto minmax(0,1fr) auto;padding:var(--safe-top) 0 var(--safe-bottom) 0;touch-action:manipulation}
 button,select{font:inherit;color:var(--cp-text);background:var(--cp-surface);border:1px solid var(--cp-border);border-radius:.625rem;min-height:40px;padding:5px 11px;transition:border-color .15s ease,background .15s ease;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none;touch-action:manipulation}
 button{cursor:pointer;white-space:nowrap}
 button:hover:not(:disabled),select:hover{border-color:var(--cp-accent)}
 button[aria-pressed="true"]{background:var(--cp-accent);color:var(--cp-accent-fg);border-color:var(--cp-accent);font-weight:600}
 button:disabled{opacity:.42;cursor:default}
 :focus-visible{outline:3px solid var(--cp-accent);outline-offset:2px}
-header{display:flex;align-items:center;gap:8px;padding:6px 14px;background:var(--cp-bg-elevated);border-bottom:1px solid var(--cp-border);min-width:0}
-.brand{font-weight:700;font-size:16px;margin-right:4px;white-space:nowrap}
+header{display:flex;align-items:center;gap:8px;padding:6px max(var(--safe-right),14px) 6px max(var(--safe-left),14px);background:var(--cp-bg-elevated);border-bottom:1px solid var(--cp-border);min-width:0}
+.brand{font-weight:700;font-size:16px;margin-right:2px;white-space:nowrap}
+.dev-pill{display:inline-flex;align-items:center;padding:2px 8px;border-radius:999px;background:var(--cp-accent-soft);color:var(--cp-accent);border:1px solid var(--cp-accent);font:700 11px/1.3 Consolas,"Courier New",monospace;white-space:nowrap}
 .stepper{display:flex;align-items:center;gap:4px;background:var(--cp-surface-soft);padding:3px;border-radius:12px;border:1px solid var(--cp-border)}
 .stepper button{min-height:36px;padding:4px 10px;border-radius:9px;font-size:14px}
 .stepper .step-arrow{font-weight:700;padding-inline:9px}
 .spacer{flex:1}
 .season-group,.tools-group{display:flex;align-items:center;gap:6px}
 .season-group button,.tools-group button,.tools-group select{min-height:38px;font-size:14px;padding:4px 10px}
-.pc-context{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:7px 16px;background:var(--cp-surface);border-bottom:1px solid var(--cp-border);min-width:0}
+.pc-context{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:7px max(var(--safe-right),16px) 7px max(var(--safe-left),16px);background:var(--cp-surface);border-bottom:1px solid var(--cp-border);min-width:0}
 .pc-summary{min-width:0;flex:1}
 .pc-summary strong{display:inline;font-size:14px;color:var(--cp-accent);margin-right:8px}
 .pc-summary span{font-size:14px;color:var(--cp-text-muted)}
@@ -40,10 +41,10 @@ header{display:flex;align-items:center;gap:8px;padding:6px 14px;background:var(-
 .pc-tags-label{font-size:12px;font-weight:600;color:var(--cp-text-muted);margin-right:2px}
 .tag-chip{min-height:28px;padding:2px 9px;border-radius:999px;font:700 12px/1.2 Consolas,"Courier New",monospace;background:var(--cp-accent-soft);color:var(--cp-accent);border:1px solid var(--cp-accent)}
 .tag-chip:hover,.tag-chip[aria-pressed="true"]{background:var(--cp-accent);color:var(--cp-accent-fg)}
-main{position:relative;min-height:0;min-width:0;padding:6px 12px;display:flex;align-items:center;justify-content:center}
+main{position:relative;min-height:0;min-width:0;padding:6px max(var(--safe-right),12px) 6px max(var(--safe-left),12px);display:flex;align-items:center;justify-content:center}
 #viewport{width:100%;height:100%;background:var(--cp-bg-elevated);border:1px solid var(--cp-border);border-radius:14px;padding:4px;display:flex;align-items:center;justify-content:center;overflow:hidden}
 #viewport>svg{width:100%;height:100%;max-width:100%;max-height:100%}
-footer{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:5px 16px;background:var(--cp-bg-elevated);border-top:1px solid var(--cp-border);font-size:13px;color:var(--cp-text-muted);min-width:0}
+footer{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:5px max(var(--safe-right),16px) 5px max(var(--safe-left),16px);background:var(--cp-bg-elevated);border-top:1px solid var(--cp-border);font-size:13px;color:var(--cp-text-muted);min-width:0}
 .legend-items{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
 .legend-items span{display:flex;align-items:center;gap:6px;white-space:nowrap}
 .swatch{width:22px;border-top:4px solid var(--cp-danger);border-radius:2px}
@@ -52,8 +53,8 @@ footer{display:flex;align-items:center;justify-content:space-between;gap:14px;pa
 .swatch.heat{border-color:var(--cp-warning);border-top-style:dashed}
 .hint-text{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 #orientation{display:none}
-dialog{padding:0;width:min(820px,calc(100vw - 20px));max-width:calc(100vw - 20px);max-height:calc(100dvh - 20px);border:1px solid var(--cp-border-strong);border-radius:16px;background:var(--cp-surface);color:var(--cp-text);box-shadow:var(--cp-shadow);overflow:hidden}
-dialog.wide{width:min(1120px,calc(100vw - 20px))}
+dialog{padding:0;margin:auto;width:min(820px,calc(100vw - var(--safe-x-sum) - 24px));max-width:calc(100vw - var(--safe-x-sum) - 24px);max-height:calc(100dvh - var(--safe-y-sum) - 20px);border:1px solid var(--cp-border-strong);border-radius:16px;background:var(--cp-surface);color:var(--cp-text);box-shadow:var(--cp-shadow);overflow:hidden}
+dialog.wide{width:min(1120px,calc(100vw - var(--safe-x-sum) - 24px))}
 dialog[open]{display:flex;flex-direction:column}
 dialog::backdrop{background:var(--cp-overlay)}
 .dialog-head{display:flex;align-items:center;gap:10px;padding:12px 18px;background:var(--cp-bg-elevated);border-bottom:1px solid var(--cp-border)}
@@ -82,37 +83,63 @@ a.btn-link{display:inline-flex;align-items:center;font:inherit;font-size:13px;fo
 .tag-detail-card p{font-size:14.5px;line-height:1.5;margin:0}
 .sources-bar{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
 .doc-viewer{width:100%;height:min(52dvh,440px);border:1px solid var(--cp-border);border-radius:8px;background:var(--cp-surface)}
-@media(max-width:1380px){.brand{display:none}}
+.topic-split{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(240px,.95fr);gap:14px;align-items:start}
+.topic-prose{display:flex;flex-direction:column;gap:12px;min-width:0}
+.photo-gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px}
+.photo-card{margin:0;background:var(--cp-bg-elevated);border:1px solid var(--cp-border);border-radius:12px;padding:10px;display:flex;flex-direction:column;gap:7px;transition:border-color .15s ease}
+.photo-card:hover{border-color:var(--cp-accent)}
+.photo-frame{width:100%;height:150px;background:var(--cp-surface);border:1px solid var(--cp-border);border-radius:8px;padding:6px;display:flex;align-items:center;justify-content:center;cursor:zoom-in;overflow:hidden}
+.photo-frame img{max-width:100%;max-height:100%;width:auto;height:auto;object-fit:contain;border-radius:4px}
+.photo-meta{display:flex;flex-direction:column;gap:4px}
+.photo-meta strong{font-size:13.5px;line-height:1.3;color:var(--cp-text)}
+.photo-meta span{font-size:12.5px;line-height:1.38;color:var(--cp-text-muted)}
+.photo-actions{display:flex;align-items:center;justify-content:space-between;gap:6px;flex-wrap:wrap;margin-top:2px}
+.photo-actions small{font-size:11px;color:var(--cp-text-soft);white-space:nowrap}
+.photo-actions a.btn-link{min-height:26px;padding:2px 8px;font-size:11.5px;white-space:nowrap;flex-shrink:0}
+.tag-photo-box{display:grid;grid-template-columns:120px minmax(0,1fr);gap:10px;align-items:center;background:var(--cp-surface);border:1px solid var(--cp-border);border-radius:10px;padding:8px}
+.tag-photo-box .photo-frame{height:104px;border:none;padding:2px}
+.photo-zoom-view{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(220px,.85fr);gap:16px;align-items:center;min-height:0;flex:1}
+.photo-zoom-stage{height:min(58dvh,440px);background:var(--cp-surface);border:1px solid var(--cp-border);border-radius:12px;padding:12px;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.photo-zoom-stage img{max-width:100%;max-height:100%;object-fit:contain}
+.photo-zoom-info{display:flex;flex-direction:column;gap:10px;background:var(--cp-bg-elevated);border:1px solid var(--cp-border);border-radius:12px;padding:14px}
+.photo-zoom-info h3{margin:0;font-size:18px}
+.photo-zoom-info p{margin:0;font-size:14.5px;color:var(--cp-text-muted)}
+@media(max-width:1520px){.brand{display:none}}
+@media(max-width:1360px){.dev-pill{padding-inline:7px}}
 @media(max-width:1120px){
   .stepper button[data-step]{min-width:48px;padding-inline:15px;font-weight:600}
   .stepper .step-arrow,#guide,#theme-btn{min-width:38px;padding-inline:9px}
 }
 @media(max-width:1023px),(max-height:579px){
   body{grid-template-rows:auto minmax(0,1fr) auto}
-  .pc-context{display:none}
-  header{padding:3px 8px;gap:5px}
+  .pc-context,.dev-pill{display:none}
+  header{padding:3px max(var(--safe-right),14px) 3px max(var(--safe-left),14px);gap:5px}
   .stepper{padding:2px;gap:3px}
   .stepper button,.season-group button,.tools-group button,.tools-group select{min-height:34px;padding:2px 8px;font-size:12.5px}
   .stepper button[data-step]{min-width:46px;padding-inline:14px;font-size:13.5px;font-weight:600}
   .stepper .step-arrow,#guide,#theme-btn{min-width:36px}
   .season-group,.tools-group{gap:4px}
-  main{padding:3px 6px}
-  footer{padding:2px 10px;font-size:11.5px}
+  main{padding:3px max(var(--safe-right),12px) 3px max(var(--safe-left),12px)}
+  footer{padding:2px max(var(--safe-right),16px) 2px max(var(--safe-left),16px);font-size:11.5px}
   .legend-items{gap:11px;flex-wrap:nowrap;overflow-x:auto}
   .hint-text{display:none}
-  dialog{width:calc(100vw - 14px);max-width:calc(100vw - 14px);max-height:calc(100dvh - 12px);border-radius:13px}
-  dialog.wide{width:calc(100vw - 14px)}
-  .dialog-head{padding:7px 12px}
+  dialog{width:calc(100vw - max(var(--safe-x-sum),88px) - 16px);max-width:calc(100vw - max(var(--safe-x-sum),88px) - 16px);max-height:calc(100dvh - max(var(--safe-y-sum),12px) - 12px);border-radius:14px}
+  dialog.wide{width:calc(100vw - max(var(--safe-x-sum),88px) - 16px)}
+  .dialog-head{padding:7px 14px}
   .dialog-head h2{font-size:16px}
   .dialog-head button,.dialog-foot button,a.btn-link{min-height:32px;padding:3px 10px;font-size:12.5px}
-  #popup-body{padding:10px 12px;gap:8px}
+  #popup-body{padding:10px 14px;gap:8px}
   #popup-body p{font-size:14px;line-height:1.45}
-  .dialog-foot{padding:6px 12px;gap:6px}
+  .dialog-foot{padding:6px 14px;gap:6px}
   #page-count{font-size:12.5px}
   .cat-bar button{min-height:28px;padding:2px 8px;font-size:12px}
   .tag-detail-card{padding:10px 12px;gap:6px}
   .tag-detail-card h3{font-size:15px}
   .tag-detail-card p{font-size:13px;line-height:1.42}
+  .photo-frame{height:112px}
+  .photo-zoom-stage{height:min(50dvh,230px);padding:6px}
+  .tag-photo-box{grid-template-columns:92px minmax(0,1fr);padding:6px}
+  .tag-photo-box .photo-frame{height:78px}
 }
 @media(max-height:540px) and (min-width:600px){
   .cycle-modal-wrap{display:grid;grid-template-columns:minmax(0,1.42fr) minmax(210px,1fr);gap:10px;align-items:stretch}
@@ -121,12 +148,14 @@ a.btn-link{display:inline-flex;align-items:center;font:inherit;font-size:13px;fo
   .cycle-stage-bar p{font-size:13.5px;line-height:1.45}
 }
 @media(max-width:640px){
+  .dev-pill{display:none}
   header{padding:3px 5px;gap:3px}
   .stepper{gap:2px}
   .stepper button[data-step]{min-width:35px;padding-inline:9px;font-size:12.5px}
   .stepper .step-arrow,#guide,#theme-btn{min-width:31px;padding-inline:6px}
   .season-group button,.tools-group button,.tools-group select{padding:2px 6px;font-size:11.5px}
-  .tags-explorer{grid-template-columns:1fr}
+  dialog,dialog.wide{width:calc(100vw - max(var(--safe-x-sum),64px) - 12px);max-width:calc(100vw - max(var(--safe-x-sum),64px) - 12px)}
+  .tags-explorer,.topic-split,.photo-zoom-view{grid-template-columns:1fr}
 }
 @media(orientation:portrait){
   body{grid-template-rows:auto minmax(0,1fr)}
@@ -143,6 +172,7 @@ a.btn-link{display:inline-flex;align-items:center;font:inherit;font-size:13px;fo
 <body>
 <header>
   <span class="brand" id="brand"></span>
+  <span class="dev-pill" id="dev-pill">DEV</span>
   <nav class="stepper" id="stepper" aria-label="Steps">
     <button type="button" class="step-arrow" id="prev-step" aria-label="Previous step">◀</button>
     <button type="button" data-step="0" id="step-tab-0"></button>
@@ -226,7 +256,7 @@ a.btn-link{display:inline-flex;align-items:center;font:inherit;font-size:13px;fo
   const STEP_TAGS = [
     ['P1', 'R1', 'PC2', 'BP'],
     ['P1', 'R1', 'PC2', 'S3', 'P05', 'PC1', 'P04', 'SC1', 'P01', 'S2', 'ACP', 'ACR', 'P02', 'AFP'],
-    ['P1', 'P2', 'P11', 'P10', 'T6', 'T7', 'S4', 'R1', 'PC2', 'S3', 'P06', 'P07', 'P08', 'SC2', 'P09', 'P05', 'PC1', 'P04', 'SC1', 'P01', 'S2', 'P02', 'P03', 'T1', 'S1', 'GP1', 'GP2', 'T2', 'ACP', 'ACR', 'AFP', 'BP', 'MP', 'AP']
+    ['P1', 'P2', 'P11', 'P10', 'P12', 'T6', 'T7', 'S4', 'R1', 'PC2', 'S3', 'P06', 'P07', 'P08', 'SC2', 'P09', 'P05', 'PC1', 'P04', 'SC1', 'P01', 'S2', 'P02', 'P03', 'T1', 'S1', 'GP1', 'GP2', 'T2', 'ACP', 'ACR', 'AFP', 'BP', 'MP', 'AP']
   ];
 
   const state = {
@@ -242,6 +272,7 @@ a.btn-link{display:inline-flex;align-items:center;font:inherit;font-size:13px;fo
     tagCat: 'all',
     selectedTag: 'P1',
     docKey: null,
+    zoomPhoto: null,
     highlightTag: null
   };
   let opener = null;
@@ -261,10 +292,13 @@ a.btn-link{display:inline-flex;align-items:center;font:inherit;font-size:13px;fo
   function render() {
     const L = copy(), U = ui();
     const compactHeader = window.matchMedia('(max-width: 1120px)').matches;
+    const shortDevPill = window.matchMedia('(max-width: 1320px)').matches;
     document.documentElement.lang = state.lang;
     document.title = L.title;
     $('language').value = state.lang;
     $('brand').textContent = U.brand;
+    $('dev-pill').textContent = shortDevPill ? 'DEV' : U.devBadge;
+    $('dev-pill').title = U.devBadge;
 
     for (let i = 0; i < 3; i++) {
       const tab = $(`step-tab-${i}`);
@@ -315,13 +349,47 @@ a.btn-link{display:inline-flex;align-items:center;font:inherit;font-size:13px;fo
     animator.refresh(document);
   }
 
+  function renderPhotoCard(pid) {
+    const L = copy(), U = ui();
+    const ph = L.photos?.[pid];
+    if (!ph) return '';
+    return `<figure class="photo-card">` +
+      `<div class="photo-frame" data-zoom-photo="${esc(pid)}" role="button" tabindex="0" aria-label="${esc(ph.title)} — ${esc(U.zoomPhotoHint)}">` +
+      `<img src="${esc(ph.src)}" alt="${esc(ph.title)}" loading="lazy">` +
+      `</div>` +
+      `<figcaption class="photo-meta"><strong>${esc(ph.title)}</strong><span>${esc(ph.caption)}</span>` +
+      `<div class="photo-actions"><small>🔍 ${esc(U.zoomPhotoHint)}</small>` +
+      `<a class="btn-link" href="${esc(ph.doc)}" target="_blank" rel="noopener">${esc(U.openDatasheet)}</a></div>` +
+      `</figcaption></figure>`;
+  }
+
   function renderModal() {
     const L = copy(), U = ui();
+    const topicObj = L.richTopics[state.topic] || L.richTopics.guide;
+    const topicPhotos = (topicObj.photos || []).filter(pid => L.photos?.[pid]);
     $('close').textContent = L.close;
     $('previous').textContent = U.prevPage;
     $('next').textContent = U.nextPage;
     $('extra-action').hidden = true;
-    $('popup').classList.toggle('wide', state.modalMode === 'cycle' || state.modalMode === 'tags' || !!state.docKey);
+    $('popup').classList.toggle('wide', state.modalMode === 'cycle' || state.modalMode === 'tags' || !!state.docKey || !!state.zoomPhoto || topicPhotos.length > 0);
+
+    if (state.zoomPhoto && L.photos?.[state.zoomPhoto]) {
+      const ph = L.photos[state.zoomPhoto];
+      $('popup-title').textContent = ph.title;
+      $('popup-foot').hidden = false;
+      $('previous').hidden = true;
+      $('next').hidden = true;
+      $('page-count').hidden = false;
+      $('page-count').textContent = U.photoLabel;
+      $('extra-action').hidden = false;
+      $('extra-action').textContent = `↩ ${state.modalMode === 'tags' ? state.selectedTag : topicObj.title}`;
+      $('popup-body').innerHTML = `<div class="photo-zoom-view">` +
+        `<div class="photo-zoom-stage"><img src="${esc(ph.src)}" alt="${esc(ph.title)}"></div>` +
+        `<div class="photo-zoom-info"><h3>${esc(ph.title)}</h3><p>${esc(ph.caption)}</p>` +
+        `<div><a class="btn-link" href="${esc(ph.doc)}" target="_blank" rel="noopener">${esc(U.openDatasheet)}</a></div>` +
+        `</div></div>`;
+      return;
+    }
 
     if (state.modalMode === 'cycle') {
       $('popup-title').textContent = L.headings[1];
@@ -370,6 +438,14 @@ a.btn-link{display:inline-flex;align-items:center;font:inherit;font-size:13px;fo
         state.selectedTag = entries[0][0];
       }
       const sel = L.tags[state.selectedTag];
+      const tagPh = sel.photo && L.photos?.[sel.photo] ? L.photos[sel.photo] : null;
+      const tagPhotoHtml = tagPh ? `<div class="tag-photo-box">` +
+        `<div class="photo-frame" data-zoom-photo="${esc(sel.photo)}" role="button" tabindex="0" aria-label="${esc(tagPh.title)}">` +
+        `<img src="${esc(tagPh.src)}" alt="${esc(tagPh.title)}" loading="lazy"></div>` +
+        `<div class="photo-meta"><strong>${esc(tagPh.title)}</strong><span>${esc(tagPh.caption)}</span>` +
+        `<div class="photo-actions"><small>🔍 ${esc(U.zoomPhotoHint)}</small>` +
+        `<a class="btn-link" href="${esc(tagPh.doc)}" target="_blank" rel="noopener">${esc(U.openDatasheet)}</a></div>` +
+        `</div></div>` : '';
       $('popup-body').innerHTML = `<div class="tags-explorer">` +
         `<div class="tags-left">` +
         `<div class="cat-bar">${cats.map(([id, label]) => `<button type="button" data-tag-cat="${id}" aria-pressed="${state.tagCat === id}">${esc(label)}</button>`).join('')}</div>` +
@@ -380,13 +456,13 @@ a.btn-link{display:inline-flex;align-items:center;font:inherit;font-size:13px;fo
         `<h3>${esc(sel.name)}</h3>` +
         `<div class="units-line">${esc(sel.units)}</div>` +
         `<p>${esc(sel.body)}</p>` +
+        tagPhotoHtml +
         `<button type="button" class="action-accent" data-locate-tag="${esc(state.selectedTag)}">${esc(U.locateBtn)}</button>` +
         `</div></div>`;
       return;
     }
 
     // Standard richTopic mode
-    const topicObj = L.richTopics[state.topic] || L.richTopics.guide;
     const multiPage = topicObj.pages.length > 1;
     $('popup-title').textContent = topicObj.title;
     $('previous').hidden = !multiPage;
@@ -413,27 +489,35 @@ a.btn-link{display:inline-flex;align-items:center;font:inherit;font-size:13px;fo
       return;
     }
 
-    let html = `<p>${esc(topicObj.pages[state.page])}</p>`;
+    let proseHtml = `<p>${esc(topicObj.pages[state.page])}</p>`;
     // Show related clickable tags if triggered from an SVG node
     const relatedTags = (state.nodeTags || '').split(/[\s,]+/).filter(t => L.tags[t]);
     if (relatedTags.length) {
-      html += `<div class="related-tags"><span class="pc-tags-label">${esc(U.activeTagsLabel)}</span>` +
+      proseHtml += `<div class="related-tags"><span class="pc-tags-label">${esc(U.activeTagsLabel)}</span>` +
         relatedTags.map(code => `<button type="button" class="tag-chip" data-open-tag="${code}">${esc(code)}</button>`).join('') +
         `</div>`;
     }
     if (topicObj.hasSources) {
-      html += `<div class="sources-bar">` +
+      proseHtml += `<div class="sources-bar">` +
         `<button type="button" data-document="msw">${esc(L.pdfMsw)}</button>` +
         `<button type="button" data-document="ksw">${esc(L.pdfKsw)}</button>` +
         `<button type="button" data-document="project">${esc(L.reference)}</button>` +
         `</div>`;
     }
-    $('popup-body').innerHTML = html;
+    if (topicPhotos.length) {
+      $('popup-body').innerHTML = `<div class="topic-split">` +
+        `<div class="topic-prose">${proseHtml}</div>` +
+        `<div class="photo-gallery">${topicPhotos.map(renderPhotoCard).join('')}</div>` +
+        `</div>`;
+    } else {
+      $('popup-body').innerHTML = proseHtml;
+    }
   }
 
   function openTopic(topic, trigger) {
     if (!$('popup').open) opener = trigger;
     state.docKey = null;
+    state.zoomPhoto = null;
     if (topic.startsWith('tag-')) {
       const code = topic.slice(4);
       state.prevTopic = ($('popup').open && state.modalMode === 'topic') ? state.topic : null;
@@ -457,6 +541,12 @@ a.btn-link{display:inline-flex;align-items:center;font:inherit;font-size:13px;fo
   }
 
   document.addEventListener('click', e => {
+    const zoomEl = e.target.closest('[data-zoom-photo]');
+    if (zoomEl) {
+      state.zoomPhoto = zoomEl.dataset.zoomPhoto;
+      renderModal();
+      return;
+    }
     const stageEl = e.target.closest('#popup [data-stage]');
     if (stageEl && state.modalMode === 'cycle') {
       state.cycleStage = Number(stageEl.dataset.stage);
@@ -486,6 +576,7 @@ a.btn-link{display:inline-flex;align-items:center;font:inherit;font-size:13px;fo
     const selTag = e.target.closest('[data-select-tag]');
     if (selTag) {
       state.selectedTag = selTag.dataset.selectTag;
+      state.zoomPhoto = null;
       renderModal();
       return;
     }
@@ -513,6 +604,12 @@ a.btn-link{display:inline-flex;align-items:center;font:inherit;font-size:13px;fo
   });
 
   document.addEventListener('keydown', e => {
+    if ((e.key === 'Enter' || e.key === ' ') && e.target.matches('[data-zoom-photo]')) {
+      e.preventDefault();
+      state.zoomPhoto = e.target.dataset.zoomPhoto;
+      renderModal();
+      return;
+    }
     if ((e.key === 'Enter' || e.key === ' ') && e.target.matches('g[data-topic]')) {
       e.preventDefault();
       if (e.target.closest('#popup') && state.modalMode === 'cycle' && e.target.dataset.stage !== undefined) {
@@ -552,7 +649,10 @@ a.btn-link{display:inline-flex;align-items:center;font:inherit;font-size:13px;fo
   $('language').addEventListener('change', e => { state.lang = e.target.value; render(); });
 
   $('extra-action').addEventListener('click', () => {
-    if (state.modalMode === 'tags' && state.prevTopic) {
+    if (state.zoomPhoto) {
+      state.zoomPhoto = null;
+      renderModal();
+    } else if (state.modalMode === 'tags' && state.prevTopic) {
       state.modalMode = 'topic';
       state.topic = state.prevTopic;
       state.prevTopic = null;
@@ -599,6 +699,7 @@ a.btn-link{display:inline-flex;align-items:center;font:inherit;font-size:13px;fo
   $('popup').addEventListener('close', () => {
     state.modalMode = null;
     state.prevTopic = null;
+    state.zoomPhoto = null;
     state.docKey = null;
     $('popup-body').replaceChildren();
     animator.refresh(document);
@@ -610,6 +711,7 @@ a.btn-link{display:inline-flex;align-items:center;font:inherit;font-size:13px;fo
     render();
   });
   window.matchMedia('(max-width: 1120px)').addEventListener('change', render);
+  window.matchMedia('(max-width: 1360px)').addEventListener('change', render);
   window.matchMedia('(prefers-reduced-motion: reduce)').addEventListener('change', () => animator.refresh(document));
 
   render();

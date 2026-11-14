@@ -214,6 +214,9 @@ writeFileSync(path.join(distDir, '.nojekyll'), '');
 copyFileSync(path.join(root, 'src', 'data', 'plant-graph.json'), path.join(distDir, 'plant-graph.json'));
 const publishFiles = ['documents/sources.json',
   ...sources.map(source => source.file),
+  ...(readdirSync(path.join(root, 'documents', 'photos'), { withFileTypes: true })
+    .filter(ent => ent.isFile() && /\.(jpe?g|png|webp|svg)$/i.test(ent.name))
+    .map(ent => `documents/photos/${ent.name}`)),
   ...readdirSync(path.join(root, 'diagrams')).filter(name => /\.(svg|png|pdf|drawio)$/.test(name)).map(name => `diagrams/${name}`)];
 for (const file of publishFiles) {
   const target = path.join(distDir, file);

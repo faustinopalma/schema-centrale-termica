@@ -244,11 +244,13 @@ def verify_lesson(screenshots: Path | None) -> None:
                 assert not page.locator("#popup").is_visible()
             page.locator("#language").select_option("it")
 
-            # Verify Cycle & Sigle modals on mobile landscape (844x390 & 667x375) fit side-by-side without clipping
+            # Verify Cycle & Sigle modals on mobile landscape (844x390 & 667x375) fit side-by-side AND clear camera punch-hole / Dynamic Island
             for m_w, m_h in [(844, 390), (667, 375)]:
                 page.set_viewport_size({"width": m_w, "height": m_h})
                 page.locator("#step-tab-0").click()
                 page.locator('#viewport [data-node="pc2"]').click()
+                dlg_b = page.locator("#popup").bounding_box()
+                assert dlg_b and dlg_b["x"] >= 48 and (m_w - (dlg_b["x"] + dlg_b["width"])) >= 48, f"Dialog hit camera punch-hole zone: {dlg_b} on {m_w}x{m_h}"
                 page.locator("#extra-action").click()
                 verify_fit(page, "#popup svg.scene")
                 svg_b = page.locator(".cycle-svg-box").bounding_box()
@@ -259,6 +261,8 @@ def verify_lesson(screenshots: Path | None) -> None:
                 page.keyboard.press("Escape")
 
                 page.locator("#tags-btn").click()
+                dlg_t = page.locator("#popup").bounding_box()
+                assert dlg_t and dlg_t["x"] >= 48 and (m_w - (dlg_t["x"] + dlg_t["width"])) >= 48, f"Sigle dialog hit camera punch-hole zone: {dlg_t} on {m_w}x{m_h}"
                 grid_b = page.locator(".tag-grid").bounding_box()
                 card_b = page.locator(".tag-detail-card").bounding_box()
                 assert grid_b and card_b and card_b["y"] < m_h - 40 and card_b["x"] > grid_b["x"], "Mobile Sigle modal must show grid and detail card side-by-side"
@@ -268,14 +272,44 @@ def verify_lesson(screenshots: Path | None) -> None:
 
             page.set_viewport_size({"width": 1440, "height": 900})
 
-            # Verify interactive Sigle explorer & highlight-on-schematic jump
+            # Verify equipment photos appear in component popups, tag cards, and photo zoom lightbox
+            page.locator("#step-tab-2").click()
+            for node_id, expected_photo in [
+                ("pc2", "hiref-msw.jpg"),
+                ("pc1", "hiref-ksw.jpg"),
+                ("gwTreat", "nobel-nic.jpg"),
+                ("potable", "spade-ambra.jpg"),
+                ("wells", "dab-ss6-borehole.jpg"),
+            ]:
+                page.locator(f'#viewport [data-node="{node_id}"]').click()
+                assert page.locator("#popup").is_visible()
+                imgs = page.locator("#popup .photo-frame img")
+                assert imgs.count() >= 1, f"Expected photo in popup for {node_id}"
+                assert any(expected_photo in (imgs.nth(k).get_attribute("src") or "") for k in range(imgs.count()))
+                loaded = imgs.first.evaluate("el => el.complete && el.naturalWidth > 50")
+                assert loaded, f"Equipment photo failed to load for {node_id}"
+                if screenshots and node_id in ["pc2", "gwTreat", "potable"]:
+                    page.screenshot(path=str(screenshots / f"dev-photo-{node_id}.png"))
+                if node_id == "pc2":
+                    page.locator("#popup [data-zoom-photo]").first.click()
+                    assert page.locator(".photo-zoom-stage img").is_visible()
+                    if screenshots:
+                        page.screenshot(path=str(screenshots / "dev-photo-zoom-pc2.png"))
+                    page.locator("#extra-action").click()
+                    assert page.locator(".photo-gallery").is_visible()
+                page.locator("#close").click()
+
+            # Verify interactive Sigle explorer & highlight-on-schematic jump (including photos for tags that have them)
             page.locator("#tags-btn").click()
             assert page.locator("#popup").is_visible()
-            for tag_code in ["P11", "S3", "SC2", "P02", "ACR"]:
+            for tag_code, has_photo in [("P11", True), ("T6", True), ("P07", True), ("P12", True), ("S3", False), ("ACR", False)]:
                 page.locator(f'#popup [data-select-tag="{tag_code}"]').click()
                 assert copy["it"]["tags"][tag_code]["name"] in page.locator(".tag-detail-card").inner_text()
+                assert (page.locator("#popup .tag-photo-box img").count() == 1) == has_photo
             if screenshots:
+                page.locator('#popup [data-select-tag="T2"]').click()
                 page.screenshot(path=str(screenshots / "tags-explorer-1440.png"))
+                page.locator('#popup [data-select-tag="ACR"]').click()
             page.locator('#popup [data-locate-tag="ACR"]').click()
             assert not page.locator("#popup").is_visible()
             assert page.locator("#viewport > svg").get_attribute("data-diagram") == "step3"
@@ -307,7 +341,10 @@ def verify_lesson(screenshots: Path | None) -> None:
 
             assert not errors, errors
             assert not [r for r in requests if r.startswith(("http:", "https:"))]
-            assert page.locator("a[href]").count() == 0
+            # Main viewport must have zero page-jumping links; any link inside #popup must open external PDF/doc in new tab
+            assert page.locator("main a[href], header a[href], footer a[href]").count() == 0
+            for href in page.locator("#popup a[href]").evaluate_all("as => as.map(a => a.getAttribute('href') + '|' + a.getAttribute('target'))"):
+                assert not href.startswith("#") and href.endswith("|_blank"), f"Unexpected link {href}"
             context.close()
             print("PASS: 3 sequential steps (90 combinations), continuous rAF animation, PC vs mobile details, portrait + PC invite, cycle zoom, Sigle explorer, accurate DHW recirculation and privacy")
         finally:
