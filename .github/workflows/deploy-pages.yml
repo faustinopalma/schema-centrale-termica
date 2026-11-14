@@ -2,7 +2,7 @@ name: Deploy GitHub Pages
 
 on:
   push:
-    branches: ["main"]
+    branches: ["main", "dev"]
   workflow_dispatch:
 
 permissions:
@@ -18,25 +18,40 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repository
+      - name: Checkout production (main)
         uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: "22"
 
-      - name: Run hydraulic graph & thermal tests
-        run: npm test
+      - name: Test & build production (main) into dist/
+        run: |
+          npm test
+          npm run build
 
-      - name: Build static site into dist/
-        run: npm run build
+      - name: Build dev branch into dist/dev/ if present
+        run: |
+          if git show-ref --verify --quiet refs/remotes/origin/dev; then
+            git worktree add ../dev-wt origin/dev
+            (cd ../dev-wt && npm test && npm run build)
+            mkdir -p dist/dev
+            cp -a ../dev-wt/dist/. dist/dev/
+          fi
 
       - name: Verify public dist boundary
         run: |
           test -f dist/index.html
           test -f dist/project.html
           test -f dist/.nojekyll
+          if git show-ref --verify --quiet refs/remotes/origin/dev; then
+            test -f dist/dev/index.html
+            test -f dist/dev/project.html
+          fi
           if find dist -iname "*private*" -o -iname "*Schema centrale*" | grep -q .; then
             echo "Private reference detected in dist/"
             exit 1
