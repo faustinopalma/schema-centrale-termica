@@ -272,11 +272,15 @@ def verify_lesson(screenshots: Path | None) -> None:
 
             page.set_viewport_size({"width": 1440, "height": 900})
 
-            # Verify distinct refrigerant phase-change styling vs water pipes
+            # Verify distinct refrigerant phase-change styling ONLY on Step 1 (Steps 2 & 3 stay clean like main)
             page.locator("#step-tab-0").click()
             assert page.locator("#legend .swatch.ref").count() == 1
             assert page.locator('#viewport .ref-core[data-fluid-kind="ref"]').count() >= 1
             assert page.locator('#viewport .pipe-core[data-fluid-kind="water"]').count() >= 4
+            for clean_step in [1, 2]:
+                page.locator(f"#step-tab-{clean_step}").click()
+                assert page.locator("#legend .swatch.ref").count() == 0
+                assert page.locator("#viewport .ref-core").count() == 0
 
             # Verify equipment photos & interactive Machine Mini-Sites (#machine-site) with in-app back navigation
             initial_app_url = page.url

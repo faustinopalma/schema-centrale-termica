@@ -223,7 +223,7 @@
       "water": {
         "title": "Centrale idrica potabile: filtro T1, accumuli S1, gruppi GP1/GP2 e addolcitori T2",
         "pages": [
-          "L'acqua fredda dell'acquedotto attraversa il filtro autopulente T1 e alimenta 2 serbatoi di prima raccolta S1 da 2.000 L ciascuno. Da qui due gruppi di spinta separati — GP1 (2 pompe inverter per Media Pressione MP, piani alti) e GP2 (2 pompe inverter per Bassa Pressione BP, piani bassi) — pressurizzano le due reti.",
+          "L'acqua fredda dell'acquedotto attraversa il filtro dissabbiatore multicartuccia T1 (50 µm) e alimenta 2 serbatoi di prima raccolta S1 da 2.000 L ciascuno. Da qui due gruppi di spinta separati — GP1 (2 pompe inverter per Media Pressione MP, piani alti) e GP2 (2 pompe inverter per Bassa Pressione BP, piani bassi) — pressurizzano le due reti.",
           "Ciascuna zona alimenta sia l'acqua fredda potabile diretta agli alloggi (AFP), sia una linea dedicata al trattamento dell'acqua calda con 2 addolcitori volumetrici T2 (per prevenire il calcare negli scambiatori SC1 e nei bollitori S2) e stazioni di dosaggio T3 e T4."
         ],
         "photos": [
@@ -933,7 +933,7 @@
       "nobel_ml": {
         "src": "documents/photos/nobel-ml.jpg",
         "title": "Nobel serie ML (T7)",
-        "caption": "Filtro autopulente motorizzato da 100 µm con quadro elettronico di lavaggio (scheda ufficiale Nobel ML)."
+        "caption": "Filtro autopulente da 100 µm con girante idraulica Turboclean e programmatore elettronico ΔP (scheda Nobel ML)."
       },
       "elbi_dl": {
         "src": "documents/photos/elbi-dl-ce.jpg",
@@ -958,7 +958,7 @@
       "spade_ambra": {
         "src": "documents/photos/spade-ambra.jpg",
         "title": "Spadeitalia AMBRA DN100 (T1)",
-        "caption": "Filtro chiarificatore a letto di quarzite sull'ingresso dell'acqua potabile (scheda ufficiale Spade AMBRA)."
+        "caption": "Filtro dissabbiatore multicartuccia da 50 µm sull'ingresso dell'acqua potabile (scheda ufficiale Spade AMBRA)."
       },
       "spade_corallo": {
         "src": "documents/photos/spade-corallo23.jpg",
@@ -1201,7 +1201,7 @@
       "water": {
         "title": "Potable water station: T1 filter, S1 tanks, GP1/GP2 boosters and T2 softeners",
         "pages": [
-          "Incoming mains water passes self-cleaning filter T1 into 2 pre-booster storage tanks S1 (2,000 L each). Two twin-pump inverter booster sets — GP1 (Medium Pressure MP, upper floors) and GP2 (Low Pressure BP, lower floors) — pressurise the two zones.",
+          "Incoming mains water passes multicartridge desanding filter T1 (50 µm) into 2 pre-booster storage tanks S1 (2,000 L each). Two twin-pump inverter booster sets — GP1 (Medium Pressure MP, upper floors) and GP2 (Low Pressure BP, lower floors) — pressurise the two zones.",
           "Each zone supplies cold drinking water directly to apartments (AFP) and feeds a dedicated DHW make-up train with 2 volumetric softeners T2 (preventing scale in SC1 and S2) plus T3 and T4 dosing units."
         ],
         "photos": [
@@ -1911,7 +1911,7 @@
       "nobel_ml": {
         "src": "documents/photos/nobel-ml.jpg",
         "title": "Nobel ML self-cleaning filter (T7)",
-        "caption": "100 µm motorized self-cleaning screen filter with control panel (official Nobel ML sheet)."
+        "caption": "100 µm self-cleaning filter with hydraulic Turboclean jet rotor and ΔP controller (official Nobel ML sheet)."
       },
       "elbi_dl": {
         "src": "documents/photos/elbi-dl-ce.jpg",
@@ -1936,7 +1936,7 @@
       "spade_ambra": {
         "src": "documents/photos/spade-ambra.jpg",
         "title": "Spadeitalia AMBRA DN100 filter (T1)",
-        "caption": "Quartz-bed clarifying filter on the potable mains intake (official Spade AMBRA sheet)."
+        "caption": "50 µm multicartridge desanding filter on the potable mains intake (official Spade AMBRA sheet)."
       },
       "spade_corallo": {
         "src": "documents/photos/spade-corallo23.jpg",
@@ -2179,7 +2179,7 @@
       "water": {
         "title": "生活给水站：T1 过滤器、S1 水箱、GP1/GP2 加压组与 T2 软化器",
         "pages": [
-          "市政自来水经自清洗过滤器 T1 进入 2 台各 2,000 升的储水箱 S1，随后由两套双泵变频加压组——GP1（高层中压 MP）和 GP2（中低层低压 BP）——分区供水。",
+          "市政自来水经多滤芯除砂过滤器 T1（50 µm）进入 2 台各 2,000 升的储水箱 S1，随后由两套双泵变频加压组——GP1（高层中压 MP）和 GP2（中低层低压 BP）——分区供水。",
           "各分区一路直接向住户供应冷饮用水（AFP），另一路经 2 台容积式软水器 T2（防止 SC1 与 S2 结垢）及 T3、T4 加药装置补入热水系统。"
         ],
         "photos": [
@@ -2889,7 +2889,7 @@
       "nobel_ml": {
         "src": "documents/photos/nobel-ml.jpg",
         "title": "Nobel ML 全自动自清洗过滤器（T7）",
-        "caption": "带电控冲洗箱的 100 µm 电动自清洗过滤器（Nobel ML 官方样本）。"
+        "caption": "配 Turboclean 水力喷射叶轮与 ΔP 微电脑控制箱的 100 µm 自清洗过滤器（Nobel ML 官方样本）。"
       },
       "elbi_dl": {
         "src": "documents/photos/elbi-dl-ce.jpg",
@@ -2913,8 +2913,8 @@
       },
       "spade_ambra": {
         "src": "documents/photos/spade-ambra.jpg",
-        "title": "Spadeitalia AMBRA DN100 石英砂过滤器（T1）",
-        "caption": "饮用水进水石英砂澄清过滤罐（Spade AMBRA 官方样本）。"
+        "title": "Spadeitalia AMBRA DN100 多滤芯除砂器（T1）",
+        "caption": "饮用水进水 50 µm 聚酯多滤芯除砂过滤罐（Spade AMBRA 官方样本）。"
       },
       "spade_corallo": {
         "src": "documents/photos/spade-corallo23.jpg",

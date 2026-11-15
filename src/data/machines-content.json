@@ -12,48 +12,52 @@
     },
     "items": {
       "hiref_msw": {
-        "title": "PC2 · Pompa di calore polivalente HiRef MSW182ML",
-        "shortTitle": "PC2 · Pompa polivalente MSW",
-        "subtitle": "2 unità in parallelo · 260,4 kW termici / 233,3 kW frigoriferi cad. · 3 circuiti d'acqua",
+        "title": "PC2 · Pompa di calore polivalente HiRef MSW182ML (2 tubi + recupero)",
+        "shortTitle": "PC2 · Polivalente MSW (4 modi)",
+        "subtitle": "2 unità in parallelo · 260,4 kW termici / 233,3 kW frigoriferi cad. · Valvola 4 vie + Recupero totale",
         "tags": [
           "PC2"
         ],
         "photo": "hiref_msw",
         "specs": [
-          "2 × MSW182ML in parallelo",
-          "Compressori Scroll in tandem",
-          "3 scambiatori a piastre inox"
+          "2 × MSW182ML (versione M a 2 tubi)",
+          "Compressori Scroll in tandem · R410A",
+          "Valvola 4 vie + deviazione recupero + EEV"
         ],
         "modes": [
           {
-            "label": "1 · Inverno (Riscaldamento)",
-            "summary": "Il refrigerante bolle a bassa pressione nello scambiatore lato falda (16 → 11 °C), viene compresso dagli Scroll e condensa cedendo calore all'acqua dei pannelli (40 → 45 °C)."
+            "label": "1 · Clima Inverno",
+            "summary": "La Falda (16 → 11 °C) lavora da Evaporatore; la valvola a 4 vie invia il vapore caldo compresso allo Scambiatore Impianto (40 → 45 °C, Condensatore), mentre lo Scambiatore Recupero resta in stand-by."
           },
           {
-            "label": "2 · Estate (Raffrescamento)",
-            "summary": "Il percorso termico s'inverte: l'acqua dell'edificio cede calore facendo evaporare il refrigerante, mentre il condensatore scarica il calore nell'acqua di falda (16 → 21 °C)."
+            "label": "2 · Carica 40/35 °C",
+            "summary": "La Falda resta Evaporatore, ma la valvola di deviazione gas caldo indirizza il vapore compresso nello Scambiatore dedicato 40/35 °C (Condensatore) per alimentare il circuito sorgente di PC1."
           },
           {
-            "label": "3 · Estate + Recupero 40/35 °C",
-            "summary": "Il vapore compresso caldo attraversa il terzo scambiatore dedicato scaldando gratuitamente l'anello intermedio a 40 °C verso PC1 con il calore sottratto agli alloggi."
+            "label": "3 · Clima Estate",
+            "summary": "La valvola a 4 vie ruota invertendo il ciclo: lo Scambiatore Impianto diventa Evaporatore raffreddando l'acqua dei pannelli, mentre lo Scambiatore Falda diventa Condensatore smaltendo il calore (16 → 21 °C)."
+          },
+          {
+            "label": "4 · Freddo + Recupero",
+            "summary": "Mentre lo Scambiatore Impianto raffresca gli alloggi (Evaporatore), la valvola di recupero invia il gas caldo allo Scambiatore 40/35 °C (Condensatore): freddo e acqua calda vengono prodotti insieme (TER > 7)!"
           }
         ],
         "parts": [
           {
-            "name": "Scambiatore a piastre lato falda",
-            "desc": "Pacco saldobrasato in acciaio inox AISI 316 dove scorrono in controcorrente l'acqua di pozzo filtrata da T7 e il refrigerante sigillato: opera da evaporatore in inverno e da condensatore di smaltimento in estate."
+            "name": "Compressori Scroll in tandem in vano insonorizzato",
+            "desc": "Due compressori Scroll accoppiati sullo stesso circuito frigorifero su supporti antivibranti: permettono di parzializzare la potenza ai carichi ridotti mantenendo alto il rendimento."
           },
           {
-            "name": "Compressori Scroll in tandem",
-            "desc": "Due spirali metalliche accoppiate (una fissa e una orbitante) intrappolano tasche di vapore refrigerante e le spingono verso il centro riducendone il volume, innalzando pressione e temperatura."
+            "name": "Valvola d'inversione a 4 vie + Valvola recupero (VD)",
+            "desc": "È il vero organo polivalente della macchina: commutando internamente il percorso del gas caldo e dell'aspirazione trasforma ciascuno scambiatore in evaporatore o condensatore lasciando fissi i tubi dell'acqua esterni."
           },
           {
-            "name": "Scambiatore utenza climatizzazione",
-            "desc": "Trasferisce l'energia termica all'acqua tecnica chiusa diretta ai volani S3 e ai rami P06, P07 e SC2, mantenendo separato il gas frigorifero dall'impianto idronico del condominio."
+            "name": "3 Scambiatori a piastre (Falda, Clima 2-tubi, Recupero)",
+            "desc": "Affacciati sul pannello destro dell'unità con 6 attacchi idraulici: Falda (sorgente/pozzo), Impianto primario a 2 tubi (caldo o freddo) e Recupero totale dedicato all'anello 40/35 °C verso PC1."
           },
           {
-            "name": "Valvola EEV + 3° scambiatore 40/35 °C",
-            "desc": "La valvola di espansione elettronica (EEV) modula al millimetro il passaggio del liquido refrigerante facendolo cadere di pressione; il terzo scambiatore alimenta l'anello tiepido verso PC1."
+            "name": "Ricevitore di liquido (RL), ponte ritegno e valvola EEV",
+            "desc": "Il ricevitore accumula la carica di refrigerante liquido variabile tra i 4 assetti; il ponte di valvole unidirezionali alimenta la valvola di espansione elettronica (EEV) che governa l'evaporazione."
           }
         ]
       },
@@ -189,44 +193,44 @@
         ]
       },
       "nobel_ml": {
-        "title": "T7 · Filtri fini autopulenti motorizzati Nobel ML",
+        "title": "T7 · Filtri fini autopulenti Nobel ML con girante idraulica Turboclean",
         "shortTitle": "T7 · Filtro autopulente 100 µm",
-        "subtitle": "2 unità in parallelo · Grado di filtrazione 100 µm · DN100 · Lavaggio automatico ΔP",
+        "subtitle": "2 unità in parallelo · Corpo ottone e cartuccia inox 100 µm · DN100 · Controlavaggio idraulico ΔP",
         "tags": [
           "T7"
         ],
         "photo": "nobel_ml",
         "specs": [
           "2 × DN100 in parallelo (65 m³/h cad.)",
-          "Cartuccia inox 100 micrometri",
-          "Pulizia motorizzata in marcia"
+          "Corpo ottone + cartuccia inox 100 µm",
+          "Girante idraulica Turboclean + quadro ML/AP"
         ],
         "modes": [
           {
             "label": "1 · Filtrazione normale (100 µm)",
-            "summary": "L'acqua attraversa la rete cilindrica in acciaio inox da 100 micron (0,1 mm), che trattiene le particelle fini a valle di T6 proteggendo gli stretti canali a piastre delle pompe di calore PC2."
+            "summary": "L'acqua attraversa il corpo flangiato in ottone e la cartuccia cilindrica inox da 100 micron trattenendo la sabbia fine prima delle PC2, mentre i due sensori inox in testa rilevano le pressioni di ingresso e uscita."
           },
           {
-            "label": "2 · Controlavaggio automatico su ΔP",
-            "summary": "Quando lo sporco depositato crea una differenza di pressione (ΔP) tra i due manometri, il quadro avvia il motoriduttore superiore che ruota le spazzole interne aprendo lo scarico di fondo per pochi secondi."
+            "label": "2 · Controlavaggio idraulico Turboclean (ΔP)",
+            "summary": "Raggiunto il ΔP sul programmatore elettronico ML/AP, si apre lo scarico inferiore Ø50 invertendo il flusso d'acqua: la spinta idraulica mette in rapida rotazione la girante Turboclean, i cui spruzzi calibrati investono tutta la cartuccia scaricando le impurità."
           }
         ],
         "parts": [
           {
-            "name": "Cartuccia filtrante cilindrica inox 100 µm",
-            "desc": "Elemento filtrante metallico rigenerabile ad ampia superficie, dimensionato per bloccare sabbia fine e scaglie prima degli scambiatori a piastre."
+            "name": "Testata in ottone con 2 manometri / sensori inox",
+            "desc": "Misura in continuo la pressione a monte e a valle trasmettendo il differenziale ΔP al programmatore computerizzato a parete."
           },
           {
-            "name": "Manometri e pressostato differenziale (ΔP)",
-            "desc": "Misurano la pressione a monte e a valle della rete: un calo di pressione a valle segnala l'accumulo di impurità e comanda automaticamente la pulizia."
+            "name": "Cartuccia filtrante cilindrica in acciaio inox (100 µm)",
+            "desc": "Elemento filtrante rigenerabile alloggiato nella tazza inferiore apribile, progettato per proteggere gli scambiatori a piastre."
           },
           {
-            "name": "Motoriduttore elettrico e gruppo spazzolante",
-            "desc": "Posto sulla calotta superiore: fa ruotare l'albero interno pulendo la superficie interna della cartuccia mentre l'impianto continua ad alimentare le PC2."
+            "name": "Girante idraulica Turboclean a spruzzi calibrati",
+            "desc": "Ruota per sola reazione idraulica durante il controlavaggio: getti d'acqua ad alta velocità puliscono l'intera rete inox con minimo consumo idrico."
           },
           {
-            "name": "Valvola motorizzata di scarico fanghi",
-            "desc": "Situata sul fondello inferiore: si apre in sincronia con la rotazione delle spazzole convogliando allo scarico l'acqua di lavaggio carica di impurità."
+            "name": "Valvola inferiore di scarico + programmatore ML/AP",
+            "desc": "Avvia il lavaggio per differenza di pressione o ad orari programmati fino a 3 volte al giorno, visualizzando sul display P ingresso, P uscita e ΔP."
           }
         ]
       },
@@ -369,45 +373,45 @@
         ]
       },
       "spade_ambra": {
-        "title": "T1 · Filtro chiarificatore a letto di quarzite Spadeitalia AMBRA",
-        "shortTitle": "T1 · Filtro quarzite AMBRA",
-        "subtitle": "Ingresso acquedotto · Filtrazione su letto granulare profondo 50 µm · Portata 66 m³/h (DN100)",
+        "title": "T1 · Filtro dissabbiatore multicartuccia Spadeitalia AMBRA DN100",
+        "shortTitle": "T1 · Multicartuccia AMBRA 50 µm",
+        "subtitle": "Ingresso acquedotto · Elementi multicartuccia in poliestere 50 µm · Portata 66 m³/h (catalogo 90 m³/h)",
         "tags": [
           "T1",
           "AFP"
         ],
         "photo": "spade_ambra",
         "specs": [
-          "Taglia AMBRA DN100 (catalogo 90 m³/h)",
-          "Portata di progetto 66 m³/h",
-          "Grado di filtrazione ~50 µm"
+          "AMBRA DN100 (Ø 500 mm · H 1040 mm)",
+          "Cartucce in panno poliestere 50 µm",
+          "Boccaporto superiore ad apertura totale"
         ],
         "modes": [
           {
-            "label": "1 · Filtrazione dall'alto verso il basso",
-            "summary": "L'acqua dell'acquedotto entra dal diffusore superiore e attraversa lentamente uno spesso strato di quarzite purissima: ruggine e limo restano intrappolati tra i granuli, mentre dalla piastra inferiore esce acqua limpida verso S1."
+            "label": "1 · Filtrazione multicartuccia in parallelo (50 µm)",
+            "summary": "L'acqua dell'acquedotto entra dalla bocca superiore e attraversa radialmente in parallelo le candele filtranti in panno di poliestere da 50 micron: sabbia, ossidi e ruggine restano all'esterno, mentre l'acqua limpida scende attraverso i supporti forati nel collettore inferiore verso S1."
           },
           {
-            "label": "2 · Controlavaggio espansivo dal basso",
-            "summary": "Invertendo periodicamente il flusso dal basso verso l'alto, l'acqua solleva e fluidifica i granuli di quarzite strofinandoli tra loro e trascinando allo scarico superiore tutto lo sporco accumulato."
+            "label": "2 · Controllo ΔP manometri, spurgo e ispezione",
+            "summary": "I due manometri (sul coperchio e sull'uscita) segnalano l'eventuale intasamento delle cartucce; la valvola inferiore scarica i sedimenti depositati e il boccaporto superiore ad apertura totale permette il cambio rapido degli elementi."
           }
         ],
         "parts": [
           {
-            "name": "Diffusore superiore di distribuzione",
-            "desc": "Ripartisce uniformemente il getto d'ingresso su tutta la sezione del serbatoio mantenendo piana la superficie della sabbia."
+            "name": "Boccaporto superiore ad apertura totale + manometro ingresso",
+            "desc": "Coperchio flangiato imbullonato che apre l'intera bocca superiore del serbatoio per l'ispezione e l'estrazione rapida delle cartucce."
           },
           {
-            "name": "Letto filtrante profondo in quarzite selezionata",
-            "desc": "Lavora lungo l'intero spessore granulare trattenendo impurità fino a circa 50 micrometri con elevate capacità di accumulo e basse perdite di carico."
+            "name": "Batteria multicartuccia in panno di poliestere (50 µm)",
+            "desc": "Più elementi cilindrici lavorano in parallelo garantendo grandi portate istantanee condominiali (fino a 90 m³/h di targa) con filtrazione precisa a 50 micrometri."
           },
           {
-            "name": "Strato inferiore di ghiaia di supporto",
-            "desc": "Granulometria più grossa adagiata sul fondo che sostiene la quarzite fine e distribuisce uniformemente l'acqua di controlavaggio."
+            "name": "Supporti interni forati e piastra portacartucce",
+            "desc": "Armature rigide in materiale plastico rinforzato che sostengono il panno filtrante e convogliano l'acqua depurata nella camera inferiore di raccolta."
           },
           {
-            "name": "Piastra portaugelli a fessure calibrate",
-            "desc": "Costellata di ugelli drenanti con fessure più strette dei granuli di quarzo: lascia passare l'acqua limpida verso S1 trattenendo l'intero letto sabbioso."
+            "name": "Corpo zincato con vernice epossidica anticondensa + spurgo",
+            "desc": "Costruito in acciaio al carbonio zincato a bagno caldo e verniciato esternamente contro la condensa dell'acqua fredda, completo di manometro d'uscita e scarico di fondo."
           }
         ]
       },
@@ -687,48 +691,52 @@
     },
     "items": {
       "hiref_msw": {
-        "title": "PC2 · HiRef MSW182ML Multipurpose Heat Pump",
-        "shortTitle": "PC2 · MSW Multipurpose HP",
-        "subtitle": "2 parallel units · 260.4 kW heating / 233.3 kW cooling each · 3 separate water exchangers",
+        "title": "PC2 · HiRef MSW182ML 2-Pipe Multipurpose Heat Pump",
+        "shortTitle": "PC2 · MSW Polyvalent (4 modes)",
+        "subtitle": "2 parallel units · 260.4 kW heating / 233.3 kW cooling each · 4-way valve + Total heat recovery",
         "tags": [
           "PC2"
         ],
         "photo": "hiref_msw",
         "specs": [
-          "2 × MSW182ML in parallel",
-          "Tandem Scroll compressors",
-          "3 stainless plate exchangers"
+          "2 × MSW182ML (2-pipe M version)",
+          "Tandem Scroll compressors · R410A",
+          "4-way reversing + recovery valve + EEV"
         ],
         "modes": [
           {
-            "label": "1 · Winter (Space heating)",
-            "summary": "Refrigerant boils at low pressure in the groundwater exchanger (16 → 11 °C), is compressed by the tandem Scrolls, and condenses to heat the closed building loop (40 → 45 °C)."
+            "label": "1 · Winter Heating",
+            "summary": "Groundwater (16 → 11 °C) acts as Evaporator; the 4-way valve routes hot compressed gas into the 2-pipe Building Exchanger (40 → 45 °C, Condenser), while the Recovery Exchanger stays on standby."
           },
           {
-            "label": "2 · Summer (Space cooling)",
-            "summary": "Heat flow reverses: warm return water from apartments boils the refrigerant, while the condenser rejects heat into the aquifer water stream (16 → 21 °C)."
+            "label": "2 · 40/35 °C Charge",
+            "summary": "Groundwater remains Evaporator, while the hot-gas diversion valve routes compressed vapour into the dedicated 40/35 °C Exchanger (Condenser) to heat the intermediate loop feeding PC1."
           },
           {
-            "label": "3 · Summer + 40/35 °C Recovery",
-            "summary": "Hot compressed refrigerant gas flows through the dedicated third plate exchanger, recovering heat extracted from apartments directly into the 40 °C intermediate loop feeding PC1."
+            "label": "3 · Summer Cooling",
+            "summary": "The 4-way valve reverses the cycle: the Building Exchanger becomes Evaporator chilling the apartment loop, while the Groundwater Exchanger becomes Condenser rejecting heat (16 → 21 °C)."
+          },
+          {
+            "label": "4 · Cooling + Recovery",
+            "summary": "While the Building Exchanger cools the apartments (Evaporator), the recovery valve sends hot discharge gas to the 40/35 °C Exchanger (Condenser), producing cooling and warm water simultaneously (TER > 7)!"
           }
         ],
         "parts": [
           {
-            "name": "Groundwater brazed-plate exchanger",
-            "desc": "AISI 316 stainless-steel plate pack where T7-filtered well water and sealed refrigerant run in counter-current: acts as evaporator in winter and heat-rejection condenser in summer."
+            "name": "Tandem Scroll compressors in acoustic enclosure",
+            "desc": "Two Scroll compressors piped in tandem on anti-vibration mounts allow smooth capacity staging at part load with high seasonal efficiency."
           },
           {
-            "name": "Tandem Scroll compressors",
-            "desc": "Two interleaved spiral scrolls (one fixed, one orbiting eccentrically) trap crescent-shaped pockets of refrigerant vapour and squeeze them toward the centre, raising pressure and temperature."
+            "name": "4-way reversing valve + Hot-gas recovery valve (VD)",
+            "desc": "The core multipurpose manifold: switching internal refrigerant gas paths turns each plate pack into an evaporator or condenser while external water piping stays fixed."
           },
           {
-            "name": "Building HVAC plate exchanger",
-            "desc": "Transfers heating or cooling capacity into the closed hydronic loop serving the S3 buffers and branches P06, P07 and SC2 while keeping refrigerant hermetically sealed."
+            "name": "3 Brazed-plate exchangers (Aquifer, 2-pipe HVAC, Recovery)",
+            "desc": "Mounted facing the right panel with 6 water ports: Aquifer source/sink, 2-pipe primary HVAC loop (heating or cooling), and Total Recovery loop feeding PC1 at 40/35 °C."
           },
           {
-            "name": "Electronic Expansion Valve (EEV) & 3rd 40/35 °C HX",
-            "desc": "A stepper-driven needle modulates liquid refrigerant throttling to flash-cool the mixture, while the third exchanger supplies warm water to the PC1 cascade loop."
+            "name": "Liquid receiver (RL), check-valve bridge & EEV",
+            "desc": "Buffers refrigerant charge variations across the 4 modes while directional check valves feed subcooled liquid into the electronic expansion valve (EEV)."
           }
         ]
       },
@@ -864,44 +872,44 @@
         ]
       },
       "nobel_ml": {
-        "title": "T7 · Nobel ML Motorized Self-Cleaning Fine Filters",
+        "title": "T7 · Nobel ML Self-Cleaning Filters with Hydraulic Turboclean Rotor",
         "shortTitle": "T7 · 100 µm Self-Cleaning Filter",
-        "subtitle": "2 parallel units · 100 µm filtration · DN100 · Automatic ΔP backwash",
+        "subtitle": "2 parallel units · Brass body & 100 µm stainless cartridge · DN100 · Hydraulic ΔP backwash",
         "tags": [
           "T7"
         ],
         "photo": "nobel_ml",
         "specs": [
           "2 × DN100 in parallel (65 m³/h each)",
-          "100 µm stainless screen",
-          "Motorized cleaning under flow"
+          "Brass body + 100 µm stainless screen",
+          "Hydraulic Turboclean rotor + ML/AP panel"
         ],
         "modes": [
           {
             "label": "1 · Normal filtration (100 µm)",
-            "summary": "Water passes through the 100-micrometre stainless-steel cylinder screen, capturing fine particles downstream of T6 to protect the narrow brazed-plate channels of PC2."
+            "summary": "Well water flows through the flanged brass head and 100 µm stainless cylinder screen to protect PC2's plate packs while dual stainless sensors monitor inlet and outlet pressure."
           },
           {
-            "label": "2 · Automatic ΔP motorized flush",
-            "summary": "Once trapped debris raises the pressure drop (ΔP) across the gauges, the controller energises the top gearmotor to rotate internal cleaning brushes while opening the bottom flush valve for a few seconds."
+            "label": "2 · Hydraulic Turboclean backwash (ΔP)",
+            "summary": "When ΔP reaches setpoint on the ML/AP microprocessor panel, the bottom Ø50 drain opens to reverse water flow: hydraulic reaction spins the Turboclean rotor whose calibrated jets blast debris off the entire cartridge."
           }
         ],
         "parts": [
           {
-            "name": "100 µm cylindrical stainless-steel screen",
-            "desc": "Reusable large-area metal mesh element retaining fine sand and scale ahead of the heat-pump plate packs."
+            "name": "Flanged brass head with dual gauges & stainless sensors",
+            "desc": "Continuously measures upstream and downstream pressures, feeding live ΔP data to the wall-mounted electronic programmer."
           },
           {
-            "name": "Inlet/outlet gauges & ΔP switch",
-            "desc": "Monitor upstream versus downstream pressure, triggering a cleaning cycle automatically whenever screen fouling increases ΔP."
+            "name": "100 µm cylindrical stainless-steel filter cartridge",
+            "desc": "Housed inside a removable lower bowl to block fine sand and scale particles above 0.1 mm."
           },
           {
-            "name": "Top electric gearmotor & rotating brushes",
-            "desc": "Drives the internal shaft to sweep debris off the inner screen surface while clean water continues flowing to PC2."
+            "name": "Water-driven Turboclean spray rotor",
+            "desc": "Spun purely by reverse water flow during flushing: calibrated high-velocity jets clean the whole screen surface using minimal water."
           },
           {
-            "name": "Motorized bottom flush valve",
-            "desc": "Opens in sync with brush rotation to discharge dislodged sediment to drain."
+            "name": "Automated Ø50 bottom drain & ML/AP programmer",
+            "desc": "Triggers flushing on pressure drop or scheduled intervals while displaying inlet pressure, outlet pressure and ΔP."
           }
         ]
       },
@@ -1044,45 +1052,45 @@
         ]
       },
       "spade_ambra": {
-        "title": "T1 · Spadeitalia AMBRA Quartz-Bed Clarifying Filter",
-        "shortTitle": "T1 · AMBRA Quartz Filter",
-        "subtitle": "Potable mains intake · 50 µm deep granular quartz-sand bed · 66 m³/h duty (DN100)",
+        "title": "T1 · Spadeitalia AMBRA DN100 Multicartridge Desanding Filter",
+        "shortTitle": "T1 · AMBRA 50 µm Multicartridge",
+        "subtitle": "Potable mains intake · 50 µm polyester multicartridge elements · 66 m³/h duty (90 m³/h rating)",
         "tags": [
           "T1",
           "AFP"
         ],
         "photo": "spade_ambra",
         "specs": [
-          "AMBRA DN100 vessel (90 m³/h catalogue)",
-          "66 m³/h project design flow",
-          "~50 µm deep-bed filtration"
+          "AMBRA DN100 (Ø 500 mm · H 1040 mm)",
+          "50 µm polyester-cloth cartridges",
+          "Full-opening bolted top lid"
         ],
         "modes": [
           {
-            "label": "1 · Top-down service filtration",
-            "summary": "Incoming city mains water enters the upper diffuser dome and percolates downward through a deep bed of pure quartz sand, trapping rust and suspended silt ~50 µm before clean water exits through the lower nozzle plate toward S1."
+            "label": "1 · Parallel multicartridge filtration (50 µm)",
+            "summary": "Incoming city mains water enters the upper chamber and passes radially through multiple parallel 50 µm polyester-cloth cartridges: sand, rust and oxides stay outside while clean water flows down the perforated cores to the lower outlet feeding S1."
           },
           {
-            "label": "2 · Bottom-up fluidised backwash",
-            "summary": "Periodically reversing flow upward lifts and fluidises the sand grains, scrubbing trapped turbidity loose and flushing it out the upper backwash drain to restore clean bed permeability."
+            "label": "2 · Dual-gauge ΔP check, bottom drain & lid access",
+            "summary": "Inlet and outlet pressure gauges reveal cartridge fouling via pressure drop; heavy grit drains from the bottom valve and the full-diameter bolted top cover opens for quick cartridge replacement."
           }
         ],
         "parts": [
           {
-            "name": "Upper inlet distribution dome",
-            "desc": "Spreads incoming mains flow evenly across the vessel cross-section so the sand surface remains level."
+            "name": "Full-opening bolted top cover & inlet pressure gauge",
+            "desc": "Uncovers the entire vessel diameter for fast inspection and replacement of the internal cartridge bundle."
           },
           {
-            "name": "Deep graded quartz-sand filtration bed",
-            "desc": "Captures fine suspended solids throughout the full depth of the granular bed with high dirt-holding capacity."
+            "name": "Parallel 50 µm polyester-cloth filter cartridges",
+            "desc": "Multiple cylindrical elements share flow in parallel to handle high instantaneous condominium demand (90 m³/h catalogue rating) at 50 µm precision."
           },
           {
-            "name": "Coarse lower support gravel layer",
-            "desc": "Stabilises the fine quartz media above and distributes upward backwash water uniformly."
+            "name": "Reinforced perforated cores & tube-sheet plate",
+            "desc": "Support the polyester filter sleeves against differential pressure and channel filtered water into the lower plenum."
           },
           {
-            "name": "Slotted collector nozzle plate",
-            "desc": "Fitted with fine-slotted strainers narrower than the sand grains, passing clarified potable water to S1 while retaining all filter media."
+            "name": "Hot-dip galvanized anti-condensation epoxy shell & drain",
+            "desc": "Carbon-steel vessel galvanized and coated in anti-condensation blue epoxy paint, fitted with outlet gauge and bottom purge cock."
           }
         ]
       },
@@ -1362,48 +1370,52 @@
     },
     "items": {
       "hiref_msw": {
-        "title": "PC2 · HiRef MSW182ML 多功能水源热泵机组",
-        "shortTitle": "PC2 · MSW 多功能热泵",
-        "subtitle": "2 台并联 · 单台制热 260.4 kW / 制冷 233.3 kW · 三组独立水换热器",
+        "title": "PC2 · HiRef MSW182ML 两管制多功能热回收热泵",
+        "shortTitle": "PC2 · MSW 多功能热泵（4 模式）",
+        "subtitle": "2 台并联 · 单台制热 260.4 kW / 制冷 233.3 kW · 四通换向阀 + 全热回收切换阀",
         "tags": [
           "PC2"
         ],
         "photo": "hiref_msw",
         "specs": [
-          "2 × MSW182ML 并联运行",
-          "双涡旋压缩机组合",
-          "3 组不锈钢板式换热器"
+          "2 × MSW182ML（两管制 M 型）",
+          "双联涡旋压缩机 · R410A",
+          "四通换向阀 + 热回收阀 + 电子膨胀阀"
         ],
         "modes": [
           {
-            "label": "1 · 冬季供暖模式",
-            "summary": "低压制冷剂在井水侧板换中吸热沸腾（井水 16 → 11 °C），经涡旋压缩机升温升压后，在楼宇侧板换中冷凝放热（循环水 40 → 45 °C）。"
+            "label": "1 · 冬季空调供暖",
+            "summary": "地下水侧（16 → 11 °C）作为蒸发器吸热；四通阀将高温高压制冷剂气体导向空调侧板换（40 → 45 °C，冷凝器），热回收板换处于待机状态。"
           },
           {
-            "label": "2 · 夏季制冷模式",
-            "summary": "传热方向反转：来自地板回水的热量使制冷剂蒸发吸热，高温制冷剂蒸汽则在井水侧冷凝器中将热量排入地下水（16 → 21 °C）。"
+            "label": "2 · 40/35 °C 蓄热模式",
+            "summary": "地下水侧仍为蒸发器，热气切换阀将压缩机排出的高温气体导向专用 40/35 °C 板换（冷凝器），为二级高温热泵 PC1 提供预热水源。"
           },
           {
-            "label": "3 · 夏季制冷 + 40/35 °C 热回收",
-            "summary": "压缩后的高温制冷剂气体进入第三组专用板式换热器，把从住户室内抽出的热量直接回收至 40 °C 中间环路供给 PC1。"
+            "label": "3 · 夏季空调制冷",
+            "summary": "四通换向阀切换流向：空调侧板换变为蒸发器制备冷水，地下水侧板换变为冷凝器向含水层排热（16 → 21 °C）。"
+          },
+          {
+            "label": "4 · 制冷 + 全热回收",
+            "summary": "空调侧板换为住户制冷（蒸发器）的同时，热回收切换阀将高温排气送入 40/35 °C 板换（冷凝器），一份电耗同时产出冷量与热水（综合能效 TER > 7）！"
           }
         ],
         "parts": [
           {
-            "name": "井水侧钎焊不锈钢板式换热器",
-            "desc": "经 T7 精细过滤的地下水与密封制冷剂逆流换热：冬季作为蒸发器取热，夏季作为排热冷凝器。"
+            "name": "隔音舱双联涡旋压缩机（Tandem Scroll）",
+            "desc": "两台涡旋压缩机并联在同一制冷回路中并配减振垫，部分负荷时可单机运行保持高能效。"
           },
           {
-            "name": "双联涡旋压缩机（Tandem Scroll）",
-            "desc": "定涡旋盘与偏心公转的动涡旋盘相互啮合，将气态制冷剂月牙形气腔逐级推向中心压缩，提升压力与温度。"
+            "name": "四通换向阀与热气回收切换阀组（V4V + VD）",
+            "desc": "多功能热泵的核心枢纽：外部水管连接固定不变，通过内部阀门切换制冷剂吸排气路径即可改变各换热器的蒸发/冷凝角色。"
           },
           {
-            "name": "楼宇空调侧板式换热器",
-            "desc": "向连接 S3 缓冲箱及 P06、P07、SC2 支路的闭式空调水传递冷热量，制冷剂始终密封在铜管回路中。"
+            "name": "三组不锈钢板式换热器（井水、两管制空调、热回收）",
+            "desc": "集中布置在机组右侧面板共 6 个水口：井水侧、两管制空调主环路侧以及通往 PC1 的 40/35 °C 热回收侧。"
           },
           {
-            "name": "电子膨胀阀（EEV）与 40/35 °C 热回收板换",
-            "desc": "步进电机精准调节节流针阀开度使高压液体闪蒸降温；第三组换热器专门为 PC1 提供 40 °C 预热水源。"
+            "name": "储液器（RL）、单向阀桥与电子膨胀阀（EEV）",
+            "desc": "储液器平衡四种工况下的制冷剂液量差异，单向阀桥确保高压液体始终同向流经电子膨胀阀精准节流。"
           }
         ]
       },
@@ -1539,44 +1551,44 @@
         ]
       },
       "nobel_ml": {
-        "title": "T7 · Nobel ML 电动自清洗精细过滤器",
+        "title": "T7 · Nobel ML 配 Turboclean 水力叶轮自清洗精滤器",
         "shortTitle": "T7 · 100 µm 自清洗过滤器",
-        "subtitle": "2 台并联 · 过滤精度 100 µm · DN100 · 压差 ΔP 自动排污",
+        "subtitle": "2 台并联 · 黄铜阀体与 100 µm 不锈钢滤筒 · DN100 · 压差 ΔP 水力反洗",
         "tags": [
           "T7"
         ],
         "photo": "nobel_ml",
         "specs": [
           "2 × DN100 并联（各 65 m³/h）",
-          "100 微米不锈钢滤筒",
-          "在线电动刷洗不断流"
+          "黄铜壳体 + 100 µm 不锈钢滤芯",
+          "Turboclean 水力旋转喷洗 + ML/AP 控制箱"
         ],
         "modes": [
           {
             "label": "1 · 正常精细过滤（100 µm）",
-            "summary": "水流穿过多孔不锈钢圆筒滤网（0.1 mm 孔径），拦截 T6 之后残留的细小颗粒，保护 PC2 板式换热器的精密流道。"
+            "summary": "井水经黄铜法兰阀头穿过多孔 100 µm 不锈钢滤筒，拦截细砂保护 PC2 板换；顶部双压力表与不锈钢传感器实时监测进出水压力。"
           },
           {
-            "label": "2 · 压差 ΔP 触发自动刷洗排污",
-            "summary": "当滤网内壁积垢导致进出水压差（ΔP）升高时，电控箱启动顶部减速电机带动内部毛刷旋转刮垢，同时打开底部排污阀数秒钟排走污物。"
+            "label": "2 · 压差 ΔP 触发 Turboclean 水力喷洗",
+            "summary": "当压差达到设定值时，ML/AP 微电脑控制箱开启底部 Ø50 排污阀使水流反转，水力推动内部 Turboclean 叶轮高速旋转，校准水射流强力冲刷整个滤网表面排走杂质。"
           }
         ],
         "parts": [
           {
-            "name": "100 µm 圆柱形不锈钢滤网筒",
-            "desc": "高强度可反复再生金属滤网，有效拦截细砂与水垢颗粒。"
+            "name": "黄铜法兰阀头与双压力表/不锈钢传感器",
+            "desc": "连续采集进水压力、出水压力及实时压差 ΔP 并传送至壁挂微电脑控制箱。"
           },
           {
-            "name": "进出水压力表与压差开关（ΔP）",
-            "desc": "实时监测滤网前后压降，达到设定压差即自动启动清洗程序。"
+            "name": "100 µm 不锈钢圆柱滤网筒",
+            "desc": "装于可拆洗下杯体中，可靠阻挡 0.1 mm 以上细颗粒。"
           },
           {
-            "name": "顶部电动减速机与旋转清扫刷",
-            "desc": "驱动中心轴旋转清扫滤筒内壁，清洗期间主机组供水保持连续。"
+            "name": "Turboclean 水力反作用旋转喷射叶轮",
+            "desc": "反冲洗时完全依靠水流反作用力驱动旋转，高压校准水柱扫洗全滤网且耗水量极低。"
           },
           {
-            "name": "底部自动排污阀",
-            "desc": "与旋转刷联动开启，将剥离的杂质快速排入排水沟。"
+            "name": "底部 Ø50 自动排污阀与 ML/AP 控制器",
+            "desc": "支持按压差 ΔP 或定时自动排污，液晶屏直观显示进出水压力与清洗状态。"
           }
         ]
       },
@@ -1719,45 +1731,45 @@
         ]
       },
       "spade_ambra": {
-        "title": "T1 · Spadeitalia AMBRA 石英砂深层澄清过滤器",
-        "shortTitle": "T1 · AMBRA 石英砂过滤器",
-        "subtitle": "市政自来水总进水 · 50 µm 多层石英砂深床过滤 · 设计流量 66 m³/h (DN100)",
+        "title": "T1 · Spadeitalia AMBRA DN100 多滤芯精滤除砂器",
+        "shortTitle": "T1 · AMBRA 50 µm 多滤芯过滤器",
+        "subtitle": "市政自来水总进水 · 50 µm 聚酯滤布多滤芯并联 · 设计流量 66 m³/h（额定 90 m³/h）",
         "tags": [
           "T1",
           "AFP"
         ],
         "photo": "spade_ambra",
         "specs": [
-          "AMBRA DN100 罐体（样本额定 90 m³/h）",
-          "项目设计流量 66 m³/h",
-          "过滤精度约 50 µm"
+          "AMBRA DN100（桶径 500 · 高 1040 mm）",
+          "50 µm 聚酯滤布多滤芯组件",
+          "全开启快拆顶盖 + 进出水双压力表"
         ],
         "modes": [
           {
-            "label": "1 · 自上而下正常深层过滤",
-            "summary": "市政自来水经顶部布水罩均匀散开，向下渗透穿过厚实的精选石英砂层：铁锈与悬浮泥沙被截留在砂粒缝隙深处，清澈饮用水经底部水帽板流入 S1 储水箱。"
+            "label": "1 · 多滤芯并联径向精滤（50 µm）",
+            "summary": "市政自来水由上部法兰进入外腔，并联由外向内穿过多个 50 µm 聚酯滤布滤芯：泥沙与铁锈氧化物被阻挡在外表面，澄净饮用水沿多孔增强内骨架汇入下腔流向 S1。"
           },
           {
-            "label": "2 · 自下而上反冲洗再生",
-            "summary": "定期切换流向使水流自下而上反冲，石英砂床受水流托举膨胀流化、颗粒相互摩擦剥离污物并随上部排污口冲走，恢复洁净滤床。"
+            "label": "2 · 双表压差监测、底部排污与开盖维护",
+            "summary": "顶盖与出口侧两块压力表直观反映滤芯压损与堵塞程度；底部球阀可排走沉降砂粒，全口径螺栓顶盖便于快速检查更换滤芯。"
           }
         ],
         "parts": [
           {
-            "name": "顶部均匀布水扩散罩",
-            "desc": "消减进水冲击力并将水流平铺至整个横截面，保持砂面平整。"
+            "name": "全口径螺栓快开顶盖与进水压力表",
+            "desc": "打开顶盖即可完整露出全截面滤芯束，方便定期检查与快速更换过滤元件。"
           },
           {
-            "name": "精选多层石英砂滤床",
-            "desc": "利用整个砂层厚度进行三维深层截污，纳污量大且压损小。"
+            "name": "并联 50 µm 聚酯无纺布滤芯组",
+            "desc": "多支圆柱滤芯并联分担水流，兼顾公寓瞬时大流量需求（样本额定 90 m³/h）与 50 微米高精度除砂。"
           },
           {
-            "name": "底部粗砾石承托层",
-            "desc": "铺设在最下方的粗粒径砾石稳固支撑细石英砂，并使反洗水流分布均匀。"
+            "name": "增强塑料多孔支撑骨架与隔板",
+            "desc": "内部刚性骨架稳固支撑滤布承受压差，并将过滤后的净水导入底部集水弯头。"
           },
           {
-            "name": "精密缝隙滤水帽底板",
-            "desc": "密布窄缝滤水帽，缝隙小于砂粒直径：顺畅输出净水至 S1 同时完整保留石英砂。"
+            "name": "热浸镀锌防结露环氧蓝漆罐体与排污阀",
+            "desc": "碳钢热镀锌罐体外部涂覆防冷凝蓝色环氧树脂，配齐出口压力表与底部排污口。"
           }
         ]
       },

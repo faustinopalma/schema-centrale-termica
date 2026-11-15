@@ -372,7 +372,7 @@ a.btn-link{display:inline-flex;align-items:center;font:inherit;font-size:13px;fo
 
   function photoToMachine(pid) {
     if (pid === 'dab_cme') return { id: 'dab_dcm', mode: 1 };
-    return mCopy().items[pid] ? { id: pid, mode: pid === 'hiref_msw' && state.season === 'summer' ? 1 : 0 } : null;
+    return mCopy().items[pid] ? { id: pid, mode: pid === 'hiref_msw' && state.season === 'summer' ? 2 : 0 } : null;
   }
 
   function topicToMachine(topic) {
@@ -471,7 +471,8 @@ a.btn-link{display:inline-flex;align-items:center;font:inherit;font-size:13px;fo
     $('viewport').inert = isPortrait;
     $('viewport').innerHTML = renderHydraulic(DIAGRAMS[STEP_KEYS[state.step]], L, state.season, `step${state.step + 1}`);
 
-    $('legend').innerHTML = U.legend.map((lbl, idx) =>
+    const legendItems = state.step === 0 ? U.legend : U.legend.slice(0, 4);
+    $('legend').innerHTML = legendItems.map((lbl, idx) =>
       `<span><i class="swatch ${['', 'cool', 'mixed', 'heat', 'ref'][idx] || ''}" aria-hidden="true"></i>${esc(lbl)}</span>`
     ).join('');
     $('click-hint').textContent = U.clickHint;
@@ -990,7 +991,9 @@ a.btn-link{display:inline-flex;align-items:center;font:inherit;font-size:13px;fo
   for (const s of ['winter', 'summer']) {
     $(`ms-${s}`).addEventListener('click', () => {
       state.season = s;
-      if (state.activeMachine === 'hiref_msw' || state.activeMachine === 'radiant_module') {
+      if (state.activeMachine === 'hiref_msw') {
+        state.machineMode = s === 'summer' ? 2 : 0;
+      } else if (state.activeMachine === 'radiant_module') {
         state.machineMode = s === 'summer' ? 1 : 0;
       }
       render();

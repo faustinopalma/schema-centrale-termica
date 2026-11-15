@@ -42,13 +42,13 @@ export function renderMachineCutaway(machineId, modeIdx = 0, activePart = 0, lan
   };
 
   const waterPipe = (pts, fromT, toT = fromT, opts = {}) => {
-    const { thin = false, animated = true, speed = 56, marker = false } = opts;
+    const { thin = false, animated = true, speed = 56, marker = false, dim = false } = opts;
     const d = roundPath(pts);
-    const stroke = fromT === toT ? `var(--cp-${fromT})` : makeGrad(pts[0][0], pts[0][1], pts.at(-1)[0], pts.at(-1)[1], fromT, toT);
+    const stroke = dim ? 'var(--cp-border-strong)' : (fromT === toT ? `var(--cp-${fromT})` : makeGrad(pts[0][0], pts[0][1], pts.at(-1)[0], pts.at(-1)[1], fromT, toT));
     const cls = thin ? ' thin' : '';
-    const anim = animated ? ` data-flow-path="1" data-fluid-kind="water" data-speed="${speed}" data-temp-start="${fromT}" data-temp-end="${toT}"` : '';
-    const mEnd = marker ? ` marker-end="url(#${pfx}-arr-${toT})"` : '';
-    return `<path d="${d}" class="pipe-casing${cls}"/><path d="${d}" class="pipe-core${cls}" style="stroke:${stroke}"${anim}${mEnd}/><path d="${d}" class="pipe-sheen"/>`;
+    const anim = (animated && !dim) ? ` data-flow-path="1" data-fluid-kind="water" data-speed="${speed}" data-temp-start="${fromT}" data-temp-end="${toT}"` : '';
+    const mEnd = (marker && !dim) ? ` marker-end="url(#${pfx}-arr-${toT})"` : '';
+    return `<g opacity="${dim ? '.38' : '1'}"><path d="${d}" class="pipe-casing${cls}"/><path d="${d}" class="pipe-core${cls}" style="stroke:${stroke}"${anim}${mEnd}/><path d="${d}" class="pipe-sheen"/></g>`;
   };
 
   const refPipe = (pts, fromT, toT, phase = 'vapour', speed = 68) => {
@@ -60,11 +60,20 @@ export function renderMachineCutaway(machineId, modeIdx = 0, activePart = 0, lan
 
   const sandTrack = (pts, speed = 42) => {
     const d = roundPath(pts);
-    return `<path d="${d}" fill="none" stroke="var(--cp-warning)" stroke-width="1.6" stroke-dasharray="3 6" opacity=".55" data-flow-path="1" data-fluid-kind="sand" data-speed="${speed}"/>`;
+    return `<path d="${d}" fill="none" stroke="var(--cp-warning)" stroke-width="1.6" stroke-dasharray="3 6" opacity=".6" data-flow-path="1" data-fluid-kind="sand" data-speed="${speed}"/>`;
   };
 
   const heatWave = (x1, y1, x2, y2) =>
     `<path class="thermal-track" data-thermal-path="1" d="M${x1} ${y1}L${x2} ${y2}" marker-end="url(#${pfx}-arr-warning)"/>`;
+
+  const rolePill = (cx, cy, label, tone = 'muted') => {
+    const w = Math.max(82, label.length * 7.2 + 16);
+    const fill = tone === 'muted' ? 'var(--cp-surface-soft)' : 'var(--cp-accent-soft)';
+    const stroke = tone === 'muted' ? 'var(--cp-border-strong)' : `var(--cp-${tone})`;
+    const textCol = tone === 'muted' ? 'var(--cp-text-muted)' : `var(--cp-${tone})`;
+    return `<rect x="${cx - w / 2}" y="${cy - 10}" width="${w}" height="20" rx="10" fill="${fill}" stroke="${stroke}" stroke-width="1.4"/>` +
+      `<text class="svg-label" x="${cx}" y="${cy + 4}" font-size="11" font-weight="700" style="fill:${textCol}" text-anchor="middle">${esc(label)}</text>`;
+  };
 
   const pin = (idx, x, y) => {
     const isAct = activePart === idx;
@@ -77,20 +86,25 @@ export function renderMachineCutaway(machineId, modeIdx = 0, activePart = 0, lan
   const organBox = (idx, x, y, w, h, rx = 12) =>
     activePart === idx ? `<rect class="organ-focus" x="${x}" y="${y}" width="${w}" height="${h}" rx="${rx}"/>` : '';
 
-  const plateStack = (x, y, w, h, nPlates = 6) => {
+  const plateStack = (x, y, w, h, nPlates = 6, vertical = true) => {
     let s = `<rect class="plate-pack" x="${x}" y="${y}" width="${w}" height="${h}" rx="8"/>`;
     for (let i = 1; i < nPlates; i++) {
-      const px = x + (w * i) / nPlates;
-      s += `<path d="M${px.toFixed(1)} ${y + 6}V${y + h - 6}" stroke="var(--cp-border-strong)" stroke-width="1.4" stroke-dasharray="6 4"/>`;
+      if (vertical) {
+        const px = x + (w * i) / nPlates;
+        s += `<path d="M${px.toFixed(1)} ${y + 6}V${y + h - 6}" stroke="var(--cp-border-strong)" stroke-width="1.4" stroke-dasharray="6 4"/>`;
+      } else {
+        const py = y + (h * i) / nPlates;
+        s += `<path d="M${x + 6} ${py.toFixed(1)}H${x + w - 6}" stroke="var(--cp-border-strong)" stroke-width="1.4" stroke-dasharray="6 4"/>`;
+      }
     }
     return s;
   };
 
-  const scrollUnit = (cx, cy, r = 34, rpm = 1.6) =>
+  const scrollUnit = (cx, cy, r = 28, rpm = 1.6) =>
     `<circle class="machine-card" cx="${cx}" cy="${cy}" r="${r}"/>` +
-    `<path d="M${cx} ${cy - r + 9}a${r - 9} ${r - 9} 0 1 1 -${r - 11} ${r - 9}a${r - 17} ${r - 17} 0 1 0 ${r - 11} -${r - 19}" fill="none" stroke="var(--cp-border-strong)" stroke-width="2.4" stroke-linecap="round"/>` +
-    `<g data-orbit="1" data-orbit-r="4.2" data-rpm="${rpm}">` +
-    `<path d="M${cx} ${cy - r + 14}a${r - 14} ${r - 14} 0 1 1 -${r - 16} ${r - 14}a${r - 22} ${r - 22} 0 1 0 ${r - 16} -${r - 24}" fill="none" stroke="var(--cp-accent)" stroke-width="2.8" stroke-linecap="round"/></g>`;
+    `<path d="M${cx} ${cy - r + 8}a${r - 8} ${r - 8} 0 1 1 -${r - 10} ${r - 8}a${r - 15} ${r - 15} 0 1 0 ${r - 10} -${r - 17}" fill="none" stroke="var(--cp-border-strong)" stroke-width="2.2" stroke-linecap="round"/>` +
+    `<g data-orbit="1" data-orbit-r="3.8" data-rpm="${rpm}">` +
+    `<path d="M${cx} ${cy - r + 12}a${r - 12} ${r - 12} 0 1 1 -${r - 14} ${r - 12}a${r - 19} ${r - 19} 0 1 0 ${r - 14} -${r - 21}" fill="none" stroke="var(--cp-accent)" stroke-width="2.5" stroke-linecap="round"/></g>`;
 
   const impellerWheel = (cx, cy, r = 24, rpm = 1.4) =>
     `<circle class="machine-sub" cx="${cx}" cy="${cy}" r="${r}"/>` +
@@ -100,286 +114,282 @@ export function renderMachineCutaway(machineId, modeIdx = 0, activePart = 0, lan
     ).join('') +
     `<circle cx="${cx}" cy="${cy}" r="5" fill="var(--cp-accent)"/></g>`;
 
+  const gauge = (cx, cy, lbl, ang = -35) =>
+    `<circle class="machine-card" cx="${cx}" cy="${cy}" r="16"/>` +
+    `<line x1="${cx}" y1="${cy}" x2="${(cx + Math.cos(ang * Math.PI / 180) * 11).toFixed(1)}" y2="${(cy + Math.sin(ang * Math.PI / 180) * 11).toFixed(1)}" stroke="var(--cp-danger)" stroke-width="2.2" stroke-linecap="round"/>` +
+    `<text class="svg-label svg-temp" x="${cx}" y="${cy + 29}" font-size="11" text-anchor="middle">${esc(lbl)}</text>`;
+
   let body = '', pins = '', focus = '';
 
   if (machineId === 'hiref_msw') {
-    const isSummer = modeIdx === 1, isRecov = modeIdx === 2;
-    body += `<rect class="machine-card" x="48" y="24" width="744" height="402" rx="20"/>`;
-    body += `<text class="svg-label svg-sub" x="420" y="50" font-size="13.5" text-anchor="middle">${esc(T(' Involucro ermetico PC2 · Circuito frigorifero sigillato R410A', 'PC2 Hermetic Cabinet · Sealed R410A Refrigerant Loop', 'PC2 密封机组外壳 · 独立 R410A 气液相变回路'))}</text>`;
-    // Left HX (Groundwater), Right HX (Building HVAC), Bottom-center 3rd HX (40/35 Recovery)
-    body += plateStack(130, 108, 68, 210, 5);
-    body += plateStack(642, 108, 68, 210, 5);
-    body += plateStack(340, 336, 160, 52, 7);
-    focus += organBox(0, 118, 98, 92, 230) + organBox(1, 316, 62, 208, 98) + organBox(2, 630, 98, 92, 230) + organBox(3, 326, 250, 188, 148);
-    // Water streams (isolated outside the refrigerant loop)
-    body += waterPipe([[18, 134], [145, 134], [145, 292], [18, 292]], 'link', isSummer ? 'danger' : 'link', { thin: true, speed: isRecov ? 22 : 56 });
-    body += `<text class="svg-label svg-temp" x="62" y="122" font-size="13" text-anchor="middle">${isSummer ? '16→21 °C' : '16→11 °C'}</text>`;
-    body += waterPipe([[822, 292], [695, 292], [695, 134], [822, 134]], isSummer || isRecov ? 'danger' : 'link', isSummer || isRecov ? 'link' : 'danger', { thin: true });
-    body += `<text class="svg-label svg-temp" x="776" y="122" font-size="13" text-anchor="middle">${isSummer || isRecov ? '13 / 18 °C' : '45 / 40 °C'}</text>`;
-    body += waterPipe([[250, 412], [355, 412], [355, 372], [485, 372], [485, 412], [590, 412]], 'link', 'danger', { thin: true, animated: isRecov || !isSummer, speed: isRecov ? 62 : 34 });
-    body += `<text class="svg-label svg-temp" x="420" y="408" font-size="12.5" text-anchor="middle">35 → 40 °C (→ PC1)</text>`;
+    const m = modeIdx;
+    const gwActive = m !== 3, clActive = m !== 1, recActive = m === 1 || m === 3;
+    body += `<rect class="machine-card" x="62" y="18" width="716" height="404" rx="20"/>`;
+    body += `<rect class="machine-sub" x="316" y="32" width="208" height="80" rx="14"/>`;
+    body += scrollUnit(374, 72, 27, 1.8) + scrollUnit(466, 72, 27, 1.8);
+    body += `<rect class="machine-card" x="342" y="136" width="156" height="56" rx="12"/>`;
+    body += `<text class="svg-label svg-temp" x="420" y="160" font-size="12.5" text-anchor="middle">V4V + VD</text>`;
+    body += `<text class="svg-label svg-sub" x="420" y="179" font-size="11" text-anchor="middle">${esc(T('Inversione / Recupero', '4-Way & Recovery', '四通换向与热回收阀'))}</text>`;
+    body += refPipe([[384, 136], [384, 112]], 'link', 'link', 'vapour');
+    body += refPipe([[456, 112], [456, 136]], 'danger', 'danger', 'vapour');
 
-    // Tandem Scroll compressors top
-    body += scrollUnit(372, 110, 32, 1.8) + scrollUnit(468, 110, 32, 1.8);
-    // EEV stepper valve at y=276
-    body += `<path class="machine-card" d="M396 262L444 290V262L396 290Z"/>` +
-      `<g data-recip="1" data-dx="0" data-dy="3"><path d="M420 240v28" stroke="var(--cp-accent)" stroke-width="3" stroke-linecap="round"/><rect class="tag-pill-bg" x="404" y="226" width="32" height="16" rx="5"/></g>`;
+    body += plateStack(100, 126, 62, 190, 5, true);
+    body += plateStack(678, 126, 62, 190, 5, true);
+    body += plateStack(336, 344, 168, 52, 6, false);
 
-    if (!isSummer && !isRecov) {
-      // Winter: Evap left -> Scrolls -> Condenser right -> EEV -> Evap left
-      body += refPipe([[182, 134], [182, 96], [338, 96]], 'link', 'link', 'vapour');
-      body += refPipe([[502, 96], [658, 96], [658, 140]], 'danger', 'danger', 'vapour');
-      body += refPipe([[658, 286], [658, 276], [444, 276]], 'danger', 'danger', 'liquid');
-      body += refPipe([[396, 276], [182, 276], [182, 290]], 'link', 'link', 'mixture');
-      body += heatWave(118, 212, 174, 212) + heatWave(664, 212, 722, 212);
-    } else if (isSummer) {
-      // Summer: Evap right -> Scrolls -> Condenser left -> EEV -> Evap right
-      body += refPipe([[658, 134], [658, 96], [502, 96]], 'link', 'link', 'vapour');
-      body += refPipe([[338, 96], [182, 96], [182, 140]], 'danger', 'danger', 'vapour');
-      body += refPipe([[182, 286], [182, 276], [396, 276]], 'danger', 'danger', 'liquid');
-      body += refPipe([[444, 276], [658, 276], [658, 290]], 'link', 'link', 'mixture');
-      body += heatWave(722, 212, 664, 212) + heatWave(174, 212, 118, 212);
+    const evapLbl = T('EVAPORATORE', 'EVAPORATOR', '蒸发器');
+    const condLbl = T('CONDENSATORE', 'CONDENSER', '冷凝器');
+    const stbyLbl = T('STAND-BY', 'STANDBY', '待机');
+    body += rolePill(131, 106, m <= 1 ? evapLbl : (m === 2 ? condLbl : stbyLbl), m <= 1 ? 'link' : (m === 2 ? 'danger' : 'muted'));
+    body += rolePill(709, 106, m === 0 ? condLbl : (m === 1 ? stbyLbl : evapLbl), m === 0 ? 'danger' : (m === 1 ? 'muted' : 'link'));
+    body += rolePill(420, 326, recActive ? condLbl : stbyLbl, recActive ? 'danger' : 'muted');
+
+    body += waterPipe([[14, 148], [112, 148], [112, 294], [14, 294]], 'link', m === 2 ? 'danger' : 'link', { thin: true, dim: !gwActive });
+    body += `<text class="svg-label svg-temp" x="131" y="76" font-size="12" text-anchor="middle">${esc(gwActive ? (m === 2 ? '16 → 21 °C' : '16 → 11 °C') : 'Falda 16 °C')}</text>`;
+    body += waterPipe([[826, 294], [728, 294], [728, 148], [826, 148]], m === 0 ? 'link' : 'danger', m === 0 ? 'danger' : 'link', { thin: true, dim: !clActive });
+    body += `<text class="svg-label svg-temp" x="709" y="76" font-size="12" text-anchor="middle">${esc(m === 0 ? '40 → 45 °C' : (clActive ? '18 → 13 °C' : 'Clima 2-tubi'))}</text>`;
+    body += waterPipe([[236, 434], [356, 434], [356, 384], [484, 384], [484, 434], [604, 434]], 'link', 'danger', { thin: true, dim: !recActive });
+    body += `<text class="svg-label svg-temp" x="672" y="438" font-size="12" text-anchor="middle">35 → 40 °C (PC1)</text>`;
+
+    body += `<rect class="machine-card" x="342" y="242" width="156" height="52" rx="12"/>`;
+    body += `<rect x="354" y="252" width="32" height="32" rx="6" fill="var(--cp-danger)" fill-opacity=".28" stroke="var(--cp-danger)" stroke-width="1.6"/>` +
+      `<text class="svg-label svg-temp" x="370" y="272" font-size="11" text-anchor="middle">RL</text>`;
+    body += `<path class="machine-sub" d="M424 254L464 282V254L424 282Z"/>` +
+      `<text class="svg-label svg-temp" x="480" y="272" font-size="10.5" text-anchor="middle">EEV</text>`;
+
+    if (m === 0) {
+      body += refPipe([[162, 152], [342, 152]], 'link', 'link', 'vapour');
+      body += refPipe([[498, 152], [678, 152]], 'danger', 'danger', 'vapour');
+      body += refPipe([[678, 268], [498, 268]], 'danger', 'danger', 'liquid');
+      body += refPipe([[342, 268], [162, 268]], 'link', 'link', 'mixture');
+      body += heatWave(88, 220, 146, 220) + heatWave(694, 220, 752, 220);
+    } else if (m === 1) {
+      body += refPipe([[162, 152], [342, 152]], 'link', 'link', 'vapour');
+      body += refPipe([[498, 174], [576, 174], [576, 368], [504, 368]], 'danger', 'danger', 'vapour');
+      body += refPipe([[476, 344], [476, 294]], 'danger', 'danger', 'liquid');
+      body += refPipe([[342, 268], [162, 268]], 'link', 'link', 'mixture');
+      body += heatWave(88, 220, 146, 220) + heatWave(420, 356, 420, 404);
+    } else if (m === 2) {
+      body += refPipe([[678, 152], [498, 152]], 'link', 'link', 'vapour');
+      body += refPipe([[342, 152], [162, 152]], 'danger', 'danger', 'vapour');
+      body += refPipe([[162, 268], [342, 268]], 'danger', 'danger', 'liquid');
+      body += refPipe([[498, 268], [678, 268]], 'link', 'link', 'mixture');
+      body += heatWave(752, 220, 694, 220) + heatWave(146, 220, 88, 220);
     } else {
-      // Summer + Total Recovery into 3rd HX (bottom): Evap right -> Scrolls -> 3rd HX -> EEV -> Evap right
-      body += refPipe([[658, 134], [658, 96], [502, 96]], 'link', 'link', 'vapour');
-      body += refPipe([[338, 96], [286, 96], [286, 352], [340, 352]], 'danger', 'danger', 'vapour');
-      body += refPipe([[500, 352], [546, 352], [546, 276], [444, 276]], 'danger', 'danger', 'liquid');
-      body += refPipe([[444, 276], [658, 276], [658, 290]], 'link', 'link', 'mixture');
-      body += heatWave(722, 212, 664, 212) + heatWave(420, 326, 420, 368);
+      body += refPipe([[678, 152], [498, 152]], 'link', 'link', 'vapour');
+      body += refPipe([[342, 174], [264, 174], [264, 368], [336, 368]], 'danger', 'danger', 'vapour');
+      body += refPipe([[364, 344], [364, 294]], 'danger', 'danger', 'liquid');
+      body += refPipe([[498, 268], [678, 268]], 'link', 'link', 'mixture');
+      body += heatWave(752, 220, 694, 220) + heatWave(420, 356, 420, 404);
     }
-    pins += pin(0, 164, 92) + pin(1, 420, 66) + pin(2, 676, 92) + pin(3, 324, 344);
+    focus += organBox(0, 310, 26, 220, 92) + organBox(1, 336, 130, 168, 68) + organBox(2, 92, 118, 656, 284) + organBox(3, 336, 236, 168, 64);
+    pins += pin(0, 296, 68) + pin(1, 518, 140) + pin(2, 656, 136) + pin(3, 320, 246);
   } else if (machineId === 'hiref_ksw') {
     const partLoad = modeIdx === 1;
-    body += `<rect class="machine-card" x="56" y="28" width="728" height="394" rx="20"/>`;
-    body += `<text class="svg-label svg-sub" x="420" y="54" font-size="13.5" text-anchor="middle">${esc(T('Secondo stadio ad alta temperatura PC1 · Salto ridotto 40 °C → 70 °C', 'PC1 High-Temperature Second Stage · Low-ratio lift 40 °C → 70 °C', 'PC1 二级高温水源热泵 · 40 °C → 70 °C 低压比高效升温'))}</text>`;
-    body += plateStack(138, 118, 72, 224, 6);
-    body += plateStack(630, 118, 72, 224, 6);
-    focus += organBox(0, 126, 108, 96, 244) + organBox(1, 314, 72, 212, 104) + organBox(2, 618, 108, 96, 244) + organBox(3, 358, 304, 124, 86);
-    // Warm 40->35 source left, Hot 65->70 primary right
-    body += waterPipe([[20, 144], [154, 144], [154, 316], [20, 316]], 'warning', 'link', { thin: true });
-    body += `<text class="svg-label svg-temp" x="72" y="130" font-size="13.5" text-anchor="middle">40 → 35 °C</text>`;
-    body += `<text class="svg-label svg-sub" x="72" y="344" font-size="12" text-anchor="middle">P05 · S3</text>`;
-    body += waterPipe([[820, 316], [686, 316], [686, 144], [820, 144]], 'warning', 'danger', { thin: true });
-    body += `<text class="svg-label svg-temp" x="768" y="130" font-size="13.5" text-anchor="middle">65 → 70 °C</text>`;
-    body += `<text class="svg-label svg-sub" x="768" y="344" font-size="12" text-anchor="middle">P04 → 2×SC1</text>`;
-    // Scrolls (second scroll stops in mode 1 part-load!)
-    body += scrollUnit(370, 124, 33, 1.9) + scrollUnit(470, 124, 33, partLoad ? 0 : 1.9);
-    if (partLoad) {
-      body += `<text class="svg-label svg-sub" x="470" y="174" font-size="11.5" text-anchor="middle">STAND-BY (50%)</text>`;
-    }
-    body += `<path class="machine-card" d="M394 334L446 364V334L394 364Z"/>`;
-    body += refPipe([[194, 144], [194, 112], [335, 112]], 'warning', 'warning', 'vapour');
-    body += refPipe([[505, 112], [646, 112], [646, 148]], 'danger', 'danger', 'vapour');
-    body += refPipe([[646, 312], [646, 349], [446, 349]], 'danger', 'danger', 'liquid');
-    body += refPipe([[394, 349], [194, 349], [194, 312]], 'link', 'warning', 'mixture');
-    body += heatWave(124, 230, 188, 230) + heatWave(652, 230, 716, 230);
-    body += `<rect class="machine-sub" x="292" y="216" width="256" height="64" rx="12"/>` +
-      `<text class="svg-label svg-title" x="420" y="243" font-size="14.5" text-anchor="middle">COP ~4,9 · 180,5 kW</text>` +
-      `<text class="svg-label svg-sub" x="420" y="265" font-size="12.5" text-anchor="middle">${esc(T('Evaporazione alta (~32 °C) grazie a PC2', 'High ~32 °C evaporation thanks to PC2', '借力 PC2 预热实现 ~32 °C 高温蒸发'))}</text>`;
-    pins += pin(0, 174, 102) + pin(1, 420, 74) + pin(2, 666, 102) + pin(3, 420, 382);
+    body += `<rect class="machine-card" x="56" y="24" width="728" height="402" rx="20"/>`;
+    body += `<text class="svg-label svg-sub" x="420" y="48" font-size="13" text-anchor="middle">${esc(T('Secondo stadio PC1 · Circuito R134a / R513A per alta condensazione (fino a 80 °C)', 'PC1 High-Temp Stage · R134a / R513A Circuit for up to 80 °C Supply', 'PC1 二级高温水源热泵 · R134a / R513A 高冷凝温度专用回路'))}</text>`;
+    body += plateStack(136, 118, 68, 224, 6);
+    body += plateStack(636, 118, 68, 224, 6);
+    body += rolePill(170, 98, T('EVAP. ~32 °C', 'EVAP. ~32 °C', '蒸发 ~32 °C'), 'warning');
+    body += rolePill(670, 98, T('COND. ~74 °C', 'COND. ~74 °C', '冷凝 ~74 °C'), 'danger');
+    body += waterPipe([[18, 146], [150, 146], [150, 314], [18, 314]], 'warning', 'link', { thin: true });
+    body += `<text class="svg-label svg-temp" x="170" y="74" font-size="12.5" text-anchor="middle">40 → 35 °C</text>`;
+    body += `<text class="svg-label svg-sub" x="170" y="366" font-size="11.5" text-anchor="middle">P05 · 26 m³/h</text>`;
+    body += waterPipe([[822, 314], [690, 314], [690, 146], [822, 146]], 'warning', 'danger', { thin: true });
+    body += `<text class="svg-label svg-temp" x="670" y="74" font-size="12.5" text-anchor="middle">65 → 70 °C</text>`;
+    body += `<text class="svg-label svg-sub" x="670" y="366" font-size="11.5" text-anchor="middle">P04 → 2×SC1</text>`;
+    body += `<rect class="machine-sub" x="312" y="70" width="216" height="92" rx="14"/>`;
+    body += scrollUnit(370, 116, 30, 1.9) + scrollUnit(470, 116, 30, partLoad ? 0 : 1.9);
+    if (partLoad) body += `<text class="svg-label svg-sub" x="470" y="156" font-size="10.5" text-anchor="middle">50% OFF</text>`;
+    body += `<rect class="machine-sub" x="336" y="318" width="44" height="54" rx="8"/>` +
+      `<text class="svg-label svg-temp" x="358" y="350" font-size="11.5" text-anchor="middle">RL</text>`;
+    body += `<path class="machine-card" d="M416 330L464 360V330L416 360Z"/>` +
+      `<text class="svg-label svg-temp" x="440" y="382" font-size="11.5" text-anchor="middle">EEV</text>`;
+    body += refPipe([[192, 146], [192, 110], [312, 110]], 'warning', 'warning', 'vapour');
+    body += refPipe([[528, 110], [648, 110], [648, 146]], 'danger', 'danger', 'vapour');
+    body += refPipe([[648, 314], [648, 345], [464, 345]], 'danger', 'danger', 'liquid');
+    body += refPipe([[416, 345], [380, 345]], 'danger', 'danger', 'liquid');
+    body += refPipe([[336, 345], [192, 345], [192, 314]], 'link', 'warning', 'mixture');
+    body += heatWave(122, 230, 184, 230) + heatWave(656, 230, 718, 230);
+    body += `<rect class="machine-sub" x="296" y="210" width="248" height="62" rx="12"/>` +
+      `<text class="svg-label svg-title" x="420" y="236" font-size="14" text-anchor="middle">COP ~4,9 · 180,5 kW</text>` +
+      `<text class="svg-label svg-sub" x="420" y="258" font-size="12" text-anchor="middle">${esc(T('Rapporto compressione ridotto', 'Low compression ratio via 40 °C source', '40 °C 中温进水大幅降低压缩比'))}</text>`;
+    focus += organBox(0, 126, 110, 88, 240) + organBox(1, 306, 64, 228, 104) + organBox(2, 626, 110, 88, 240) + organBox(3, 328, 310, 152, 82);
+    pins += pin(0, 224, 152) + pin(1, 292, 86) + pin(2, 614, 152) + pin(3, 492, 320);
   } else if (machineId === 'dab_ss6') {
     const running = modeIdx === 0;
-    // Aquifer ground & vertical slotted borehole casing
-    body += `<rect class="aquifer-fill" x="150" y="58" width="540" height="368" rx="18"/>`;
-    body += `<rect class="machine-card" x="310" y="26" width="220" height="404" rx="10"/>`;
-    // Slotted screen perforations on well casing
-    for (const sy of [260, 290, 320, 350, 380]) {
-      body += `<line x1="304" y1="${sy}" x2="316" y2="${sy}" stroke="var(--cp-link)" stroke-width="4"/>` +
-        `<line x1="524" y1="${sy}" x2="536" y2="${sy}" stroke="var(--cp-link)" stroke-width="4"/>`;
+    body += `<rect class="aquifer-fill" x="148" y="54" width="544" height="374" rx="18"/>`;
+    body += `<rect class="machine-card" x="308" y="24" width="224" height="408" rx="10"/>`;
+    for (const sy of [266, 296, 326, 356, 386]) {
+      body += `<line x1="302" y1="${sy}" x2="314" y2="${sy}" stroke="var(--cp-link)" stroke-width="4"/>` +
+        `<line x1="526" y1="${sy}" x2="538" y2="${sy}" stroke="var(--cp-link)" stroke-width="4"/>`;
     }
-    // Submersible pump stainless cylinder inside well
-    body += `<rect class="machine-sub" x="366" y="76" width="108" height="332" rx="12"/>`;
-    // 1) Bottom TR motor (y=298..398)
-    body += `<rect class="machine-card" x="378" y="302" width="84" height="94" rx="8"/>`;
-    for (let fy = 316; fy <= 382; fy += 13) body += `<line x1="386" y1="${fy}" x2="454" y2="${fy}" stroke="var(--cp-border-strong)" stroke-width="2"/>`;
-    body += `<text class="svg-label svg-title" x="420" y="354" font-size="13" text-anchor="middle">TR Motor</text>`;
-    // 2) Suction strainer (y=258..298)
-    body += `<rect class="plate-pack" x="378" y="260" width="84" height="36" rx="4"/>`;
-    for (let sx = 388; sx <= 452; sx += 10) body += `<line x1="${sx}" y1="265" x2="${sx}" y2="291" stroke="var(--cp-accent)" stroke-width="1.6"/>`;
-    // 3) 3 stacked mixed-flow impeller stages (y=132..252)
-    for (const [idx, sy] of [[0, 232], [1, 192], [2, 152]]) {
+    body += `<rect class="machine-sub" x="366" y="74" width="108" height="336" rx="12"/>`;
+    body += `<line x1="478" y1="54" x2="478" y2="360" stroke="var(--cp-accent)" stroke-width="3" stroke-dasharray="6 3"/>`;
+    body += `<rect class="machine-card" x="378" y="302" width="84" height="96" rx="8"/>`;
+    for (let fy = 316; fy <= 384; fy += 13) body += `<line x1="386" y1="${fy}" x2="454" y2="${fy}" stroke="var(--cp-border-strong)" stroke-width="1.8"/>`;
+    body += `<text class="svg-label svg-title" x="420" y="355" font-size="13" text-anchor="middle">TR Motor</text>`;
+    body += `<rect class="plate-pack" x="378" y="258" width="84" height="38" rx="4"/>`;
+    for (let sx = 388; sx <= 452; sx += 10) body += `<line x1="${sx}" y1="263" x2="${sx}" y2="291" stroke="var(--cp-accent)" stroke-width="1.6"/>`;
+    body += `<line x1="420" y1="118" x2="420" y2="302" stroke="var(--cp-border-strong)" stroke-width="3.5"/>`;
+    for (const sy of [230, 190, 150]) {
       body += `<rect class="machine-card" x="378" y="${sy - 16}" width="84" height="32" rx="6"/>`;
       body += `<g data-rotor="1" data-cx="420" data-cy="${sy}" data-rpm="${running ? 2.2 : 0}">` +
-        `<path d="M394 ${sy + 6}L420 ${sy - 9}L446 ${sy + 6}Z" fill="var(--cp-accent)" opacity=".85"/></g>`;
-      if (idx === 2) body += `<text class="svg-label svg-temp" x="598" y="${sy + 5}" font-size="13.5">930 kPa (9,3 bar)</text>`;
+        `<path d="M392 ${sy + 7}L420 ${sy - 9}L448 ${sy + 7}Z" fill="var(--cp-accent)" opacity=".88"/></g>`;
     }
-    // 4) Built-in check valve at top (y=86..124)
-    const valveY = running ? 94 : 110;
-    body += `<path d="M388 114h64" stroke="var(--cp-border-strong)" stroke-width="3"/>` +
-      `<path d="M398 ${valveY}h44l-8 -10h-28Z" fill="var(--cp-accent)"/>`;
-    // Flow paths when running
-    body += waterPipe([[220, 355], [344, 355], [344, 278], [420, 278], [420, 18]], 'link', 'link', { thin: true, animated: running, marker: running });
-    body += waterPipe([[620, 355], [496, 355], [496, 278], [420, 278]], 'link', 'link', { thin: true, animated: running });
-    body += `<text class="svg-label svg-title" x="225" y="96" font-size="15" text-anchor="middle">${esc(T('Falda ~16 °C', 'Aquifer ~16 °C', '地下含水层 ~16 °C'))}</text>`;
-    body += `<text class="svg-label svg-sub" x="635" y="295" font-size="12.5" text-anchor="middle">${esc(T('Raffreddamento motore', 'Motor cooling sleeve', '水流贴壁冷却潜水电机'))}</text>`;
-    if (!running) {
-      body += `<text class="svg-label svg-title" x="635" y="106" font-size="14" text-anchor="middle">${esc(T('Valvola chiusa · Colonna piena', 'Check valve shut · Riser held', '止回阀闭合 · 锁住立管水柱'))}</text>`;
-    }
-    focus += organBox(0, 370, 296, 100, 106) + organBox(1, 370, 254, 100, 46) + organBox(2, 370, 130, 100, 122) + organBox(3, 376, 76, 88, 48);
-    pins += pin(0, 336, 350) + pin(1, 336, 278) + pin(2, 336, 192) + pin(3, 336, 98);
+    const vY = running ? 92 : 109;
+    body += `<path d="M386 113h68" stroke="var(--cp-border-strong)" stroke-width="3.2"/>` +
+      `<path d="M398 ${vY}h44l-8 -10h-28Z" fill="var(--cp-accent)"/>`;
+    body += waterPipe([[216, 360], [344, 360], [344, 277], [420, 277], [420, 16]], 'link', 'link', { thin: true, animated: running, marker: running });
+    body += waterPipe([[624, 360], [496, 360], [496, 277], [420, 277]], 'link', 'link', { thin: true, animated: running });
+    body += `<text class="svg-label svg-title" x="222" y="94" font-size="14.5" text-anchor="middle">${esc(T('Falda ~16 °C', 'Aquifer ~16 °C', '地下含水层 ~16 °C'))}</text>`;
+    body += `<text class="svg-label svg-temp" x="614" y="156" font-size="13.5" text-anchor="middle">930 kPa (9,3 bar)</text>`;
+    body += `<text class="svg-label svg-sub" x="612" y="294" font-size="10.5" text-anchor="middle">${esc(running ? T('L’acqua raffredda il motore TR', 'Inflow cools TR motor shell', '吸入井水贴壁冷却电机') : T('Valvola chiusa · Colonna piena', 'Check valve shut · Riser held', '止回阀闭合保压'))}</text>`;
+    focus += organBox(0, 370, 296, 100, 108) + organBox(1, 370, 252, 100, 48) + organBox(2, 370, 128, 100, 122) + organBox(3, 376, 74, 88, 46);
+    pins += pin(0, 336, 350) + pin(1, 336, 276) + pin(2, 336, 190) + pin(3, 336, 96);
   } else if (machineId === 'nobel_nic') {
     const purging = modeIdx === 1;
-    // Tangential inlet top-left -> cylinder -> long converging cone -> bottom grit tank -> top clean vortex finder
-    body += `<path class="machine-card" d="M310 68h220v74L456 326h-72L310 142Z"/>`;
-    body += `<rect class="machine-sub" x="332" y="326" width="176" height="68" rx="22"/>`;
-    body += `<rect class="machine-card" x="394" y="34" width="52" height="118" rx="8"/>`;
-    // Incoming tangential pipe
-    body += waterPipe([[110, 98], [336, 98]], 'link', 'link', { marker: true });
-    // Helical outer vortex path + sand grains spiralling down cone wall
-    const spiralPts = [[338, 104], [496, 126], [344, 174], [476, 218], [372, 266], [448, 306], [420, 352]];
-    body += `<path d="${roundPath(spiralPts)}" fill="none" stroke="var(--cp-link)" stroke-width="3.2" opacity=".55" data-flow-path="1" data-fluid-kind="water" data-temp-start="link" data-temp-end="link"/>`;
+    body += `<rect class="machine-card" x="326" y="54" width="188" height="84" rx="10"/>`;
+    body += `<path class="machine-card" d="M326 132h188L452 332h-64Z"/>`;
+    body += `<path d="M352 396v28M488 396v28" stroke="var(--cp-border-strong)" stroke-width="6" stroke-linecap="round"/>`;
+    body += `<rect class="machine-sub" x="318" y="332" width="204" height="68" rx="32"/>`;
+    body += `<rect class="machine-card" x="396" y="42" width="48" height="114" rx="6"/>`;
+    body += waterPipe([[102, 102], [344, 102]], 'link', 'link', { marker: true });
+    const spiralPts = [[346, 108], [488, 134], [358, 182], [468, 228], [382, 276], [442, 314], [420, 360]];
+    body += `<path d="${roundPath(spiralPts)}" fill="none" stroke="var(--cp-link)" stroke-width="3" opacity=".55" data-flow-path="1" data-fluid-kind="water" data-temp-start="link" data-temp-end="link"/>`;
     body += sandTrack(spiralPts, 48);
-    // Settled sand pile in bottom chamber
-    body += `<path d="M352 384q68 -26 136 0Z" fill="var(--cp-warning)" opacity="${purging ? '.35' : '.8'}"/>`;
+    body += `<path d="M346 388q74 -24 148 0Z" fill="var(--cp-warning)" opacity="${purging ? '.35' : '.82'}"/>`;
+    body += `<rect class="machine-card" x="522" y="354" width="32" height="24" rx="4"/>`;
     if (purging) {
-      body += waterPipe([[420, 384], [420, 436], [560, 436]], 'warning', 'warning', { thin: true, marker: true });
-      body += sandTrack([[420, 376], [420, 436], [560, 436]], 64);
+      body += waterPipe([[500, 366], [690, 366]], 'warning', 'warning', { thin: true, marker: true });
+      body += sandTrack([[420, 372], [690, 366]], 64);
     }
-    // Inner clean upward vortex exiting top to 2xT7
-    body += waterPipe([[420, 302], [420, 44], [690, 44]], 'link', 'link', { marker: true });
-    body += `<text class="svg-label svg-title" x="180" y="78" font-size="14.5" text-anchor="middle">${esc(T('Ingresso tangenziale 108 m³/h', 'Tangential inlet 108 m³/h', '切向进水 108 m³/h'))}</text>`;
-    body += `<text class="svg-label svg-title" x="620" y="30" font-size="14.5" text-anchor="middle">${esc(T('Acqua depurata → 2×T7', 'Clean vortex → 2×T7', '净水内涡流 → 2×T7'))}</text>`;
-    body += `<text class="svg-label svg-sub" x="668" y="220" font-size="12.5" text-anchor="middle">${esc(T('Forza centrifuga → parete', 'Centrifugal force → wall', '离心力将重砂甩向锥壁'))}</text>`;
-    focus += organBox(0, 230, 74, 120, 52) + organBox(1, 304, 140, 232, 186) + organBox(2, 324, 322, 192, 78) + organBox(3, 386, 28, 68, 130);
-    pins += pin(0, 268, 98) + pin(1, 500, 216) + pin(2, 316, 360) + pin(3, 468, 62);
+    body += waterPipe([[420, 304], [420, 62], [696, 62]], 'link', 'link', { marker: true });
+    body += `<text class="svg-label svg-title" x="176" y="66" font-size="13.5" text-anchor="middle">${esc(T('Ingresso tangenziale DN125', 'Tangential inlet DN125', 'DN125 切向加速进水'))}</text>`;
+    body += `<text class="svg-label svg-title" x="632" y="42" font-size="13.5" text-anchor="middle">${esc(T('Acqua depurata → 2×T7', 'Clean vortex → 2×T7', '净水内涡流 → 2×T7'))}</text>`;
+    body += `<text class="svg-label svg-sub" x="676" y="218" font-size="12" text-anchor="middle">${esc(T('Inox AISI 304 · >50 µm', 'AISI 304 · >50 µm grit', 'AISI 304 锥体除砂 (>50 µm)'))}</text>`;
+    body += `<text class="svg-label svg-sub" x="646" y="340" font-size="12" text-anchor="middle">${esc(T('Valvola a sfera 1" spurgo', '1" purge ball valve', '1" 底部排砂球阀'))}</text>`;
+    focus += organBox(0, 236, 78, 120, 50) + organBox(1, 320, 134, 200, 198) + organBox(2, 312, 326, 248, 80, 32) + organBox(3, 388, 36, 64, 126);
+    pins += pin(0, 272, 102) + pin(1, 502, 218) + pin(2, 296, 366) + pin(3, 474, 88);
   } else if (machineId === 'nobel_ml') {
     const flushing = modeIdx === 1;
-    // Top gearmotor + filter vessel + cylindrical 100um screen + 2 pressure gauges + bottom flush valve
-    body += `<rect class="machine-card" x="346" y="32" width="148" height="48" rx="10"/>`;
-    body += `<text class="svg-label svg-title" x="420" y="61" font-size="13.5" text-anchor="middle">Motor 10–30 W</text>`;
-    body += `<rect class="machine-card" x="292" y="88" width="256" height="270" rx="22"/>`;
-    body += `<rect class="plate-pack" x="342" y="114" width="156" height="216" rx="10"/>`;
-    // Fine 100 um mesh hatch
-    for (let my = 132; my <= 314; my += 22) body += `<line x1="348" y1="${my}" x2="492" y2="${my}" stroke="var(--cp-border-strong)" stroke-width="1.2" stroke-dasharray="4 4"/>`;
-    // Central rotating brush shaft
-    body += `<line x1="420" y1="80" x2="420" y2="358" stroke="var(--cp-accent)" stroke-width="4"/>`;
-    body += `<g data-rotor="1" data-cx="420" data-cy="222" data-rpm="${flushing ? 2.4 : 0}">` +
-      `<line x1="348" y1="222" x2="492" y2="222" stroke="var(--cp-accent)" stroke-width="3.5"/>` +
-      `<circle cx="350" cy="222" r="5" fill="var(--cp-accent)"/><circle cx="490" cy="222" r="5" fill="var(--cp-accent)"/></g>`;
-    // Differential pressure gauges P1 & P2
-    for (const [gx, lbl, ang] of [[246, 'P1', -35], [594, 'P2', flushing ? -75 : -30]]) {
-      body += `<circle class="machine-card" cx="${gx}" cy="116" r="22"/>` +
-        `<line x1="${gx}" y1="116" x2="${gx + Math.cos(ang * Math.PI / 180) * 14}" y2="${116 + Math.sin(ang * Math.PI / 180) * 14}" stroke="var(--cp-danger)" stroke-width="2.4"/>` +
-        `<text class="svg-label svg-temp" x="${gx}" y="154" font-size="12" text-anchor="middle">${lbl}</text>`;
-    }
-    // Main water flow through 100 um screen
-    body += waterPipe([[110, 186], [360, 186], [480, 256], [730, 256]], 'link', 'link', { marker: true });
+    body += `<rect x="284" y="96" width="232" height="82" rx="18" fill="var(--cp-warning)" fill-opacity=".22" stroke="var(--cp-border-strong)" stroke-width="2.2"/>`;
+    body += `<rect class="machine-card" x="304" y="178" width="192" height="184" rx="22"/>`;
+    body += gauge(352, 62, 'P1', -30) + gauge(448, 62, 'P2', flushing ? -80 : -32);
+    body += `<path d="M464 62H614V138" fill="none" stroke="var(--cp-accent)" stroke-width="1.8" stroke-dasharray="4 3"/>`;
+    body += `<rect class="machine-card" x="562" y="138" width="164" height="92" rx="12"/>` +
+      `<rect class="machine-sub" x="578" y="152" width="132" height="36" rx="6"/>` +
+      `<text class="svg-label svg-temp" x="644" y="175" font-size="12" text-anchor="middle">${flushing ? 'ML/AP: WASH ON' : 'ML/AP: ΔP OK'}</text>` +
+      `<text class="svg-label svg-sub" x="644" y="212" font-size="11.5" text-anchor="middle">${esc(T('Quadro ΔP / Timer', 'ΔP / Timer Controller', 'ML/AP 压差电脑控制箱'))}</text>`;
+    body += `<rect class="plate-pack" x="334" y="192" width="132" height="154" rx="10"/>`;
+    for (let my = 210; my <= 330; my += 20) body += `<line x1="340" y1="${my}" x2="460" y2="${my}" stroke="var(--cp-border-strong)" stroke-width="1.2" stroke-dasharray="4 4"/>`;
+    body += `<line x1="400" y1="186" x2="400" y2="356" stroke="var(--cp-accent)" stroke-width="3.5"/>`;
+    body += `<g data-rotor="1" data-cx="400" data-cy="268" data-rpm="${flushing ? 3.2 : 0}">` +
+      `<path d="M352 268h96M400 226v84" stroke="var(--cp-accent)" stroke-width="3.2" stroke-linecap="round"/>` +
+      `<circle cx="352" cy="268" r="4.5" fill="var(--cp-link)"/><circle cx="448" cy="268" r="4.5" fill="var(--cp-link)"/></g>`;
+    body += waterPipe([[84, 136], [356, 136], [356, 250], [444, 250], [444, 136], [536, 136]], 'link', 'link', { thin: true, marker: true });
+    body += `<rect class="machine-sub" x="376" y="362" width="48" height="32" rx="6"/>`;
     if (flushing) {
-      body += waterPipe([[420, 330], [420, 424], [585, 424]], 'warning', 'warning', { thin: true, marker: true });
-      body += sandTrack([[420, 200], [420, 424], [585, 424]], 60);
-      body += `<text class="svg-label svg-title" x="625" y="406" font-size="13.5" text-anchor="middle">${esc(T('Scarico impurità (ΔP)', ' Automatic ΔP flush drain', 'ΔP 触发自动排污'))}</text>`;
+      body += waterPipe([[400, 268], [400, 426], [568, 426]], 'warning', 'warning', { thin: true, marker: true });
+      body += sandTrack([[400, 236], [400, 426], [568, 426]], 62);
+      body += `<text class="svg-label svg-title" x="668" y="408" font-size="13" text-anchor="middle">${esc(T('Getti Turboclean → Scarico Ø50', 'Turboclean jets → Ø50 drain', 'Turboclean 高压水射流排污'))}</text>`;
     }
-    body += `<text class="svg-label svg-title" x="180" y="168" font-size="14" text-anchor="middle">${esc(T('Da T6 · 65 m³/h', 'From T6 · 65 m³/h', '来自 T6 · 65 m³/h'))}</text>`;
-    body += `<text class="svg-label svg-title" x="660" y="236" font-size="14" text-anchor="middle">${esc(T('Filtrata 100 µm → PC2', '100 µm clean → PC2', '100 µm 净水 → PC2'))}</text>`;
-    focus += organBox(0, 334, 108, 172, 228) + organBox(1, 218, 88, 404, 72) + organBox(2, 338, 26, 164, 60) + organBox(3, 382, 354, 76, 78);
-    pins += pin(0, 342, 314) + pin(1, 246, 84) + pin(2, 512, 54) + pin(3, 382, 392);
+    body += `<text class="svg-label svg-title" x="166" y="114" font-size="13.5" text-anchor="middle">${esc(T('Ingresso DN100 (65 m³/h)', 'DN100 inlet (65 m³/h)', 'DN100 进水 (65 m³/h)'))}</text>`;
+    focus += organBox(0, 278, 38, 244, 142) + organBox(1, 326, 186, 148, 166) + organBox(2, 344, 218, 112, 100) + organBox(3, 368, 356, 364, 78);
+    pins += pin(0, 304, 62) + pin(1, 300, 268) + pin(2, 400, 206) + pin(3, 352, 382);
   } else if (machineId === 'elbi_dl') {
     const surge = modeIdx === 0;
-    // Main groundwater pipe at bottom + side-branch T into vertical 1,000 L bladder vessel
-    body += waterPipe([[90, 396], [750, 396]], 'link', 'link', { marker: true });
-    body += waterPipe([[420, 396], [420, 326]], 'link', 'link', { thin: true, animated: true, speed: surge ? 48 : 26 });
-    body += `<circle cx="420" cy="396" r="6" fill="var(--cp-link)" stroke="var(--cp-surface)" stroke-width="2"/>`;
-    // Steel shell on legs
-    body += `<path d="M332 332v52M508 332v52" stroke="var(--cp-border-strong)" stroke-width="6" stroke-linecap="round"/>`;
-    body += `<rect class="machine-card" x="298" y="42" width="244" height="296" rx="88"/>`;
-    // Top gas precharge valve & compressible gas zone
-    body += `<rect class="machine-sub" x="408" y="24" width="24" height="20" rx="4"/>`;
-    body += `<text class="svg-label svg-sub" x="420" y="88" font-size="13.5" text-anchor="middle">${esc(T('Cuscino gas precaricato (N₂ / Aria)', 'Pre-charged gas cushion (N₂ / Air)', '顶部预充可压缩气垫'))}</text>`;
-    // Pulsing replaceable butyl bladder inside
-    const bTop = surge ? 116 : 158;
-    body += `<g data-pulse="1" data-cx="420" data-cy="260" data-amp="${surge ? 0.065 : 0.03}">` +
-      `<path d="M332 324Q322 ${bTop} 420 ${bTop}Q518 ${bTop} 508 324Z" fill="var(--cp-link)" fill-opacity=".22" stroke="var(--cp-accent)" stroke-width="3.4"/></g>`;
-    body += `<text class="svg-label svg-title" x="420" y="248" font-size="15" text-anchor="middle">${esc(T('Membrana in butile · Acqua', 'Butyl bladder · Water', '丁基橡胶囊 · 隔离井水'))}</text>`;
-    body += `<text class="svg-label svg-temp" x="656" y="190" font-size="15" text-anchor="middle">1.000 L · 10 bar</text>`;
-    body += `<text class="svg-label svg-sub" x="656" y="372" font-size="13" text-anchor="middle">${esc(T('Linea principale verso PC2', 'Main header toward PC2', '通往 PC2 的地下水主干管'))}</text>`;
-    focus += organBox(0, 312, 50, 216, 74) + organBox(1, 322, 118, 196, 206) + organBox(2, 290, 36, 260, 308, 88) + organBox(3, 378, 336, 84, 74);
-    pins += pin(0, 276, 82) + pin(1, 514, 218) + pin(2, 276, 190) + pin(3, 458, 368);
+    body += waterPipe([[90, 404], [750, 404]], 'link', 'link', { marker: true });
+    body += waterPipe([[420, 404], [420, 336]], 'link', 'link', { thin: true, speed: surge ? 50 : 26 });
+    body += `<circle cx="420" cy="404" r="6" fill="var(--cp-link)" stroke="var(--cp-surface)" stroke-width="2"/>`;
+    body += `<path d="M332 332v56M508 332v56" stroke="var(--cp-border-strong)" stroke-width="6" stroke-linecap="round"/>`;
+    body += `<rect class="machine-card" x="298" y="44" width="244" height="298" rx="76"/>`;
+    body += `<rect class="machine-sub" x="406" y="26" width="28" height="22" rx="4"/>`;
+    body += gauge(574, 112, '2,5 bar', -25);
+    const bw = surge ? 84 : 58;
+    body += `<g data-pulse="1" data-cx="420" data-cy="194" data-amp="${surge ? 0.055 : 0.025}">` +
+      `<path d="M408 48h24Q${420 + bw} 194 436 336h-32Q${420 - bw} 194 408 48Z" fill="var(--cp-link)" fill-opacity=".25" stroke="var(--cp-accent)" stroke-width="3.2"/></g>`;
+    body += `<text class="svg-label svg-sub" x="172" y="138" font-size="12.5" text-anchor="middle">${esc(T('Camera gas (2,5 bar)', 'Gas cushion (2.5 bar)', '外腔 2.5 bar 预充气垫'))}</text>`;
+    body += `<text class="svg-label svg-title" x="668" y="176" font-size="13.5" text-anchor="middle">${esc(T('Membrana a tutta altezza', 'Full-height bladder', '上下锚定全容积胶囊'))}</text>`;
+    body += `<text class="svg-label svg-temp" x="668" y="218" font-size="14" text-anchor="middle">DL 1000 · 10 bar</text>`;
+    body += `<text class="svg-label svg-sub" x="656" y="380" font-size="12.5" text-anchor="middle">${esc(T('Derivazione a T (G 2" Top-Pro)', 'Side-branch T (G 2" Top-Pro)', 'G 2" Top-Pro 防腐旁路法兰'))}</text>`;
+    focus += organBox(0, 304, 52, 232, 280, 70) + organBox(1, 336, 44, 168, 296, 40) + organBox(2, 290, 36, 260, 312, 80) + organBox(3, 376, 336, 88, 78);
+    pins += pin(0, 326, 112) + pin(1, 420, 148) + pin(2, 276, 218) + pin(3, 462, 370);
   } else if (machineId === 'dab_dcm') {
     const isHalf = modeIdx === 1, isStandby = modeIdx === 2;
     const rpm1 = isHalf ? 0.65 : 2.1, rpm2 = isStandby ? 0 : (isHalf ? 0.65 : 2.1);
-    // Collinear horizontal header left -> split twin inline volutes -> flapper check valve -> right outlet
     body += waterPipe([[66, 250], [220, 250], [220, 158], [556, 158], [556, 250], [774, 250]], 'danger', 'danger', { speed: isHalf ? 30 : 68, marker: true });
-    body += waterPipe([[220, 250], [220, 342], [556, 342], [556, 250]], 'danger', 'danger', { animated: !isStandby, speed: isHalf ? 30 : 68 });
-    // Top MCE/C inverter drives + twin centrifugal impellers
-    for (const [idx, cy, rpm, hzTxt] of [[0, 158, rpm1, isHalf ? '25 Hz · ~15% kW' : '50 Hz · 100%'], [1, 342, rpm2, isStandby ? '0 Hz · RISERVA' : (isHalf ? '25 Hz · ~15% kW' : '50 Hz · 100%')]]) {
-      body += `<rect class="machine-card" x="284" y="${cy - 54}" width="88" height="44" rx="8"/>` +
-        `<text class="svg-label svg-temp" x="328" y="${cy - 27}" font-size="12" text-anchor="middle">MCE/C</text>`;
-      body += `<circle class="machine-card" cx="418" cy="${cy}" r="38"/>` + impellerWheel(418, cy, 28, rpm);
-      body += `<text class="svg-label svg-sub" x="418" y="${cy + (idx === 0 ? -48 : 58)}" font-size="13" text-anchor="middle">${esc(hzTxt)}</text>`;
+    body += waterPipe([[220, 250], [220, 342], [556, 342], [556, 250]], 'danger', 'danger', { animated: !isStandby, speed: isHalf ? 30 : 68, dim: isStandby });
+    for (const [idx, cy, rpm, hzTxt] of [[0, 158, rpm1, isHalf ? 'ΔP-c · 25 Hz (~15% kW)' : 'ΔP-c · 50 Hz (100%)'], [1, 342, rpm2, isStandby ? '0 Hz · STAND-BY' : (isHalf ? 'ΔP-c · 25 Hz (~15% kW)' : 'ΔP-c · 50 Hz (100%)')]]) {
+      body += `<rect class="machine-card" x="276" y="${cy - 50}" width="96" height="44" rx="8"/>` +
+        `<text class="svg-label svg-temp" x="324" y="${cy - 23}" font-size="12" text-anchor="middle">MCE/C</text>`;
+      body += `<rect class="plate-pack" x="374" y="${cy - 12}" width="14" height="24" rx="3"/>`;
+      body += `<circle class="machine-card" cx="424" cy="${cy}" r="38"/>` + impellerWheel(424, cy, 28, rpm);
+      body += `<text class="svg-label svg-sub" x="424" y="${cy + (idx === 0 ? -64 : 58)}" font-size="12.5" text-anchor="middle">${esc(hzTxt)}</text>`;
     }
-    // Automatic flapper check valve at right union (x=556, y=250)
-    const flapAngle = isStandby ? 36 : 0;
+    const flapAngle = isStandby ? 38 : 0;
     body += `<circle class="machine-card" cx="556" cy="250" r="24"/>` +
-      `<line x1="556" y1="228" x2="556" y2="272" stroke="var(--cp-accent)" stroke-width="4" stroke-linecap="round" transform="rotate(${flapAngle} 556 250)"/>`;
-    body += `<text class="svg-label svg-title" x="132" y="226" font-size="14" text-anchor="middle">${esc(T('Aspirazione in-line', 'Inline suction', '同轴法兰进水'))}</text>`;
-    body += `<text class="svg-label svg-title" x="688" y="226" font-size="14" text-anchor="middle">${esc(T('Mandata Δp regolata', 'Δp regulated supply', 'Δp 变频恒压出水'))}</text>`;
-    focus += organBox(0, 276, 96, 104, 60) + organBox(1, 372, 112, 92, 92) + organBox(2, 64, 218, 712, 64) + organBox(3, 524, 218, 64, 64);
-    pins += pin(0, 276, 124) + pin(1, 468, 124) + pin(2, 146, 278) + pin(3, 594, 250);
+      `<line x1="556" y1="228" x2="556" y2="272" stroke="var(--cp-accent)" stroke-width="4.2" stroke-linecap="round" transform="rotate(${flapAngle} 556 250)"/>`;
+    body += `<text class="svg-label svg-title" x="136" y="206" font-size="13.5" text-anchor="middle">${esc(T('Flangia PN16 aspirazione', 'PN16 inline suction', 'PN16 同轴进水法兰'))}</text>`;
+    body += `<text class="svg-label svg-title" x="686" y="206" font-size="13.5" text-anchor="middle">${esc(T('Mandata ΔP-c costante', 'Constant ΔP-c delivery', 'ΔP-c 恒压差出水'))}</text>`;
+    focus += organBox(0, 270, 102, 108, 56) + organBox(1, 378, 112, 92, 92) + organBox(2, 64, 218, 712, 64) + organBox(3, 524, 218, 64, 64);
+    pins += pin(0, 256, 128) + pin(1, 484, 132) + pin(2, 146, 298) + pin(3, 598, 250);
   } else if (machineId === 'dab_evoplus') {
     const isCharge = modeIdx === 1;
     const tone = isCharge ? 'danger' : 'warning';
-    // Sanitary bronze housing left + stainless-steel sealed rotor can + dry ECM stator outer coils
-    body += waterPipe([[74, 232], [270, 232]], tone, tone, { speed: isCharge ? 66 : 36 });
-    body += waterPipe([[270, 232], [270, 112], [690, 112]], tone, tone, { speed: isCharge ? 66 : 36, marker: true });
-    // Sanitary volute
-    body += `<rect class="machine-card" x="228" y="156" width="92" height="152" rx="20"/>`;
-    body += impellerWheel(274, 232, 30, isCharge ? 2.1 : 1.1);
-    // Dry stator outer housing
-    body += `<rect class="machine-card" x="320" y="134" width="276" height="196" rx="18"/>`;
-    // Dry copper/ECM stator coils top & bottom
-    body += `<rect class="machine-sub" x="348" y="150" width="190" height="36" rx="6"/>` +
-      `<rect class="machine-sub" x="348" y="278" width="190" height="36" rx="6"/>`;
-    body += `<text class="svg-label svg-sub" x="443" y="173" font-size="12.5" text-anchor="middle">${esc(T('Statore ECM asciutto', 'Dry ECM stator coils', '外部干燥 ECM 定子绕组'))}</text>`;
-    // Hermetic thin stainless separation can (canotto inox)
-    body += `<rect x="318" y="194" width="234" height="76" rx="12" fill="var(--cp-link)" fill-opacity=".14" stroke="var(--cp-accent)" stroke-width="3" stroke-dasharray="7 3"/>`;
-    // Wet permanent-magnet rotor + shaft spinning inside water
-    body += `<line x1="274" y1="232" x2="532" y2="232" stroke="var(--cp-border-strong)" stroke-width="5"/>`;
-    body += `<g data-pulse="1" data-cx="440" data-cy="232" data-amp="0.03"><rect class="tag-pill-bg" x="382" y="208" width="116" height="48" rx="8"/>` +
-      `<text class="svg-label svg-title" x="440" y="237" font-size="13" text-anchor="middle">${esc(T('Rotore bagnato', 'Wet PM Rotor', '水中永磁转子'))}</text></g>`;
-    body += `<text class="svg-label svg-temp" x="625" y="88" font-size="14" text-anchor="middle">${isCharge ? 'P01 · 16 m³/h (60 °C)' : 'P02/P03 · 3,6 m³/h (48 °C)'}</text>`;
-    focus += organBox(0, 314, 188, 244, 88) + organBox(1, 374, 202, 132, 60) + organBox(2, 340, 142, 208, 180) + organBox(3, 220, 148, 108, 168);
-    pins += pin(0, 566, 212) + pin(1, 440, 256) + pin(2, 558, 164) + pin(3, 222, 164);
+    body += waterPipe([[236, 412], [236, 230], [236, 48]], tone, tone, { speed: isCharge ? 66 : 36, marker: true });
+    body += `<rect x="192" y="152" width="92" height="156" rx="22" fill="var(--cp-warning)" fill-opacity=".18" stroke="var(--cp-border-strong)" stroke-width="2.2"/>`;
+    body += impellerWheel(238, 230, 30, isCharge ? 2.2 : 1.15);
+    body += `<rect class="machine-card" x="284" y="130" width="266" height="200" rx="18"/>`;
+    body += `<rect class="machine-card" x="550" y="114" width="116" height="232" rx="16"/>` +
+      `<rect class="machine-sub" x="568" y="148" width="80" height="44" rx="6"/>` +
+      `<text class="svg-label svg-temp" x="608" y="175" font-size="12" text-anchor="middle">EVOPLUS</text>` +
+      `<text class="svg-label svg-sub" x="608" y="222" font-size="11.5" text-anchor="middle">${isCharge ? '16 m³/h' : '0,34 kW'}</text>`;
+    body += `<rect class="machine-sub" x="314" y="146" width="204" height="36" rx="6"/>` +
+      `<rect class="machine-sub" x="314" y="278" width="204" height="36" rx="6"/>`;
+    body += `<text class="svg-label svg-sub" x="416" y="169" font-size="12" text-anchor="middle">${esc(T('Avvolgimenti statore ECM (asciutti)', 'Dry ECM stator windings', '外部干燥 ECM 定子绕组'))}</text>`;
+    body += `<rect x="282" y="190" width="246" height="80" rx="12" fill="var(--cp-link)" fill-opacity=".16" stroke="var(--cp-accent)" stroke-width="2.8" stroke-dasharray="7 3"/>`;
+    body += `<rect class="plate-pack" x="304" y="218" width="14" height="24" rx="3"/><rect class="plate-pack" x="502" y="218" width="14" height="24" rx="3"/>`;
+    body += `<line x1="238" y1="230" x2="520" y2="230" stroke="var(--cp-border-strong)" stroke-width="5"/>`;
+    body += `<g data-pulse="1" data-cx="412" data-cy="230" data-amp="0.025"><rect class="tag-pill-bg" x="348" y="206" width="128" height="48" rx="8"/>` +
+      `<text class="svg-label svg-title" x="412" y="235" font-size="12.5" text-anchor="middle">${esc(T('Rotore bagnato PM', 'Wet PM Rotor', '水浸润滑永磁转子'))}</text></g>`;
+    body += `<text class="svg-label svg-temp" x="118" y="88" font-size="13.5" text-anchor="middle">${isCharge ? 'P01 → S2 (60 °C)' : 'ACR · 48 °C (P02/P03)'}</text>`;
+    focus += organBox(0, 280, 184, 254, 92) + organBox(1, 340, 200, 144, 60) + organBox(2, 306, 138, 222, 184) + organBox(3, 186, 146, 104, 168);
+    pins += pin(0, 526, 204) + pin(1, 412, 256) + pin(2, 416, 114) + pin(3, 174, 230);
   } else if (machineId === 'spade_ambra') {
-    const backwash = modeIdx === 1;
-    // Deep-bed cylindrical quartz vessel
-    body += `<rect class="machine-card" x="276" y="42" width="288" height="356" rx="56"/>`;
-    // 1) Upper diffuser dome
-    body += `<path class="machine-sub" d="M366 96h108l-20 22h-68Z"/>`;
-    // 2) Deep graded quartz sand layer (pulsing upward during backwash!)
-    body += `<g ${backwash ? 'data-pulse="1" data-cx="420" data-cy="210" data-amp="0.045"' : ''}>` +
-      `<rect x="292" y="${backwash ? 142 : 168}" width="256" height="${backwash ? 142 : 124}" rx="8" fill="var(--cp-warning)" fill-opacity=".24" stroke="var(--cp-warning)" stroke-width="2"/>` +
-      `<text class="svg-label svg-title" x="420" y="226" font-size="15" text-anchor="middle">${esc(T('Letto di quarzite (~50 µm)', 'Quartz sand bed (~50 µm)', '精选石英砂深床 (~50 µm)'))}</text></g>`;
-    // 3) Coarse support gravel
-    body += `<rect x="292" y="294" width="256" height="40" rx="6" fill="var(--cp-border-strong)" fill-opacity=".28" stroke="var(--cp-border-strong)" stroke-width="1.6"/>`;
-    body += `<text class="svg-label svg-sub" x="420" y="319" font-size="12.5" text-anchor="middle">${esc(T('Ghiaia di supporto', 'Coarse support gravel', '粗砾石承托层'))}</text>`;
-    // 4) Nozzle collector plate
-    body += `<line x1="286" y1="344" x2="554" y2="344" stroke="var(--cp-accent)" stroke-width="4"/>`;
-    for (let nx = 316; nx <= 524; nx += 34) body += `<rect class="tag-pill-bg" x="${nx - 7}" y="336" width="14" height="16" rx="3"/>`;
-
-    if (!backwash) {
-      body += waterPipe([[96, 74], [420, 74], [420, 154]], 'link', 'link');
-      body += waterPipe([[420, 352], [420, 416], [736, 416]], 'link', 'link', { marker: true });
-      body += `<text class="svg-label svg-title" x="174" y="56" font-size="14" text-anchor="middle">${esc(T('Acquedotto · 66 m³/h', 'City mains · 66 m³/h', '市政自来水 · 66 m³/h'))}</text>`;
-      body += `<text class="svg-label svg-title" x="654" y="396" font-size="14" text-anchor="middle">${esc(T('Acqua limpida → 2×S1', 'Clarified water → 2×S1', '澄清净水 → 2×S1'))}</text>`;
-    } else {
-      body += waterPipe([[96, 416], [420, 416], [420, 92], [736, 92]], 'link', 'warning', { marker: true });
-      body += sandTrack([[420, 250], [420, 92], [736, 92]], 54);
-      body += `<text class="svg-label svg-title" x="656" y="72" font-size="14" text-anchor="middle">${esc(T('Scarico torbidità controlavaggio', 'Backwash turbidity drain', '反冲洗排走截留污物'))}</text>`;
+    const inspectMode = modeIdx === 1;
+    body += `<path d="M326 364v54M514 364v54" stroke="var(--cp-border-strong)" stroke-width="6" stroke-linecap="round"/>`;
+    body += `<rect class="machine-card" x="286" y="76" width="268" height="296" rx="22"/>`;
+    const lidY = inspectMode ? 48 : 62;
+    body += `<rect class="machine-sub" x="272" y="${lidY}" width="296" height="20" rx="6"/>`;
+    for (const bx of [292, 346, 494, 548]) body += `<circle cx="${bx}" cy="${lidY + 10}" r="3.5" fill="var(--cp-border-strong)"/>`;
+    body += gauge(248, 178, 'P1', -35);
+    body += gauge(248, 304, 'P2', inspectMode ? -75 : -30);
+    body += `<line x1="290" y1="296" x2="550" y2="296" stroke="var(--cp-accent)" stroke-width="4"/>`;
+    for (const cx of [332, 390, 450, 508]) {
+      body += `<rect class="plate-pack" x="${cx - 18}" y="138" width="36" height="158" rx="8"/>`;
+      body += `<line x1="${cx}" y1="146" x2="${cx}" y2="312" stroke="var(--cp-link)" stroke-width="2.4" stroke-dasharray="4 4"/>`;
     }
-    focus += organBox(0, 354, 86, 132, 40) + organBox(1, 286, 140, 268, 156) + organBox(2, 286, 290, 268, 48) + organBox(3, 282, 332, 276, 28);
-    pins += pin(0, 342, 106) + pin(1, 578, 222) + pin(2, 578, 314) + pin(3, 264, 344);
+    body += `<text class="svg-label svg-title" x="420" y="114" font-size="13" text-anchor="middle">${esc(T('Multicartuccia 50 µm', '50 µm Cartridges', '50 µm 聚酯多滤芯束'))}</text>`;
+    body += waterPipe([[68, 114], [306, 114]], 'link', 'link');
+    body += waterPipe([[420, 298], [420, 340], [748, 340]], 'link', 'link', { marker: true, speed: inspectMode ? 28 : 58 });
+    if (inspectMode) {
+      body += waterPipe([[356, 372], [356, 426], [204, 426]], 'warning', 'warning', { thin: true, marker: true });
+      body += sandTrack([[350, 372], [350, 420], [204, 420]], 52);
+    }
+    body += `<text class="svg-label svg-title" x="166" y="94" font-size="13.5" text-anchor="middle">${esc(T('Ingresso DN100 (66 m³/h)', 'DN100 inlet (66 m³/h)', 'DN100 自来水进水'))}</text>`;
+    body += `<text class="svg-label svg-title" x="668" y="318" font-size="13.5" text-anchor="middle">${esc(T('Filtrata 50 µm → 2×S1', '50 µm clean → 2×S1', '50 µm 净水 → 2×S1'))}</text>`;
+    focus += organBox(0, 266, 18, 308, 70) + organBox(1, 306, 122, 228, 176) + organBox(2, 286, 286, 268, 34) + organBox(3, 224, 276, 336, 152);
+    pins += pin(0, 582, 58) + pin(1, 574, 206) + pin(2, 574, 276) + pin(3, 286, 396);
   } else if (machineId === 'dab_nkve') {
     const dualPeak = modeIdx === 1;
-    // Left S1 break tanks (2x2000L) -> suction manifold -> 2 vertical multistage NKVE columns + MCE/P inverters -> discharge manifold + pressure sensor
     body += `<rect class="machine-card" x="56" y="106" width="144" height="264" rx="18"/>`;
     body += `<rect class="aquifer-fill" x="68" y="162" width="120" height="196" rx="10"/>`;
     body += `<text class="svg-label svg-title" x="128" y="136" font-size="14.5" text-anchor="middle">2 × S1</text>`;
     body += `<text class="svg-label svg-sub" x="128" y="264" font-size="13" text-anchor="middle">4.000 L</text>`;
-    // Suction & discharge headers
     body += waterPipe([[200, 336], [536, 336]], 'link', 'link');
     body += waterPipe([[356, 336], [356, 114], [768, 114]], 'link', 'link', { marker: true, speed: dualPeak ? 74 : 46 });
-    body += waterPipe([[516, 336], [516, 114], [768, 114]], 'link', 'link', { animated: dualPeak, speed: 74 });
-    // Two vertical multistage NKVE columns
+    body += waterPipe([[516, 336], [516, 114], [768, 114]], 'link', 'link', { animated: dualPeak, dim: !dualPeak, speed: 74 });
     for (const [idx, cx, active] of [[0, 356, true], [1, 516, dualPeak]]) {
       body += `<rect class="machine-card" x="${cx - 38}" y="52" width="76" height="44" rx="8"/>` +
         `<text class="svg-label svg-temp" x="${cx}" y="79" font-size="12" text-anchor="middle">MCE/P</text>`;
@@ -390,7 +400,6 @@ export function renderMachineCutaway(machineId, modeIdx = 0, activePart = 0, lan
       }
       if (!active && idx === 1) body += `<text class="svg-label svg-sub" x="${cx}" y="382" font-size="12" text-anchor="middle">STAND-BY</text>`;
     }
-    // Pressure transducer + small diaphragm vessel on discharge header
     body += `<rect class="machine-card" x="640" y="148" width="54" height="86" rx="22"/>` +
       `<line x1="667" y1="114" x2="667" y2="148" stroke="var(--cp-border-strong)" stroke-width="4"/>`;
     body += `<text class="svg-label svg-temp" x="688" y="88" font-size="14" text-anchor="middle">GP1: 7,3 bar · GP2: 4,3 bar</text>`;
@@ -398,98 +407,89 @@ export function renderMachineCutaway(machineId, modeIdx = 0, activePart = 0, lan
     pins += pin(0, 128, 86) + pin(1, 304, 224) + pin(2, 436, 74) + pin(3, 714, 188);
   } else if (machineId === 'spade_corallo') {
     const regen = modeIdx === 1;
-    // Left FRP resin cylinder + Top CLK electronic turbine valve + Right white salt brine tank
-    body += `<rect class="machine-card" x="284" y="42" width="112" height="54" rx="10"/>`;
-    body += `<text class="svg-label svg-temp" x="340" y="74" font-size="13.5" text-anchor="middle">CLK Valve</text>`;
-    body += `<rect class="machine-card" x="252" y="96" width="176" height="306" rx="44"/>`;
-    // Golden cation resin bed inside vessel
-    body += `<rect x="268" y="156" width="144" height="214" rx="18" fill="var(--cp-warning)" fill-opacity=".28" stroke="var(--cp-warning)" stroke-width="2"/>`;
-    body += `<text class="svg-label svg-title" x="340" y="252" font-size="14.5" text-anchor="middle">${esc(T('Resine Na⁺ ↔ Ca²⁺/Mg²⁺', 'Resin Na⁺ ↔ Ca²⁺/Mg²⁺', '阳离子交换树脂床'))}</text>`;
-    // Right polyethylene brine tank
-    body += `<path class="machine-card" d="M516 178h168l-12 222H528Z"/>`;
-    body += `<rect class="aquifer-fill" x="532" y="254" width="136" height="136" rx="8"/>`;
-    body += `<text class="svg-label svg-title" x="600" y="214" font-size="14" text-anchor="middle">${esc(T('Tino salamoia (NaCl)', 'Salt brine tank (NaCl)', '饱和盐水溶盐箱'))}</text>`;
-    body += `<text class="svg-label svg-temp" x="600" y="330" font-size="14" text-anchor="middle">NaCl + H₂O</text>`;
+    body += `<rect x="278" y="42" width="124" height="54" rx="10" fill="var(--cp-warning)" fill-opacity=".22" stroke="var(--cp-border-strong)" stroke-width="2.2"/>`;
+    body += `<text class="svg-label svg-temp" x="340" y="28" font-size="13" text-anchor="middle">CLACK 1"1/2</text>`;
+    body += `<rect class="machine-card" x="248" y="96" width="184" height="308" rx="46"/>`;
+    body += `<rect x="264" y="152" width="152" height="222" rx="20" fill="var(--cp-warning)" fill-opacity=".26" stroke="var(--cp-warning)" stroke-width="2"/>`;
+    body += `<rect class="machine-sub" x="332" y="96" width="16" height="282" rx="4"/>`;
+    body += `<text class="svg-label svg-title" x="340" y="428" font-size="13" text-anchor="middle">${esc(T('Resine 200 L (Na⁺)', '200 L Resin (Na⁺)', '200 L 阳离子树脂'))}</text>`;
+    body += `<rect class="machine-card" x="486" y="14" width="84" height="38" rx="8"/>` +
+      `<line x1="528" y1="52" x2="528" y2="68" stroke="var(--cp-accent)" stroke-width="2.5"/>` +
+      `<circle cx="528" cy="68" r="6" fill="var(--cp-surface)" stroke="var(--cp-accent)" stroke-width="2.2"/>` +
+      `<text class="svg-label svg-temp" x="528" y="38" font-size="11.5" text-anchor="middle">Pulse INOX</text>`;
+    body += `<path class="machine-card" d="M532 178h168l-12 224H544Z"/>`;
+    body += `<rect class="aquifer-fill" x="548" y="256" width="136" height="136" rx="8"/>`;
+    body += `<rect class="machine-sub" x="558" y="192" width="18" height="196" rx="4"/>`;
+    body += `<text class="svg-label svg-title" x="616" y="428" font-size="13" text-anchor="middle">${esc(T('Tino salamoia 340 L', '340 L Brine tank', '340 L 溶盐箱'))}</text>`;
+    body += `<text class="svg-label svg-temp" x="626" y="332" font-size="13.5" text-anchor="middle">NaCl + H₂O</text>`;
 
     if (!regen) {
-      body += waterPipe([[74, 68], [284, 68]], 'link', 'link');
-      body += waterPipe([[340, 96], [340, 378], [396, 378], [396, 68], [766, 68]], 'link', 'success', { thin: true, marker: true });
-      body += `<text class="svg-label svg-title" x="158" y="50" font-size="13.5" text-anchor="middle">${esc(T('Acqua dura (Ca²⁺, Mg²⁺)', 'Hard water (Ca²⁺, Mg²⁺)', '含钙镁硬水进入'))}</text>`;
-      body += `<text class="svg-label svg-title" x="648" y="50" font-size="13.5" text-anchor="middle">${esc(T('Acqua addolcita → T3/T4 → S2', 'Softened → T3/T4 → S2', '软化水 → T3/T4 → S2'))}</text>`;
+      body += waterPipe([[68, 68], [296, 68], [296, 368], [340, 368], [340, 68], [768, 68]], 'link', 'success', { thin: true, marker: true });
+      body += `<text class="svg-label svg-title" x="158" y="50" font-size="13" text-anchor="middle">${esc(T('Acqua dura (Ca²⁺, Mg²⁺)', 'Hard water (Ca²⁺, Mg²⁺)', '含钙镁硬水'))}</text>`;
+      body += `<text class="svg-label svg-title" x="676" y="50" font-size="13" text-anchor="middle">${esc(T('Addolcita → T3/T4 → S2', 'Softened → T3/T4 → S2', '软化水 → T3/T4 → S2'))}</text>`;
     } else {
-      // Brine drawn from salt tank through resin and flushed to drain!
-      body += waterPipe([[564, 344], [564, 134], [340, 134], [340, 376], [136, 376]], 'warning', 'warning', { thin: true, marker: true });
-      body += sandTrack([[340, 220], [340, 376], [136, 376]], 54);
-      body += `<text class="svg-label svg-title" x="160" y="352" font-size="13.5" text-anchor="middle">${esc(T('Scarico durezza (Ca²⁺/Mg²⁺)', 'Hardness flush to drain', '置换钙镁排入下水道'))}</text>`;
+      body += waterPipe([[567, 356], [567, 128], [376, 128], [376, 368], [340, 368], [340, 128], [124, 128]], 'warning', 'warning', { thin: true, marker: true });
+      body += sandTrack([[334, 348], [334, 134], [124, 134]], 54);
+      body += `<text class="svg-label svg-title" x="166" y="108" font-size="13" text-anchor="middle">${esc(T('Scarico rigenerazione', 'Regeneration drain', '再生置换废液排走'))}</text>`;
     }
-    focus += organBox(0, 276, 36, 128, 64) + organBox(1, 246, 100, 188, 306, 44) + organBox(2, 510, 172, 180, 234) + organBox(3, 560, 44, 210, 56);
-    pins += pin(0, 260, 68) + pin(1, 444, 252) + pin(2, 696, 286) + pin(3, 736, 102);
+    focus += organBox(0, 272, 36, 136, 64) + organBox(1, 242, 100, 196, 308, 46) + organBox(2, 526, 172, 180, 236) + organBox(3, 478, 10, 100, 72);
+    pins += pin(0, 256, 68) + pin(1, 452, 252) + pin(2, 712, 286) + pin(3, 528, 98);
   } else if (machineId === 'dab_micra') {
     const lowLevel = modeIdx === 1;
-    // Underground 3.5 m3 rainwater cistern + leaf filter + slim 3" MICRA HS 130 Hz pump + inline Active Driver Plus -> garden sprinklers
     body += `<rect class="machine-card" x="78" y="138" width="356" height="268" rx="18"/>`;
     const waterTop = lowLevel ? 344 : 210;
     body += `<rect class="aquifer-fill" x="92" y="${waterTop}" width="328" height="${392 - waterTop}" rx="10"/>`;
-    // Roof rainwater inlet + leaf filter basket
     body += waterPipe([[62, 92], [164, 92], [164, 168]], 'link', 'link', { thin: true, animated: !lowLevel });
     body += `<rect class="plate-pack" x="136" y="158" width="56" height="36" rx="6"/>`;
-    // Slim 3" MICRA HS submersible pump
     body += `<rect class="machine-sub" x="278" y="218" width="44" height="164" rx="8"/>`;
     for (const sy of [342, 308, 274]) {
       body += `<g data-rotor="1" data-cx="300" data-cy="${sy}" data-rpm="${lowLevel ? 0 : 3.2}">` +
         `<path d="M286 ${sy + 4}L300 ${sy - 6}L314 ${sy + 4}Z" fill="var(--cp-accent)"/></g>`;
     }
-    // Inline Active Driver Plus inverter above cistern -> irrigation sprinklers
-    body += `<rect class="machine-card" x="506" y="148" width="128" height="84" rx="14"/>`;
-    body += `<text class="svg-label svg-temp" x="570" y="185" font-size="13" text-anchor="middle">Active Driver</text>`;
-    body += `<text class="svg-label svg-sub" x="570" y="208" font-size="12" text-anchor="middle">130 Hz · 4,8 bar</text>`;
-    body += waterPipe([[300, 218], [300, 96], [570, 96], [570, 148]], 'link', 'link', { thin: true, animated: !lowLevel });
-    body += waterPipe([[634, 190], [768, 190]], 'success', 'success', { thin: true, animated: !lowLevel, marker: !lowLevel });
+    body += `<rect class="machine-card" x="506" y="108" width="136" height="86" rx="14"/>`;
+    body += `<rect class="machine-sub" x="522" y="118" width="104" height="38" rx="6"/>` +
+      `<text class="svg-label svg-temp" x="574" y="142" font-size="12" text-anchor="middle">Active Driver</text>`;
+    body += `<text class="svg-label svg-sub" x="574" y="178" font-size="11.5" text-anchor="middle">130 Hz · 4,8 bar</text>`;
+    body += `<rect class="plate-pack" x="518" y="194" width="112" height="22" rx="5"/>`;
+    body += waterPipe([[300, 218], [300, 96], [476, 96], [476, 205], [768, 205]], 'link', 'success', { thin: true, animated: !lowLevel, marker: !lowLevel });
     if (lowLevel) {
       body += waterPipe([[434, 290], [372, 290]], 'link', 'link', { thin: true, marker: true });
-      body += `<text class="svg-label svg-title" x="580" y="294" font-size="13.5" text-anchor="middle">${esc(T('Reintegro soccorso (non potabile)', 'Backup non-potable make-up', '低液位保护与非饮用水补水'))}</text>`;
+      body += `<text class="svg-label svg-title" x="590" y="294" font-size="13" text-anchor="middle">${esc(T('Reintegro soccorso (non potabile)', 'Backup non-potable make-up', '低液位保护与非饮用水补水'))}</text>`;
     }
-    body += `<text class="svg-label svg-title" x="200" y="124" font-size="14" text-anchor="middle">${esc(T('Vasca piovana 3.500 L', '3,500 L Rainwater tank', '3,500 L 雨水蓄水池'))}</text>`;
-    body += `<text class="svg-label svg-title" x="712" y="168" font-size="14" text-anchor="middle">${esc(T('Irrigazione giardino', 'Garden irrigation', '公共绿地喷灌'))}</text>`;
-    focus += organBox(0, 72, 132, 368, 280) + organBox(1, 268, 210, 64, 178) + organBox(2, 498, 140, 144, 100) + organBox(3, 640, 150, 144, 72);
-    pins += pin(0, 114, 184) + pin(1, 344, 304) + pin(2, 570, 254) + pin(3, 736, 224);
+    body += `<text class="svg-label svg-title" x="288" y="76" font-size="14" text-anchor="middle">${esc(T('Vasca piovana 3.500 L', '3,500 L Rainwater tank', '3,500 L 雨水蓄水池'))}</text>`;
+    body += `<text class="svg-label svg-title" x="718" y="176" font-size="13.5" text-anchor="middle">${esc(T('Irrigazione giardino', 'Garden irrigation', '公共绿地喷灌'))}</text>`;
+    focus += organBox(0, 72, 132, 368, 280) + organBox(1, 268, 210, 64, 178) + organBox(2, 498, 102, 152, 120) + organBox(3, 648, 150, 136, 78);
+    pins += pin(0, 114, 184) + pin(1, 344, 304) + pin(2, 574, 242) + pin(3, 736, 238);
   } else if (machineId === 'plate_hx') {
     const isSC1 = modeIdx === 1;
-    // Exploded / cross-section view of 5 alternating corrugated plates showing odd vs even counter-current channels!
-    body += `<rect class="machine-card" x="186" y="48" width="468" height="354" rx="18"/>`;
-    const xs = [256, 322, 388, 454, 520, 586];
-    for (let i = 0; i < xs.length; i++) {
-      const px = xs[i];
-      body += `<path d="M${px} 82l8 18l-8 18l8 18l-8 18l8 18l-8 18l8 18l-8 18l8 18l-8 18l8 18l-8 18l8 18l-8 18" fill="none" stroke="var(--cp-border-strong)" stroke-width="3.2"/>`;
+    body += `<rect class="machine-card" x="196" y="38" width="448" height="374" rx="18"/>`;
+    const xs = [260, 324, 388, 452, 516, 580];
+    for (const px of xs) {
+      body += `<path d="M${px} 108l7 16l-7 16l7 16l-7 16l7 16l-7 16l7 16l-7 16l7 16l-7 16l7 16l-7 16l7 16l-7 16" fill="none" stroke="var(--cp-border-strong)" stroke-width="3"/>`;
     }
-    // Odd channels (0, 2, 4): Primary downward flow
-    for (const cx of [289, 421, 553]) {
-      body += waterPipe([[cx, 84], [cx, 364]], 'danger', isSC1 ? 'warning' : 'link', { thin: true });
+    body += waterPipe([[68, 62], [548, 62]], 'danger', 'danger', { thin: true });
+    for (const cx of [292, 420, 548]) body += waterPipe([[cx, 62], [cx, 388]], 'danger', isSC1 ? 'warning' : 'link', { thin: true });
+    body += waterPipe([[548, 388], [68, 388]], 'link', 'link', { thin: true, marker: true });
+
+    body += waterPipe([[772, 352], [356, 352]], 'link', 'link', { thin: true });
+    for (const cx of [356, 484]) {
+      body += waterPipe([[cx, 352], [cx, 96]], 'link', 'danger', { thin: true });
+      body += heatWave(cx - 28, 226, cx - 4, 226);
     }
-    // Even channels (1, 3): Secondary upward counter-current flow!
-    for (const cx of [355, 487]) {
-      body += waterPipe([[cx, 364], [cx, 84]], 'link', 'danger', { thin: true });
-      body += heatWave(cx - 28, 224, cx - 4, 224);
-    }
-    // Top/bottom manifolds
-    body += waterPipe([[72, 84], [553, 84]], 'danger', 'danger', { thin: true });
-    body += waterPipe([[553, 364], [72, 364]], 'link', 'link', { thin: true, marker: true });
-    body += waterPipe([[768, 364], [355, 364]], 'link', 'link', { thin: true });
-    body += waterPipe([[355, 84], [768, 84]], 'danger', 'danger', { thin: true, marker: true });
-    body += `<text class="svg-label svg-temp" x="122" y="66" font-size="13.5" text-anchor="middle">${isSC1 ? 'PC1 · 70 °C' : 'P08 · Centrale'}</text>`;
-    body += `<text class="svg-label svg-temp" x="122" y="392" font-size="13.5" text-anchor="middle">${isSC1 ? 'Ritorno · 65 °C' : 'Ritorno PC2'}</text>`;
-    body += `<text class="svg-label svg-temp" x="716" y="66" font-size="13.5" text-anchor="middle">${isSC1 ? 'Potabile · 60 °C (S2)' : 'P09 · Alta Press. AP'}</text>`;
-    body += `<text class="svg-label svg-temp" x="716" y="392" font-size="13.5" text-anchor="middle">${isSC1 ? 'Da P01 · 55 °C' : 'Ritorno Torri AP'}</text>`;
-    focus += organBox(0, 246, 76, 352, 294) + organBox(1, 274, 80, 100, 288) + organBox(2, 340, 80, 164, 288) + organBox(3, 180, 42, 480, 366);
-    pins += pin(0, 256, 224) + pin(1, 289, 122) + pin(2, 487, 122) + pin(3, 634, 224);
+    body += waterPipe([[356, 96], [772, 96]], 'danger', 'danger', { thin: true, marker: true });
+
+    body += `<text class="svg-label svg-temp" x="126" y="46" font-size="12.5" text-anchor="middle">${isSC1 ? 'PC1 · 70 °C' : 'P08 · Centrale'}</text>`;
+    body += `<text class="svg-label svg-temp" x="126" y="416" font-size="12.5" text-anchor="middle">${isSC1 ? 'Ritorno · 65 °C' : 'Ritorno PC2'}</text>`;
+    body += `<text class="svg-label svg-temp" x="716" y="78" font-size="12.5" text-anchor="middle">${isSC1 ? 'Potabile · 60 °C' : 'P09 · Torri AP'}</text>`;
+    body += `<text class="svg-label svg-temp" x="716" y="378" font-size="12.5" text-anchor="middle">${isSC1 ? 'Da P01 · 55 °C' : 'Ritorno AP'}</text>`;
+    focus += organBox(0, 250, 102, 340, 246) + organBox(1, 276, 56, 48, 338) + organBox(2, 340, 90, 160, 268) + organBox(3, 190, 34, 460, 382);
+    pins += pin(0, 232, 226) + pin(1, 292, 148) + pin(2, 484, 148) + pin(3, 616, 226);
   } else if (machineId === 'dhw_storage') {
     const isS3Mode = modeIdx === 1;
     if (!isS3Mode) {
-      // S2 stratified 3,000 L cylinder (left-center) + Wax-element 48 °C thermostatic mixer cutaway (right)
       const strat = makeGrad(0, 82, 0, 378, 'danger', 'link');
       body += `<rect class="machine-card" x="176" y="56" width="212" height="338" rx="68"/>`;
       body += `<rect x="192" y="76" width="180" height="298" rx="56" fill="${strat}" fill-opacity=".28" stroke="var(--cp-border-strong)"/>`;
-      // Bottom baffle plate calming 15 °C AFP make-up
       body += `<line x1="236" y1="346" x2="328" y2="346" stroke="var(--cp-border-strong)" stroke-width="4" stroke-linecap="round"/>`;
       body += waterPipe([[54, 122], [196, 122]], 'danger', 'danger', { thin: true, marker: true });
       body += waterPipe([[196, 316], [54, 316]], 'warning', 'link', { thin: true, marker: true });
@@ -498,34 +498,30 @@ export function renderMachineCutaway(machineId, modeIdx = 0, activePart = 0, lan
       body += `<text class="svg-label svg-temp" x="282" y="138" font-size="17" text-anchor="middle">60 °C</text>`;
       body += `<text class="svg-label svg-temp" x="282" y="328" font-size="16" text-anchor="middle">~15–25 °C</text>`;
 
-      // Thermostatic mixing valve cutaway on right
       body += `<rect class="machine-card" x="516" y="136" width="164" height="164" rx="22"/>`;
       body += `<g data-pulse="1" data-cx="598" data-cy="218" data-amp="0.06">` +
-        `<rect class="tag-pill-bg" x="572" y="182" width="52" height="72" rx="12"/>` +
+        `<rect class="tag-pill-bg" x="560" y="182" width="76" height="72" rx="12"/>` +
         `<text class="svg-label svg-title" x="598" y="223" font-size="12.5" text-anchor="middle">Wax 48°</text></g>`;
-      // 60C hot in, 15C cold bottom in, ACR recirc top in -> 48C ACP out!
-      body += waterPipe([[372, 114], [462, 114], [462, 218], [516, 218]], 'danger', 'danger', { thin: true });
+      body += waterPipe([[372, 126], [462, 126], [462, 218], [516, 218]], 'danger', 'danger', { thin: true });
       body += waterPipe([[282, 424], [282, 374]], 'link', 'link', { thin: true });
       body += waterPipe([[282, 424], [598, 424], [598, 300]], 'link', 'link', { thin: true });
-      body += waterPipe([[598, 66], [598, 136]], 'warning', 'warning', { thin: true });
+      body += waterPipe([[598, 62], [598, 136]], 'warning', 'warning', { thin: true });
+      body += waterPipe([[598, 86], [372, 86]], 'warning', 'warning', { thin: true });
       body += waterPipe([[680, 218], [794, 218]], 'warning', 'warning', { marker: true });
       body += `<text class="svg-label svg-temp" x="742" y="196" font-size="15" text-anchor="middle">ACP · 48 °C</text>`;
-      body += `<text class="svg-label svg-sub" x="598" y="54" font-size="12.5" text-anchor="middle">ACR (~46 °C)</text>`;
+      body += `<text class="svg-label svg-sub" x="598" y="48" font-size="12.5" text-anchor="middle">ACR (~46 °C)</text>`;
       body += `<text class="svg-label svg-sub" x="454" y="412" font-size="12.5" text-anchor="middle">AFP (~15 °C)</text>`;
-      focus += organBox(0, 184, 70, 196, 310, 58) + organBox(1, 48, 96, 154, 246) + organBox(2, 508, 128, 180, 180) + organBox(3, 384, 96, 132, 142);
-      pins += pin(0, 282, 224) + pin(1, 144, 218) + pin(2, 654, 158) + pin(3, 462, 158);
+      focus += organBox(0, 184, 70, 196, 310, 58) + organBox(1, 48, 96, 154, 246) + organBox(2, 508, 128, 180, 180) + organBox(3, 384, 108, 132, 130);
+      pins += pin(0, 282, 224) + pin(1, 144, 218) + pin(2, 654, 158) + pin(3, 462, 168);
     } else {
-      // Parallel S3 supply thermal buffers + direct un-buffered return!
       body += `<rect class="machine-card" x="260" y="78" width="128" height="224" rx="44"/>`;
       body += `<rect class="machine-card" x="452" y="78" width="128" height="224" rx="44"/>`;
       body += `<text class="svg-label svg-title" x="324" y="192" font-size="15" text-anchor="middle">S3 #1 · 2.000 L</text>`;
       body += `<text class="svg-label svg-title" x="516" y="192" font-size="15" text-anchor="middle">S3 #2 · 2.000 L</text>`;
-      // Supply splits in parallel into both S3 tanks and reunites!
       body += waterPipe([[74, 120], [212, 120], [212, 52], [516, 52], [516, 78]], 'danger', 'danger', { thin: true });
       body += waterPipe([[212, 120], [260, 120]], 'danger', 'danger', { thin: true });
       body += waterPipe([[324, 302], [324, 332], [636, 332], [636, 120], [768, 120]], 'danger', 'danger', { thin: true, marker: true });
       body += waterPipe([[516, 302], [516, 332]], 'danger', 'danger', { thin: true });
-      // Direct return bypassing S3 tanks below!
       body += waterPipe([[768, 396], [74, 396]], 'link', 'link', { marker: true });
       body += `<text class="svg-label svg-sub" x="420" y="382" font-size="13.5" text-anchor="middle">${esc(T('Ritorno diretto alle PC2 (bypassa i serbatoi S3)', 'Direct return to PC2 (bypasses S3 buffers)', '回水干管直接返回 PC2（旁通 S3 水箱）'))}</text>`;
       focus += organBox(0, 252, 70, 144, 240, 44) + organBox(1, 444, 70, 144, 240, 44) + organBox(2, 68, 372, 706, 46) + organBox(3, 196, 40, 456, 304);
@@ -533,38 +529,32 @@ export function renderMachineCutaway(machineId, modeIdx = 0, activePart = 0, lan
     }
   } else if (machineId === 'radiant_module') {
     const summer = modeIdx === 1;
-    // Left apartment satellite box (M-bus meter + 2-way valve + local mixer + pump) -> Right room floor screed serpentine + ceiling/wall dehumidifier
-    body += `<rect class="machine-card" x="52" y="64" width="268" height="332" rx="18"/>`;
-    body += `<text class="svg-label svg-title" x="186" y="92" font-size="15" text-anchor="middle">${esc(T('Modulo d’utenza alloggio', 'Apartment Satellite Box', '住户分户水力计量箱'))}</text>`;
-    // M-bus meter badge
-    body += `<rect class="machine-sub" x="82" y="122" width="92" height="46" rx="8"/>` +
-      `<text class="svg-label svg-temp" x="128" y="150" font-size="13" text-anchor="middle">M-bus kWh</text>`;
-    // Local 3-way mixing valve + apartment circulator
-    body += `<circle class="machine-card" cx="236" cy="218" r="20"/><text class="svg-label svg-title" x="236" y="223" font-size="13" text-anchor="middle">M</text>`;
-    body += impellerWheel(236, 294, 20, 1.5);
+    body += `<rect class="machine-card" x="48" y="56" width="284" height="346" rx="18"/>`;
+    body += `<text class="svg-label svg-title" x="190" y="84" font-size="14.5" text-anchor="middle">${esc(T('Modulo d’utenza alloggio', 'Apartment Satellite Box', '住户分户水力计量箱'))}</text>`;
+    body += `<rect class="machine-sub" x="76" y="118" width="90" height="42" rx="8"/>` +
+      `<text class="svg-label svg-temp" x="121" y="144" font-size="12.5" text-anchor="middle">M-bus kWh</text>`;
+    body += `<circle class="machine-card" cx="256" cy="214" r="19"/><text class="svg-label svg-title" x="256" y="219" font-size="12.5" text-anchor="middle">M</text>`;
+    body += impellerWheel(256, 286, 19, 1.5);
 
-    // Apartment room on right: Dehumidifier top + Floor screed serpentine bottom
-    body += `<rect class="machine-card" x="368" y="64" width="420" height="332" rx="18"/>`;
-    // Isothermal dehumidifier unit (active in summer!)
-    body += `<rect class="machine-sub" x="412" y="90" width="332" height="74" rx="12"/>`;
-    body += `<text class="svg-label svg-title" x="578" y="120" font-size="14" text-anchor="middle">${esc(T('Deumidificatore d’alloggio', 'Apartment Dehumidifier', '户内等温除湿机'))}</text>`;
-    body += `<text class="svg-label svg-sub" x="578" y="144" font-size="12.5" text-anchor="middle">${esc(summer ? T('Attivo a 13 °C · Asciuga l’aria (niente condensa)', 'Active at 13 °C · Dries indoor air below dew point', '13 °C 冷水运行 · 抽湿防结露') : T('Spento in inverno', 'Idle in winter heating', '冬季供暖期停机'))}</text>`;
-    if (summer) {
-      body += waterPipe([[190, 145], [190, 114], [412, 114]], 'link', 'link', { thin: true });
-    }
-    // Screed serpentine coil at bottom of room
-    body += `<rect class="plate-pack" x="394" y="266" width="368" height="108" rx="10"/>`;
+    body += `<rect class="machine-card" x="372" y="56" width="420" height="346" rx="18"/>`;
+    body += `<rect class="machine-sub" x="414" y="82" width="336" height="74" rx="12"/>`;
+    body += `<text class="svg-label svg-title" x="582" y="112" font-size="14" text-anchor="middle">${esc(T('Deumidificatore d’alloggio', 'Apartment Dehumidifier', '户内等温除湿机'))}</text>`;
+    body += `<text class="svg-label svg-sub" x="582" y="136" font-size="12" text-anchor="middle">${esc(summer ? T('Alimentato a 13 °C · Asciuga l’aria sotto rugiada', 'Fed at 13 °C · Dries air below dew point', '13 °C 直供盘管 · 深度除湿防结露') : T('Spento in riscaldamento invernale', 'Idle during winter heating', '冬季供暖期停机'))}</text>`;
+
+    body += `<rect class="plate-pack" x="396" y="266" width="372" height="112" rx="10"/>`;
     const inT = summer ? 'link' : 'danger', outT = summer ? 'danger' : 'link';
-    body += waterPipe([[16, 145], [82, 145]], inT, inT, { thin: true });
-    body += waterPipe([[174, 145], [236, 145], [236, 198]], inT, inT, { thin: true });
-    const coilPts = [[256, 294], [418, 294], [736, 294], [736, 324], [418, 324], [418, 354], [736, 354], [736, 382], [186, 382], [186, 354], [16, 354]];
+    body += waterPipe([[14, 139], [76, 139]], inT, inT, { thin: true });
+    body += waterPipe([[166, 139], [256, 139], [256, 195]], inT, inT, { thin: true });
+    if (summer) body += waterPipe([[206, 139], [206, 108], [414, 108]], 'link', 'link', { thin: true });
+    body += waterPipe([[196, 366], [196, 214], [237, 214]], outT, outT, { thin: true, speed: 32 });
+    const coilPts = [[275, 286], [420, 286], [740, 286], [740, 316], [420, 316], [420, 346], [740, 346], [740, 366], [14, 366]];
     body += waterPipe(coilPts, inT, outT, { thin: true });
-    for (const hx of [468, 578, 688]) {
-      body += summer ? heatWave(hx, 206, hx, 258) : heatWave(hx, 258, hx, 200);
+    for (const hx of [472, 582, 692]) {
+      body += summer ? heatWave(hx, 202, hx, 256) : heatWave(hx, 256, hx, 196);
     }
-    body += `<text class="svg-label svg-temp" x="578" y="238" font-size="17" text-anchor="middle">${summer ? '18 → 23 °C' : '38 → 33 °C'}</text>`;
-    focus += organBox(0, 74, 114, 108, 62) + organBox(1, 204, 188, 64, 134) + organBox(2, 388, 260, 380, 120) + organBox(3, 404, 84, 348, 86);
-    pins += pin(0, 128, 188) + pin(1, 188, 256) + pin(2, 424, 252) + pin(3, 434, 126);
+    body += `<text class="svg-label svg-temp" x="582" y="234" font-size="16" text-anchor="middle">${summer ? '13° → Mix 18 → 23 °C' : '42° → Mix 38 → 33 °C'}</text>`;
+    focus += organBox(0, 70, 110, 102, 58) + organBox(1, 186, 188, 98, 126) + organBox(2, 390, 260, 384, 124) + organBox(3, 408, 76, 348, 86);
+    pins += pin(0, 121, 184) + pin(1, 294, 248) + pin(2, 426, 252) + pin(3, 434, 118);
   }
 
   return `<svg xmlns="http://www.w3.org/2000/svg" class="vector-map machine-cutaway" data-machine="${esc(machineId)}" viewBox="0 0 840 450" role="group">` +

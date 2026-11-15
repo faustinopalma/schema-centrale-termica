@@ -765,26 +765,11 @@ export function renderHydraulic(d, copy, season = 'winter', prefix = 'hyd') {
       body += `<rect class="plate-pack" x="${x + w - 54}" y="${y + 84}" width="14" height="160" rx="3"/>`;
       body += `<rect class="plate-pack" x="${x + 86}" y="${y + h - 44}" width="82" height="12" rx="3"/>`;
       const cx = x + w / 2, cy = y + 152;
-      if (!isMulti) {
-        const rl = x + 84, rr = x + w - 84, rt = y + 106, rb = y + 204;
-        const rPts = rev ? [[rr, rb], [rr, rt], [rl, rt], [rl, rb], [rr, rb]] : [[rl, rb], [rl, rt], [rr, rt], [rr, rb], [rl, rb]];
-        body += drawPipe(rPts, rev ? 'danger' : 'link', rev ? 'link' : 'danger', {
-          thin: true, marker: false, gradEnds: [[rl, rt], [rr, rt]], plateau: true, fluidKind: 'ref', refPhase: 'loop'
-        });
-        body += `<circle class="machine-card" cx="${cx}" cy="${rt}" r="18"/>` +
-          `<g data-rotor="1" data-cx="${cx}" data-cy="${rt}"><path d="M${cx - 7} ${rt - 8}L${cx + 10} ${rt}L${cx - 7} ${rt + 8}Z" fill="var(--cp-accent)"/></g>`;
-        body += `<path class="machine-card" d="M${cx - 13} ${rb - 9}L${cx + 13} ${rb + 9}V${rb - 9}L${cx - 13} ${rb + 9}Z"/>`;
-        body += drawHeat(x + 56, cy, rl - 6, cy, rev);
-        body += drawHeat(rr + 6, cy, x + w - 56, cy, rev);
-        body += `<path class="thermal-track" data-thermal-path="1" data-heat-link="pc2-intermediate" d="M${cx} ${rb + 14}V${y + h - 48}" marker-end="url(#${prefix}-arr-warning)"/>`;
-      } else {
-        body += `<circle class="ref-casing" cx="${cx}" cy="${cy}" r="28"/>`;
-        body += `<circle class="machine-card" cx="${cx}" cy="${cy}" r="22"/>` +
-          `<g data-rotor="1" data-cx="${cx}" data-cy="${cy}"><path d="M${cx - 8} ${cy - 10}L${cx + 12} ${cy}L${cx - 8} ${cy + 10}Z" fill="var(--cp-accent)"/></g>`;
-        body += drawHeat(x + 58, cy, cx - 26, cy, rev);
-        body += drawHeat(cx + 26, cy, x + w - 58, cy, rev);
-        body += `<path class="thermal-track" data-thermal-path="1" data-heat-link="pc2-intermediate" d="M${cx} ${cy + 26}V${y + h - 48}" marker-end="url(#${prefix}-arr-warning)"/>`;
-      }
+      body += `<circle class="machine-card" cx="${cx}" cy="${cy}" r="22"/>` +
+        `<g data-rotor="1" data-cx="${cx}" data-cy="${cy}"><path d="M${cx - 8} ${cy - 10}L${cx + 12} ${cy}L${cx - 8} ${cy + 10}Z" fill="var(--cp-accent)"/></g>`;
+      body += drawHeat(x + 58, cy, cx - 26, cy, rev);
+      body += drawHeat(cx + 26, cy, x + w - 58, cy, rev);
+      body += `<path class="thermal-track" data-thermal-path="1" data-heat-link="pc2-intermediate" d="M${cx} ${cy + 26}V${y + h - 48}" marker-end="url(#${prefix}-arr-warning)"/>`;
     } else if (n.shape === 'bufferSingle' || n.shape === 'multiBuffer') {
       const isMulti = n.shape === 'multiBuffer';
       const pin = portPt(n, p.in), pout = portPt(n, p.out), tone = portTone(n, 'in');
@@ -852,16 +837,11 @@ export function renderHydraulic(d, copy, season = 'winter', prefix = 'hyd') {
       body += `<rect class="plate-pack" x="${x + 38}" y="${y + 68}" width="12" height="108" rx="3"/>`;
       body += `<rect class="plate-pack" x="${x + w - 50}" y="${y + 68}" width="12" height="108" rx="3"/>`;
       const cx = x + w / 2, cy = y + 122;
-      const rl = x + 74, rr = x + w - 74, rt = y + 86, rb = y + 156;
-      body += drawPipe([[rl, rb], [rl, rt], [rr, rt], [rr, rb], [rl, rb]], 'link', 'danger', {
-        thin: true, marker: false, gradEnds: [[rl, rt], [rr, rt]], plateau: true, fluidKind: 'ref', refPhase: 'loop'
-      });
-      body += `<circle class="machine-card" cx="${cx}" cy="${rt}" r="16"/>` +
-        `<g data-rotor="1" data-cx="${cx}" data-cy="${rt}"><path d="M${cx - 6} ${rt - 7}L${cx + 9} ${rt}L${cx - 6} ${rt + 7}Z" fill="var(--cp-accent)"/></g>`;
-      body += `<path class="machine-card" d="M${cx - 11} ${rb - 8}L${cx + 11} ${rb + 8}V${rb - 8}L${cx - 11} ${rb + 8}Z"/>`;
-      body += drawHeat(x + 52, cy, rl - 4, cy, false);
-      body += drawHeat(rr + 4, cy, x + w - 52, cy, false);
-      body += `<path class="power-track" d="M${cx} ${y + h - 20}V${rb + 11}" marker-end="url(#${prefix}-arr-accent)"/>`;
+      body += `<circle class="machine-card" cx="${cx}" cy="${cy}" r="20"/>` +
+        `<g data-rotor="1" data-cx="${cx}" data-cy="${cy}"><path d="M${cx - 7} ${cy - 9}L${cx + 11} ${cy}L${cx - 7} ${cy + 9}Z" fill="var(--cp-accent)"/></g>`;
+      body += drawHeat(x + 54, cy, cx - 24, cy, false);
+      body += drawHeat(cx + 24, cy, x + w - 54, cy, false);
+      body += `<path class="power-track" d="M${cx} ${y + h - 22}V${cy + 24}" marker-end="url(#${prefix}-arr-accent)"/>`;
       body += `<text class="svg-label svg-temp pc-detail" x="${cx}" y="${y + h - 6}" font-size="14" text-anchor="middle">70/65 °C</text>`;
     } else if (n.shape === 'plateExchanger' || n.shape === 'multiExchanger') {
       const pi = portPt(n, p.pi), po = portPt(n, p.po), so = portPt(n, p.so), si = portPt(n, p.si);
