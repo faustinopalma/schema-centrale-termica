@@ -1,0 +1,2027 @@
+{
+  "it": {
+    "ui": {
+      "openMachineBtn": "⚙ Funzionamento interno",
+      "backToMapBtn": "◀ Mappa d'insieme",
+      "backToCardBtn": "↩ Scheda riepilogativa",
+      "partsTitle": "Organi interni (tocca sul disegno o qui):",
+      "specsTitle": "Dati di progetto nel condominio:",
+      "photoPreviewBtn": "📷 Foto reale macchina",
+      "cutawayPreviewBtn": "⚙ Torna allo spaccato animato",
+      "machineSelectLabel": "Macchina:"
+    },
+    "items": {
+      "hiref_msw": {
+        "title": "PC2 · Pompa di calore polivalente HiRef MSW182ML",
+        "shortTitle": "PC2 · Pompa polivalente MSW",
+        "subtitle": "2 unità in parallelo · 260,4 kW termici / 233,3 kW frigoriferi cad. · 3 circuiti d'acqua",
+        "tags": [
+          "PC2"
+        ],
+        "photo": "hiref_msw",
+        "specs": [
+          "2 × MSW182ML in parallelo",
+          "Compressori Scroll in tandem",
+          "3 scambiatori a piastre inox"
+        ],
+        "modes": [
+          {
+            "label": "1 · Inverno (Riscaldamento)",
+            "summary": "Il refrigerante bolle a bassa pressione nello scambiatore lato falda (16 → 11 °C), viene compresso dagli Scroll e condensa cedendo calore all'acqua dei pannelli (40 → 45 °C)."
+          },
+          {
+            "label": "2 · Estate (Raffrescamento)",
+            "summary": "Il percorso termico s'inverte: l'acqua dell'edificio cede calore facendo evaporare il refrigerante, mentre il condensatore scarica il calore nell'acqua di falda (16 → 21 °C)."
+          },
+          {
+            "label": "3 · Estate + Recupero 40/35 °C",
+            "summary": "Il vapore compresso caldo attraversa il terzo scambiatore dedicato scaldando gratuitamente l'anello intermedio a 40 °C verso PC1 con il calore sottratto agli alloggi."
+          }
+        ],
+        "parts": [
+          {
+            "name": "Scambiatore a piastre lato falda",
+            "desc": "Pacco saldobrasato in acciaio inox AISI 316 dove scorrono in controcorrente l'acqua di pozzo filtrata da T7 e il refrigerante sigillato: opera da evaporatore in inverno e da condensatore di smaltimento in estate."
+          },
+          {
+            "name": "Compressori Scroll in tandem",
+            "desc": "Due spirali metalliche accoppiate (una fissa e una orbitante) intrappolano tasche di vapore refrigerante e le spingono verso il centro riducendone il volume, innalzando pressione e temperatura."
+          },
+          {
+            "name": "Scambiatore utenza climatizzazione",
+            "desc": "Trasferisce l'energia termica all'acqua tecnica chiusa diretta ai volani S3 e ai rami P06, P07 e SC2, mantenendo separato il gas frigorifero dall'impianto idronico del condominio."
+          },
+          {
+            "name": "Valvola EEV + 3° scambiatore 40/35 °C",
+            "desc": "La valvola di espansione elettronica (EEV) modula al millimetro il passaggio del liquido refrigerante facendolo cadere di pressione; il terzo scambiatore alimenta l'anello tiepido verso PC1."
+          }
+        ]
+      },
+      "hiref_ksw": {
+        "title": "PC1 · Pompa di calore alta temperatura HiRef 30KSW202K",
+        "shortTitle": "PC1 · Alta temperatura KSW",
+        "subtitle": "Secondo stadio termico · Sorgente 40/35 °C → Mandata primaria 70/65 °C · 180,5 kW",
+        "tags": [
+          "PC1",
+          "P04",
+          "P05"
+        ],
+        "photo": "hiref_ksw",
+        "specs": [
+          "Potenza termica 180,5 kW",
+          "Sorgente tiepida 40 → 35 °C",
+          "Mandata 70 °C verso 2 × SC1"
+        ],
+        "modes": [
+          {
+            "label": "1 · Salto termico bistadio (40 → 70 °C)",
+            "summary": "Partendo dall'acqua già tiepida a 40 °C dell'anello intermedio, il refrigerante evapora a pressione elevata (~32 °C) e con una compressione contenuta raggiunge 70 °C in mandata con alto rendimento (COP ~4,9)."
+          },
+          {
+            "label": "2 · Modulazione a carico parziale",
+            "summary": "Quando uno dei due bollitori S2 ha già raggiunto 60 °C, un solo compressore Scroll rimane attivo dimezzando la potenza elettrica assorbita e mantenendo costanti i 70 °C."
+          }
+        ],
+        "parts": [
+          {
+            "name": "Evaporatore ad alta temperatura (lato P05)",
+            "desc": "Riceve acqua tecnica a 40 °C dai volani intermedi S3 e la restituisce a 35 °C. L'elevata temperatura di ingresso mantiene alta la densità del vapore aspirato dai compressori."
+          },
+          {
+            "name": "Doppio compressore Scroll per alta pressione",
+            "desc": "Progettato per temperature di condensazione fino a 75–80 °C: lavora con un rapporto di compressione ridotto grazie al preriscaldamento fornito dal primo stadio PC2."
+          },
+          {
+            "name": "Condensatore primario 70/65 °C (lato P04)",
+            "desc": "Il vapore surriscaldato cede calore al circuito chiuso spinto da P04 (32 m³/h), portando l'acqua tecnica a 70 °C per caricare rapidamente gli scambiatori sanitari SC1."
+          },
+          {
+            "name": "Valvola elettronica e sottoraffreddamento",
+            "desc": "Controlla il surriscaldamento all'uscita dell'evaporatore in tempo reale durante i transitori di carica dei bollitori da 3.000 litri."
+          }
+        ]
+      },
+      "dab_ss6": {
+        "title": "P11 / P10 · Elettropompe sommerse multistadio DAB SS6 / SS8",
+        "shortTitle": "P11/P10 · Sommerse pozzo SS",
+        "subtitle": "Pozzo P1 (2 × P11 da 54 m³/h) + Pozzo riserva P2 (1 × P10 da 108 m³/h) · Prevalenza 930 kPa",
+        "tags": [
+          "P11",
+          "P10",
+          "P1",
+          "P2"
+        ],
+        "photo": "dab_ss6",
+        "specs": [
+          "P1: 2 × 22 kW (54 m³/h cad.)",
+          "P2 riserva: 1 × 37 kW (108 m³/h)",
+          "Acciaio inox AISI 304 · 93 m c.a."
+        ],
+        "modes": [
+          {
+            "label": "1 · Estrazione in marcia (giranti in serie)",
+            "summary": "L'acqua di falda a 16 °C entra dalla camicia fenestrata del pozzo, lambisce e raffredda il motore sommerso TR sul fondo, attraversa la griglia aspirante e sale attraverso le giranti multistadio che sommano pressione a ogni stadio."
+          },
+          {
+            "label": "2 · Pompa ferma e tenuta antiritorno",
+            "summary": "All'arresto della pompa, la valvola di ritegno integrata in testa si chiude istantaneamente sotto il peso della colonna d'acqua verticale, mantenendo piena la tubazione e bloccando la rotazione inversa."
+          }
+        ],
+        "parts": [
+          {
+            "name": "Motore sommerso riavvolgibile TR (in fondo)",
+            "desc": "Installato sotto la parte idraulica: l'acqua aspirata scorre lungo la parete esterna del motore asportando il calore degli avvolgimenti elettrici prima di entrare nella griglia."
+          },
+          {
+            "name": "Griglia di aspirazione inox e cuscinetti idrolubrificati",
+            "desc": "Trattiene i ciottoli grossolani alla bocca di presa; l'albero ruota su bussole in gomma scanalata lubrificate dall'acqua stessa con canali per lasciar defluire eventuale sabbia fine."
+          },
+          {
+            "name": "Stadi multipli a flusso misto (giranti + diffusori)",
+            "desc": "Ogni girante centrifuga accelera l'acqua e il diffusore fisso successivo converte la velocità in pressione statica; impilando più stadi in un cilindro stretto da 6\" o 8\" si raggiungono 9,3 bar."
+          },
+          {
+            "name": "Valvola di ritegno incorporata in mandata",
+            "desc": "Posta in cima al corpo pompa: si solleva durante la spinta verso T6 e si richiude a pompa ferma proteggendo le giranti dal colpo d'ariete di ritorno."
+          }
+        ]
+      },
+      "nobel_nic": {
+        "title": "T6 · Separatore centrifugo a idrociclone Nobel NIC-K",
+        "shortTitle": "T6 · Idrociclone sabbia",
+        "subtitle": "Separazione centrifuga idrodinamica · DN125 · Portata 108 m³/h",
+        "tags": [
+          "T6"
+        ],
+        "photo": "nobel_nic",
+        "specs": [
+          "Portata progetto 108 m³/h (30 L/s)",
+          "Attacchi flangiati DN125",
+          "Separazione continua a vortice"
+        ],
+        "modes": [
+          {
+            "label": "1 · Separazione a doppio vortice",
+            "summary": "Entrando tangenzialmente ad alta velocità, l'acqua forma un vortice discendente lungo il cono: la forza centrifuga spinge i granelli di sabbia contro la parete facendoli scivolare nel serbatoio di fondo, mentre l'acqua pulita risale al centro."
+          },
+          {
+            "label": "2 · Spurgo sabbia dal serbatoio inferiore",
+            "summary": "Aprendo brevemente la valvola di scarico inferiore, la pressione stessa della linea espelle i sedimenti accumulati nella camera calma di raccolta continuando ad alimentare i filtri T7."
+          }
+        ],
+        "parts": [
+          {
+            "name": "Ingresso tangenziale accelerante (DN125)",
+            "desc": "Immette la corrente d'acqua di pozzo lateralmente contro la parete cilindrica superiore, trasformando la spinta rettilinea in una rapida rotazione elicoidale."
+          },
+          {
+            "name": "Cono convergente ad alta accelerazione",
+            "desc": "Man mano che il diametro del cono si restringe verso il basso, la velocità angolare aumenta moltiplicando l'accelerazione centrifuga che separa sabbia e limo pesante."
+          },
+          {
+            "name": "Camera inferiore calma di sedimentazione",
+            "desc": "Sotto l'apice del cono i solidi separati si depositano al riparo dalla turbolenza del vortice, pronti per essere evacuati dallo scarico periodico."
+          },
+          {
+            "name": "Tubo centrale di risalita (vortice interno pulito)",
+            "desc": "Al centro del cono si genera un vortice ascendente che convoglia verso l'alto l'acqua alleggerita dalle particelle pesanti, inviandola ai due filtri fini T7."
+          }
+        ]
+      },
+      "nobel_ml": {
+        "title": "T7 · Filtri fini autopulenti motorizzati Nobel ML",
+        "shortTitle": "T7 · Filtro autopulente 100 µm",
+        "subtitle": "2 unità in parallelo · Grado di filtrazione 100 µm · DN100 · Lavaggio automatico ΔP",
+        "tags": [
+          "T7"
+        ],
+        "photo": "nobel_ml",
+        "specs": [
+          "2 × DN100 in parallelo (65 m³/h cad.)",
+          "Cartuccia inox 100 micrometri",
+          "Pulizia motorizzata in marcia"
+        ],
+        "modes": [
+          {
+            "label": "1 · Filtrazione normale (100 µm)",
+            "summary": "L'acqua attraversa la rete cilindrica in acciaio inox da 100 micron (0,1 mm), che trattiene le particelle fini a valle di T6 proteggendo gli stretti canali a piastre delle pompe di calore PC2."
+          },
+          {
+            "label": "2 · Controlavaggio automatico su ΔP",
+            "summary": "Quando lo sporco depositato crea una differenza di pressione (ΔP) tra i due manometri, il quadro avvia il motoriduttore superiore che ruota le spazzole interne aprendo lo scarico di fondo per pochi secondi."
+          }
+        ],
+        "parts": [
+          {
+            "name": "Cartuccia filtrante cilindrica inox 100 µm",
+            "desc": "Elemento filtrante metallico rigenerabile ad ampia superficie, dimensionato per bloccare sabbia fine e scaglie prima degli scambiatori a piastre."
+          },
+          {
+            "name": "Manometri e pressostato differenziale (ΔP)",
+            "desc": "Misurano la pressione a monte e a valle della rete: un calo di pressione a valle segnala l'accumulo di impurità e comanda automaticamente la pulizia."
+          },
+          {
+            "name": "Motoriduttore elettrico e gruppo spazzolante",
+            "desc": "Posto sulla calotta superiore: fa ruotare l'albero interno pulendo la superficie interna della cartuccia mentre l'impianto continua ad alimentare le PC2."
+          },
+          {
+            "name": "Valvola motorizzata di scarico fanghi",
+            "desc": "Situata sul fondello inferiore: si apre in sincronia con la rotazione delle spazzole convogliando allo scarico l'acqua di lavaggio carica di impurità."
+          }
+        ]
+      },
+      "elbi_dl": {
+        "title": "S4 · Serbatoi preautoclave a membrana ELBI DL 1000 V",
+        "shortTitle": "S4 · Vaso a membrana 1.000 L",
+        "subtitle": "2 vasi da 1.000 litri in derivazione laterale · Pressione nominale 10 bar · Anti-colpo d'ariete",
+        "tags": [
+          "S4"
+        ],
+        "photo": "elbi_dl",
+        "specs": [
+          "2 × 1.000 L (totale 2.000 L)",
+          "Derivazione laterale a T",
+          "Membrana intercambiabile in butile"
+        ],
+        "modes": [
+          {
+            "label": "1 · Assorbimento picco (compressione cuscino gas)",
+            "summary": "All'avvio delle pompe sommerse o alla chiusura di una valvola, l'onda di sovrappressione entra dal raccordo a T inferiore gonfiando la membrana elastica e comprimendo il cuscino d'aria superiore, che smorza il colpo d'ariete."
+          },
+          {
+            "label": "2 · Stabilizzazione e rilascio elastico",
+            "summary": "Quando la richiesta aumenta bruscamente, il cuscino di gas compresso spinge la membrana restituendo immediatamente acqua in linea e riducendo gli avviamenti ravvicinati delle pompe."
+          }
+        ],
+        "parts": [
+          {
+            "name": "Cuscino superiore di gas precaricato",
+            "desc": "Camera sigillata tra la parete d'acciaio e l'esterno della membrana, gonfiata dalla valvola superiore: la comprimibilità del gas agisce come una molla pneumatica."
+          },
+          {
+            "name": "Membrana elastica intercambiabile a sacco",
+            "desc": "Contiene interamente l'acqua isolandola dalla lamiera d'acciaio del serbatoio, prevenendo la corrosione interna e preservando la carica d'aria."
+          },
+          {
+            "name": "Mantello verticale in acciaio verniciato (10 bar)",
+            "desc": "Involucro strutturale su tre piedi di supporto progettato per resistere alla pressione massima di esercizio della linea di falda."
+          },
+          {
+            "name": "Connessione idraulica in derivazione laterale (T)",
+            "desc": "Il vaso è collegato con un singolo bocchettone laterale alla tubazione principale: l'acqua entra ed esce in risposta alle sole variazioni di pressione."
+          }
+        ]
+      },
+      "dab_dcm": {
+        "title": "P04–P09 · Elettropompe elettroniche in-line a inverter DAB DCM-GE / CME",
+        "shortTitle": "P04–P09 · Pompe in-line inverter",
+        "subtitle": "Circolatori flangiati singoli e gemellari con inverter MCE/C · Modulazione Δp variabile",
+        "tags": [
+          "P04",
+          "P05",
+          "P06",
+          "P07",
+          "P08",
+          "P09"
+        ],
+        "photo": "dab_dcm",
+        "specs": [
+          "P07: 66 m³/h · P09: 57 m³/h · P08: 41,2 m³/h",
+          "P04: 32 m³/h · P05: 26 m³/h · P06: 3 m³/h",
+          "Inverter MCE/C a bordo motore"
+        ],
+        "modes": [
+          {
+            "label": "1 · Pieno carico di punta (100% giri)",
+            "summary": "Quando molti appartamenti richiedono caldo o freddo contemporaneamente, le valvole di zona si aprono: l'inverter rileva il calo di pressione differenziale e accelera la girante per fornire l'intera portata di progetto."
+          },
+          {
+            "label": "2 · Carico parziale inverter (50% giri → ~15% kW)",
+            "summary": "Quando metà degli alloggi è in temperatura e chiude le valvole, l'inverter dimezza i giri del motore: per la legge di affinità cubica delle pompe centrifughe, dimezzare i giri riduce la potenza assorbita di quasi sette volte."
+          },
+          {
+            "label": "3 · Scambio gemellare e valvola clapet",
+            "summary": "Nelle versioni gemellari DCM-GE i due motori si alternano ogni 24 ore per uniformare l'usura; la valvola a battente (clapet) nel collettore chiude automaticamente la bocca della pompa a riposo evitando ricircoli interni."
+          }
+        ],
+        "parts": [
+          {
+            "name": "Convertitore di frequenza (Inverter MCE/C)",
+            "desc": "Montato direttamente sopra la cassa motore: varia in continuo la frequenza elettrica (Hz) adeguando istante per istante velocità e potenza assorbita al fabbisogno reale."
+          },
+          {
+            "name": "Girante centrifuga radiale chiusa",
+            "desc": "Aspira l'acqua al centro ('occhio' della girante) e la proietta radialmente nella chiocciola per forza centrifuga, generando prevalenza con basse vibrazioni."
+          },
+          {
+            "name": "Bocche di aspirazione e mandata in-line",
+            "desc": "Le flange di ingresso e uscita sono allineate sullo stesso asse rettilineo della tubazione, consentendo il montaggio diretto lungo i collettori di centrale."
+          },
+          {
+            "name": "Valvola automatica a clapet (nei gruppi gemellari)",
+            "desc": "Sportello mobile sul punto di unione delle due chiocciole: la spinta della pompa attiva lo preme contro il condotto della pompa ferma garantendo la riserva pronta."
+          }
+        ]
+      },
+      "dab_evoplus": {
+        "title": "P01 / P02 / P03 · Circolatori sanitari a rotore bagnato DAB EVOPLUS SAN",
+        "shortTitle": "P01–P03 · Rotore bagnato SAN",
+        "subtitle": "Motore sincrono a magneti permanenti ermetico · Carica S2 e ricircolo montanti ACR",
+        "tags": [
+          "P01",
+          "P02",
+          "P03",
+          "ACR"
+        ],
+        "photo": "dab_evoplus",
+        "specs": [
+          "P02 (MP) e P03 (BP): 3,6 m³/h · 0,34 kW",
+          "P01 carica bollitori: 2 × 16 m³/h",
+          "Corpo sanitario resistente all'ossigeno"
+        ],
+        "modes": [
+          {
+            "label": "1 · Ricircolo continuo montanti ACR (P02 / P03)",
+            "summary": "Con max 0,34 kW per zona, il circolatore mantiene un flusso costante (3,6 m³/h) lungo i 40 metri delle colonne del vano scala, riportando l'acqua a ~46 °C verso il miscelatore così che ai piani alti arrivi subito calda."
+          },
+          {
+            "label": "2 · Carica bollitori S2 (P01)",
+            "summary": "Sul circuito secondario tra SC1 e S2, i circolatori P01 prelevano acqua a 55 °C dal fondo del bollitore e la reimmettono in alto a 60 °C fino al completo caricamento dei 3.000 litri."
+          }
+        ],
+        "parts": [
+          {
+            "name": "Canotto separatore inox ermetico",
+            "desc": "Un cilindro sottile amagnetico in acciaio inox isola ermeticamente gli avvolgimenti elettrici asciutti dallo spazio centrale bagnato, eliminando le tenute meccaniche rotanti."
+          },
+          {
+            "name": "Rotore a magneti permanenti immerso nell'acqua",
+            "desc": "Il rotore gira immerso nella stessa acqua potabile pompata, che lubrifica silenziosamente i cuscinetti in ceramica e asporta il calore."
+          },
+          {
+            "name": "Statore elettronico ECM ad alta efficienza",
+            "desc": "Genera un campo magnetico rotante a frequenza variabile attraverso il canotto inox, riducendo al minimo i consumi nel servizio continuo 24/24h."
+          },
+          {
+            "name": "Idraulica in lega sanitaria (versione SAN)",
+            "desc": "Impiega bronzo o acciaio inox idoneo al contatto continuo con acqua potabile calda ricca di ossigeno disciolto."
+          }
+        ]
+      },
+      "spade_ambra": {
+        "title": "T1 · Filtro chiarificatore a letto di quarzite Spadeitalia AMBRA",
+        "shortTitle": "T1 · Filtro quarzite AMBRA",
+        "subtitle": "Ingresso acquedotto · Filtrazione su letto granulare profondo 50 µm · Portata 66 m³/h (DN100)",
+        "tags": [
+          "T1",
+          "AFP"
+        ],
+        "photo": "spade_ambra",
+        "specs": [
+          "Taglia AMBRA DN100 (catalogo 90 m³/h)",
+          "Portata di progetto 66 m³/h",
+          "Grado di filtrazione ~50 µm"
+        ],
+        "modes": [
+          {
+            "label": "1 · Filtrazione dall'alto verso il basso",
+            "summary": "L'acqua dell'acquedotto entra dal diffusore superiore e attraversa lentamente uno spesso strato di quarzite purissima: ruggine e limo restano intrappolati tra i granuli, mentre dalla piastra inferiore esce acqua limpida verso S1."
+          },
+          {
+            "label": "2 · Controlavaggio espansivo dal basso",
+            "summary": "Invertendo periodicamente il flusso dal basso verso l'alto, l'acqua solleva e fluidifica i granuli di quarzite strofinandoli tra loro e trascinando allo scarico superiore tutto lo sporco accumulato."
+          }
+        ],
+        "parts": [
+          {
+            "name": "Diffusore superiore di distribuzione",
+            "desc": "Ripartisce uniformemente il getto d'ingresso su tutta la sezione del serbatoio mantenendo piana la superficie della sabbia."
+          },
+          {
+            "name": "Letto filtrante profondo in quarzite selezionata",
+            "desc": "Lavora lungo l'intero spessore granulare trattenendo impurità fino a circa 50 micrometri con elevate capacità di accumulo e basse perdite di carico."
+          },
+          {
+            "name": "Strato inferiore di ghiaia di supporto",
+            "desc": "Granulometria più grossa adagiata sul fondo che sostiene la quarzite fine e distribuisce uniformemente l'acqua di controlavaggio."
+          },
+          {
+            "name": "Piastra portaugelli a fessure calibrate",
+            "desc": "Costellata di ugelli drenanti con fessure più strette dei granuli di quarzo: lascia passare l'acqua limpida verso S1 trattenendo l'intero letto sabbioso."
+          }
+        ]
+      },
+      "dab_nkve": {
+        "title": "GP1 / GP2 · Gruppi di pressurizzazione inverter DAB 2 × NKVE",
+        "shortTitle": "GP1/GP2 · Spinta multistadio NKVE",
+        "subtitle": "Alimentati dai serbatoi S1 (2 × 2.000 L) · GP1 Media Pressione (7,3 bar) · GP2 Bassa Pressione (4,3 bar)",
+        "tags": [
+          "GP1",
+          "GP2",
+          "S1",
+          "AFP"
+        ],
+        "photo": "dab_nkve",
+        "specs": [
+          "GP1 (MP): 34 m³/h · 2 × 7,5 kW",
+          "GP2 (BP): 37 m³/h · 2 × 5,5 kW",
+          "2 serbatoi prima raccolta S1 da 2.000 L"
+        ],
+        "modes": [
+          {
+            "label": "1 · Normale prelievo (1 pompa modulante)",
+            "summary": "L'acqua dei serbatoi atmosferici S1 entra nella prima pompa verticale NKVE: il trasduttore sul collettore legge la pressione della rete e l'inverter MCE/P regola i giri mantenendo costante la pressione ai rubinetti."
+          },
+          {
+            "label": "2 · Picco contemporaneo (cascata a 2 pompe)",
+            "summary": "Nelle ore di punta mattutine, quando la prima pompa raggiunge il 100% dei giri, il secondo inverter avvia dolcemente in parallelo la gemella NKVE raddoppiando la portata a pressione costante."
+          }
+        ],
+        "parts": [
+          {
+            "name": "Serbatoi di prima raccolta S1 (2 × 2.000 L)",
+            "desc": "Disaccoppiano l'aspirazione delle pompe dalla rete pubblica dell'acquedotto e offrono una riserva pronta per i picchi istantanei."
+          },
+          {
+            "name": "Colonna verticale multistadio in acciaio inox NKVE",
+            "desc": "Più giranti centrifughe impilate verticalmente sullo stesso albero generano alte pressioni (oltre 7–9 bar per gli ultimi piani della zona MP) con minimo ingombro."
+          },
+          {
+            "name": "Inverter MCE/P comunicanti in cascata",
+            "desc": "Scambiano automaticamente il ruolo di pompa pilota ad ogni ciclo e modulano i giri in base alla lettura reale dei trasduttori di pressione."
+          },
+          {
+            "name": "Collettori inox, valvole di ritegno e vasi smorzatori",
+            "desc": "Unificano la mandata di zona (MP o BP) e mantengono la rete in pressione a prelievo nullo notturno, consentendo lo stand-by totale dei motori."
+          }
+        ]
+      },
+      "spade_corallo": {
+        "title": "T2 · Addolcitori volumetrici a scambio ionico Spadeitalia CORALLO 23 CLK",
+        "shortTitle": "T2 · Addolcitore resine CORALLO",
+        "subtitle": "2 unità dedicate all'alimento ACS (1 MP + 1 BP) · Protezione anticalcare di SC1 e S2",
+        "tags": [
+          "T2",
+          "T3",
+          "T4"
+        ],
+        "photo": "spade_corallo",
+        "specs": [
+          "2 linee indipendenti (MP e BP)",
+          "Valvola volumetrica elettronica CLK",
+          "Resine cationiche + tino salamoia"
+        ],
+        "modes": [
+          {
+            "label": "1 · Servizio: cattura calcare (Scambio ionico)",
+            "summary": "L'acqua dura destinata al circuito sanitario attraversa microsfere di resina cariche di ioni Sodio (Na⁺): le resine catturano gli ioni Calcio (Ca²⁺) e Magnesio (Mg²⁺) responsabili del calcare, cedendo ioni sodio solubili."
+          },
+          {
+            "label": "2 · Rigenerazione con salamoia (NaCl)",
+            "summary": "Raggiunto il volume d'acqua contabilizzato dalla turbina, la testata CLK aspira dal tino bianco laterale acqua salata concentrata (NaCl) che stacca Calcio e Magnesio inviandoli allo scarico e ricarica le resine di Na⁺."
+          }
+        ],
+        "parts": [
+          {
+            "name": "Testata elettronica volumetrica CLK",
+            "desc": "Misura con una turbina i metri cubi d'acqua effettivamente addolciti, avviando la rigenerazione in base al consumo reale."
+          },
+          {
+            "name": "Bombola con resine cationiche ad uso alimentare",
+            "desc": "Contiene microsfere polimeriche che proteggono dalle incrostazioni calcaree le piastre a 70 °C degli scambiatori SC1 e i bollitori S2."
+          },
+          {
+            "name": "Tino salamoia laterale per sale in pastiglie",
+            "desc": "Prepara la soluzione satura di cloruro di sodio impiegata durante il breve lavaggio di rigenerazione (l'acqua di lavaggio va interamente allo scarico)."
+          },
+          {
+            "name": "Miscelatore durezza residua + stazioni T3 / T4",
+            "desc": "Mantiene il giusto grado di durezza residua a protezione delle tubazioni, affiancato a valle dai dosaggi antilegionella (T3) e anticorrosivo (T4)."
+          }
+        ]
+      },
+      "dab_micra": {
+        "title": "P12 · Recupero acque piovane e pompa DAB MICRA HS + Active Driver",
+        "shortTitle": "P12 · Recupero piovana MICRA HS",
+        "subtitle": "Vasca meteorica da 3,5 m³ · Elettropompa sommersa 3\" ad alta velocità (130 Hz) · Irrigazione aree verdi",
+        "tags": [
+          "P12"
+        ],
+        "photo": "dab_micra",
+        "specs": [
+          "Portata 4 m³/h · Prevalenza 480 kPa",
+          "Vasca raccolta piovana 3.500 L",
+          "Rete irrigua separata dall'acqua potabile"
+        ],
+        "modes": [
+          {
+            "label": "1 · Irrigazione da acqua piovana accumulata",
+            "summary": "Aprendo gli irrigatori condominiali la pressione nel tubo scende: l'inverter Active Driver spinge la snella pompa sommersa MICRA HS fino a 130 Hz (~7.600 giri/min) per erogare 4,8 bar costanti con acqua piovana recuperata."
+          },
+          {
+            "label": "2 · Protezione minimo livello e reintegro",
+            "summary": "Nei periodi estivi secchi la sonda di livello protegge la pompa dalla marcia a vuoto e abilita il reintegro ausiliario dalla rete non potabile di falda."
+          }
+        ],
+        "parts": [
+          {
+            "name": "Vasca di accumulo meteorico (3,5 m³) e prefiltro",
+            "desc": "Raccoglie le acque piovane trattenendo foglie e detriti prima dello stoccaggio interrato al buio."
+          },
+          {
+            "name": "Pompa sommersa 3\" ad alta velocità MICRA HS 4/4",
+            "desc": "Alimentata fino a 130 Hz dall'inverter, ruota a velocità più che doppia rispetto ai 50 Hz standard generando 48 m di prevalenza in soli 74 mm di diametro."
+          },
+          {
+            "name": "Inverter in linea Active Driver Plus",
+            "desc": "Integra flussostato, trasduttore di pressione e variatore di frequenza raffreddato direttamente dall'acqua che lo attraversa."
+          },
+          {
+            "name": "Disgiunzione fisica dalla rete potabile",
+            "desc": "L'intero anello irriguo opera su tubazioni dedicate e separate dalla distribuzione potabile AFP."
+          }
+        ]
+      },
+      "plate_hx": {
+        "title": "SC1 e SC2 · Scambiatori di calore a piastre corrugate in controcorrente",
+        "shortTitle": "SC1/SC2 · Scambiatori a piastre",
+        "subtitle": "Trasferimento termico ad altissima superficie con isolamento idraulico e di pressione",
+        "tags": [
+          "SC1",
+          "SC2",
+          "AP"
+        ],
+        "specs": [
+          "SC2 clima AP: 231 kW inv. / 240 kW est.",
+          "2 × SC1 sanitari: 90 kW ciascuno",
+          "Flussi alternati in controcorrente"
+        ],
+        "modes": [
+          {
+            "label": "1 · SC2 · Separazione pressione piani alti (AP)",
+            "summary": "La colonna d'acqua che sale agli ultimi piani delle Torri A e B esercita un'elevata pressione statica. SC2 mantiene separato quel circuito (mosso da P09) dal circuito della centrale (mosso da P08): caldo e freddo attraversano le lamiere inox proteggendo le PC2 dall'alta pressione."
+          },
+          {
+            "label": "2 · SC1 · Separazione igienica acqua tecnica / potabile",
+            "summary": "Nei canali dispari scende l'acqua tecnica chiusa di PC1 a 70 → 65 °C; nei canali pari risale in controcorrente l'acqua potabile spinta da P01 che si scalda da 55 a 60 °C verso i bollitori S2."
+          }
+        ],
+        "parts": [
+          {
+            "name": "Pacco di piastre sottili corrugate a spina di pesce",
+            "desc": "Fogli in acciaio inox spessi ~0,5 mm stampati a rilievo: le nervature creano micro-turbolenza moltiplicando lo scambio termico in pochissimo spazio."
+          },
+          {
+            "name": "Canali alternati pari / dispari sigillati",
+            "desc": "Gli oblò di passaggio indirizzano il fluido primario nelle camere dispari e il fluido secondario nelle camere pari adiacenti."
+          },
+          {
+            "name": "Circolazione in controcorrente pura",
+            "desc": "Facendo scorrere i due fluidi in versi opposti, la temperatura di uscita del secondario si avvicina a pochi gradi dalla temperatura di ingresso del primario."
+          },
+          {
+            "name": "Barriera strutturale di pressione e igiene",
+            "desc": "I punti di contatto delle nervature sostengono forti differenze di pressione tra i due lati mantenendo indipendenti i due circuiti."
+          }
+        ]
+      },
+      "dhw_storage": {
+        "title": "S2, Miscelatori e S3 · Bollitori sanitari stratificati, Miscelazione 48 °C e Volani",
+        "shortTitle": "S2/S3 · Bollitori e Miscelatore",
+        "subtitle": "2 × S2 da 3.000 L a 60 °C + Miscelatori antiscottatura 48 °C + 4 × Volani inerziali S3 da 2.000 L",
+        "tags": [
+          "S2",
+          "S3",
+          "ACP",
+          "ACR"
+        ],
+        "specs": [
+          "2 × S2 sanitari da 3.000 L (10 bar)",
+          "Uscita temperata ACP a 48 °C",
+          "4 × S3 volani inerziali da 2.000 L (6 bar)"
+        ],
+        "modes": [
+          {
+            "label": "1 · Bollitore S2 (60 °C) + Miscelatore termostatico (48 °C)",
+            "summary": "Nel bollitore S2 l'acqua calda a 60 °C stratifica in alto garantendo l'igiene termica, mentre l'acqua fredda AFP (15 °C) entra dal basso. All'uscita il miscelatore termostatico dosa acqua a 60 °C, ricircolo ACR e acqua fredda per inviare esattamente 48 °C costanti alle case."
+          },
+          {
+            "label": "2 · Volani inerziali S3 in parallelo sulla mandata",
+            "summary": "I quattro serbatoi S3 da 2.000 L (due sul clima e due sull'anello 40/35 °C) sono inseriti in parallelo sulla sola mandata mentre il ritorno rientra diretto alle PC2: accumulano energia termica stabilizzando il lavoro dei compressori."
+          }
+        ],
+        "parts": [
+          {
+            "name": "Stratificazione termica per densità in S2",
+            "desc": "L'acqua a 60 °C è più leggera di quella a 15 °C: un deflettore inferiore calma il getto freddo entrante così che sollevi il cuscino caldo superiore mantenendo netta la separazione."
+          },
+          {
+            "name": "Anello di carica laterale da SC1 (60 / 55 °C)",
+            "desc": "La pompa P01 aspira gli strati inferiori più tiepidi di S2, li scalda a 60 °C in SC1 e li immette nella cupola alta del bollitore."
+          },
+          {
+            "name": "Elemento termostatico a cera (Miscelatore 48 °C)",
+            "desc": "Un bulbo termosensibile immerso nell'uscita mista si dilata istantaneamente se la temperatura supera 48 °C, aprendo la via fredda e riducendo quella a 60 °C (protezione antiscottatura)."
+          },
+          {
+            "name": "Connessione in parallelo dei volani S3",
+            "desc": "Ripartendo la mandata su due serbatoi gemelli da 2.000 L si dimezza la velocità interna e si smorzano le oscillazioni di temperatura."
+          }
+        ]
+      },
+      "radiant_module": {
+        "title": "BP / AP · Modulo d'utenza d'alloggio, Pannelli radianti e Deumidificazione",
+        "shortTitle": "BP/AP · Modulo alloggio e Pannelli",
+        "subtitle": "Contabilizzazione M-bus · Miscelazione climatica locale · Serpentina a pavimento caldo/freddo",
+        "tags": [
+          "BP",
+          "AP",
+          "ACP"
+        ],
+        "specs": [
+          "Inverno: 42 °C ingresso → 38/33 °C pavimento",
+          "Estate: 13 °C ingresso → 18/23 °C pavimento",
+          "Contabilizzazione M-bus + Deumidificatore"
+        ],
+        "modes": [
+          {
+            "label": "1 · Riscaldamento invernale radiante (38 → 33 °C)",
+            "summary": "Quando il termostato dell'appartamento chiede caldo, la valvola a 2 vie apre l'ingresso dal montante condominiale (42 °C), la miscelatrice locale tempera l'acqua a 38 °C e il circolatore d'alloggio alimenta le serpentine nel massetto."
+          },
+          {
+            "label": "2 · Raffrescamento estivo + Controllo condensa (18 → 23 °C)",
+            "summary": "In estate dal montante arriva acqua a ~13 °C: una presa diretta a 13 °C alimenta la batteria del deumidificatore per asciugare l'aria, mentre la miscelatrice rialza a 18 °C l'acqua inviata al pavimento mantenendolo sempre asciutto sopra il punto di rugiada."
+          }
+        ],
+        "parts": [
+          {
+            "name": "Contabilizzatori di energia termica e sanitaria (M-bus)",
+            "desc": "Misurano portata e salto termico (ΔT) scambiato dall'alloggio oltre ai consumi di acqua sanitaria, trasmettendo le letture via rete M-bus."
+          },
+          {
+            "name": "Valvola miscelatrice e circolatore di appartamento",
+            "desc": "Ricava due livelli di temperatura dallo stesso montante condominiale: 13 °C efficaci per la deumidificazione estiva e 18 °C confortevoli per il pavimento."
+          },
+          {
+            "name": "Serpentina radiante annegata nel massetto",
+            "desc": "Sfruttando l'intera superficie delle stanze riscalda con acqua a soli 38 °C, facendo lavorare le pompe di calore alla massima efficienza."
+          },
+          {
+            "name": "Unità di deumidificazione isotermica",
+            "desc": "Sottrae l'umidità estiva dall'aria interna abbassando il punto di rugiada e garantendo fresco asciutto senza condensa superficiale."
+          }
+        ]
+      }
+    }
+  },
+  "en": {
+    "ui": {
+      "openMachineBtn": "⚙ Inside the machine",
+      "backToMapBtn": "◀ Overall plant map",
+      "backToCardBtn": "↩ Summary card",
+      "partsTitle": "Internal organs (select on cutaway or below):",
+      "specsTitle": "Condominium design duty:",
+      "photoPreviewBtn": "📷 Real unit photo",
+      "cutawayPreviewBtn": "⚙ Back to animated cutaway",
+      "machineSelectLabel": "Machine:"
+    },
+    "items": {
+      "hiref_msw": {
+        "title": "PC2 · HiRef MSW182ML Multipurpose Heat Pump",
+        "shortTitle": "PC2 · MSW Multipurpose HP",
+        "subtitle": "2 parallel units · 260.4 kW heating / 233.3 kW cooling each · 3 separate water exchangers",
+        "tags": [
+          "PC2"
+        ],
+        "photo": "hiref_msw",
+        "specs": [
+          "2 × MSW182ML in parallel",
+          "Tandem Scroll compressors",
+          "3 stainless plate exchangers"
+        ],
+        "modes": [
+          {
+            "label": "1 · Winter (Space heating)",
+            "summary": "Refrigerant boils at low pressure in the groundwater exchanger (16 → 11 °C), is compressed by the tandem Scrolls, and condenses to heat the closed building loop (40 → 45 °C)."
+          },
+          {
+            "label": "2 · Summer (Space cooling)",
+            "summary": "Heat flow reverses: warm return water from apartments boils the refrigerant, while the condenser rejects heat into the aquifer water stream (16 → 21 °C)."
+          },
+          {
+            "label": "3 · Summer + 40/35 °C Recovery",
+            "summary": "Hot compressed refrigerant gas flows through the dedicated third plate exchanger, recovering heat extracted from apartments directly into the 40 °C intermediate loop feeding PC1."
+          }
+        ],
+        "parts": [
+          {
+            "name": "Groundwater brazed-plate exchanger",
+            "desc": "AISI 316 stainless-steel plate pack where T7-filtered well water and sealed refrigerant run in counter-current: acts as evaporator in winter and heat-rejection condenser in summer."
+          },
+          {
+            "name": "Tandem Scroll compressors",
+            "desc": "Two interleaved spiral scrolls (one fixed, one orbiting eccentrically) trap crescent-shaped pockets of refrigerant vapour and squeeze them toward the centre, raising pressure and temperature."
+          },
+          {
+            "name": "Building HVAC plate exchanger",
+            "desc": "Transfers heating or cooling capacity into the closed hydronic loop serving the S3 buffers and branches P06, P07 and SC2 while keeping refrigerant hermetically sealed."
+          },
+          {
+            "name": "Electronic Expansion Valve (EEV) & 3rd 40/35 °C HX",
+            "desc": "A stepper-driven needle modulates liquid refrigerant throttling to flash-cool the mixture, while the third exchanger supplies warm water to the PC1 cascade loop."
+          }
+        ]
+      },
+      "hiref_ksw": {
+        "title": "PC1 · HiRef 30KSW202K High-Temperature Heat Pump",
+        "shortTitle": "PC1 · KSW High-Temp HP",
+        "subtitle": "Second cascade stage · 40/35 °C warm source → 70/65 °C primary supply · 180.5 kW",
+        "tags": [
+          "PC1",
+          "P04",
+          "P05"
+        ],
+        "photo": "hiref_ksw",
+        "specs": [
+          "180.5 kW thermal output",
+          "40 → 35 °C warm source",
+          "70 °C supply to 2 × SC1"
+        ],
+        "modes": [
+          {
+            "label": "1 · Two-stage lift (40 → 70 °C)",
+            "summary": "Starting from 40 °C intermediate water allows refrigerant to evaporate at high pressure (~32 °C), reaching 70 °C primary supply with a modest compression ratio and high COP (~4.9)."
+          },
+          {
+            "label": "2 · Part-load single-scroll modulation",
+            "summary": "When one of the two S2 cylinders reaches 60 °C, one scroll compressor unloads, halving electrical input while holding a steady 70 °C primary supply."
+          }
+        ],
+        "parts": [
+          {
+            "name": "Warm-source evaporator (P05 side)",
+            "desc": "Receives 40 °C technical water from the intermediate S3 buffers and returns it at 35 °C, keeping suction gas density high."
+          },
+          {
+            "name": "High-condensing tandem Scroll compressors",
+            "desc": "Engineered for condensing temperatures up to 75–80 °C, operating smoothly thanks to the pre-lifted source temperature provided by PC2."
+          },
+          {
+            "name": "70/65 °C primary condenser (P04 side)",
+            "desc": "Superheated refrigerant vapour releases heat into the closed loop circulated by P04 (32 m³/h), delivering 70 °C water to both SC1 sanitary exchangers."
+          },
+          {
+            "name": "Electronic expansion & subcooling control",
+            "desc": "Continuously regulates evaporator superheat across changing return temperatures as the 3,000 L storage cylinders charge."
+          }
+        ]
+      },
+      "dab_ss6": {
+        "title": "P11 / P10 · DAB SS6 / SS8 Multistage Submersible Borehole Pumps",
+        "shortTitle": "P11/P10 · Borehole Submersible",
+        "subtitle": "Main well P1 (2 × P11 at 54 m³/h) + Reserve well P2 (1 × P10 at 108 m³/h) · 930 kPa head",
+        "tags": [
+          "P11",
+          "P10",
+          "P1",
+          "P2"
+        ],
+        "photo": "dab_ss6",
+        "specs": [
+          "P1: 2 × 22 kW (54 m³/h each)",
+          "P2 reserve: 1 × 37 kW (108 m³/h)",
+          "AISI 304 stainless · 93 m head"
+        ],
+        "modes": [
+          {
+            "label": "1 · Pumping duty (impellers in series)",
+            "summary": "16 °C aquifer water enters through the slotted well screen, sweeps upward past the bottom TR submersible motor to cool it, enters the suction strainer, and gains pressure across each stacked impeller stage."
+          },
+          {
+            "label": "2 · Standby & built-in check valve hold",
+            "summary": "When the pump stops, the top non-return valve snaps shut under the vertical water column, keeping the riser primed and preventing reverse rotation."
+          }
+        ],
+        "parts": [
+          {
+            "name": "Bottom TR rewindable submersible motor",
+            "desc": "Mounted beneath the hydraulic stack so incoming groundwater flows along the motor casing, carrying away winding heat before entering the pump intake."
+          },
+          {
+            "name": "Stainless suction strainer & water-lubricated bearings",
+            "desc": "Screens coarse gravel at the intake; fluted rubber shaft bearings are lubricated by pumped water with channels allowing fine sand grains to pass out."
+          },
+          {
+            "name": "Stacked mixed-flow impellers & diffusers",
+            "desc": "Each rotating impeller accelerates water into a stationary diffuser that converts velocity into static pressure, building 9.3 bar inside a slim 6\" or 8\" casing."
+          },
+          {
+            "name": "Integrated discharge non-return valve",
+            "desc": "Opens upward during pumping toward T6 and seals tightly on shutdown to absorb backflow surges."
+          }
+        ]
+      },
+      "nobel_nic": {
+        "title": "T6 · Nobel NIC-K Centrifugal Hydrocyclone Separator",
+        "shortTitle": "T6 · Hydrocyclone Separator",
+        "subtitle": "Hydrodynamic centrifugal sand separation · DN125 · 108 m³/h flow",
+        "tags": [
+          "T6"
+        ],
+        "photo": "nobel_nic",
+        "specs": [
+          "108 m³/h (30 L/s) design flow",
+          "DN125 flanged ports",
+          "Continuous vortex separation"
+        ],
+        "modes": [
+          {
+            "label": "1 · Double-vortex centrifugal separation",
+            "summary": "Entering tangentially at high speed, well water spins downward along the cone: centrifugal force flings dense sand grains against the outer wall so they slide into the bottom chamber, while clean water spirals upward through the centre."
+          },
+          {
+            "label": "2 · Bottom sediment purge",
+            "summary": "Briefly opening the bottom drain valve uses line pressure to flush collected sand from the quiet underflow chamber while uninterrupted supply continues to T7."
+          }
+        ],
+        "parts": [
+          {
+            "name": "Tangential accelerating inlet (DN125)",
+            "desc": "Injects incoming well water along the upper cylinder wall, converting linear flow into a high-speed helical vortex."
+          },
+          {
+            "name": "Converging conical separation barrel",
+            "desc": "As the cone narrows downward, rotational velocity intensifies, multiplying centrifugal g-forces that separate heavy sand and silt."
+          },
+          {
+            "name": "Quiet bottom accumulation chamber",
+            "desc": "Below the cone apex, separated solids settle out of the main vortex stream until purged through the drain valve."
+          },
+          {
+            "name": "Central vortex finder (clean outlet)",
+            "desc": "An inner upward vortex rises along the axis and exits cleanly out the top flange toward the two T7 fine filters."
+          }
+        ]
+      },
+      "nobel_ml": {
+        "title": "T7 · Nobel ML Motorized Self-Cleaning Fine Filters",
+        "shortTitle": "T7 · 100 µm Self-Cleaning Filter",
+        "subtitle": "2 parallel units · 100 µm filtration · DN100 · Automatic ΔP backwash",
+        "tags": [
+          "T7"
+        ],
+        "photo": "nobel_ml",
+        "specs": [
+          "2 × DN100 in parallel (65 m³/h each)",
+          "100 µm stainless screen",
+          "Motorized cleaning under flow"
+        ],
+        "modes": [
+          {
+            "label": "1 · Normal filtration (100 µm)",
+            "summary": "Water passes through the 100-micrometre stainless-steel cylinder screen, capturing fine particles downstream of T6 to protect the narrow brazed-plate channels of PC2."
+          },
+          {
+            "label": "2 · Automatic ΔP motorized flush",
+            "summary": "Once trapped debris raises the pressure drop (ΔP) across the gauges, the controller energises the top gearmotor to rotate internal cleaning brushes while opening the bottom flush valve for a few seconds."
+          }
+        ],
+        "parts": [
+          {
+            "name": "100 µm cylindrical stainless-steel screen",
+            "desc": "Reusable large-area metal mesh element retaining fine sand and scale ahead of the heat-pump plate packs."
+          },
+          {
+            "name": "Inlet/outlet gauges & ΔP switch",
+            "desc": "Monitor upstream versus downstream pressure, triggering a cleaning cycle automatically whenever screen fouling increases ΔP."
+          },
+          {
+            "name": "Top electric gearmotor & rotating brushes",
+            "desc": "Drives the internal shaft to sweep debris off the inner screen surface while clean water continues flowing to PC2."
+          },
+          {
+            "name": "Motorized bottom flush valve",
+            "desc": "Opens in sync with brush rotation to discharge dislodged sediment to drain."
+          }
+        ]
+      },
+      "elbi_dl": {
+        "title": "S4 · ELBI DL 1000 V Replaceable-Bladder Pressure Vessels",
+        "shortTitle": "S4 · 1,000 L Bladder Vessel",
+        "subtitle": "2 × 1,000 L side-branch vessels · 10 bar rating · Water-hammer & pressure cushion",
+        "tags": [
+          "S4"
+        ],
+        "photo": "elbi_dl",
+        "specs": [
+          "2 × 1,000 L (2,000 L total)",
+          "Side-branch T connection",
+          "Replaceable butyl bladder"
+        ],
+        "modes": [
+          {
+            "label": "1 · Surge absorption (gas cushion compression)",
+            "summary": "When borehole pumps start or valves close, the pressure wave enters the bottom T-port, expanding the flexible bladder against the compressible gas cushion above to absorb water hammer."
+          },
+          {
+            "label": "2 · Elastic pressure stabilisation",
+            "summary": "When flow demand rises suddenly, the compressed gas cushion pushes back on the bladder, feeding water smoothly into the header and preventing rapid pump short-cycling."
+          }
+        ],
+        "parts": [
+          {
+            "name": "Pre-charged compressible gas cushion",
+            "desc": "Sealed air/nitrogen volume between the steel shell and the bladder exterior: acts as an elastic pneumatic spring."
+          },
+          {
+            "name": "Full-containment replaceable butyl bladder",
+            "desc": "Isolates the water completely from the painted carbon-steel shell, preventing internal corrosion and gas loss."
+          },
+          {
+            "name": "10 bar vertical steel pressure shell",
+            "desc": "Three-legged structural vessel rated for the maximum operating pressure of the groundwater supply train."
+          },
+          {
+            "name": "Side-branch T hydraulic port",
+            "desc": "Connected laterally off the main header so water enters and leaves the bladder purely in response to pressure transients."
+          }
+        ]
+      },
+      "dab_dcm": {
+        "title": "P04–P09 · DAB DCM-GE / CME Inverter Inline Circulation Pumps",
+        "shortTitle": "P04–P09 · Inverter Inline Pumps",
+        "subtitle": "Single & twin flanged inline circulators with MCE/C drives · Variable Δp modulation",
+        "tags": [
+          "P04",
+          "P05",
+          "P06",
+          "P07",
+          "P08",
+          "P09"
+        ],
+        "photo": "dab_dcm",
+        "specs": [
+          "P07: 66 m³/h · P09: 57 m³/h · P08: 41.2 m³/h",
+          "P04: 32 m³/h · P05: 26 m³/h · P06: 3 m³/h",
+          "Onboard MCE/C frequency converter"
+        ],
+        "modes": [
+          {
+            "label": "1 · Peak building load (100% speed)",
+            "summary": "When many apartment zone valves open simultaneously, header differential pressure drops and the MCE/C inverter ramps impeller speed to deliver full design flow."
+          },
+          {
+            "label": "2 · Part-load inverter trim (50% speed → ~15% kW)",
+            "summary": "As apartments reach setpoint and close their valves, the inverter halves motor RPM: by the centrifugal cubic affinity law, halving speed cuts shaft power to roughly one-seventh."
+          },
+          {
+            "label": "3 · Twin-head alternation & flapper check valve",
+            "summary": "In twin DCM-GE units the two heads alternate duty every 24 hours; an internal flapper valve seals the idle volute automatically to prevent backflow."
+          }
+        ],
+        "parts": [
+          {
+            "name": "Motor-mounted MCE/C inverter drive",
+            "desc": "Continuously modulates electrical frequency (Hz) to hold proportional or constant differential pressure across the building risers."
+          },
+          {
+            "name": "Closed radial centrifugal impeller",
+            "desc": "Draws water axially into the impeller eye and accelerates it outward into the volute casing to build smooth hydraulic head."
+          },
+          {
+            "name": "Collinear inline suction & discharge flanges",
+            "desc": "Inlet and outlet sit on the same straight pipe axis, allowing compact installation directly along plant-room headers."
+          },
+          {
+            "name": "Automatic twin-casing flapper valve",
+            "desc": "Pivots shut across the standby pump throat under discharge pressure from the active pump, providing built-in redundancy."
+          }
+        ]
+      },
+      "dab_evoplus": {
+        "title": "P01 / P02 / P03 · DAB EVOPLUS SAN Wet-Rotor Sanitary Circulators",
+        "shortTitle": "P01–P03 · SAN Wet-Rotor Pump",
+        "subtitle": "Seal-less permanent-magnet ECM circulators · S2 tank charging & ACR stairwell recirculation",
+        "tags": [
+          "P01",
+          "P02",
+          "P03",
+          "ACR"
+        ],
+        "photo": "dab_evoplus",
+        "specs": [
+          "P02 (MP) & P03 (BP): 3.6 m³/h · 0.34 kW",
+          "P01 S2 tank charging: 2 × 16 m³/h",
+          "Corrosion-resistant sanitary body"
+        ],
+        "modes": [
+          {
+            "label": "1 · Continuous ACR riser recirculation (P02 / P03)",
+            "summary": "Using at most 0.34 kW per pressure zone, the pump maintains a gentle 3.6 m³/h loop down the ACR return pipe from the top of the 40 m stairwell riser so 48 °C water stays ready outside every apartment."
+          },
+          {
+            "label": "2 · S2 cylinder charging loop (P01)",
+            "summary": "Draws cooler 55 °C potable water from the bottom of S2 through plate exchanger SC1 and returns 60 °C hot water into the upper cylinder dome."
+          }
+        ],
+        "parts": [
+          {
+            "name": "Hermetic stainless-steel rotor can",
+            "desc": "A thin non-magnetic stainless sleeve isolates the dry electrical stator windings from the wet rotor chamber, eliminating shaft mechanical seals."
+          },
+          {
+            "name": "Water-immersed permanent-magnet rotor",
+            "desc": "Spins directly inside the pumped potable water, which silently lubricates ceramic bearings and removes rotor heat."
+          },
+          {
+            "name": "High-efficiency ECM electronic stator",
+            "desc": "Drives the rotor magnetically across the stainless can with variable speed control for low 24/7 energy consumption."
+          },
+          {
+            "name": "Potable-grade SAN hydraulic housing",
+            "desc": "Uses bronze/stainless alloys engineered for continuous contact with oxygenated hot drinking water."
+          }
+        ]
+      },
+      "spade_ambra": {
+        "title": "T1 · Spadeitalia AMBRA Quartz-Bed Clarifying Filter",
+        "shortTitle": "T1 · AMBRA Quartz Filter",
+        "subtitle": "Potable mains intake · 50 µm deep granular quartz-sand bed · 66 m³/h duty (DN100)",
+        "tags": [
+          "T1",
+          "AFP"
+        ],
+        "photo": "spade_ambra",
+        "specs": [
+          "AMBRA DN100 vessel (90 m³/h catalogue)",
+          "66 m³/h project design flow",
+          "~50 µm deep-bed filtration"
+        ],
+        "modes": [
+          {
+            "label": "1 · Top-down service filtration",
+            "summary": "Incoming city mains water enters the upper diffuser dome and percolates downward through a deep bed of pure quartz sand, trapping rust and suspended silt ~50 µm before clean water exits through the lower nozzle plate toward S1."
+          },
+          {
+            "label": "2 · Bottom-up fluidised backwash",
+            "summary": "Periodically reversing flow upward lifts and fluidises the sand grains, scrubbing trapped turbidity loose and flushing it out the upper backwash drain to restore clean bed permeability."
+          }
+        ],
+        "parts": [
+          {
+            "name": "Upper inlet distribution dome",
+            "desc": "Spreads incoming mains flow evenly across the vessel cross-section so the sand surface remains level."
+          },
+          {
+            "name": "Deep graded quartz-sand filtration bed",
+            "desc": "Captures fine suspended solids throughout the full depth of the granular bed with high dirt-holding capacity."
+          },
+          {
+            "name": "Coarse lower support gravel layer",
+            "desc": "Stabilises the fine quartz media above and distributes upward backwash water uniformly."
+          },
+          {
+            "name": "Slotted collector nozzle plate",
+            "desc": "Fitted with fine-slotted strainers narrower than the sand grains, passing clarified potable water to S1 while retaining all filter media."
+          }
+        ]
+      },
+      "dab_nkve": {
+        "title": "GP1 / GP2 · DAB 2 × NKVE Variable-Speed Booster Sets",
+        "shortTitle": "GP1/GP2 · NKVE Booster Skid",
+        "subtitle": "Fed by 2 × 2,000 L S1 break tanks · GP1 Medium Pressure (7.3 bar) · GP2 Low Pressure (4.3 bar)",
+        "tags": [
+          "GP1",
+          "GP2",
+          "S1",
+          "AFP"
+        ],
+        "photo": "dab_nkve",
+        "specs": [
+          "GP1 (MP): 34 m³/h · 2 × 7.5 kW",
+          "GP2 (BP): 37 m³/h · 2 × 5.5 kW",
+          "2 × 2,000 L S1 break tanks upstream"
+        ],
+        "modes": [
+          {
+            "label": "1 · Normal draw-off (1 pump modulating)",
+            "summary": "Drawing from atmospheric S1 tanks, one vertical NKVE multistage pump varies RPM via its MCE/P inverter and manifold pressure transducer to hold steady tap pressure across floors."
+          },
+          {
+            "label": "2 · Morning/evening peak (2 pumps in cascade)",
+            "summary": "When simultaneous apartment demand brings the lead pump to 100% speed, the second NKVE inverter ramps in smoothly in parallel to double flow capacity at constant pressure."
+          }
+        ],
+        "parts": [
+          {
+            "name": "Upstream S1 break tanks (2 × 2,000 L)",
+            "desc": "Decouple booster suction from public water-main pressure fluctuations and buffer instantaneous peak draw-offs."
+          },
+          {
+            "name": "Vertical multistage stainless NKVE stack",
+            "desc": "Multiple stainless impellers stacked on one vertical shaft generate high pressure (7–9+ bar for upper MP floors) on a compact footprint."
+          },
+          {
+            "name": "Cascaded MCE/P frequency inverters",
+            "desc": "Communicate to alternate lead/lag duty and modulate motor speed from live manifold pressure-transducer feedback."
+          },
+          {
+            "name": "Stainless manifolds, check valves & diaphragm vessels",
+            "desc": "Combine pump outputs cleanly and hold line pressure at zero night draw-off so motors can enter full sleep mode."
+          }
+        ]
+      },
+      "spade_corallo": {
+        "title": "T2 · Spadeitalia CORALLO 23 CLK Volumetric Ion-Exchange Softeners",
+        "shortTitle": "T2 · CORALLO Water Softener",
+        "subtitle": "2 dedicated DHW make-up units (1 MP + 1 BP) · Scale protection for SC1 & S2",
+        "tags": [
+          "T2",
+          "T3",
+          "T4"
+        ],
+        "photo": "spade_corallo",
+        "specs": [
+          "2 independent units (MP & BP)",
+          "CLK volumetric turbine valve",
+          "Cation resin vessel + brine tank"
+        ],
+        "modes": [
+          {
+            "label": "1 · Service softening (Ca²⁺ / Mg²⁺ ion exchange)",
+            "summary": "Hard cold water feeding the hot-water system percolates through food-grade resin beads charged with Sodium ions (Na⁺): the beads capture scale-forming Calcium (Ca²⁺) and Magnesium (Mg²⁺) ions and release soluble Na⁺ in exchange."
+          },
+          {
+            "label": "2 · Metered brine regeneration (NaCl)",
+            "summary": "After treating the programmed water volume, the CLK valve draws concentrated salt brine (NaCl) from the white side tank, flushing captured Ca²⁺/Mg²⁺ to drain and recharging the resin beads with Na⁺."
+          }
+        ],
+        "parts": [
+          {
+            "name": "CLK volumetric electronic control valve",
+            "desc": "Uses an internal turbine meter to track actual cubic metres softened, regenerating strictly on real water consumption."
+          },
+          {
+            "name": "FRP pressure vessel with cation-exchange resin",
+            "desc": "Contains micro-spherical polymer beads that prevent limescale crust from forming on the 70 °C plates of SC1 and inside S2."
+          },
+          {
+            "name": "Polyethylene salt-brine tank",
+            "desc": "Dissolves tablet salt into saturated NaCl brine used during the brief regeneration rinse cycle (rinse water goes entirely to drain)."
+          },
+          {
+            "name": "Residual-hardness blending & T3 / T4 dosing",
+            "desc": "Maintains optimal residual hardness to protect pipework, paired with downstream anti-Legionella (T3) and anti-corrosion (T4) dosing stations."
+          }
+        ]
+      },
+      "dab_micra": {
+        "title": "P12 · Rainwater Harvesting & DAB MICRA HS + Active Driver",
+        "shortTitle": "P12 · MICRA HS Rainwater Pump",
+        "subtitle": "3.5 m³ underground rainwater tank · 3\" high-speed (130 Hz) borehole pump · Garden irrigation",
+        "tags": [
+          "P12"
+        ],
+        "photo": "dab_micra",
+        "specs": [
+          "4 m³/h flow · 480 kPa head",
+          "3,500 L rainwater cistern",
+          "Isolated from potable water"
+        ],
+        "modes": [
+          {
+            "label": "1 · Landscape irrigation from harvested rain",
+            "summary": "Opening garden sprinklers drops line pressure: the inline Active Driver inverter accelerates the slim 3\" MICRA HS pump up to 130 Hz (~7,600 rpm) to deliver steady 4.8 bar pressure from stored rainwater."
+          },
+          {
+            "label": "2 · Low-water protection & backup make-up",
+            "summary": "During dry spells a low-level sensor protects the pump from dry running and enables auxiliary make-up from the non-potable groundwater line."
+          }
+        ],
+        "parts": [
+          {
+            "name": "3.5 m³ rainwater cistern & leaf pre-filter",
+            "desc": "Collects roof/court runoff underground away from sunlight, conserving treated drinking water."
+          },
+          {
+            "name": "3\" high-speed submersible MICRA HS 4/4",
+            "desc": "Driven at up to 130 Hz—more than twice standard 50 Hz mains speed—developing 48 m of head inside a compact 74 mm diameter body."
+          },
+          {
+            "name": "Water-cooled Active Driver Plus inverter",
+            "desc": "Combines flow switch, pressure sensor and variable-frequency drive cooled directly by the water flowing through its body."
+          },
+          {
+            "name": "Physical separation from potable water",
+            "desc": "Operates on dedicated irrigation piping kept strictly separate from the AFP drinking-water network."
+          }
+        ]
+      },
+      "plate_hx": {
+        "title": "SC1 & SC2 · Counter-Current Corrugated Plate Heat Exchangers",
+        "shortTitle": "SC1/SC2 · Plate Exchangers",
+        "subtitle": "High-efficiency heat transfer with complete fluid and hydrostatic-pressure isolation",
+        "tags": [
+          "SC1",
+          "SC2",
+          "AP"
+        ],
+        "specs": [
+          "SC2 high-zone break: 231 / 240 kW",
+          "2 × SC1 sanitary: 90 kW each",
+          "Alternating counter-current channels"
+        ],
+        "modes": [
+          {
+            "label": "1 · SC2 · High-rise hydrostatic pressure break (AP)",
+            "summary": "Water columns rising to the top floors of Towers A & B create high static head. SC2 isolates that high-pressure loop (P09) from the plant-room loop (P08) so heating and cooling cross the thin stainless plates while shielding PC2 and S3 from tower head."
+          },
+          {
+            "label": "2 · SC1 · Sanitary isolation (70/65 °C ↔ 60/55 °C)",
+            "summary": "Closed technical water from PC1 flows down the odd channels (70 → 65 °C) while potable water driven by P01 rises in counter-current through the even channels (55 → 60 °C) to charge S2."
+          }
+        ],
+        "parts": [
+          {
+            "name": "Herringbone-corrugated 0.5 mm stainless plates",
+            "desc": "Pressed chevrons induce strong micro-turbulence across a large surface area, achieving very high heat-transfer coefficients in a compact frame."
+          },
+          {
+            "name": "Sealed alternating odd / even fluid channels",
+            "desc": "Perimeter port rings direct Fluid A strictly into odd inter-plate gaps and Fluid B into adjacent even gaps with zero cross-mixing."
+          },
+          {
+            "name": "Pure counter-current temperature approach",
+            "desc": "Running the two streams in opposite directions maintains a uniform temperature difference along the plate height, allowing close temperature approach."
+          },
+          {
+            "name": "Differential-pressure & hygiene barrier",
+            "desc": "Corrugated contact points support high pressure differentials between independent hydraulic circuits."
+          }
+        ]
+      },
+      "dhw_storage": {
+        "title": "S2, Mixers & S3 · Stratified DHW Cylinders, 48 °C Thermostatic Mixing & Buffers",
+        "shortTitle": "S2/S3 · Cylinders & Mixer",
+        "subtitle": "2 × 3,000 L S2 at 60 °C + Anti-scald 48 °C mixers + 4 × 2,000 L parallel S3 thermal buffers",
+        "tags": [
+          "S2",
+          "S3",
+          "ACP",
+          "ACR"
+        ],
+        "specs": [
+          "2 × 3,000 L S2 cylinders (10 bar)",
+          "48 °C tempered ACP outlet",
+          "4 × 2,000 L S3 buffers (6 bar)"
+        ],
+        "modes": [
+          {
+            "label": "1 · S2 stratification (60 °C) + 48 °C thermostatic mixer",
+            "summary": "Buoyant 60 °C potable water stratifies in the upper dome of S2 for thermal hygiene while 15 °C cold make-up enters gently at the bottom. Downstream, a wax-element thermostatic valve blends 60 °C water with ACR return and cold AFP to hold a steady 48 °C supply."
+          },
+          {
+            "label": "2 · Parallel supply-side S3 thermal buffers",
+            "summary": "In both the HVAC loop and the 40/35 °C intermediate loop, two 2,000 L S3 vessels sit in parallel on the supply header while return water bypasses directly back to PC2, adding thermal inertia that smooths compressor staging."
+          }
+        ],
+        "parts": [
+          {
+            "name": "Buoyancy thermal stratification inside S2",
+            "desc": "A lower inlet diffuser calms incoming 15 °C mains water so it lifts the 60 °C hot zone upward while preserving a sharp thermocline."
+          },
+          {
+            "name": "P01 side-charging loop from SC1",
+            "desc": "Draws cooler bottom layers out to SC1 and returns 60 °C water near the top dome until all 3,000 L are charged."
+          },
+          {
+            "name": "Wax-capsule thermostatic mixing element (48 °C)",
+            "desc": "A temperature-sensitive wax actuator expands immediately if outlet temperature rises above 48 °C, throttling the 60 °C port and opening the cold port for anti-scald safety."
+          },
+          {
+            "name": "Parallel S3 supply header arrangement",
+            "desc": "Splitting supply flow across twin 2,000 L vessels halves internal velocity and buffers compressor staging transients."
+          }
+        ]
+      },
+      "radiant_module": {
+        "title": "BP / AP · Apartment User Satellite, Radiant Floor Panels & Dehumidifier",
+        "shortTitle": "BP/AP · Apartment Module & Floor",
+        "subtitle": "M-bus energy metering · Local mixing valve · Reversible heating/cooling floor coil",
+        "tags": [
+          "BP",
+          "AP",
+          "ACP"
+        ],
+        "specs": [
+          "Winter: 42 °C riser → 38/33 °C floor",
+          "Summer: 13 °C riser → 18/23 °C floor",
+          "M-bus meters + Dehumidifier"
+        ],
+        "modes": [
+          {
+            "label": "1 · Winter radiant floor heating (38 → 33 °C)",
+            "summary": "When the room thermostat calls for heat, the 2-way zone valve opens the 42 °C building riser, the local mixing valve tempers supply to 38 °C, and the apartment circulator drives warm water through the floor screed loops."
+          },
+          {
+            "label": "2 · Summer radiant cooling + Dew-point control (18 → 23 °C)",
+            "summary": "In summer 13 °C chilled water from the riser feeds the apartment dehumidifier coil directly to dry indoor air, while the local mixing valve tempers floor water up to 18 °C so floor surfaces remain dry above the dew point."
+          }
+        ],
+        "parts": [
+          {
+            "name": "M-bus thermal & domestic water meters",
+            "desc": "Measure apartment flow and supply/return ΔT for heating and cooling plus domestic water draw-off via centralized digital M-bus readout."
+          },
+          {
+            "name": "Local apartment mixing valve & circulator",
+            "desc": "Produces two tailored temperatures from one building riser: 13 °C water for latent dehumidification in summer and 18 °C water for condensation-free floors."
+          },
+          {
+            "name": "Screed-embedded serpentine radiant loops",
+            "desc": "Using the entire floor surface as a gentle emitter allows heating with 38 °C water, maximising heat-pump efficiency."
+          },
+          {
+            "name": "Dedicated apartment dehumidifier",
+            "desc": "Removes summer indoor humidity to lower the dew point and ensure crisp radiant cooling comfort."
+          }
+        ]
+      }
+    }
+  },
+  "zh": {
+    "ui": {
+      "openMachineBtn": "⚙ 内部工作原理",
+      "backToMapBtn": "◀ 返回总览图",
+      "backToCardBtn": "↩ 返回简介卡片",
+      "partsTitle": "内部核心部件（点击剖面图或下方标签）：",
+      "specsTitle": "本公寓设计参数：",
+      "photoPreviewBtn": "📷 查看设备实物图",
+      "cutawayPreviewBtn": "⚙ 返回动画剖面图",
+      "machineSelectLabel": "设备："
+    },
+    "items": {
+      "hiref_msw": {
+        "title": "PC2 · HiRef MSW182ML 多功能水源热泵机组",
+        "shortTitle": "PC2 · MSW 多功能热泵",
+        "subtitle": "2 台并联 · 单台制热 260.4 kW / 制冷 233.3 kW · 三组独立水换热器",
+        "tags": [
+          "PC2"
+        ],
+        "photo": "hiref_msw",
+        "specs": [
+          "2 × MSW182ML 并联运行",
+          "双涡旋压缩机组合",
+          "3 组不锈钢板式换热器"
+        ],
+        "modes": [
+          {
+            "label": "1 · 冬季供暖模式",
+            "summary": "低压制冷剂在井水侧板换中吸热沸腾（井水 16 → 11 °C），经涡旋压缩机升温升压后，在楼宇侧板换中冷凝放热（循环水 40 → 45 °C）。"
+          },
+          {
+            "label": "2 · 夏季制冷模式",
+            "summary": "传热方向反转：来自地板回水的热量使制冷剂蒸发吸热，高温制冷剂蒸汽则在井水侧冷凝器中将热量排入地下水（16 → 21 °C）。"
+          },
+          {
+            "label": "3 · 夏季制冷 + 40/35 °C 热回收",
+            "summary": "压缩后的高温制冷剂气体进入第三组专用板式换热器，把从住户室内抽出的热量直接回收至 40 °C 中间环路供给 PC1。"
+          }
+        ],
+        "parts": [
+          {
+            "name": "井水侧钎焊不锈钢板式换热器",
+            "desc": "经 T7 精细过滤的地下水与密封制冷剂逆流换热：冬季作为蒸发器取热，夏季作为排热冷凝器。"
+          },
+          {
+            "name": "双联涡旋压缩机（Tandem Scroll）",
+            "desc": "定涡旋盘与偏心公转的动涡旋盘相互啮合，将气态制冷剂月牙形气腔逐级推向中心压缩，提升压力与温度。"
+          },
+          {
+            "name": "楼宇空调侧板式换热器",
+            "desc": "向连接 S3 缓冲箱及 P06、P07、SC2 支路的闭式空调水传递冷热量，制冷剂始终密封在铜管回路中。"
+          },
+          {
+            "name": "电子膨胀阀（EEV）与 40/35 °C 热回收板换",
+            "desc": "步进电机精准调节节流针阀开度使高压液体闪蒸降温；第三组换热器专门为 PC1 提供 40 °C 预热水源。"
+          }
+        ]
+      },
+      "hiref_ksw": {
+        "title": "PC1 · HiRef 30KSW202K 高温水源热泵机组",
+        "shortTitle": "PC1 · KSW 高温热泵",
+        "subtitle": "二级升温热泵 · 40/35 °C 中温水源 → 70/65 °C 高温一次水 · 180.5 kW",
+        "tags": [
+          "PC1",
+          "P04",
+          "P05"
+        ],
+        "photo": "hiref_ksw",
+        "specs": [
+          "制热功率 180.5 kW",
+          "40 → 35 °C 预热进水",
+          "70 °C 高温出水供 2 × SC1"
+        ],
+        "modes": [
+          {
+            "label": "1 · 双级接力升温（40 → 70 °C）",
+            "summary": "依托中间环路已有的 40 °C 温水，制冷剂可在较高压力下蒸发（约 32 °C），以较小的压缩比高效输出 70 °C 热水（COP 约 4.9）。"
+          },
+          {
+            "label": "2 · 部分负荷单机卸载调节",
+            "summary": "当其中一座 S2 储水罐已充热至 60 °C 时，一台涡旋压缩机自动卸载，电耗减半并维持 70 °C 恒定出水。"
+          }
+        ],
+        "parts": [
+          {
+            "name": "中温水源蒸发器（P05 侧）",
+            "desc": "接收来自中间缓冲罐 S3 的 40 °C 循环水并降温至 35 °C 返回，保持高吸气密度。"
+          },
+          {
+            "name": "耐高压双涡旋压缩机",
+            "desc": "专为 75–80 °C 高冷凝温度设计，借助 PC2 第一级预热实现高效率运行。"
+          },
+          {
+            "name": "70/65 °C 高温冷凝器（P04 侧）",
+            "desc": "高温制冷剂蒸汽向 P04（32 m³/h）驱动的闭式一次水放热，输出 70 °C 热水供给两组生活热水板换 SC1。"
+          },
+          {
+            "name": "电子膨胀节流与过热度控制",
+            "desc": "在两座 3,000 L 储水罐充热温差变化过程中实时精准调节制冷剂流量。"
+          }
+        ]
+      },
+      "dab_ss6": {
+        "title": "P11 / P10 · DAB SS6 / SS8 深井多级不锈钢潜水电泵",
+        "shortTitle": "P11/P10 · 深井多级潜水泵",
+        "subtitle": "主井 P1（2 × P11 各 54 m³/h）+ 备用井 P2（1 × P10 达 108 m³/h）· 扬程 930 kPa",
+        "tags": [
+          "P11",
+          "P10",
+          "P1",
+          "P2"
+        ],
+        "photo": "dab_ss6",
+        "specs": [
+          "P1 主井：2 × 22 kW（各 54 m³/h）",
+          "P2 备用井：1 × 37 kW（108 m³/h）",
+          "AISI 304 不锈钢 · 扬程 93 米"
+        ],
+        "modes": [
+          {
+            "label": "1 · 抽水运行（多级叶轮串联增压）",
+            "summary": "16 °C 地下水穿过井壁滤水管进入井筒，先流经底部 TR 潜水电机外壁带走电机热量，再经不锈钢滤网进入多级混流叶轮逐级增压上升。"
+          },
+          {
+            "label": "2 · 停机保压与顶部止回阀闭锁",
+            "summary": "水泵停机瞬间，泵头内置止回阀在立管水柱重力下立即关闭，保持管路满水并防止叶轮反转。"
+          }
+        ],
+        "parts": [
+          {
+            "name": "底部 TR 可重绕水冷潜水电机",
+            "desc": "布置在叶轮组下方：被吸入的井水沿电机外壳流过，冷却定子绕组后再进入吸入口。"
+          },
+          {
+            "name": "不锈钢吸入滤网与水润滑轴承",
+            "desc": "滤网阻挡大颗粒砂石；轴系采用带排砂槽的水润滑橡胶轴承，允许微量细砂随水流排出。"
+          },
+          {
+            "name": "串联多级混流叶轮与导叶壳",
+            "desc": "每一级旋转叶轮赋予水动能，固定导叶将其转化为静压能；多级串联在细长井筒内即可产生 9.3 bar 高扬程。"
+          },
+          {
+            "name": "出口内置止回阀",
+            "desc": "抽水时向上顶开送往 T6，停泵时自动严密闭合消除回流水锤。"
+          }
+        ]
+      },
+      "nobel_nic": {
+        "title": "T6 · Nobel NIC-K 离心旋流除砂器（水力旋流器）",
+        "shortTitle": "T6 · 离心旋流除砂器",
+        "subtitle": "水力涡流离心除砂 · DN125 · 设计流量 108 m³/h",
+        "tags": [
+          "T6"
+        ],
+        "photo": "nobel_nic",
+        "specs": [
+          "设计流量 108 m³/h (30 L/s)",
+          "DN125 法兰接口",
+          "连续双涡流离心分离"
+        ],
+        "modes": [
+          {
+            "label": "1 · 双涡流离心除砂运行",
+            "summary": "井水沿切线方向高速射入上筒体形成向下旋转的外涡流：较重的砂粒在离心力作用下贴着锥壁滑入底部集砂腔，净水则在中心形成内涡流向上排出。"
+          },
+          {
+            "label": "2 · 底部集砂室定期排污",
+            "summary": "短暂开启底部排砂阀，依靠系统自身水压即可将沉积在静水集砂室内的泥沙冲出，同时持续向 T7 供水。"
+          }
+        ],
+        "parts": [
+          {
+            "name": "切向加速进水口（DN125）",
+            "desc": "引导井水贴着筒体内壁切向进入，将直线流速转化为强烈旋转涡流。"
+          },
+          {
+            "name": "渐缩圆锥分离段",
+            "desc": "锥体向下逐渐收窄使旋转角速度倍增，产生强大离心加速度分离重质泥沙。"
+          },
+          {
+            "name": "底部静水沉砂收集腔",
+            "desc": "位于锥底下方，使已分离的砂粒脱离主涡流安静沉积，等待定期排污。"
+          },
+          {
+            "name": "中心溢流升管（净水出口）",
+            "desc": "脱除重砂后的洁净井水沿轴心内涡流上升，从顶部出口送往两台 T7 精细过滤器。"
+          }
+        ]
+      },
+      "nobel_ml": {
+        "title": "T7 · Nobel ML 电动自清洗精细过滤器",
+        "shortTitle": "T7 · 100 µm 自清洗过滤器",
+        "subtitle": "2 台并联 · 过滤精度 100 µm · DN100 · 压差 ΔP 自动排污",
+        "tags": [
+          "T7"
+        ],
+        "photo": "nobel_ml",
+        "specs": [
+          "2 × DN100 并联（各 65 m³/h）",
+          "100 微米不锈钢滤筒",
+          "在线电动刷洗不断流"
+        ],
+        "modes": [
+          {
+            "label": "1 · 正常精细过滤（100 µm）",
+            "summary": "水流穿过多孔不锈钢圆筒滤网（0.1 mm 孔径），拦截 T6 之后残留的细小颗粒，保护 PC2 板式换热器的精密流道。"
+          },
+          {
+            "label": "2 · 压差 ΔP 触发自动刷洗排污",
+            "summary": "当滤网内壁积垢导致进出水压差（ΔP）升高时，电控箱启动顶部减速电机带动内部毛刷旋转刮垢，同时打开底部排污阀数秒钟排走污物。"
+          }
+        ],
+        "parts": [
+          {
+            "name": "100 µm 圆柱形不锈钢滤网筒",
+            "desc": "高强度可反复再生金属滤网，有效拦截细砂与水垢颗粒。"
+          },
+          {
+            "name": "进出水压力表与压差开关（ΔP）",
+            "desc": "实时监测滤网前后压降，达到设定压差即自动启动清洗程序。"
+          },
+          {
+            "name": "顶部电动减速机与旋转清扫刷",
+            "desc": "驱动中心轴旋转清扫滤筒内壁，清洗期间主机组供水保持连续。"
+          },
+          {
+            "name": "底部自动排污阀",
+            "desc": "与旋转刷联动开启，将剥离的杂质快速排入排水沟。"
+          }
+        ]
+      },
+      "elbi_dl": {
+        "title": "S4 · ELBI DL 1000 V 可更换隔膜稳压缓冲罐",
+        "shortTitle": "S4 · 1,000 L 隔膜稳压罐",
+        "subtitle": "2 座 1,000 L 旁路三通连接 · 额定压力 10 bar · 吸收水锤与稳定井水压力",
+        "tags": [
+          "S4"
+        ],
+        "photo": "elbi_dl",
+        "specs": [
+          "2 × 1,000 L（共 2,000 L）",
+          "主干管旁路 T 形接入",
+          "食品级可更换丁基胶囊"
+        ],
+        "modes": [
+          {
+            "label": "1 · 水锤峰值吸收（气垫压缩）",
+            "summary": "深井泵启停或阀门切换产生压力波时，水流从底部三通涌入橡胶囊使其膨胀，压缩罐顶预充气垫，如同空气弹簧般平抑水锤冲击。"
+          },
+          {
+            "label": "2 · 压力补偿与平稳释放",
+            "summary": "当管路流量需求瞬间增大时，受压气垫回推橡胶囊向主管补水，减少潜水泵频繁启停。"
+          }
+        ],
+        "parts": [
+          {
+            "name": "顶部预充可压缩气室",
+            "desc": "钢壳与橡胶囊外壁之间的密封气体层：利用气体的弹性吸收管路压力波动。"
+          },
+          {
+            "name": "全封闭可更换丁基橡胶囊",
+            "desc": "将井水完全包裹在囊内，隔离碳钢罐壁以防内部锈蚀和气体流失。"
+          },
+          {
+            "name": "10 bar 立式承压钢罐体",
+            "desc": "带三脚支座的厚壁钢制容器，承受地下水干管最高工作压力。"
+          },
+          {
+            "name": "旁路三通水力接口",
+            "desc": "以单口支管并联在过滤干管侧面，随管网压力瞬态变化自动吞吐水量。"
+          }
+        ]
+      },
+      "dab_dcm": {
+        "title": "P04–P09 · DAB DCM-GE / CME 立式管道变频循环泵",
+        "shortTitle": "P04–P09 · 变频管道循环泵",
+        "subtitle": "单头及双联法兰管道泵配 MCE/C 变频器 · 变压差 Δp 智能调速",
+        "tags": [
+          "P04",
+          "P05",
+          "P06",
+          "P07",
+          "P08",
+          "P09"
+        ],
+        "photo": "dab_dcm",
+        "specs": [
+          "P07: 66 m³/h · P09: 57 m³/h · P08: 41.2 m³/h",
+          "P04: 32 m³/h · P05: 26 m³/h · P06: 3 m³/h",
+          "电机顶置 MCE/C 变频器"
+        ],
+        "modes": [
+          {
+            "label": "1 · 高峰满负荷运行（100% 转速）",
+            "summary": "当众多住户同时开启空调分户阀时，干管压差下降，变频器自动提升叶轮转速以输出完整设计流量。"
+          },
+          {
+            "label": "2 · 部分负荷变频降速（50% 转速 → 约 15% 电耗）",
+            "summary": "当半数房间达到设定温度关闭阀门后，变频器将转速降至一半：根据离心泵三次方相似定律，转速减半可大幅降低轴功率。"
+          },
+          {
+            "label": "3 · 双联泵轮换与止回翻板阀",
+            "summary": "DCM-GE 双联泵每 24 小时自动交替主备运行；蜗壳汇合处的自动翻板止回阀在水流推力下封闭备用泵流道，防止内部回流。"
+          }
+        ],
+        "parts": [
+          {
+            "name": "车载 MCE/C 变频控制器",
+            "desc": "直接安装在电机顶部，连续调节供电频率（Hz）以维持恒定或比例压差。"
+          },
+          {
+            "name": "闭式径向离心叶轮",
+            "desc": "水流从叶轮中心轴向吸入并沿径向甩入蜗壳，平稳转化为管网扬程。"
+          },
+          {
+            "name": "同轴直线进出法兰（In-line）",
+            "desc": "进水口与出水口位于同一直线上，可直接串联安装在机房分集水器管路上。"
+          },
+          {
+            "name": "双联泵自动隔断翻板阀",
+            "desc": "运行泵的水压自动将翻板压向停机泵出口，实现热备冗余切换。"
+          }
+        ]
+      },
+      "dab_evoplus": {
+        "title": "P01 / P02 / P03 · DAB EVOPLUS SAN 卫生级湿转子电子循环泵",
+        "shortTitle": "P01–P03 · SAN 湿转子循环泵",
+        "subtitle": "密封屏蔽式永磁同步电机 · S2 储水罐充热与 ACR 楼梯间热水立管回水",
+        "tags": [
+          "P01",
+          "P02",
+          "P03",
+          "ACR"
+        ],
+        "photo": "dab_evoplus",
+        "specs": [
+          "P02 (MP) 与 P03 (BP)：3.6 m³/h · 0.34 kW",
+          "P01 充热循环泵：2 × 16 m³/h",
+          "耐溶解氧腐蚀卫生级泵体"
+        ],
+        "modes": [
+          {
+            "label": "1 · 楼梯间 ACR 保温微循环（P02 / P03）",
+            "summary": "每个压力分区最大仅耗电 0.34 kW，维持 3.6 m³/h 的温和流量使 40 米高楼梯间立管内的热水经 ACR 回到混水阀与 S2，确保高层住户打开龙头即出 48 °C 热水。"
+          },
+          {
+            "label": "2 · S2 储水罐快速充热（P01）",
+            "summary": "从 S2 罐底抽出 55 °C 较冷饮用水送入 SC1 加热至 60 °C 后送回罐顶，直至 3,000 L 储水全部充热。"
+          }
+        ],
+        "parts": [
+          {
+            "name": "不锈钢密封屏蔽套",
+            "desc": "超薄无磁不锈钢套筒将外部干燥定子绕组与内部过水转子腔严密隔绝，省去易磨损的旋转轴封。"
+          },
+          {
+            "name": "浸没于水中的永磁转子",
+            "desc": "转子直接浸泡在输送的热水中旋转，依靠水流自动润滑陶瓷轴承并带走热量，运行静音。"
+          },
+          {
+            "name": "高能效 ECM 电子换向定子",
+            "desc": "隔着不锈钢屏蔽套产生变频旋转磁场驱动转子，适合全天候连续低功耗运行。"
+          },
+          {
+            "name": "SAN 饮用水级耐蚀泵壳",
+            "desc": "采用青铜/不锈钢材质制造，耐受富含溶解氧的热自来水并符合饮用卫生标准。"
+          }
+        ]
+      },
+      "spade_ambra": {
+        "title": "T1 · Spadeitalia AMBRA 石英砂深层澄清过滤器",
+        "shortTitle": "T1 · AMBRA 石英砂过滤器",
+        "subtitle": "市政自来水总进水 · 50 µm 多层石英砂深床过滤 · 设计流量 66 m³/h (DN100)",
+        "tags": [
+          "T1",
+          "AFP"
+        ],
+        "photo": "spade_ambra",
+        "specs": [
+          "AMBRA DN100 罐体（样本额定 90 m³/h）",
+          "项目设计流量 66 m³/h",
+          "过滤精度约 50 µm"
+        ],
+        "modes": [
+          {
+            "label": "1 · 自上而下正常深层过滤",
+            "summary": "市政自来水经顶部布水罩均匀散开，向下渗透穿过厚实的精选石英砂层：铁锈与悬浮泥沙被截留在砂粒缝隙深处，清澈饮用水经底部水帽板流入 S1 储水箱。"
+          },
+          {
+            "label": "2 · 自下而上反冲洗再生",
+            "summary": "定期切换流向使水流自下而上反冲，石英砂床受水流托举膨胀流化、颗粒相互摩擦剥离污物并随上部排污口冲走，恢复洁净滤床。"
+          }
+        ],
+        "parts": [
+          {
+            "name": "顶部均匀布水扩散罩",
+            "desc": "消减进水冲击力并将水流平铺至整个横截面，保持砂面平整。"
+          },
+          {
+            "name": "精选多层石英砂滤床",
+            "desc": "利用整个砂层厚度进行三维深层截污，纳污量大且压损小。"
+          },
+          {
+            "name": "底部粗砾石承托层",
+            "desc": "铺设在最下方的粗粒径砾石稳固支撑细石英砂，并使反洗水流分布均匀。"
+          },
+          {
+            "name": "精密缝隙滤水帽底板",
+            "desc": "密布窄缝滤水帽，缝隙小于砂粒直径：顺畅输出净水至 S1 同时完整保留石英砂。"
+          }
+        ]
+      },
+      "dab_nkve": {
+        "title": "GP1 / GP2 · DAB 2 × NKVE 立式多级变频恒压供水机组",
+        "shortTitle": "GP1/GP2 · NKVE 变频增压组",
+        "subtitle": "由 2 × 2,000 L S1 断流水箱供水 · GP1 中压区 (7.3 bar) · GP2 低压区 (4.3 bar)",
+        "tags": [
+          "GP1",
+          "GP2",
+          "S1",
+          "AFP"
+        ],
+        "photo": "dab_nkve",
+        "specs": [
+          "GP1 (MP 高层)：34 m³/h · 2 × 7.5 kW",
+          "GP2 (BP 中低层)：37 m³/h · 2 × 5.5 kW",
+          "前置 2 × 2,000 L S1 储水罐"
+        ],
+        "modes": [
+          {
+            "label": "1 · 日常中小流量（单泵变频恒压）",
+            "summary": "从常压断流水箱 S1 吸水，一台立式多级 NKVE 水泵根据出水总管压力传感器信号实时调节转速，保持各楼层龙头水压恒定。"
+          },
+          {
+            "label": "2 · 早晚用水高峰（双泵并联接力）",
+            "summary": "当多户同时用水使主泵达到满转时，第二台 NKVE 变频器平滑并网投入，流量翻倍而管网水压保持稳定。"
+          }
+        ],
+        "parts": [
+          {
+            "name": "前置 S1 常压断流储水罐（2 × 2,000 L）",
+            "desc": "将增压泵吸入口与市政管网解耦，并为早晚瞬时用水高峰提供充足缓冲储水。"
+          },
+          {
+            "name": "NKVE 立式多级不锈钢叶轮柱",
+            "desc": "同轴垂直串联多级不锈钢离心叶轮，紧凑占地即可产生 7–9 bar 以上高压送达高层住户。"
+          },
+          {
+            "name": "主备联控 MCE/P 变频器组",
+            "desc": "双机通讯自动轮换主泵角色，依据压力变送器反馈闭环调速。"
+          },
+          {
+            "name": "不锈钢总管、止回阀与稳压小罐",
+            "desc": "夜间零用水时维持管网静压，使两台变频泵进入休眠待机状态。"
+          }
+        ]
+      },
+      "spade_corallo": {
+        "title": "T2 · Spadeitalia CORALLO 23 CLK 流量型离子交换软水器",
+        "shortTitle": "T2 · CORALLO 全自动软水器",
+        "subtitle": "2 套独立生活热水补水软化（MP 与 BP 各一）· 防止 SC1 与 S2 结水垢",
+        "tags": [
+          "T2",
+          "T3",
+          "T4"
+        ],
+        "photo": "spade_corallo",
+        "specs": [
+          "MP / BP 双支路独立配置",
+          "CLK 涡轮流量控制阀头",
+          "食品级阳离子树脂罐 + 盐箱"
+        ],
+        "modes": [
+          {
+            "label": "1 · 正常软化制水（Ca²⁺ / Mg²⁺ 离子交换）",
+            "summary": "流向热水系统的冷水穿过富含钠离子（Na⁺）的树脂微球层：树脂吸附易结垢的钙离子（Ca²⁺）与镁离子（Mg²⁺），置换出可溶性钠离子以保护高温换热器。"
+          },
+          {
+            "label": "2 · 计量吸盐再生冲洗（NaCl）",
+            "summary": "累计处理水量达到设定值后，CLK 阀头从白色盐箱吸入浓盐水（NaCl）流过树脂，将钙镁离子冲洗排入下水道，并使树脂重新恢复 Na⁺ 活性。"
+          }
+        ],
+        "parts": [
+          {
+            "name": "CLK 电子涡轮流量多路阀",
+            "desc": "内置涡轮流量计精确统计实际软化水量，按真实用水量触发再生。"
+          },
+          {
+            "name": "玻璃钢承压罐与阳离子交换树脂",
+            "desc": "装填食品级高分子树脂微球，防止 70 °C 高温板换 SC1 及储水罐 S2 内部结垢。"
+          },
+          {
+            "name": "聚乙烯溶盐箱",
+            "desc": "溶解盐锭制备饱和盐水用于再生冲洗阶段，再生废液全部直排下水道。"
+          },
+          {
+            "name": "残余硬度混水阀及下游 T3 / T4 加药",
+            "desc": "调配适宜残余硬度保护管材，并与下游防军团菌（T3）和防腐蚀（T4）加药装置协同运行。"
+          }
+        ]
+      },
+      "dab_micra": {
+        "title": "P12 · 雨水回收与 DAB MICRA HS 高速潜水泵 + Active Driver",
+        "shortTitle": "P12 · MICRA HS 雨水灌溉泵",
+        "subtitle": "3.5 m³ 地下雨水收集池 · 3\" 高频（130 Hz）潜水泵 · 小区绿化喷灌",
+        "tags": [
+          "P12"
+        ],
+        "photo": "dab_micra",
+        "specs": [
+          "流量 4 m³/h · 扬程 480 kPa",
+          "3,500 L 雨水蓄水池",
+          "独立绿化非饮用管网"
+        ],
+        "modes": [
+          {
+            "label": "1 · 雨水恒压绿化喷灌",
+            "summary": "绿化喷头开启后管压下降，Active Driver 变频器驱动直径 74 mm 的 MICRA HS 潜水泵升频至 130 Hz（约 7,600 转/分），恒定输出 4.8 bar 压力浇灌绿地。"
+          },
+          {
+            "label": "2 · 低液位保护与备用补水",
+            "summary": "干旱期池水不足时，液位传感器防止水泵空转，并可引入非饮用地下水作为备用补水。"
+          }
+        ],
+        "parts": [
+          {
+            "name": "3.5 m³ 地下雨水池与树叶初滤器",
+            "desc": "拦截屋面雨水中的落叶杂物并避光储存，节约饮用自来水。"
+          },
+          {
+            "name": "3\" 超高速多级潜水泵 MICRA HS 4/4",
+            "desc": "依托 130 Hz 高频电源高速旋转，纤细泵体即可输出 48 米高扬程。"
+          },
+          {
+            "name": "过流水冷式 Active Driver Plus 变频器",
+            "desc": "集成流量传感、压力传感与变频调速，由过流水流直接冷却。"
+          },
+          {
+            "name": "独立绿化供水管线",
+            "desc": "与住户饮用水管网 AFP 保持物理独立，保障饮水卫生安全。"
+          }
+        ]
+      },
+      "plate_hx": {
+        "title": "SC1 与 SC2 · 逆流波纹板式换热器",
+        "shortTitle": "SC1/SC2 · 板式换热器",
+        "subtitle": "超大换热面积高效传热 · 两侧流体与静水压力完全隔离",
+        "tags": [
+          "SC1",
+          "SC2",
+          "AP"
+        ],
+        "specs": [
+          "SC2 高区隔压：冬季 231 / 夏季 240 kW",
+          "2 × SC1 生活热水：各 90 kW",
+          "奇偶流道纯逆流换热"
+        ],
+        "modes": [
+          {
+            "label": "1 · SC2 · 高层空调水静压隔断（AP 高压区）",
+            "summary": "A、B 两塔高区立管水柱静压较高。SC2 将高区闭式环路（P09 驱动）与机房主环路（P08 驱动）从水力上隔开：冷热量穿过不锈钢薄板传递，保护 PC2 免受高楼静压影响。"
+          },
+          {
+            "label": "2 · SC1 · 一次高温水与饮用水卫生隔离",
+            "summary": "PC1 的 70 → 65 °C 闭式技术水沿奇数流道向下流动，P01 推动的饮用水沿偶数流道自下而上逆流升温（55 → 60 °C）为 S2 充热。"
+          }
+        ],
+        "parts": [
+          {
+            "name": "0.5 mm 人字形波纹不锈钢板片束",
+            "desc": "冲压人字波纹迫使水流产生微湍流，在紧凑空间内实现极高传热效率。"
+          },
+          {
+            "name": "密封交替排列的奇/偶薄层流道",
+            "desc": "角孔密封结构引导一次水走奇数夹层、二次水走相邻偶数夹层，互不掺混。"
+          },
+          {
+            "name": "纯逆流小温差逼近",
+            "desc": "两侧水流方向相反，使二次侧出水温度能够贴近一次侧进水温度。"
+          },
+          {
+            "name": "承压与卫生隔离屏障",
+            "desc": "密集的波纹触点相互支撑承受两侧压差，让独立回路安全交换热能。"
+          }
+        ]
+      },
+      "dhw_storage": {
+        "title": "S2、恒温混水阀与 S3 · 分层储水罐、48 °C 防烫混水与缓冲罐",
+        "shortTitle": "S2/S3 · 储水罐与恒温混水",
+        "subtitle": "2 × 3,000 L S2 热水罐（60 °C）+ 48 °C 恒温混水阀 + 4 × 2,000 L S3 并联缓冲罐",
+        "tags": [
+          "S2",
+          "S3",
+          "ACP",
+          "ACR"
+        ],
+        "specs": [
+          "2 × 3,000 L S2 储水罐（10 bar）",
+          "48 °C 恒温防烫供水 ACP",
+          "4 × 2,000 L S3 缓冲水箱（6 bar）"
+        ],
+        "modes": [
+          {
+            "label": "1 · S2 温度分层储热（60 °C）+ 48 °C 恒温混水",
+            "summary": "S2 罐内较轻的 60 °C 高温水自然分层在顶部抑菌储热，15 °C 冷补水从罐底进入。出罐后恒温混水阀自动调配 60 °C 热水、ACR 回水与冷水，恒定输出 48 °C 生活热水。"
+          },
+          {
+            "label": "2 · S3 供水干管双罐并联热缓冲",
+            "summary": "空调环路与 40/35 °C 中间环路各设两座并联在供水干管上的 2,000 L S3 缓冲罐（回水直接返回 PC2），利用水体热惯性稳定压缩机运行。"
+          }
+        ],
+        "parts": [
+          {
+            "name": "S2 罐内冷热密度自然分层",
+            "desc": "底部布水挡板减缓 15 °C 补水流速，平稳托举上方 60 °C 热水层并保持清晰温跃层。"
+          },
+          {
+            "name": "P01 侧向循环充热回路（来自 SC1）",
+            "desc": "抽取罐底较凉水层经 SC1 加热至 60 °C 送入罐顶，直至整罐 3,000 L 充热完成。"
+          },
+          {
+            "name": "石蜡感温元件恒温混水阀芯（48 °C）",
+            "desc": "浸在混合出水口的石蜡热敏元件一旦感知水温高于 48 °C 立即膨胀，调小 60 °C 热口并加大冷水口防烫。"
+          },
+          {
+            "name": "双 S3 并联供水结构",
+            "desc": "供水分流进入两座 2,000 L 缓冲罐可降低罐内流速并平抑温度波动。"
+          }
+        ]
+      },
+      "radiant_module": {
+        "title": "BP / AP · 住户分户水力模块、辐射地板与除湿系统",
+        "shortTitle": "BP/AP · 住户模块与地板盘管",
+        "subtitle": "M-bus 分户热量计量 · 户内混水调节 · 冷暖两用辐射地板",
+        "tags": [
+          "BP",
+          "AP",
+          "ACP"
+        ],
+        "specs": [
+          "冬季：立管 42 °C → 地板 38/33 °C",
+          "夏季：立管 13 °C → 地板 18/23 °C",
+          "M-bus 能量表 + 户内除湿机"
+        ],
+        "modes": [
+          {
+            "label": "1 · 冬季低温辐射供暖（38 → 33 °C）",
+            "summary": "室内温控器请求供暖时，二通电动阀打开引入 42 °C 立管热水，户内混水阀将其调节至 38 °C 并由户内循环泵送入地板盘管均匀辐射供暖。"
+          },
+          {
+            "label": "2 · 夏季辐射供冷 + 防结露除湿（18 → 23 °C）",
+            "summary": "夏季立管送来约 13 °C 冷水：一路 13 °C 冷水直接供给户内除湿机盘管降低空气露点，另一路经户内混水阀回升至 18 °C 送入地板，保持地面干爽舒适。"
+          }
+        ],
+        "parts": [
+          {
+            "name": "M-bus 冷热量表与热水表",
+            "desc": "计量每户地板水流量与进回水温差（ΔT）以及生活热水消耗，通过 M-bus 总线集中远传。"
+          },
+          {
+            "name": "户内混水阀与独立循环泵",
+            "desc": "从同一根大楼立管分出两种实用温度：夏季 13 °C 强效除湿、18 °C 温和供冷。"
+          },
+          {
+            "name": "砂浆层内的蛇形辐射盘管",
+            "desc": "利用整间地面温和换热，冬季仅需 38 °C 水温即可供暖，充分发挥热泵高能效。"
+          },
+          {
+            "name": "户内等温除湿机",
+            "desc": "抽走夏季室内多余湿气降低露点，使地面辐射供冷干爽宜人。"
+          }
+        ]
+      }
+    }
+  }
+}

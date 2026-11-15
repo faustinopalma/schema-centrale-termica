@@ -28,7 +28,8 @@
         "Tratto più caldo",
         "Tratto più freddo",
         "ACS 48 °C e ricircolo montante",
-        "Flusso termico"
+        "Flusso termico",
+        "Refrigerante (vapore / liquido)"
       ],
       "clickHint": "Tocca un componente o una sigla per la spiegazione",
       "rotateTitle": "Ruota il telefono in orizzontale",
@@ -1005,7 +1006,8 @@
         "Warmer section",
         "Cooler section",
         "48 °C DHW & warm riser recirc.",
-        "Heat transfer"
+        "Heat transfer",
+        "Refrigerant (vapour / liquid)"
       ],
       "clickHint": "Select any component or tag badge for its explanation",
       "rotateTitle": "Rotate your phone to landscape",
@@ -1982,7 +1984,8 @@
         "温度较高段",
         "温度较低段",
         "48 °C 热水及立管热回水",
-        "热量传递"
+        "热量传递",
+        "制冷剂（气液相变）"
       ],
       "clickHint": "点击任意部件或设备代号查看说明",
       "rotateTitle": "请将手机横屏放置",

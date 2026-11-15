@@ -272,7 +272,14 @@ def verify_lesson(screenshots: Path | None) -> None:
 
             page.set_viewport_size({"width": 1440, "height": 900})
 
-            # Verify equipment photos appear in component popups, tag cards, and photo zoom lightbox
+            # Verify distinct refrigerant phase-change styling vs water pipes
+            page.locator("#step-tab-0").click()
+            assert page.locator("#legend .swatch.ref").count() == 1
+            assert page.locator('#viewport .ref-core[data-fluid-kind="ref"]').count() >= 1
+            assert page.locator('#viewport .pipe-core[data-fluid-kind="water"]').count() >= 4
+
+            # Verify equipment photos & interactive Machine Mini-Sites (#machine-site) with in-app back navigation
+            initial_app_url = page.url
             page.locator("#step-tab-2").click()
             for node_id, expected_photo in [
                 ("pc2", "hiref-msw.jpg"),
@@ -288,15 +295,76 @@ def verify_lesson(screenshots: Path | None) -> None:
                 assert any(expected_photo in (imgs.nth(k).get_attribute("src") or "") for k in range(imgs.count()))
                 loaded = imgs.first.evaluate("el => el.complete && el.naturalWidth > 50")
                 assert loaded, f"Equipment photo failed to load for {node_id}"
+                assert page.locator("#popup [data-open-machine]").count() >= 1, f"Expected machine mini-site button for {node_id}"
                 if screenshots and node_id in ["pc2", "gwTreat", "potable"]:
                     page.screenshot(path=str(screenshots / f"dev-photo-{node_id}.png"))
                 if node_id == "pc2":
                     page.locator("#popup [data-zoom-photo]").first.click()
                     assert page.locator(".photo-zoom-stage img").is_visible()
-                    if screenshots:
-                        page.screenshot(path=str(screenshots / "dev-photo-zoom-pc2.png"))
                     page.locator("#extra-action").click()
                     assert page.locator(".photo-gallery").is_visible()
+                    # Launch Machine Mini-Site from the button on the photo card, test back-to-card AND back-to-map
+                    page.locator("#popup [data-open-machine]").first.click()
+                    assert page.locator("#machine-site").is_visible()
+                    assert not page.locator("#popup").is_visible()
+                    assert page.url == initial_app_url
+                    # Return to summary card first
+                    page.locator("#ms-back-card").click()
+                    assert page.locator("#popup").is_visible()
+                    assert not page.locator("#machine-site").is_visible()
+                    # Re-open Machine Mini-Site, exercise all 15 machines, modes, pins & photo toggle, then return to overall map
+                    page.locator("#popup [data-open-machine]").first.click()
+                    all_machine_ids = page.locator("#ms-select option").evaluate_all("opts => opts.map(o => o.value)")
+                    assert len(all_machine_ids) == 15, f"Expected 15 machine mini-sites, got {len(all_machine_ids)}"
+                    for mid in all_machine_ids:
+                        page.locator("#ms-select").select_option(mid)
+                        assert page.locator(f'#ms-canvas svg[data-machine="{mid}"]').is_visible()
+                        mode_count = page.locator("#ms-modes [data-ms-mode]").count()
+                        assert mode_count >= 2
+                        for m_idx in range(mode_count):
+                            page.locator(f'#ms-modes [data-ms-mode="{m_idx}"]').click()
+                            clip_errs = page.locator("#ms-canvas svg").evaluate("""svg => {
+                                const box = svg.viewBox.baseVal, errs = [];
+                                const texts = [...svg.querySelectorAll('text')].filter(t => t.checkVisibility());
+                                for (const t of texts) {
+                                    const b = t.getBBox();
+                                    if (b.x < -4 || b.y < -4 || b.x + b.width > box.width + 4 || b.y + b.height > box.height + 4)
+                                        errs.push('Clip: ' + t.textContent);
+                                }
+                                for (let i = 0; i < texts.length; i++) {
+                                    for (let j = i + 1; j < texts.length; j++) {
+                                        const a = texts[i].getBBox(), b = texts[j].getBBox();
+                                        if (Math.min(a.x+a.width, b.x+b.width) - Math.max(a.x, b.x) > 2 &&
+                                            Math.min(a.y+a.height, b.y+b.height) - Math.max(a.y, b.y) > 2)
+                                            errs.push('Overlap: ' + texts[i].textContent + ' / ' + texts[j].textContent);
+                                    }
+                                }
+                                return errs;
+                            }""")
+                            assert not clip_errs, f"SVG text issue in {mid} mode {m_idx}: {clip_errs}"
+                        page.locator('#ms-canvas [data-part-idx="2"]').click()
+                        assert page.locator('#ms-parts [data-ms-part="2"]').get_attribute("aria-pressed") == "true"
+                        if screenshots and mid in ["hiref_msw", "nobel_nic", "spade_corallo", "dab_dcm"]:
+                            page.locator('#ms-modes [data-ms-mode="0"]').click()
+                            page.screenshot(path=str(screenshots / f"machine-{mid}-1440.png"))
+                    page.locator("#ms-select").select_option("hiref_msw")
+                    page.locator("[data-ms-photo-toggle]").click()
+                    assert page.locator("#ms-canvas > img").is_visible()
+                    page.locator("[data-ms-photo-toggle]").click()
+                    assert page.locator("#ms-canvas > svg").is_visible()
+                    # Verify mobile landscape fit inside Machine Mini-Site too
+                    page.set_viewport_size({"width": 844, "height": 390})
+                    assert page.locator("#ms-canvas > svg").is_visible()
+                    assert page.locator("#ms-to-map").is_visible()
+                    if screenshots:
+                        page.screenshot(path=str(screenshots / "machine-mobile-844.png"))
+                    page.set_viewport_size({"width": 1440, "height": 900})
+                    page.locator("#ms-to-map").click()
+                    assert not page.locator("#machine-site").is_visible()
+                    assert not page.locator("#popup").is_visible()
+                    assert page.locator("#viewport > svg").is_visible()
+                    assert page.url == initial_app_url
+                    continue
                 page.locator("#close").click()
 
             # Verify interactive Sigle explorer & highlight-on-schematic jump (including photos for tags that have them)

@@ -17,6 +17,14 @@ export const hydraulicStyle = `
 .pipe-core.thin{stroke-width:4.2}
 .pipe-casing.thin{stroke-width:7.4}
 .pipe-sheen{fill:none;stroke:var(--cp-sheen);stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;pointer-events:none}
+.ref-casing{fill:none;stroke:var(--cp-accent);stroke-width:9.2;stroke-linecap:round;stroke-linejoin:round;opacity:.34}
+.ref-casing.thin{stroke-width:7.4}
+.ref-channel{fill:none;stroke:var(--cp-surface);stroke-width:5.8;stroke-linecap:round;stroke-linejoin:round}
+.ref-channel.thin{stroke-width:4.6}
+.ref-core{fill:none;stroke-width:3.2;stroke-linecap:round;stroke-linejoin:round}
+.ref-core.vapour{stroke-dasharray:9 6}
+.ref-core.mixture{stroke-dasharray:2.6 5.4}
+.ref-core.loop{stroke-dasharray:7 4 2.4 4}
 .thermal-track{fill:none;stroke:var(--cp-warning);stroke-width:3;stroke-dasharray:6 5;stroke-linecap:round;opacity:.85}
 .power-track{fill:none;stroke:var(--cp-accent);stroke-width:3.2;stroke-linecap:round}
 .hydraulic-node{cursor:pointer;outline:none}
@@ -392,10 +400,10 @@ export function createDiagrams(graph) {
         { ...node('stage3', 'cycleStage', 430, 344, 300, 168, 'stage3', 'expansion', { in: port(300, 84, 'ref'), out: port(0, 84, 'ref') }), stage: 3 }
       ],
       edges: [
-        { id: 'phase0', from: 'stage0.out', to: 'stage1.in', fluid: 'ref', points: [[97, 165], [97, 112], [430, 112]] },
-        { id: 'phase1', from: 'stage1.out', to: 'stage2.in', fluid: 'ref', points: [[730, 112], [1063, 112], [1063, 165]] },
-        { id: 'phase2', from: 'stage2.out', to: 'stage3.in', fluid: 'ref', points: [[1063, 375], [1063, 428], [730, 428]] },
-        { id: 'phase3', from: 'stage3.out', to: 'stage0.in', fluid: 'ref', points: [[430, 428], [97, 428], [97, 375]] }
+        { id: 'phase0', from: 'stage0.out', to: 'stage1.in', fluid: 'ref', refPhase: 'vapour', points: [[97, 165], [97, 112], [430, 112]] },
+        { id: 'phase1', from: 'stage1.out', to: 'stage2.in', fluid: 'ref', refPhase: 'vapour', points: [[730, 112], [1063, 112], [1063, 165]] },
+        { id: 'phase2', from: 'stage2.out', to: 'stage3.in', fluid: 'ref', refPhase: 'liquid', points: [[1063, 375], [1063, 428], [730, 428]] },
+        { id: 'phase3', from: 'stage3.out', to: 'stage0.in', fluid: 'ref', refPhase: 'mixture', points: [[430, 428], [97, 428], [97, 375]] }
       ]
     };
     diagrams[d.id] = d;
@@ -496,13 +504,13 @@ export function renderHydraulic(d, copy, season = 'winter', prefix = 'hyd') {
   };
 
   const defs = [
-    ...['danger', 'link', 'warning', 'accent'].map(tone =>
+    ...['danger', 'link', 'warning', 'accent', 'success'].map(tone =>
       `<marker id="${prefix}-arr-${tone}" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="3.8" markerHeight="3.8" orient="auto"><path d="M0 1L9 5L0 9Z" fill="var(--cp-${tone})"/></marker>`
     )
   ];
 
   const drawPipe = (points, fromTone, toTone = fromTone, opts = {}) => {
-    const { attrs = '', bridges = [], thin = false, gradEnds = null, plateau = false, marker = true, animated = true } = opts;
+    const { attrs = '', bridges = [], thin = false, gradEnds = null, plateau = false, marker = true, animated = true, fluidKind = 'water', refPhase = 'loop' } = opts;
     const dStr = buildRoundedPath(points, bridges);
     let stroke = `var(--cp-${fromTone})`;
     if (fromTone !== toTone || gradEnds) {
@@ -511,8 +519,14 @@ export function renderHydraulic(d, copy, season = 'winter', prefix = 'hyd') {
       stroke = g.stroke;
     }
     const cls = thin ? ' thin' : '';
-    const flowAttrs = animated ? ` data-flow-path="1" data-temp-start="${fromTone}" data-temp-end="${toTone}"` : '';
     const mEnd = marker ? ` marker-end="url(#${prefix}-arr-${toTone})"` : '';
+    if (fluidKind === 'ref') {
+      const flowAttrs = animated ? ` data-flow-path="1" data-fluid-kind="ref" data-ref-phase="${refPhase}" data-temp-start="${fromTone}" data-temp-end="${toTone}"` : '';
+      return `<path d="${dStr}" class="ref-casing${cls}" aria-hidden="true"/>` +
+        `<path d="${dStr}" class="ref-channel${cls}" aria-hidden="true"/>` +
+        `<path d="${dStr}" class="ref-core ${refPhase}" style="stroke:${stroke}" data-temperature-from="${fromTone}" data-temperature-to="${toTone}"${flowAttrs}${mEnd} ${attrs}/>`;
+    }
+    const flowAttrs = animated ? ` data-flow-path="1" data-fluid-kind="water" data-temp-start="${fromTone}" data-temp-end="${toTone}"` : '';
     return `<path d="${dStr}" class="pipe-casing${cls}" aria-hidden="true"/>` +
       `<path d="${dStr}" class="pipe-core${cls}" style="stroke:${stroke}" data-temperature-from="${fromTone}" data-temperature-to="${toTone}"${flowAttrs}${mEnd} ${attrs}/>` +
       `<path d="${dStr}" class="pipe-sheen" aria-hidden="true"/>`;
@@ -601,7 +615,13 @@ export function renderHydraulic(d, copy, season = 'winter', prefix = 'hyd') {
 
     const visPts = refined.slice(startIdx, endIdx + 1);
     if (visPts.length >= 2) {
-      pipesSvg += drawPipe(visPts, fromT, toT, { thin: !!e.thin, marker: endIdx === refined.length - 1 });
+      const isRef = e.fluid === 'ref';
+      pipesSvg += drawPipe(visPts, fromT, toT, {
+        thin: !!e.thin,
+        marker: endIdx === refined.length - 1,
+        fluidKind: isRef ? 'ref' : 'water',
+        refPhase: e.refPhase || 'vapour'
+      });
       if (startIdx > 0) {
         const jp = visPts[0];
         junctionDots.set(`${jp[0]},${jp[1]}`, `<circle data-junction="${jp[0]},${jp[1]}" cx="${jp[0]}" cy="${jp[1]}" r="4.8" fill="var(--cp-${fromT})" stroke="var(--cp-surface)" stroke-width="1.5"/>`);
@@ -676,6 +696,7 @@ export function renderHydraulic(d, copy, season = 'winter', prefix = 'hyd') {
       const leftTone = rev ? 'danger' : 'link', rightTone = rev ? 'link' : 'danger';
       body += drawPipe(refLoop, leftTone, rightTone, {
         thin: true, marker: false, gradEnds: [[rl, rt], [rr, rt]], plateau: true,
+        fluidKind: 'ref', refPhase: 'loop',
         attrs: 'data-closed="true" data-channel="pc2.ref"'
       });
       body += `<circle class="machine-card" cx="${rcx}" cy="${rt}" r="26"/>` +
@@ -744,11 +765,26 @@ export function renderHydraulic(d, copy, season = 'winter', prefix = 'hyd') {
       body += `<rect class="plate-pack" x="${x + w - 54}" y="${y + 84}" width="14" height="160" rx="3"/>`;
       body += `<rect class="plate-pack" x="${x + 86}" y="${y + h - 44}" width="82" height="12" rx="3"/>`;
       const cx = x + w / 2, cy = y + 152;
-      body += `<circle class="machine-card" cx="${cx}" cy="${cy}" r="22"/>` +
-        `<g data-rotor="1" data-cx="${cx}" data-cy="${cy}"><path d="M${cx - 8} ${cy - 10}L${cx + 12} ${cy}L${cx - 8} ${cy + 10}Z" fill="var(--cp-accent)"/></g>`;
-      body += drawHeat(x + 58, cy, cx - 26, cy, rev);
-      body += drawHeat(cx + 26, cy, x + w - 58, cy, rev);
-      body += `<path class="thermal-track" data-thermal-path="1" data-heat-link="pc2-intermediate" d="M${cx} ${cy + 26}V${y + h - 48}" marker-end="url(#${prefix}-arr-warning)"/>`;
+      if (!isMulti) {
+        const rl = x + 84, rr = x + w - 84, rt = y + 106, rb = y + 204;
+        const rPts = rev ? [[rr, rb], [rr, rt], [rl, rt], [rl, rb], [rr, rb]] : [[rl, rb], [rl, rt], [rr, rt], [rr, rb], [rl, rb]];
+        body += drawPipe(rPts, rev ? 'danger' : 'link', rev ? 'link' : 'danger', {
+          thin: true, marker: false, gradEnds: [[rl, rt], [rr, rt]], plateau: true, fluidKind: 'ref', refPhase: 'loop'
+        });
+        body += `<circle class="machine-card" cx="${cx}" cy="${rt}" r="18"/>` +
+          `<g data-rotor="1" data-cx="${cx}" data-cy="${rt}"><path d="M${cx - 7} ${rt - 8}L${cx + 10} ${rt}L${cx - 7} ${rt + 8}Z" fill="var(--cp-accent)"/></g>`;
+        body += `<path class="machine-card" d="M${cx - 13} ${rb - 9}L${cx + 13} ${rb + 9}V${rb - 9}L${cx - 13} ${rb + 9}Z"/>`;
+        body += drawHeat(x + 56, cy, rl - 6, cy, rev);
+        body += drawHeat(rr + 6, cy, x + w - 56, cy, rev);
+        body += `<path class="thermal-track" data-thermal-path="1" data-heat-link="pc2-intermediate" d="M${cx} ${rb + 14}V${y + h - 48}" marker-end="url(#${prefix}-arr-warning)"/>`;
+      } else {
+        body += `<circle class="ref-casing" cx="${cx}" cy="${cy}" r="28"/>`;
+        body += `<circle class="machine-card" cx="${cx}" cy="${cy}" r="22"/>` +
+          `<g data-rotor="1" data-cx="${cx}" data-cy="${cy}"><path d="M${cx - 8} ${cy - 10}L${cx + 12} ${cy}L${cx - 8} ${cy + 10}Z" fill="var(--cp-accent)"/></g>`;
+        body += drawHeat(x + 58, cy, cx - 26, cy, rev);
+        body += drawHeat(cx + 26, cy, x + w - 58, cy, rev);
+        body += `<path class="thermal-track" data-thermal-path="1" data-heat-link="pc2-intermediate" d="M${cx} ${cy + 26}V${y + h - 48}" marker-end="url(#${prefix}-arr-warning)"/>`;
+      }
     } else if (n.shape === 'bufferSingle' || n.shape === 'multiBuffer') {
       const isMulti = n.shape === 'multiBuffer';
       const pin = portPt(n, p.in), pout = portPt(n, p.out), tone = portTone(n, 'in');
@@ -816,11 +852,16 @@ export function renderHydraulic(d, copy, season = 'winter', prefix = 'hyd') {
       body += `<rect class="plate-pack" x="${x + 38}" y="${y + 68}" width="12" height="108" rx="3"/>`;
       body += `<rect class="plate-pack" x="${x + w - 50}" y="${y + 68}" width="12" height="108" rx="3"/>`;
       const cx = x + w / 2, cy = y + 122;
-      body += `<circle class="machine-card" cx="${cx}" cy="${cy}" r="20"/>` +
-        `<g data-rotor="1" data-cx="${cx}" data-cy="${cy}"><path d="M${cx - 7} ${cy - 9}L${cx + 11} ${cy}L${cx - 7} ${cy + 9}Z" fill="var(--cp-accent)"/></g>`;
-      body += drawHeat(x + 54, cy, cx - 24, cy, false);
-      body += drawHeat(cx + 24, cy, x + w - 54, cy, false);
-      body += `<path class="power-track" d="M${cx} ${y + h - 22}V${cy + 24}" marker-end="url(#${prefix}-arr-accent)"/>`;
+      const rl = x + 74, rr = x + w - 74, rt = y + 86, rb = y + 156;
+      body += drawPipe([[rl, rb], [rl, rt], [rr, rt], [rr, rb], [rl, rb]], 'link', 'danger', {
+        thin: true, marker: false, gradEnds: [[rl, rt], [rr, rt]], plateau: true, fluidKind: 'ref', refPhase: 'loop'
+      });
+      body += `<circle class="machine-card" cx="${cx}" cy="${rt}" r="16"/>` +
+        `<g data-rotor="1" data-cx="${cx}" data-cy="${rt}"><path d="M${cx - 6} ${rt - 7}L${cx + 9} ${rt}L${cx - 6} ${rt + 7}Z" fill="var(--cp-accent)"/></g>`;
+      body += `<path class="machine-card" d="M${cx - 11} ${rb - 8}L${cx + 11} ${rb + 8}V${rb - 8}L${cx - 11} ${rb + 8}Z"/>`;
+      body += drawHeat(x + 52, cy, rl - 4, cy, false);
+      body += drawHeat(rr + 4, cy, x + w - 52, cy, false);
+      body += `<path class="power-track" d="M${cx} ${y + h - 20}V${rb + 11}" marker-end="url(#${prefix}-arr-accent)"/>`;
       body += `<text class="svg-label svg-temp pc-detail" x="${cx}" y="${y + h - 6}" font-size="14" text-anchor="middle">70/65 °C</text>`;
     } else if (n.shape === 'plateExchanger' || n.shape === 'multiExchanger') {
       const pi = portPt(n, p.pi), po = portPt(n, p.po), so = portPt(n, p.so), si = portPt(n, p.si);
@@ -997,10 +1038,12 @@ export function renderHydraulic(d, copy, season = 'winter', prefix = 'hyd') {
       const symX = isSideVert ? pin[0] : x + w / 2;
       const symY = y + h / 2;
       const labelX = n.stage === 0 ? x + 212 : n.stage === 2 ? x + 93 : x + w / 2;
+      const stageInPhase = ['mixture', 'vapour', 'vapour', 'liquid'][n.stage];
+      const stageOutPhase = ['vapour', 'vapour', 'liquid', 'mixture'][n.stage];
       body += `<rect class="machine-card" x="${x}" y="${y}" width="${w}" height="${h}" rx="16"/>`;
       body += `<text class="svg-label svg-title" x="${labelX}" y="${isSideVert ? symY - 16 : y + 28}" font-size="16.5" text-anchor="middle">${esc(copy.stages[n.stage])}</text>`;
-      body += drawPipe([pin, [symX, symY]], portTone(n, 'in'), portTone(n, 'in'), { thin: true, marker: false });
-      body += drawPipe([[symX, symY], pout], portTone(n, 'out'), portTone(n, 'out'), { thin: true, marker: false });
+      body += drawPipe([pin, [symX, symY]], portTone(n, 'in'), portTone(n, 'in'), { thin: true, marker: false, fluidKind: 'ref', refPhase: stageInPhase });
+      body += drawPipe([[symX, symY], pout], portTone(n, 'out'), portTone(n, 'out'), { thin: true, marker: false, fluidKind: 'ref', refPhase: stageOutPhase });
       if (n.stage === 1) {
         body += `<circle class="machine-card" cx="${symX}" cy="${symY}" r="28"/>` +
           `<g data-rotor="1" data-cx="${symX}" data-cy="${symY}"><path d="M${symX - 11} ${symY - 13}L${symX + 17} ${symY}L${symX - 11} ${symY + 13}Z" fill="var(--cp-accent)"/></g>`;
@@ -1054,13 +1097,45 @@ export function renderHydraulic(d, copy, season = 'winter', prefix = 'hyd') {
 
 export function createFlowAnimator() {
   let rafId = 0, lastTs = 0, offset = 0;
-  let tracks = [], rotors = [];
+  let tracks = [], rotors = [], orbits = [], pulses = [], recips = [];
   const NS = 'http://www.w3.org/2000/svg';
   const toneVar = tone => `var(--cp-${tone || 'link'})`;
+
+  function makeRefGlyph() {
+    const g = document.createElementNS(NS, 'g');
+    // Vapour sub-glyph: hollow expanding bubble + trailing micro-ring
+    const vap = document.createElementNS(NS, 'g');
+    const c1 = document.createElementNS(NS, 'circle');
+    c1.setAttribute('cx', '2'); c1.setAttribute('cy', '0'); c1.setAttribute('r', '4.3');
+    c1.style.fill = 'var(--cp-surface)'; c1.style.fillOpacity = '0.35'; c1.style.strokeWidth = '1.8';
+    const c2 = document.createElementNS(NS, 'circle');
+    c2.setAttribute('cx', '-5.2'); c2.setAttribute('cy', '-1.4'); c2.setAttribute('r', '2.2');
+    c2.style.fill = 'none'; c2.style.strokeWidth = '1.4';
+    vap.append(c1, c2);
+
+    // Subcooled liquid sub-glyph: solid faceted diamond droplet
+    const liq = document.createElementNS(NS, 'polygon');
+    liq.setAttribute('points', '5.5,0 0,-3.8 -5.2,0 0,3.8');
+    liq.style.stroke = 'var(--cp-surface)'; liq.style.strokeWidth = '1.2';
+
+    // Boiling two-phase mixture sub-glyph: 3 effervescent micro-bubbles
+    const mix = document.createElementNS(NS, 'g');
+    for (const [bx, by, br] of [[-4.2, -1.8, 2.1], [0.6, 2.0, 2.4], [4.5, -1.2, 1.8]]) {
+      const mb = document.createElementNS(NS, 'circle');
+      mb.setAttribute('cx', String(bx)); mb.setAttribute('cy', String(by)); mb.setAttribute('r', String(br));
+      mb.style.fill = 'var(--cp-surface)'; mb.style.strokeWidth = '1.5';
+      mix.appendChild(mb);
+    }
+    g.append(vap, liq, mix);
+    return { g, vap, c1, c2, liq, mix };
+  }
 
   function buildTracks(root) {
     tracks = [];
     rotors = [];
+    orbits = [];
+    pulses = [];
+    recips = [];
     const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     for (const svg of root.querySelectorAll('svg.vector-map')) {
       const layer = svg.querySelector('.flow-layer');
@@ -1079,26 +1154,46 @@ export function createFlowAnimator() {
           const p2 = path.getPointAtLength(Math.min(len, d + 1.5));
           lut[i] = { x: p.x, y: p.y, a: Math.atan2(p2.y - p.y, p2.x - p.x) * 180 / Math.PI };
         }
-        const spacing = 46;
+        const fluidKind = path.getAttribute('data-fluid-kind') || 'water';
+        const refPhase = path.getAttribute('data-ref-phase') || 'loop';
+        const customSpeed = Number(path.getAttribute('data-speed') || 0);
+        const spacing = fluidKind === 'ref' ? 38 : (fluidKind === 'sand' ? 28 : 46);
         const nParticles = Math.max(1, Math.floor(len / spacing));
         const fromT = path.getAttribute('data-temp-start') || 'link';
         const toT = path.getAttribute('data-temp-end') || fromT;
         const items = [];
         for (let i = 0; i < nParticles; i++) {
-          const g = document.createElementNS(NS, 'g');
-          const pill = document.createElementNS(NS, 'rect');
-          pill.setAttribute('x', '-5.5');
-          pill.setAttribute('y', '-2.3');
-          pill.setAttribute('width', '11');
-          pill.setAttribute('height', '4.6');
-          pill.setAttribute('rx', '2.3');
-          pill.style.fill = 'var(--cp-surface)';
-          pill.style.strokeWidth = '1.5';
-          g.appendChild(pill);
-          layer.appendChild(g);
-          items.push({ g, pill, phase: (i / nParticles) * len });
+          if (fluidKind === 'ref') {
+            const rg = makeRefGlyph();
+            layer.appendChild(rg.g);
+            items.push({ ...rg, phase: (i / nParticles) * len, idxSeed: i });
+          } else if (fluidKind === 'sand') {
+            const g = document.createElementNS(NS, 'g');
+            const dot = document.createElementNS(NS, 'circle');
+            dot.setAttribute('r', '2.8');
+            dot.style.fill = 'var(--cp-warning)';
+            dot.style.stroke = 'var(--cp-text)';
+            dot.style.strokeWidth = '0.9';
+            g.appendChild(dot);
+            layer.appendChild(g);
+            items.push({ g, dot, phase: (i / nParticles) * len });
+          } else {
+            const g = document.createElementNS(NS, 'g');
+            const pill = document.createElementNS(NS, 'rect');
+            pill.setAttribute('x', '-5.5');
+            pill.setAttribute('y', '-2.3');
+            pill.setAttribute('width', '11');
+            pill.setAttribute('height', '4.6');
+            pill.setAttribute('rx', '2.3');
+            pill.style.fill = 'var(--cp-surface)';
+            pill.style.strokeWidth = '1.5';
+            g.appendChild(pill);
+            layer.appendChild(g);
+            items.push({ g, pill, phase: (i / nParticles) * len });
+          }
         }
-        tracks.push({ kind: 'fluid', len, lut, count, items, speed: 56, fromT, toT });
+        const defaultSpd = fluidKind === 'ref' ? 68 : (fluidKind === 'sand' ? 44 : 56);
+        tracks.push({ kind: fluidKind, refPhase, len, lut, count, items, speed: customSpeed || defaultSpd, fromT, toT });
       }
 
       for (const path of svg.querySelectorAll('[data-thermal-path="1"]')) {
@@ -1123,7 +1218,16 @@ export function createFlowAnimator() {
       }
 
       for (const r of svg.querySelectorAll('[data-rotor="1"]')) {
-        rotors.push({ el: r, cx: Number(r.dataset.cx), cy: Number(r.dataset.cy) });
+        rotors.push({ el: r, cx: Number(r.dataset.cx), cy: Number(r.dataset.cy), rpm: Number(r.dataset.rpm || 1) });
+      }
+      for (const o of svg.querySelectorAll('[data-orbit="1"]')) {
+        orbits.push({ el: o, rad: Number(o.dataset.orbitR || 4.2), rpm: Number(o.dataset.rpm || 1.6) });
+      }
+      for (const p of svg.querySelectorAll('[data-pulse="1"]')) {
+        pulses.push({ el: p, cx: Number(p.dataset.cx), cy: Number(p.dataset.cy), amp: Number(p.dataset.amp || 0.08) });
+      }
+      for (const rc of svg.querySelectorAll('[data-recip="1"]')) {
+        recips.push({ el: rc, dx: Number(rc.dataset.dx || 0), dy: Number(rc.dataset.dy || 0) });
       }
     }
 
@@ -1134,17 +1238,61 @@ export function createFlowAnimator() {
 
   function renderFrame(dist, isStatic = false) {
     for (const tr of tracks) {
-      if (tr.kind === 'fluid') {
+      if (tr.kind === 'water' || tr.kind === 'sand') {
         for (const it of tr.items) {
           const s = (it.phase + dist * (tr.speed / 56)) % tr.len;
           const idx = Math.min(tr.count, Math.max(0, Math.round((s / tr.len) * tr.count)));
           const pt = tr.lut[idx];
           const fade = isStatic ? 0.92 : Math.min(1, s / 10, (tr.len - s) / 10);
-          const ratio = s / tr.len;
-          const tone = tr.fromT === tr.toT ? tr.fromT : (ratio < 0.5 ? tr.fromT : tr.toT);
-          it.pill.style.stroke = toneVar(tone);
+          if (tr.kind === 'water') {
+            const ratio = s / tr.len;
+            const tone = tr.fromT === tr.toT ? tr.fromT : (ratio < 0.5 ? tr.fromT : tr.toT);
+            it.pill.style.stroke = toneVar(tone);
+          }
           it.g.setAttribute('opacity', fade.toFixed(2));
           it.g.setAttribute('transform', `translate(${pt.x.toFixed(1)} ${pt.y.toFixed(1)}) rotate(${pt.a.toFixed(1)})`);
+        }
+      } else if (tr.kind === 'ref') {
+        for (const it of tr.items) {
+          const s = (it.phase + dist * (tr.speed / 56)) % tr.len;
+          const idx = Math.min(tr.count, Math.max(0, Math.round((s / tr.len) * tr.count)));
+          const pt = tr.lut[idx];
+          const ratio = s / tr.len;
+          const fade = isStatic ? 0.94 : Math.min(1, s / 9, (tr.len - s) / 9);
+          let ph = tr.refPhase;
+          let tone = tr.fromT;
+          if (ph === 'loop') {
+            // Closed loop [evap bottom -> evap top -> condenser top -> condenser bottom -> expansion -> evap bottom]
+            if (ratio < 0.14 || ratio >= 0.84) {
+              ph = 'mixture';
+              tone = 'link';
+            } else if (ratio < 0.62) {
+              ph = 'vapour';
+              tone = ratio < 0.36 ? 'link' : 'danger';
+            } else {
+              ph = 'liquid';
+              tone = 'danger';
+            }
+          } else if (tr.fromT !== tr.toT) {
+            tone = ratio < 0.5 ? tr.fromT : tr.toT;
+          }
+          const col = toneVar(tone);
+          it.vap.setAttribute('display', ph === 'vapour' ? 'inline' : 'none');
+          it.liq.setAttribute('display', ph === 'liquid' ? 'inline' : 'none');
+          it.mix.setAttribute('display', ph === 'mixture' ? 'inline' : 'none');
+          if (ph === 'vapour') {
+            it.c1.style.stroke = col;
+            it.c2.style.stroke = col;
+            const pulseR = isStatic ? 4.2 : 3.9 + 0.7 * Math.sin(dist * 0.12 + it.idxSeed);
+            it.c1.setAttribute('r', pulseR.toFixed(1));
+          } else if (ph === 'liquid') {
+            it.liq.style.fill = col;
+          } else {
+            for (const mb of it.mix.children) mb.style.stroke = col;
+          }
+          const jitterY = (!isStatic && ph === 'mixture') ? (Math.sin(dist * 0.22 + it.idxSeed * 2.1) * 1.3) : 0;
+          it.g.setAttribute('opacity', fade.toFixed(2));
+          it.g.setAttribute('transform', `translate(${pt.x.toFixed(1)} ${(pt.y + jitterY).toFixed(1)}) rotate(${pt.a.toFixed(1)})`);
         }
       } else {
         for (const it of tr.items) {
@@ -1159,9 +1307,23 @@ export function createFlowAnimator() {
       }
     }
     if (!isStatic) {
-      const deg = (dist * 2.4) % 360;
       for (const r of rotors) {
+        if (r.rpm === 0) continue;
+        const deg = (dist * 2.4 * r.rpm) % 360;
         r.el.setAttribute('transform', `rotate(${deg.toFixed(1)} ${r.cx} ${r.cy})`);
+      }
+      for (const o of orbits) {
+        const ang = (dist * 0.085 * o.rpm);
+        const ox = Math.cos(ang) * o.rad, oy = Math.sin(ang) * o.rad;
+        o.el.setAttribute('transform', `translate(${ox.toFixed(2)} ${oy.toFixed(2)})`);
+      }
+      for (const p of pulses) {
+        const sc = 1 + Math.sin(dist * 0.06) * p.amp;
+        p.el.setAttribute('transform', `translate(${p.cx} ${p.cy}) scale(${sc.toFixed(3)}) translate(${-p.cx} ${-p.cy})`);
+      }
+      for (const rc of recips) {
+        const w = Math.sin(dist * 0.055);
+        rc.el.setAttribute('transform', `translate(${(rc.dx * w).toFixed(1)} ${(rc.dy * w).toFixed(1)})`);
       }
     }
   }

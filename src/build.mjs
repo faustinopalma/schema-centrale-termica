@@ -3,6 +3,7 @@ import { createHash } from 'node:crypto';
 import { fileURLToPath } from 'node:url';
 import path from 'node:path';
 import { createDiagrams, readTopology, renderHydraulic, createFlowAnimator, hydraulicStyle } from './hydraulic-diagrams.mjs';
+import { renderMachineCutaway } from './machine-cutaways.mjs';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const data = JSON.parse(readFileSync(path.join(root, 'src', 'data', 'plant-data.json'), 'utf8'));
@@ -167,6 +168,7 @@ const replacements = {
 for (const [key,value] of Object.entries(replacements)) html = html.replaceAll(`{{${key}}}`, value);
 if (/\{\{[A-Z_]+\}\}/.test(html)) throw new Error('Unexpanded template token');
 const lesson = JSON.parse(readFileSync(path.join(root, 'src', 'data', 'lesson-content.json'), 'utf8'));
+const machines = JSON.parse(readFileSync(path.join(root, 'src', 'data', 'machines-content.json'), 'utf8'));
 const graph = JSON.parse(readFileSync(path.join(root, 'src', 'data', 'plant-graph.json'), 'utf8'));
 const topology = readTopology(graph);
 const hydraulicDiagrams = createDiagrams(graph);
@@ -182,15 +184,18 @@ function validateTranslation(reference, translation, location) {
 }
 for (const language of ['it', 'zh']) {
   validateTranslation(lesson.en, lesson[language], language);
+  validateTranslation(machines.en, machines[language], `machines.${language}`);
 }
 const template = readFileSync(path.join(root, 'src', 'templates', 'lesson.template.html'), 'utf8');
 const themeMatch = html.match(/:root \{[\s\S]*?\r?\n\}\r?\nhtml\[data-theme="dark"\] \{[\s\S]*?\r?\n\}/);
 if (!themeMatch) throw new Error('Shared light/dark theme block is missing from the site template');
 const theme = themeMatch[0];
 const page = template.replace('{{THEME}}', theme).replace('{{LESSON}}', JSON.stringify(lesson).replaceAll('<', '\\u003c'))
+  .replace('{{MACHINES}}', JSON.stringify(machines).replaceAll('<', '\\u003c'))
   .replace('{{HYDRAULIC_STYLE}}', hydraulicStyle)
   .replace('{{HYDRAULIC_DIAGRAMS}}', JSON.stringify(hydraulicDiagrams).replaceAll('<', '\\u003c'))
   .replace('{{HYDRAULIC_RENDERER}}', renderHydraulic.toString())
+  .replace('{{MACHINE_CUTAWAY_RENDERER}}', renderMachineCutaway.toString())
   .replace('{{FLOW_ANIMATOR}}', createFlowAnimator.toString());
 if (/\{\{[A-Z_]+\}\}/.test(page)) throw new Error('Unexpanded teaching template token');
 for (const old of readdirSync(path.join(root, 'diagrams')).filter(n => n.startsWith('connected-'))) {
