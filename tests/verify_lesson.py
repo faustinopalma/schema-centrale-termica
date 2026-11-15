@@ -303,6 +303,16 @@ def verify_lesson(screenshots: Path | None) -> None:
                 if screenshots and node_id in ["pc2", "gwTreat", "potable"]:
                     page.screenshot(path=str(screenshots / f"dev-photo-{node_id}.png"))
                 if node_id == "pc2":
+                    # Closing zoomed photo via #close returns to machine detail popup first, then second #close returns to schematic
+                    page.locator("#popup [data-zoom-photo]").first.click()
+                    assert page.locator(".photo-zoom-stage img").is_visible()
+                    page.locator("#close").click()
+                    assert page.locator("#popup").is_visible()
+                    assert page.locator(".photo-gallery").is_visible()
+                    page.locator("#close").click()
+                    assert not page.locator("#popup").is_visible()
+                    # Re-open popup and also verify #extra-action back from zoomed photo
+                    page.locator('#viewport [data-node="pc2"]').click()
                     page.locator("#popup [data-zoom-photo]").first.click()
                     assert page.locator(".photo-zoom-stage img").is_visible()
                     page.locator("#extra-action").click()
@@ -354,7 +364,8 @@ def verify_lesson(screenshots: Path | None) -> None:
                     page.locator("#ms-select").select_option("hiref_msw")
                     page.locator("[data-ms-photo-toggle]").click()
                     assert page.locator("#ms-canvas > img").is_visible()
-                    page.locator("[data-ms-photo-toggle]").click()
+                    page.locator("[data-ms-photo-close]").click()
+                    assert page.locator("#machine-site").is_visible()
                     assert page.locator("#ms-canvas > svg").is_visible()
                     # Verify mobile landscape fit inside Machine Mini-Site too
                     page.set_viewport_size({"width": 844, "height": 390})
@@ -370,6 +381,28 @@ def verify_lesson(screenshots: Path | None) -> None:
                     assert page.url == initial_app_url
                     continue
                 page.locator("#close").click()
+
+            # Verify zoomed photos on phone viewports (including scrolled multi-photo cards & compact 568x320) are never clipped
+            for ph_w, ph_h in [(844, 390), (844, 320), (667, 375), (568, 320)]:
+                page.set_viewport_size({"width": ph_w, "height": ph_h})
+                page.locator('#viewport [data-node="gwTreat"]').click()
+                page.evaluate("document.getElementById('popup-body').scrollTop = 200")
+                page.locator("#popup [data-zoom-photo]").nth(2).click()
+                fit_photo = page.evaluate("""() => {
+                    const br = document.getElementById('popup-body').getBoundingClientRect();
+                    const sr = document.querySelector('.photo-zoom-stage').getBoundingClientRect();
+                    const ir = document.querySelector('.photo-zoom-stage img').getBoundingClientRect();
+                    return sr.top >= br.top - 1 && sr.bottom <= br.bottom + 1 &&
+                           ir.top >= sr.top - 1 && ir.bottom <= sr.bottom + 1 &&
+                           ir.left >= sr.left - 1 && ir.right <= sr.right + 1 &&
+                           ir.height >= 120 && ir.width >= 60;
+                }""")
+                assert fit_photo, f"Zoomed photo clipped on mobile viewport {ph_w}x{ph_h}"
+                page.locator("#close").click()
+                assert page.locator("#popup").is_visible(), "Closing zoomed photo on phone must return to detail card"
+                page.locator("#close").click()
+                assert not page.locator("#popup").is_visible()
+            page.set_viewport_size({"width": 1440, "height": 900})
 
             # Verify interactive Sigle explorer & highlight-on-schematic jump (including photos for tags that have them)
             page.locator("#tags-btn").click()

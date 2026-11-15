@@ -56,6 +56,8 @@ footer{display:flex;align-items:center;justify-content:space-between;gap:14px;pa
 #orientation{display:none}
 dialog{padding:0;margin:auto;width:min(820px,calc(100vw - var(--safe-x-sum) - 24px));max-width:calc(100vw - var(--safe-x-sum) - 24px);max-height:calc(100dvh - var(--safe-y-sum) - 20px);border:1px solid var(--cp-border-strong);border-radius:16px;background:var(--cp-surface);color:var(--cp-text);box-shadow:var(--cp-shadow);overflow:hidden}
 dialog.wide{width:min(1120px,calc(100vw - var(--safe-x-sum) - 24px))}
+dialog.photo-mode{width:min(1040px,calc(100vw - var(--safe-x-sum) - 24px));height:min(700px,calc(100dvh - var(--safe-y-sum) - 20px))}
+dialog.photo-mode #popup-body{overflow:hidden;padding:12px 16px}
 dialog[open]{display:flex;flex-direction:column}
 dialog::backdrop{background:var(--cp-overlay)}
 .dialog-head{display:flex;align-items:center;gap:10px;padding:12px 18px;background:var(--cp-bg-elevated);border-bottom:1px solid var(--cp-border)}
@@ -89,8 +91,8 @@ a.btn-link{display:inline-flex;align-items:center;font:inherit;font-size:13px;fo
 .photo-gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px}
 .photo-card{margin:0;background:var(--cp-bg-elevated);border:1px solid var(--cp-border);border-radius:12px;padding:10px;display:flex;flex-direction:column;gap:7px;transition:border-color .15s ease}
 .photo-card:hover{border-color:var(--cp-accent)}
-.photo-frame{width:100%;height:150px;background:var(--cp-surface);border:1px solid var(--cp-border);border-radius:8px;padding:6px;display:flex;align-items:center;justify-content:center;cursor:zoom-in;overflow:hidden}
-.photo-frame img{max-width:100%;max-height:100%;width:auto;height:auto;object-fit:contain;border-radius:4px}
+.photo-frame{position:relative;width:100%;height:150px;background:var(--cp-surface);border:1px solid var(--cp-border);border-radius:8px;cursor:zoom-in;overflow:hidden;flex-shrink:0}
+.photo-frame img{position:absolute;inset:6px;width:calc(100% - 12px);height:calc(100% - 12px);object-fit:contain;object-position:center;display:block;border-radius:4px}
 .photo-meta{display:flex;flex-direction:column;gap:4px}
 .photo-meta strong{font-size:13.5px;line-height:1.3;color:var(--cp-text)}
 .photo-meta span{font-size:12.5px;line-height:1.38;color:var(--cp-text-muted)}
@@ -103,13 +105,14 @@ a.btn-link{display:inline-flex;align-items:center;font:inherit;font-size:13px;fo
 .ms-back-primary{background:var(--cp-accent);color:var(--cp-accent-fg);border-color:var(--cp-accent);font-weight:700;min-height:38px;padding:4px 12px;font-size:13.5px}
 .ms-back-primary:hover{background:var(--cp-accent-hover);border-color:var(--cp-accent-hover)}
 .ms-select{min-height:38px;max-width:290px;font-weight:600;font-size:13.5px}
-.ms-body{display:grid;grid-template-columns:minmax(0,1.42fr) minmax(280px,1fr);gap:12px;padding:8px max(var(--safe-right),14px) 8px max(var(--safe-left),14px);min-height:0;overflow:hidden}
+.ms-body{display:grid;grid-template-columns:minmax(0,1.42fr) minmax(280px,1fr);grid-template-rows:minmax(0,1fr);gap:12px;padding:8px max(var(--safe-right),14px) 8px max(var(--safe-left),14px);min-height:0;overflow:hidden}
 .ms-stage-col{display:flex;flex-direction:column;gap:8px;min-height:0;min-width:0}
 .ms-mode-bar{display:flex;align-items:center;gap:6px;flex-wrap:wrap}
 .ms-mode-bar button{min-height:34px;padding:4px 11px;font-size:13px}
 .ms-mode-bar .ms-photo-toggle{margin-left:auto}
-.ms-canvas{flex:1;min-height:0;background:var(--cp-bg-elevated);border:1px solid var(--cp-border);border-radius:14px;padding:6px;display:flex;align-items:center;justify-content:center;overflow:hidden}
-.ms-canvas>svg,.ms-canvas>img{width:100%;height:100%;max-width:100%;max-height:100%;object-fit:contain}
+.ms-canvas{position:relative;flex:1;min-height:0;background:var(--cp-bg-elevated);border:1px solid var(--cp-border);border-radius:14px;overflow:hidden}
+.ms-canvas>svg,.ms-canvas>img{position:absolute;inset:6px;width:calc(100% - 12px);height:calc(100% - 12px);object-fit:contain;object-position:center;display:block}
+.ms-photo-close{position:absolute;top:10px;right:10px;z-index:2;min-height:32px;padding:4px 11px;font-size:12.5px;font-weight:600;background:var(--cp-panel-strong);border:1px solid var(--cp-border-strong);box-shadow:var(--cp-shadow)}
 .ms-summary-banner{padding:9px 13px;background:var(--cp-surface);border:1px solid var(--cp-border);border-left:4px solid var(--cp-accent);border-radius:10px;font-size:14px;line-height:1.45}
 .ms-info-col{background:var(--cp-surface);border:1px solid var(--cp-border);border-radius:14px;padding:12px 14px;display:flex;flex-direction:column;gap:9px;min-height:0;overflow-y:auto;overscroll-behavior:contain}
 .ms-info-col h2{margin:0;font-size:17.5px;line-height:1.28}
@@ -129,11 +132,12 @@ a.btn-link{display:inline-flex;align-items:center;font:inherit;font-size:13px;fo
 .part-pin:hover .pin-ring,.part-pin.active .pin-ring{fill:var(--cp-accent)}
 .part-pin:hover .pin-num,.part-pin.active .pin-num{fill:var(--cp-accent-fg)}
 .tag-photo-box{display:grid;grid-template-columns:120px minmax(0,1fr);gap:10px;align-items:center;background:var(--cp-surface);border:1px solid var(--cp-border);border-radius:10px;padding:8px}
-.tag-photo-box .photo-frame{height:104px;border:none;padding:2px}
-.photo-zoom-view{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(220px,.85fr);gap:16px;align-items:center;min-height:0;flex:1}
-.photo-zoom-stage{height:min(58dvh,440px);background:var(--cp-surface);border:1px solid var(--cp-border);border-radius:12px;padding:12px;display:flex;align-items:center;justify-content:center;overflow:hidden}
-.photo-zoom-stage img{max-width:100%;max-height:100%;object-fit:contain}
-.photo-zoom-info{display:flex;flex-direction:column;gap:10px;background:var(--cp-bg-elevated);border:1px solid var(--cp-border);border-radius:12px;padding:14px}
+.tag-photo-box .photo-frame{height:104px;border:none}
+.tag-photo-box .photo-frame img{inset:3px;width:calc(100% - 6px);height:calc(100% - 6px)}
+.photo-zoom-view{display:grid;grid-template-columns:minmax(0,1.55fr) minmax(210px,.85fr);grid-template-rows:minmax(0,1fr);gap:16px;align-items:stretch;width:100%;height:100%;min-height:0;flex:1}
+.photo-zoom-stage{position:relative;width:100%;height:100%;min-height:0;min-width:0;background:var(--cp-surface);border:1px solid var(--cp-border);border-radius:12px;overflow:hidden;cursor:zoom-out}
+.photo-zoom-stage img{position:absolute;inset:8px;width:calc(100% - 16px);height:calc(100% - 16px);max-width:none;max-height:none;object-fit:contain;object-position:center;display:block}
+.photo-zoom-info{display:flex;flex-direction:column;justify-content:flex-start;gap:10px;background:var(--cp-bg-elevated);border:1px solid var(--cp-border);border-radius:12px;padding:14px;min-height:0;max-height:100%;overflow-y:auto;overscroll-behavior:contain}
 .photo-zoom-info h3{margin:0;font-size:18px}
 .photo-zoom-info p{margin:0;font-size:14.5px;color:var(--cp-text-muted)}
 @media(max-width:1380px){.brand{display:none}}
@@ -157,6 +161,10 @@ a.btn-link{display:inline-flex;align-items:center;font:inherit;font-size:13px;fo
   .hint-text{display:none}
   dialog{width:calc(100vw - max(var(--safe-x-sum),88px) - 16px);max-width:calc(100vw - max(var(--safe-x-sum),88px) - 16px);max-height:calc(100dvh - max(var(--safe-y-sum),12px) - 12px);border-radius:14px}
   dialog.wide{width:calc(100vw - max(var(--safe-x-sum),88px) - 16px)}
+  dialog.photo-mode{width:calc(100vw - max(var(--safe-x-sum),88px) - 16px);height:calc(100dvh - max(var(--safe-y-sum),12px) - 12px)}
+  dialog.photo-mode .dialog-head{padding:5px 12px}
+  dialog.photo-mode #popup-body{padding:8px 12px}
+  dialog.photo-mode .dialog-foot{padding:4px 12px}
   .dialog-head{padding:7px 14px}
   .dialog-head h2{font-size:16px}
   .dialog-head button,.dialog-foot button,a.btn-link{min-height:32px;padding:3px 10px;font-size:12.5px}
@@ -169,14 +177,19 @@ a.btn-link{display:inline-flex;align-items:center;font:inherit;font-size:13px;fo
   .tag-detail-card h3{font-size:15px}
   .tag-detail-card p{font-size:13px;line-height:1.42}
   .photo-frame{height:112px}
-  .photo-zoom-stage{height:min(50dvh,230px);padding:6px}
+  .photo-zoom-view{grid-template-columns:minmax(0,1.65fr) minmax(175px,.85fr);gap:10px}
+  .photo-zoom-stage img{inset:6px;width:calc(100% - 12px);height:calc(100% - 12px)}
+  .photo-zoom-info{padding:10px 12px;gap:6px}
+  .photo-zoom-info h3{font-size:15px}
+  .photo-zoom-info p{font-size:13px;line-height:1.42}
   .tag-photo-box{grid-template-columns:92px minmax(0,1fr);padding:6px}
   .tag-photo-box .photo-frame{height:78px}
   .ms-head{padding:3px max(var(--safe-right),14px) 3px max(var(--safe-left),14px);gap:4px}
   .ms-head button,.ms-head select{min-height:33px;padding:2px 8px;font-size:12px}
   .ms-select{max-width:190px}
   .ms-body{grid-template-columns:minmax(0,1.32fr) minmax(220px,1fr);gap:8px;padding:4px max(var(--safe-right),12px) 4px max(var(--safe-left),12px)}
-  .ms-mode-bar button{min-height:28px;padding:2px 8px;font-size:11.5px}
+  .ms-mode-bar{flex-wrap:nowrap;overflow-x:auto}
+  .ms-mode-bar button{min-height:28px;padding:2px 8px;font-size:11.5px;flex-shrink:0}
   .ms-summary-banner{padding:6px 10px;font-size:12px;line-height:1.36}
   .ms-info-col{padding:8px 10px;gap:6px}
   .ms-info-col h2{font-size:14.5px}
@@ -197,8 +210,12 @@ a.btn-link{display:inline-flex;align-items:center;font:inherit;font-size:13px;fo
   .stepper .step-arrow,#guide,#theme-btn,#ms-theme{min-width:31px;padding-inline:6px}
   .season-group button,.tools-group button,.tools-group select,.ms-head button,.ms-head select{padding:2px 6px;font-size:11.5px}
   .ms-select{max-width:128px}
-  dialog,dialog.wide{width:calc(100vw - max(var(--safe-x-sum),64px) - 12px);max-width:calc(100vw - max(var(--safe-x-sum),64px) - 12px)}
-  .tags-explorer,.topic-split,.photo-zoom-view{grid-template-columns:1fr}
+  dialog,dialog.wide,dialog.photo-mode{width:calc(100vw - max(var(--safe-x-sum),64px) - 12px);max-width:calc(100vw - max(var(--safe-x-sum),64px) - 12px)}
+  .tags-explorer,.topic-split{grid-template-columns:1fr}
+  .photo-zoom-view{grid-template-columns:minmax(0,1.45fr) minmax(150px,1fr);gap:8px}
+}
+@media(max-width:460px){
+  .photo-zoom-view{grid-template-columns:1fr;grid-template-rows:minmax(0,1.4fr) minmax(0,1fr)}
 }
 @media(orientation:portrait){
   body{grid-template-rows:auto minmax(0,1fr)}
@@ -356,6 +373,7 @@ a.btn-link{display:inline-flex;align-items:center;font:inherit;font-size:13px;fo
     selectedTag: 'P1',
     docKey: null,
     zoomPhoto: null,
+    savedPopupScroll: 0,
     highlightTag: null,
     activeMachine: null,
     machineMode: 0,
@@ -516,7 +534,7 @@ a.btn-link{display:inline-flex;align-items:center;font:inherit;font-size:13px;fo
     ).join('') + (ph ? `<button type="button" class="ms-photo-toggle action-accent" data-ms-photo-toggle="1" aria-pressed="${state.machinePhotoView}">${esc(state.machinePhotoView ? MU.cutawayPreviewBtn : MU.photoPreviewBtn)}</button>` : '');
 
     if (state.machinePhotoView && ph) {
-      $('ms-canvas').innerHTML = `<img src="${esc(ph.src)}" alt="${esc(ph.title)}">`;
+      $('ms-canvas').innerHTML = `<img src="${esc(ph.src)}" alt="${esc(ph.title)}"><button type="button" class="ms-photo-close" data-ms-photo-close="1">✕ ${esc(L.close)}</button>`;
       $('ms-mode-summary').textContent = ph.caption;
     } else {
       $('ms-canvas').innerHTML = renderMachineCutaway(state.activeMachine, modeIdx, partIdx, state.lang);
@@ -550,7 +568,7 @@ a.btn-link{display:inline-flex;align-items:center;font:inherit;font-size:13px;fo
         cycleStage: state.cycleStage,
         tagCat: state.tagCat,
         selectedTag: state.selectedTag,
-        zoomPhoto: state.zoomPhoto
+        zoomPhoto: null
       };
       closingForMachine = true;
       $('popup').close();
@@ -621,9 +639,11 @@ a.btn-link{display:inline-flex;align-items:center;font:inherit;font-size:13px;fo
     $('previous').textContent = U.prevPage;
     $('next').textContent = U.nextPage;
     $('extra-action').hidden = true;
-    $('popup').classList.toggle('wide', state.modalMode === 'cycle' || state.modalMode === 'tags' || !!state.zoomPhoto || topicPhotos.length > 0);
+    const isPhotoZoom = Boolean(state.zoomPhoto && L.photos?.[state.zoomPhoto]);
+    $('popup').classList.toggle('wide', state.modalMode === 'cycle' || state.modalMode === 'tags' || isPhotoZoom || topicPhotos.length > 0);
+    $('popup').classList.toggle('photo-mode', isPhotoZoom);
 
-    if (state.zoomPhoto && L.photos?.[state.zoomPhoto]) {
+    if (isPhotoZoom) {
       const ph = L.photos[state.zoomPhoto];
       const mTarget = photoToMachine(state.zoomPhoto);
       const mBtn = mTarget ? `<div><button type="button" class="action-accent" data-open-machine="${esc(mTarget.id)}" data-machine-mode="${mTarget.mode}">${esc(mCopy().ui.openMachineBtn)}</button></div>` : '';
@@ -636,7 +656,7 @@ a.btn-link{display:inline-flex;align-items:center;font:inherit;font-size:13px;fo
       $('extra-action').hidden = false;
       $('extra-action').textContent = `↩ ${state.modalMode === 'tags' ? state.selectedTag : topicObj.title}`;
       $('popup-body').innerHTML = `<div class="photo-zoom-view">` +
-        `<div class="photo-zoom-stage"><img src="${esc(ph.src)}" alt="${esc(ph.title)}"></div>` +
+        `<div class="photo-zoom-stage" data-zoom-out="1"><img src="${esc(ph.src)}" alt="${esc(ph.title)}"></div>` +
         `<div class="photo-zoom-info"><h3>${esc(ph.title)}</h3><p>${esc(ph.caption)}</p>${mBtn}` +
         `</div></div>`;
       return;
@@ -752,10 +772,25 @@ a.btn-link{display:inline-flex;align-items:center;font:inherit;font-size:13px;fo
     }
   }
 
+  function stepBackPopup() {
+    if (state.zoomPhoto) {
+      const restoreScroll = state.savedPopupScroll || 0;
+      state.zoomPhoto = null;
+      state.savedPopupScroll = 0;
+      renderModal();
+      $('popup-body').scrollTop = restoreScroll;
+      $('close').focus({ preventScroll: true });
+      return true;
+    }
+    $('popup').close();
+    return false;
+  }
+
   function openTopic(topic, trigger) {
     if (!$('popup').open) opener = trigger;
     state.docKey = null;
     state.zoomPhoto = null;
+    state.savedPopupScroll = 0;
     if (topic.startsWith('tag-')) {
       const code = topic.slice(4);
       state.prevTopic = ($('popup').open && state.modalMode === 'topic') ? state.topic : null;
@@ -772,6 +807,7 @@ a.btn-link{display:inline-flex;align-items:center;font:inherit;font-size:13px;fo
       state.page = 0;
     }
     renderModal();
+    $('popup-body').scrollTop = 0;
     if (!$('popup').open) {
       $('popup').showModal();
       $('close').focus({ preventScroll: true });
@@ -791,6 +827,11 @@ a.btn-link{display:inline-flex;align-items:center;font:inherit;font-size:13px;fo
       renderMachineSite();
       return;
     }
+    if (e.target.closest('[data-ms-photo-close]')) {
+      state.machinePhotoView = false;
+      renderMachineSite();
+      return;
+    }
     if (e.target.closest('[data-ms-photo-toggle]')) {
       state.machinePhotoView = !state.machinePhotoView;
       renderMachineSite();
@@ -803,10 +844,16 @@ a.btn-link{display:inline-flex;align-items:center;font:inherit;font-size:13px;fo
       renderMachineSite();
       return;
     }
+    if (e.target.closest('[data-zoom-out]')) {
+      stepBackPopup();
+      return;
+    }
     const zoomEl = e.target.closest('[data-zoom-photo]');
     if (zoomEl) {
+      state.savedPopupScroll = $('popup-body').scrollTop;
       state.zoomPhoto = zoomEl.dataset.zoomPhoto;
       renderModal();
+      $('popup-body').scrollTop = 0;
       return;
     }
     const stageEl = e.target.closest('#popup [data-stage]');
@@ -873,7 +920,14 @@ a.btn-link{display:inline-flex;align-items:center;font:inherit;font-size:13px;fo
   document.addEventListener('keydown', e => {
     if (e.key === 'Escape' && state.activeMachine) {
       e.preventDefault();
-      closeMachineToMap();
+      if (state.machinePhotoView) {
+        state.machinePhotoView = false;
+        renderMachineSite();
+      } else if (state.savedModal) {
+        closeMachineToCard();
+      } else {
+        closeMachineToMap();
+      }
       return;
     }
     if ((e.key === 'Enter' || e.key === ' ') && e.target.matches('[data-part-idx]')) {
@@ -885,8 +939,10 @@ a.btn-link{display:inline-flex;align-items:center;font:inherit;font-size:13px;fo
     }
     if ((e.key === 'Enter' || e.key === ' ') && e.target.matches('[data-zoom-photo]')) {
       e.preventDefault();
+      state.savedPopupScroll = $('popup-body').scrollTop;
       state.zoomPhoto = e.target.dataset.zoomPhoto;
       renderModal();
+      $('popup-body').scrollTop = 0;
       return;
     }
     if ((e.key === 'Enter' || e.key === ' ') && e.target.matches('g[data-topic]')) {
@@ -933,8 +989,7 @@ a.btn-link{display:inline-flex;align-items:center;font:inherit;font-size:13px;fo
 
   $('extra-action').addEventListener('click', () => {
     if (state.zoomPhoto) {
-      state.zoomPhoto = null;
-      renderModal();
+      stepBackPopup();
     } else if (state.modalMode === 'tags' && state.prevTopic) {
       state.modalMode = 'topic';
       state.topic = state.prevTopic;
@@ -971,12 +1026,18 @@ a.btn-link{display:inline-flex;align-items:center;font:inherit;font-size:13px;fo
       }
     }
   });
-  $('close').addEventListener('click', () => $('popup').close());
+  $('close').addEventListener('click', () => stepBackPopup());
+  $('popup').addEventListener('cancel', e => {
+    if (state.zoomPhoto) {
+      e.preventDefault();
+      stepBackPopup();
+    }
+  });
 
   $('popup').addEventListener('click', e => {
     const r = $('popup').getBoundingClientRect();
     if (e.target === $('popup') && (e.clientX < r.left || e.clientX > r.right || e.clientY < r.top || e.clientY > r.bottom)) {
-      $('popup').close();
+      stepBackPopup();
     }
   });
   $('ms-to-map').addEventListener('click', () => closeMachineToMap(false));
