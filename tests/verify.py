@@ -131,11 +131,8 @@ def verify_browser(screenshot_dir: Path | None) -> None:
             page.locator('[data-map="overview"]').click()
             page.locator('#overview [data-node="pc1"]').click()
             page.locator('.source > summary').filter(has_text="S01 /").click()
-            page.locator('[data-pdf="S01"]').click()
-            assert page.locator(".pdf-frame").get_attribute("src") == "documents/hiref-ksw.pdf"
+            assert page.locator('[data-pdf], .pdf-frame, a[href]').count() == 0
             assert page.url == initial_url
-            page.locator('[data-pdf="S01"]').click()
-            assert page.locator(".pdf-frame").count() == 0
             page.keyboard.press("Escape")
             page.locator("#guide-info").click()
             assert page.locator(".component").count() == 34

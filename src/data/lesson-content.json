@@ -98,7 +98,6 @@
       "riserBP": "Zona BP · 48 °C",
       "devBadge": "DEV · Anteprima con foto",
       "photoLabel": "Foto da scheda tecnica ufficiale",
-      "openDatasheet": "↗ Scheda PDF",
       "zoomPhotoHint": "Tocca la foto per ingrandire"
     },
     "steps": [
@@ -912,79 +911,66 @@
     "photos": {
       "hiref_msw": {
         "src": "documents/photos/hiref-msw.jpg",
-        "doc": "documents/hiref-msw.pdf",
         "title": "HiRef serie MSW (PC2)",
         "caption": "Pompa di calore polivalente acqua-acqua con compressori scroll (brochure ufficiale HiRef MSW)."
       },
       "hiref_ksw": {
         "src": "documents/photos/hiref-ksw.jpg",
-        "doc": "documents/hiref-ksw.pdf",
         "title": "HiRef serie KSW (PC1)",
         "caption": "Pompa di calore acqua-acqua per alte temperature di mandata fino a 70–80 °C (brochure ufficiale HiRef KSW)."
       },
       "dab_ss6": {
         "src": "documents/photos/dab-ss6-borehole.jpg",
-        "doc": "documents/dab-ss6.pdf",
         "title": "DAB serie SS6 / SS8 + motore TR (P11, P10)",
         "caption": "Elettropompa sommersa multistadio in acciaio inox per pozzi profondi (scheda ufficiale DAB SS6)."
       },
       "nobel_nic": {
         "src": "documents/photos/nobel-nic.jpg",
-        "doc": "documents/nobel-nic.pdf",
         "title": "Nobel serie NIC-K (T6)",
         "caption": "Separatore centrifugo a idrociclone per sabbia e solidi pesanti (scheda ufficiale Nobel NIC-K)."
       },
       "nobel_ml": {
         "src": "documents/photos/nobel-ml.jpg",
-        "doc": "documents/nobel-ml.pdf",
         "title": "Nobel serie ML (T7)",
         "caption": "Filtro autopulente motorizzato da 100 µm con quadro elettronico di lavaggio (scheda ufficiale Nobel ML)."
       },
       "elbi_dl": {
         "src": "documents/photos/elbi-dl-ce.jpg",
-        "doc": "documents/elbi-dl-ce.pdf",
         "title": "ELBI serie DL-CE (S4)",
         "caption": "Serbatoio preautoclave verticale a membrana intercambiabile da 1.000 L (scheda ELBI DL-CE)."
       },
       "dab_dcm": {
         "src": "documents/photos/dab-dcm-ge.jpg",
-        "doc": "documents/dab-dcm-ge.pdf",
         "title": "DAB serie DCM-GE gemellare inverter (P05, P07, P08, P09)",
         "caption": "Elettropompa gemellare in-line con inverter MCE/C integrati (scheda ufficiale DAB DCM-GE)."
       },
       "dab_cme": {
         "src": "documents/photos/dab-cme-ge.jpg",
-        "doc": "documents/dab-dcm-ge.pdf",
         "title": "DAB serie CME / DCP-GE in-line inverter (P04, P06)",
         "caption": "Circolatore elettronico in-line flangiato con inverter MCE/C a bordo (scheda ufficiale DAB CME/DCM-GE)."
       },
       "dab_evoplus": {
         "src": "documents/photos/dab-evoplus.jpg",
-        "doc": "documents/dab-evoplus-manual.pdf",
         "title": "DAB EVOPLUS SAN (P01, P02, P03)",
         "caption": "Circolatore elettronico a rotore bagnato per circuiti di acqua calda sanitaria (manuale ufficiale DAB EVOPLUS)."
       },
       "spade_ambra": {
         "src": "documents/photos/spade-ambra.jpg",
-        "doc": "documents/spade-ambra.pdf",
         "title": "Spadeitalia AMBRA DN100 (T1)",
         "caption": "Filtro chiarificatore a letto di quarzite sull'ingresso dell'acqua potabile (scheda ufficiale Spade AMBRA)."
       },
       "spade_corallo": {
         "src": "documents/photos/spade-corallo23.jpg",
-        "doc": "documents/spade-corallo23-datasheet.pdf",
         "title": "Spadeitalia CORALLO 23 CLK (T2)",
         "caption": "Addolcitore volumetrico a resine con tino salamoia per la protezione anticalcare dell'ACS (scheda Spade CORALLO 23)."
       },
       "dab_nkve": {
         "src": "documents/photos/dab-nkve.jpg",
-        "doc": "documents/dab-nkve.pdf",
         "title": "DAB serie NKVE con inverter MCE/P (GP1, GP2)",
         "caption": "Elettropompe verticali multistadio in acciaio inox impiegate nei gruppi di spinta GP1 e GP2 (scheda ufficiale DAB NKVE)."
       },
       "dab_micra": {
         "src": "documents/photos/dab-micra-hs.jpg",
-        "doc": "documents/dab-micra-hs.pdf",
         "title": "DAB MICRA HS + Active Driver (P12 irrigazione)",
         "caption": "Pompa sommersa compatta ad alta velocità con inverter per recupero acque meteoriche (scheda ufficiale DAB MICRA HS)."
       }
@@ -1089,7 +1075,6 @@
       "riserBP": "BP zone · 48 °C",
       "devBadge": "DEV · Photo preview",
       "photoLabel": "Photo from official datasheet",
-      "openDatasheet": "↗ PDF Datasheet",
       "zoomPhotoHint": "Select photo to enlarge"
     },
     "steps": [
@@ -1903,79 +1888,66 @@
     "photos": {
       "hiref_msw": {
         "src": "documents/photos/hiref-msw.jpg",
-        "doc": "documents/hiref-msw.pdf",
         "title": "HiRef MSW series (PC2)",
         "caption": "Multipurpose water-to-water scroll heat pump (official HiRef MSW brochure)."
       },
       "hiref_ksw": {
         "src": "documents/photos/hiref-ksw.jpg",
-        "doc": "documents/hiref-ksw.pdf",
         "title": "HiRef KSW series (PC1)",
         "caption": "High-temperature water-to-water heat pump up to 70–80 °C supply (official HiRef KSW brochure)."
       },
       "dab_ss6": {
         "src": "documents/photos/dab-ss6-borehole.jpg",
-        "doc": "documents/dab-ss6.pdf",
         "title": "DAB SS6 / SS8 borehole pump + TR motor (P11, P10)",
         "caption": "Stainless-steel multistage submersible borehole pump and motor (official DAB SS6 sheet)."
       },
       "nobel_nic": {
         "src": "documents/photos/nobel-nic.jpg",
-        "doc": "documents/nobel-nic.pdf",
         "title": "Nobel NIC-K hydrocyclone (T6)",
         "caption": "Centrifugal hydrocyclone sand and heavy-solids separator (official Nobel NIC-K sheet)."
       },
       "nobel_ml": {
         "src": "documents/photos/nobel-ml.jpg",
-        "doc": "documents/nobel-ml.pdf",
         "title": "Nobel ML self-cleaning filter (T7)",
         "caption": "100 µm motorized self-cleaning screen filter with control panel (official Nobel ML sheet)."
       },
       "elbi_dl": {
         "src": "documents/photos/elbi-dl-ce.jpg",
-        "doc": "documents/elbi-dl-ce.pdf",
         "title": "ELBI DL-CE bladder vessel (S4)",
         "caption": "1,000 L vertical replaceable-bladder pressure vessel (ELBI DL-CE datasheet)."
       },
       "dab_dcm": {
         "src": "documents/photos/dab-dcm-ge.jpg",
-        "doc": "documents/dab-dcm-ge.pdf",
         "title": "DAB DCM-GE twin inverter inline pump (P05, P07, P08, P09)",
         "caption": "Twin inline circulation pump with integrated MCE/C inverters (official DAB DCM-GE sheet)."
       },
       "dab_cme": {
         "src": "documents/photos/dab-cme-ge.jpg",
-        "doc": "documents/dab-dcm-ge.pdf",
         "title": "DAB CME / DCP-GE inline inverter pump (P04, P06)",
         "caption": "Flanged inline electronic circulator with onboard MCE/C drive (official DAB CME/DCM-GE sheet)."
       },
       "dab_evoplus": {
         "src": "documents/photos/dab-evoplus.jpg",
-        "doc": "documents/dab-evoplus-manual.pdf",
         "title": "DAB EVOPLUS SAN circulator (P01, P02, P03)",
         "caption": "Wet-rotor electronic circulator for domestic hot-water loops (official DAB EVOPLUS manual)."
       },
       "spade_ambra": {
         "src": "documents/photos/spade-ambra.jpg",
-        "doc": "documents/spade-ambra.pdf",
         "title": "Spadeitalia AMBRA DN100 filter (T1)",
         "caption": "Quartz-bed clarifying filter on the potable mains intake (official Spade AMBRA sheet)."
       },
       "spade_corallo": {
         "src": "documents/photos/spade-corallo23.jpg",
-        "doc": "documents/spade-corallo23-datasheet.pdf",
         "title": "Spadeitalia CORALLO 23 CLK softener (T2)",
         "caption": "Volumetric ion-exchange water softener with brine tank for DHW scale protection (Spade CORALLO 23 sheet)."
       },
       "dab_nkve": {
         "src": "documents/photos/dab-nkve.jpg",
-        "doc": "documents/dab-nkve.pdf",
         "title": "DAB NKVE multistage pump with MCE/P inverter (GP1, GP2)",
         "caption": "Vertical multistage stainless-steel inverter pumps used in booster sets GP1 and GP2 (official DAB NKVE sheet)."
       },
       "dab_micra": {
         "src": "documents/photos/dab-micra-hs.jpg",
-        "doc": "documents/dab-micra-hs.pdf",
         "title": "DAB MICRA HS + Active Driver (P12 irrigation)",
         "caption": "Compact high-speed submersible pump with inverter for rainwater irrigation (official DAB MICRA HS sheet)."
       }
@@ -2080,7 +2052,6 @@
       "riserBP": "低压区 BP · 48 °C",
       "devBadge": "DEV · 实物图预览版",
       "photoLabel": "官方技术样本实物图",
-      "openDatasheet": "↗ 打开 PDF 样本",
       "zoomPhotoHint": "点击图片可放大查看"
     },
     "steps": [
@@ -2894,79 +2865,66 @@
     "photos": {
       "hiref_msw": {
         "src": "documents/photos/hiref-msw.jpg",
-        "doc": "documents/hiref-msw.pdf",
         "title": "HiRef MSW 系列（PC2）",
         "caption": "水源多功能涡旋式热泵机组（HiRef MSW 官方样本）。"
       },
       "hiref_ksw": {
         "src": "documents/photos/hiref-ksw.jpg",
-        "doc": "documents/hiref-ksw.pdf",
         "title": "HiRef KSW 系列（PC1）",
         "caption": "高温出水型水源热泵机组，最高出水可达 70–80 °C（HiRef KSW 官方样本）。"
       },
       "dab_ss6": {
         "src": "documents/photos/dab-ss6-borehole.jpg",
-        "doc": "documents/dab-ss6.pdf",
         "title": "DAB SS6 / SS8 深井潜水泵与 TR 电机（P11、P10）",
         "caption": "深井不锈钢多级潜水电泵及配套潜水电机（DAB SS6 官方技术样本）。"
       },
       "nobel_nic": {
         "src": "documents/photos/nobel-nic.jpg",
-        "doc": "documents/nobel-nic.pdf",
         "title": "Nobel NIC-K 旋流除砂器（T6）",
         "caption": "井水重质泥沙离心旋流分离器（Nobel NIC-K 官方样本）。"
       },
       "nobel_ml": {
         "src": "documents/photos/nobel-ml.jpg",
-        "doc": "documents/nobel-ml.pdf",
         "title": "Nobel ML 全自动自清洗过滤器（T7）",
         "caption": "带电控冲洗箱的 100 µm 电动自清洗过滤器（Nobel ML 官方样本）。"
       },
       "elbi_dl": {
         "src": "documents/photos/elbi-dl-ce.jpg",
-        "doc": "documents/elbi-dl-ce.pdf",
         "title": "ELBI DL-CE 隔膜稳压膨胀罐（S4）",
         "caption": "1,000 L 立式可更换隔膜压力缓冲罐（ELBI DL-CE 样本）。"
       },
       "dab_dcm": {
         "src": "documents/photos/dab-dcm-ge.jpg",
-        "doc": "documents/dab-dcm-ge.pdf",
         "title": "DAB DCM-GE 双联变频管道循环泵（P05、P07、P08、P09）",
         "caption": "集成 MCE/C 变频器的双联管道循环泵（DAB DCM-GE 官方样本）。"
       },
       "dab_cme": {
         "src": "documents/photos/dab-cme-ge.jpg",
-        "doc": "documents/dab-dcm-ge.pdf",
         "title": "DAB CME / DCP-GE 变频管道循环泵（P04、P06）",
         "caption": "法兰连接立式变频管道循环泵（DAB CME/DCM-GE 官方样本）。"
       },
       "dab_evoplus": {
         "src": "documents/photos/dab-evoplus.jpg",
-        "doc": "documents/dab-evoplus-manual.pdf",
         "title": "DAB EVOPLUS SAN 卫生热水循环泵（P01、P02、P03）",
         "caption": "生活热水系统专用湿转子电子循环泵（DAB EVOPLUS 官方手册）。"
       },
       "spade_ambra": {
         "src": "documents/photos/spade-ambra.jpg",
-        "doc": "documents/spade-ambra.pdf",
         "title": "Spadeitalia AMBRA DN100 石英砂过滤器（T1）",
         "caption": "饮用水进水石英砂澄清过滤罐（Spade AMBRA 官方样本）。"
       },
       "spade_corallo": {
         "src": "documents/photos/spade-corallo23.jpg",
-        "doc": "documents/spade-corallo23-datasheet.pdf",
         "title": "Spadeitalia CORALLO 23 CLK 全自动软水器（T2）",
         "caption": "带盐箱的流量型离子交换软水设备，防止生活热水结垢（Spade CORALLO 23 样本）。"
       },
       "dab_nkve": {
         "src": "documents/photos/dab-nkve.jpg",
-        "doc": "documents/dab-nkve.pdf",
         "title": "DAB NKVE 立式多级变频增压泵（GP1、GP2）",
         "caption": "用于 GP1、GP2 恒压供水机组的立式多级不锈钢变频泵（DAB NKVE 官方样本）。"
       },
       "dab_micra": {
         "src": "documents/photos/dab-micra-hs.jpg",
-        "doc": "documents/dab-micra-hs.pdf",
         "title": "DAB MICRA HS 潜水泵与变频控制器（P12 雨水灌溉）",
         "caption": "用于雨水回收灌溉的高速紧凑型潜水泵及变频器（DAB MICRA HS 官方样本）。"
       }

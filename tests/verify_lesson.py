@@ -325,12 +325,11 @@ def verify_lesson(screenshots: Path | None) -> None:
                 if screenshots and width == 390:
                     page.screenshot(path=str(screenshots / "portrait-390.png"))
 
-            # Verify public datasheets open inside guide modal & dark theme works
+            # Verify Guide modal opens cleanly without PDF links & dark theme works
             page.set_viewport_size({"width": 1440, "height": 900})
             page.locator("#guide").click()
-            for doc in ["msw", "ksw"]:
-                page.locator(f'[data-document="{doc}"]').click()
-                assert page.locator("iframe.doc-viewer").get_attribute("src") == f"documents/hiref-{doc}.pdf"
+            assert page.locator("#popup").is_visible()
+            assert page.locator("#popup a[href], #popup [data-document]").count() == 0
             page.locator("#close").click()
             page.locator("#theme-btn").click()
             assert page.locator("html").get_attribute("data-theme") == "dark"
@@ -341,10 +340,7 @@ def verify_lesson(screenshots: Path | None) -> None:
 
             assert not errors, errors
             assert not [r for r in requests if r.startswith(("http:", "https:"))]
-            # Main viewport must have zero page-jumping links; any link inside #popup must open external PDF/doc in new tab
-            assert page.locator("main a[href], header a[href], footer a[href]").count() == 0
-            for href in page.locator("#popup a[href]").evaluate_all("as => as.map(a => a.getAttribute('href') + '|' + a.getAttribute('target'))"):
-                assert not href.startswith("#") and href.endswith("|_blank"), f"Unexpected link {href}"
+            assert page.locator("a[href]").count() == 0, "Zero links allowed anywhere in the app"
             context.close()
             print("PASS: 3 sequential steps (90 combinations), continuous rAF animation, PC vs mobile details, portrait + PC invite, cycle zoom, Sigle explorer, accurate DHW recirculation and privacy")
         finally:

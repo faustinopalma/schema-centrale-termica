@@ -360,8 +360,7 @@ a.btn-link{display:inline-flex;align-items:center;font:inherit;font-size:13px;fo
       `<img src="${esc(ph.src)}" alt="${esc(ph.title)}" loading="lazy">` +
       `</div>` +
       `<figcaption class="photo-meta"><strong>${esc(ph.title)}</strong><span>${esc(ph.caption)}</span>` +
-      `<div class="photo-actions"><small>🔍 ${esc(U.zoomPhotoHint)}</small>` +
-      `<a class="btn-link" href="${esc(ph.doc)}" target="_blank" rel="noopener">${esc(U.openDatasheet)}</a></div>` +
+      `<div class="photo-actions"><small>🔍 ${esc(U.zoomPhotoHint)}</small></div>` +
       `</figcaption></figure>`;
   }
 
@@ -373,7 +372,7 @@ a.btn-link{display:inline-flex;align-items:center;font:inherit;font-size:13px;fo
     $('previous').textContent = U.prevPage;
     $('next').textContent = U.nextPage;
     $('extra-action').hidden = true;
-    $('popup').classList.toggle('wide', state.modalMode === 'cycle' || state.modalMode === 'tags' || !!state.docKey || !!state.zoomPhoto || topicPhotos.length > 0);
+    $('popup').classList.toggle('wide', state.modalMode === 'cycle' || state.modalMode === 'tags' || !!state.zoomPhoto || topicPhotos.length > 0);
 
     if (state.zoomPhoto && L.photos?.[state.zoomPhoto]) {
       const ph = L.photos[state.zoomPhoto];
@@ -388,7 +387,6 @@ a.btn-link{display:inline-flex;align-items:center;font:inherit;font-size:13px;fo
       $('popup-body').innerHTML = `<div class="photo-zoom-view">` +
         `<div class="photo-zoom-stage"><img src="${esc(ph.src)}" alt="${esc(ph.title)}"></div>` +
         `<div class="photo-zoom-info"><h3>${esc(ph.title)}</h3><p>${esc(ph.caption)}</p>` +
-        `<div><a class="btn-link" href="${esc(ph.doc)}" target="_blank" rel="noopener">${esc(U.openDatasheet)}</a></div>` +
         `</div></div>`;
       return;
     }
@@ -445,8 +443,7 @@ a.btn-link{display:inline-flex;align-items:center;font:inherit;font-size:13px;fo
         `<div class="photo-frame" data-zoom-photo="${esc(sel.photo)}" role="button" tabindex="0" aria-label="${esc(tagPh.title)}">` +
         `<img src="${esc(tagPh.src)}" alt="${esc(tagPh.title)}" loading="lazy"></div>` +
         `<div class="photo-meta"><strong>${esc(tagPh.title)}</strong><span>${esc(tagPh.caption)}</span>` +
-        `<div class="photo-actions"><small>🔍 ${esc(U.zoomPhotoHint)}</small>` +
-        `<a class="btn-link" href="${esc(tagPh.doc)}" target="_blank" rel="noopener">${esc(U.openDatasheet)}</a></div>` +
+        `<div class="photo-actions"><small>🔍 ${esc(U.zoomPhotoHint)}</small></div>` +
         `</div></div>` : '';
       $('popup-body').innerHTML = `<div class="tags-explorer">` +
         `<div class="tags-left">` +
@@ -480,30 +477,12 @@ a.btn-link{display:inline-flex;align-items:center;font:inherit;font-size:13px;fo
     }
     $('popup-foot').hidden = !multiPage && !topicObj.hasCycleZoom;
 
-    if (state.docKey) {
-      const srcMap = { msw: 'documents/hiref-msw.pdf', ksw: 'documents/hiref-ksw.pdf', project: 'project.html' };
-      $('popup-body').innerHTML = `<div class="sources-bar">` +
-        `<button type="button" data-document="msw" aria-pressed="${state.docKey === 'msw'}">${esc(L.pdfMsw)}</button>` +
-        `<button type="button" data-document="ksw" aria-pressed="${state.docKey === 'ksw'}">${esc(L.pdfKsw)}</button>` +
-        `<button type="button" data-document="project" aria-pressed="${state.docKey === 'project'}">${esc(L.reference)}</button>` +
-        `<a class="btn-link" href="${srcMap[state.docKey]}" target="_blank" rel="noopener">↗ PDF / Web</a>` +
-        `</div><iframe class="doc-viewer" title="${esc(state.docKey)}" src="${srcMap[state.docKey]}"></iframe>`;
-      return;
-    }
-
     let proseHtml = `<p>${esc(topicObj.pages[state.page])}</p>`;
     // Show related clickable tags if triggered from an SVG node
     const relatedTags = (state.nodeTags || '').split(/[\s,]+/).filter(t => L.tags[t]);
     if (relatedTags.length) {
       proseHtml += `<div class="related-tags"><span class="pc-tags-label">${esc(U.activeTagsLabel)}</span>` +
         relatedTags.map(code => `<button type="button" class="tag-chip" data-open-tag="${code}">${esc(code)}</button>`).join('') +
-        `</div>`;
-    }
-    if (topicObj.hasSources) {
-      proseHtml += `<div class="sources-bar">` +
-        `<button type="button" data-document="msw">${esc(L.pdfMsw)}</button>` +
-        `<button type="button" data-document="ksw">${esc(L.pdfKsw)}</button>` +
-        `<button type="button" data-document="project">${esc(L.reference)}</button>` +
         `</div>`;
     }
     if (topicPhotos.length) {

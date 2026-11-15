@@ -199,20 +199,8 @@ details[open]>summary { margin-bottom: 12px; }
   function sourceHTML(id) {
     const s = DATA.sources.find(source => source.id === id);
     return `<details class="source"><summary>${esc(id)} / ${esc(s.title)}</summary>
-      <p>${esc(s.coverage)}</p><p class="muted">${esc(s.publisher)} · PDF pages ${esc(s.pages)}</p>
-      ${s.url ? `<p class="muted">Original source: ${esc(s.url)}</p>` : ''}
-      ${s.file ? `<button type="button" data-pdf="${esc(id)}">View PDF in this popup</button><div class="pdf-host"></div>` : ''}</details>`;
+      <p>${esc(s.coverage)}</p><p class="muted">${esc(s.publisher)}</p></details>`;
   }
-  byId('popup-content').addEventListener('click', e => {
-    const button = e.target.closest('[data-pdf]');
-    if (!button) return;
-    const host = button.nextElementSibling;
-    if (host.childElementCount) { host.replaceChildren(); button.textContent='View PDF in this popup'; return; }
-    const source = DATA.sources.find(s=>s.id === button.dataset.pdf);
-    const frame = document.createElement('iframe');
-    frame.className='pdf-frame'; frame.title=source.title; frame.src=encodeURI(source.file);
-    host.append(frame); button.textContent='Hide PDF';
-  });
   function componentHTML(id, open = false) {
     const c = DATA.components.find(component => component.id === id);
     return `<details class="component" data-component="${esc(id)}" ${open ? 'open' : ''}>
