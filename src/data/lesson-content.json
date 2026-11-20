@@ -205,9 +205,7 @@
           "Due serbatoi verticali S2 da 3.000 litri ciascuno (totale 6.000 L, uno per MP e uno per BP) accumulano acqua potabile calda a 60 °C per coprire i picchi contemporanei di prelievo mattutini e serali del condominio.",
           "Due pompe di carica P01 fanno circolare l'acqua potabile tra la parte inferiore di S2 e lo scambiatore SC1 finché l'intero accumulo raggiunge la temperatura di progetto."
         ],
-        "photos": [
-          "dab_evoplus"
-        ]
+        "photos": []
       },
       "dhw": {
         "title": "Ai rubinetti arriva dritta — perché allora nel vano scala gira il ricircolo?",
@@ -272,9 +270,7 @@
           "Negli edifici multipiano l'altezza della colonna d'acqua dei piani alti (Alta Pressione, AP) genera una pressione statica elevata. Per evitare di sottoporre anche le pompe di calore PC2 e i volani S3 a quella pressione, lo scambiatore a piastre SC2 divide idraulicamente i due circuiti.",
           "La pompa P08 fa circolare l'acqua della centrale sul lato primario di SC2, mentre la pompa P09 fa circolare l'acqua del circuito chiuso AP verso i piani alti delle Torri A e B: il calore passa attraverso le piastre senza sommare le pressioni."
         ],
-        "photos": [
-          "dab_dcm"
-        ]
+        "photos": []
       },
       "evaporator": {
         "title": "Fase 1 · Evaporatore (assorbimento del calore)",
@@ -1183,9 +1179,7 @@
           "Two vertical 3,000-litre S2 cylinders (6,000 L total, one for MP and one for BP) store potable hot water at 60 °C to meet morning and evening draw-off peaks across the condominium.",
           "Two P01 charging pumps circulate potable water between the bottom of each S2 tank and its SC1 exchanger until storage reaches target temperature."
         ],
-        "photos": [
-          "dab_evoplus"
-        ]
+        "photos": []
       },
       "dhw": {
         "title": "Direct to taps inside apartments — why does the stairwell riser recirculate?",
@@ -1250,9 +1244,7 @@
           "In tall buildings, water reaching the upper floors (High Pressure, AP) exerts high static head. Plate heat exchanger SC2 hydraulically isolates the upper-floor circuit so PC2 and S3 operate at lower central-plant pressure.",
           "Pump P08 circulates central-plant water on SC2's primary side while P09 circulates the separate AP loop to upper-floor apartments in Towers A and B, transferring heat without combining static pressures."
         ],
-        "photos": [
-          "dab_dcm"
-        ]
+        "photos": []
       },
       "evaporator": {
         "title": "Stage 1 · Evaporator (absorbing heat)",
@@ -2161,9 +2153,7 @@
           "两台各 3,000 升的立式储水罐 S2（共 6,000 L，MP 与 BP 各一台）在 60 °C 下储存生活热水，满足全楼早晚集中用水高峰。",
           "两台充热泵 P01 在 S2 底部与 SC1 二次侧之间循环饮用水，直至整罐达到设定储热温度。"
         ],
-        "photos": [
-          "dab_evoplus"
-        ]
+        "photos": []
       },
       "dhw": {
         "title": "户内直达龙头——为什么公共楼梯间立管还要循环？",
@@ -2228,9 +2218,7 @@
           "高层住户（高压区 AP）静水压较高。通过板式换热器 SC2 将高层环路与机房主环路水力隔离，可避免 PC2 热泵与 S3 水箱承受过高静压。",
           "水泵 P08 驱动机房水通过 SC2 一次侧，P09 驱动独立的 AP 二次侧闭式水循环至 A/B 塔高层住户，只传热而不叠加水压。"
         ],
-        "photos": [
-          "dab_dcm"
-        ]
+        "photos": []
       },
       "evaporator": {
         "title": "阶段 1 · 蒸发器（低温吸热沸腾）",

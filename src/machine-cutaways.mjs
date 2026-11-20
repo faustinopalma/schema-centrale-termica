@@ -1,7 +1,7 @@
 // Detailed animated internal cutaway renderer for all 15 plant machines (embedded in browser index.html)
-export function renderMachineCutaway(machineId, modeIdx = 0, activePart = 0, lang = 'it') {
+export function renderMachineCutaway(machineId, modeIdx = 0, activePart = 0, lang = 'it', scope = 'mc') {
   const esc = s => String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
-  const pfx = `mc-${machineId}-${modeIdx}`;
+  const pfx = `${scope}-${machineId}-${modeIdx}`;
   const T = (it, en, zh) => (lang === 'it' ? it : lang === 'zh' ? zh : en);
 
   let gradSeq = 0;
@@ -76,6 +76,7 @@ export function renderMachineCutaway(machineId, modeIdx = 0, activePart = 0, lan
   };
 
   const pin = (idx, x, y) => {
+    if (scope === 'card') return '';
     const isAct = activePart === idx;
     return `<g class="part-pin${isAct ? ' active' : ''}" data-part-idx="${idx}" role="button" tabindex="0" aria-label="Part ${idx + 1}">` +
       `<circle cx="${x}" cy="${y}" r="18" fill="var(--cp-surface)" opacity="0"/>` +
@@ -487,32 +488,37 @@ export function renderMachineCutaway(machineId, modeIdx = 0, activePart = 0, lan
   } else if (machineId === 'dhw_storage') {
     const isS3Mode = modeIdx === 1;
     if (!isS3Mode) {
-      const strat = makeGrad(0, 82, 0, 378, 'danger', 'link');
-      body += `<rect class="machine-card" x="176" y="56" width="212" height="338" rx="68"/>`;
-      body += `<rect x="192" y="76" width="180" height="298" rx="56" fill="${strat}" fill-opacity=".28" stroke="var(--cp-border-strong)"/>`;
-      body += `<line x1="236" y1="346" x2="328" y2="346" stroke="var(--cp-border-strong)" stroke-width="4" stroke-linecap="round"/>`;
-      body += waterPipe([[54, 122], [196, 122]], 'danger', 'danger', { thin: true, marker: true });
-      body += waterPipe([[196, 316], [54, 316]], 'warning', 'link', { thin: true, marker: true });
-      body += `<text class="svg-label svg-sub" x="108" y="104" font-size="12.5" text-anchor="middle">SC1 → 60 °C</text>`;
-      body += `<text class="svg-label svg-sub" x="108" y="340" font-size="12.5" text-anchor="middle">P01 → 55 °C</text>`;
-      body += `<text class="svg-label svg-temp" x="282" y="138" font-size="17" text-anchor="middle">60 °C</text>`;
-      body += `<text class="svg-label svg-temp" x="282" y="328" font-size="16" text-anchor="middle">~15–25 °C</text>`;
+      const strat = makeGrad(0, 82, 0, 360, 'danger', 'link');
+      for (const [cx, zoneLbl] of [[222, 'S2 MP'], [378, 'S2 BP']]) {
+        body += `<rect class="machine-card" x="${cx - 66}" y="64" width="132" height="312" rx="46"/>`;
+        body += `<rect x="${cx - 54}" y="80" width="108" height="280" rx="38" fill="${strat}" fill-opacity=".28" stroke="var(--cp-border-strong)"/>`;
+        body += `<line x1="${cx - 28}" y1="338" x2="${cx + 28}" y2="338" stroke="var(--cp-border-strong)" stroke-width="3.5" stroke-linecap="round"/>`;
+        body += `<text class="svg-label svg-temp" x="${cx}" y="128" font-size="15.5" text-anchor="middle">60 °C</text>`;
+        body += `<text class="svg-label svg-title" x="${cx}" y="174" font-size="13.5" text-anchor="middle">${zoneLbl}</text>`;
+        body += `<text class="svg-label svg-sub" x="${cx}" y="196" font-size="12.5" text-anchor="middle">3.000 L</text>`;
+        body += `<text class="svg-label svg-temp" x="${cx}" y="316" font-size="13.5" text-anchor="middle">~15–25 °C</text>`;
+      }
+      body += waterPipe([[36, 118], [168, 118]], 'danger', 'danger', { thin: true, marker: true });
+      body += waterPipe([[168, 326], [36, 326]], 'warning', 'link', { thin: true, marker: true });
+      body += `<text class="svg-label svg-sub" x="96" y="98" font-size="12" text-anchor="middle">SC1 → 60 °C</text>`;
+      body += `<text class="svg-label svg-sub" x="96" y="352" font-size="12" text-anchor="middle">P01 → 55 °C</text>`;
 
-      body += `<rect class="machine-card" x="516" y="136" width="164" height="164" rx="22"/>`;
-      body += `<g data-pulse="1" data-cx="598" data-cy="218" data-amp="0.06">` +
-        `<rect class="tag-pill-bg" x="560" y="182" width="76" height="72" rx="12"/>` +
-        `<text class="svg-label svg-title" x="598" y="223" font-size="12.5" text-anchor="middle">Wax 48°</text></g>`;
-      body += waterPipe([[372, 126], [462, 126], [462, 218], [516, 218]], 'danger', 'danger', { thin: true });
-      body += waterPipe([[282, 424], [282, 374]], 'link', 'link', { thin: true });
-      body += waterPipe([[282, 424], [598, 424], [598, 300]], 'link', 'link', { thin: true });
-      body += waterPipe([[598, 62], [598, 136]], 'warning', 'warning', { thin: true });
-      body += waterPipe([[598, 86], [372, 86]], 'warning', 'warning', { thin: true });
-      body += waterPipe([[680, 218], [794, 218]], 'warning', 'warning', { marker: true });
-      body += `<text class="svg-label svg-temp" x="742" y="196" font-size="15" text-anchor="middle">ACP · 48 °C</text>`;
-      body += `<text class="svg-label svg-sub" x="598" y="48" font-size="12.5" text-anchor="middle">ACR (~46 °C)</text>`;
-      body += `<text class="svg-label svg-sub" x="454" y="412" font-size="12.5" text-anchor="middle">AFP (~15 °C)</text>`;
-      focus += organBox(0, 184, 70, 196, 310, 58) + organBox(1, 48, 96, 154, 246) + organBox(2, 508, 128, 180, 180) + organBox(3, 384, 108, 132, 130);
-      pins += pin(0, 282, 224) + pin(1, 144, 218) + pin(2, 654, 158) + pin(3, 462, 168);
+      body += `<rect class="machine-card" x="546" y="136" width="156" height="164" rx="22"/>`;
+      body += `<g data-pulse="1" data-cx="624" data-cy="218" data-amp="0.06">` +
+        `<rect class="tag-pill-bg" x="586" y="182" width="76" height="72" rx="12"/>` +
+        `<text class="svg-label svg-title" x="624" y="223" font-size="12.5" text-anchor="middle">Wax 48°</text></g>`;
+      body += waterPipe([[222, 80], [222, 42], [378, 42]], 'danger', 'danger', { thin: true });
+      body += waterPipe([[378, 80], [378, 42], [492, 42], [492, 218], [546, 218]], 'danger', 'danger', { thin: true });
+      body += waterPipe([[222, 420], [222, 360]], 'link', 'link', { thin: true });
+      body += waterPipe([[222, 420], [378, 420], [378, 360]], 'link', 'link', { thin: true });
+      body += waterPipe([[378, 420], [624, 420], [624, 300]], 'link', 'link', { thin: true });
+      body += waterPipe([[624, 62], [624, 136]], 'warning', 'warning', { thin: true });
+      body += waterPipe([[702, 218], [806, 218]], 'warning', 'warning', { marker: true });
+      body += `<text class="svg-label svg-temp" x="762" y="196" font-size="14" text-anchor="middle">ACP · 48 °C</text>`;
+      body += `<text class="svg-label svg-sub" x="624" y="44" font-size="12.5" text-anchor="middle">ACR (~46 °C)</text>`;
+      body += `<text class="svg-label svg-sub" x="520" y="404" font-size="12.5" text-anchor="middle">AFP (~15 °C)</text>`;
+      focus += organBox(0, 148, 56, 304, 328, 48) + organBox(1, 30, 88, 138, 256) + organBox(2, 538, 128, 172, 180) + organBox(3, 464, 30, 84, 204);
+      pins += pin(0, 222, 246) + pin(1, 102, 222) + pin(2, 680, 158) + pin(3, 518, 112);
     } else {
       body += `<rect class="machine-card" x="260" y="78" width="128" height="224" rx="44"/>`;
       body += `<rect class="machine-card" x="452" y="78" width="128" height="224" rx="44"/>`;

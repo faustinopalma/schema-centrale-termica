@@ -382,6 +382,20 @@ def verify_lesson(screenshots: Path | None) -> None:
                     continue
                 page.locator("#close").click()
 
+            # Verify S2 cylinders & SC2 exchanger popups show their dedicated cutaway cards (never a pump photo)
+            for node_id, expected_machine in [("s2", "dhw_storage"), ("sc2", "plate_hx")]:
+                page.locator(f'#viewport [data-node="{node_id}"]').click()
+                assert page.locator("#popup").is_visible()
+                assert page.locator("#popup .photo-frame img").count() == 0
+                assert page.locator(f'#popup .cutaway-frame svg[data-machine="{expected_machine}"]').is_visible()
+                if screenshots and node_id == "s2":
+                    page.screenshot(path=str(screenshots / "s2-cylinders-popup.png"))
+                page.locator("#popup .cutaway-frame").click()
+                assert page.locator(f'#ms-canvas svg[data-machine="{expected_machine}"]').is_visible()
+                page.locator("#ms-back-card").click()
+                assert page.locator("#popup").is_visible()
+                page.locator("#close").click()
+
             # Verify zoomed photos on phone viewports (including scrolled multi-photo cards & compact 568x320) are never clipped
             for ph_w, ph_h in [(844, 390), (844, 320), (667, 375), (568, 320)]:
                 page.set_viewport_size({"width": ph_w, "height": ph_h})
